@@ -1,6 +1,14 @@
 body {
+  position: absolute;
+  width: 1413px;
+  height: 753px;
+  left: 0px;
+  top: 0px;
+  background: #4801FF;
+  border-radius: 0px;
+
   background-image: url("bg2.png");
-  background-size: cover;
+  background-size: 30%;
   background-repeat: round space;
   font-family: Arial, sans-serif;
 }
@@ -12,3 +20,47 @@ body {
   padding: 50px;
   color: rgb(0, 0, 0);
 }
+
+* {
+  box-sizing: border-box;
+}
+
+header, footer {
+  background-color: #333;
+  color: white;
+  padding: 1em;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+
+nav li {
+  flex: 1;
+  text-align: center;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  display: block;
+  padding: 1em;
+}
+
+main {
+  padding: 1em;
+}
+
+@media (max-width: 600px) {
+  nav ul {
+    flex-wrap: wrap;
+  }
+
+  nav li {
+    flex: 1 1 100%;
+  }
+}
+
