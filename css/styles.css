@@ -1,0 +1,14 @@
+body {
+  background-image: url("bg2.png");
+  background-size: cover;
+  background-repeat: round space;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 50px;
+  color: rgb(0, 0, 0);
+}
