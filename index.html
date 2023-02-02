@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<!-- head section -->
   <head>
     <meta charset="utf-8">
     <title>Home</title>
@@ -8,31 +8,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- css files -->
     <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <!-- fav icon-->
+    <link rel="icon" type="image/png" href="fav.png" >
+    <!-- call out scripts -->
+    <script src="js/app.js"></script>
   </head>
-
+<!-- body -->
   <body>
     <header> 
-      <h1 style="color:black;"> Welcome to my personal website :)</h1>
+      <h1 style="color:rgb(255, 255, 255);"> Welcome to my personal website :)</h1>
+      <p>yuang tong</p>
+      <p>原</p>
     </header>
+    <!-- nav section -->
     <nav>
       <ul>
-          <li><a href="#Home">Home</a></li>
-          <li><a href="#About">About</a></li>
-          <li><a href="#Services">Services</a></li>
-          <li><a href="#Contact">Contact</a></li>
+          <li><a href="#home">home</a></li>
+          <li><a href="#about">about</a></li>
+          <li><a href="#services">services</a></li>
+          <li><a href="#contact">contact</a></li>
       </ul>
-  </nav>
-  <main>
-      <h2 id="Home">Home</h2>
-      <p>This is ...</p>
-      <button onclick="alertButton()">Click me</button>
-  </main>
-   <!-- indicate how to contact and social media -->
-  <footer>
+    </nav>
+    <!-- main section -->
+    <main>
+      <h2 id="home">home</h2>
+        <p>This is personal site, welcome to my projects.</p>
+        <!-- div intro -->
+        <div class="introduction">
+          <h1>Hello! I'm Yuang Tong</h1>
+          <p>A junior web designer with a passion for creating visually appealing and user-friendly websites.</p>
+        </div>
+        <!-- div about -->
+        ,<div class="about">
+          <h2 id="about">about</h2>
+          <p> Based in Lima, Peru</p>
+        </div>
+        <!-- button -->
+        <button onclick="alertButton()">Click me</button>
+    </main>
+    <!-- horizontal rule -->
+    <hr>
+    <!-- indicate how to contact and social media -->
+    <footer>
       <p>Copyright &copy; ...</p>
-  </footer>
+    </footer>
   </body>
-
-  <script src="js/app.js"></script>
-
+ 
 </html>
