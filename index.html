@@ -3,54 +3,65 @@
 <!-- head section -->
   <head>
     <meta charset="utf-8">
-    <title>Home</title>
+    <title>awesome page</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- css files -->
     <link rel="stylesheet" type="text/css" href="css/styles.css">
     <!-- fav icon-->
     <link rel="icon" type="image/png" href="fav.png" >
-    <!-- call out scripts -->
+    <!-- call out javascript -->
     <script src="js/app.js"></script>
+    <!-- call out font - new rodin -->
+    <script>
+      (function(d) {
+        var config = {
+          kitId: 'vsk7ziv',
+          scriptTimeout: 3000,
+          async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+      })(document);
+    </script>
   </head>
 <!-- body -->
   <body>
+     <!-- nav bar -->
+    <div class="navbar">
+          <a href="#home">home</a>
+          <a href="#about">about</a>
+          <a href="#services">services</a>
+          <a href="contact.html">contact</a>
+    </div>
+    <!-- header -->
     <header> 
+      <!-- 
       <h1 style="color:rgb(255, 255, 255);"> Welcome to my personal website :)</h1>
       <p>yuang tong</p>
-      <p>原</p>
+      <p>原</p> nav section -->
     </header>
-    <!-- nav section -->
-    <nav>
-      <ul>
-          <li><a href="#home">home</a></li>
-          <li><a href="#about">about</a></li>
-          <li><a href="#services">services</a></li>
-          <li><a href="#contact">contact</a></li>
-      </ul>
-    </nav>
     <!-- main section -->
     <main>
-      <h2 id="home">home</h2>
-        <p>This is personal site, welcome to my projects.</p>
-        <!-- div intro -->
-        <div class="introduction">
-          <h1>Hello! I'm Yuang Tong</h1>
-          <p>A junior web designer with a passion for creating visually appealing and user-friendly websites.</p>
-        </div>
-        <!-- div about -->
-        ,<div class="about">
-          <h2 id="about">about</h2>
-          <p> Based in Lima, Peru</p>
-        </div>
-        <!-- button -->
-        <button onclick="alertButton()">Click me</button>
+      <p class="home"> Welcome to my personal site.</p>
+      <!-- div intro -->
+      <section class="introduction">
+        <h1> yuang tong</h1>
+        <p>A junior web designer with a passion for creating visually appealing and user-friendly websites.</p>
+      </section>
+      <!-- div about -->
+      <section class="about">
+        <h2 id="about">About</h2>
+        <p> Based in Lima, Peru</p>
+      </section>
+      <!-- button -->
+      <button onclick="alertButton()">Click me</button>
+      <br>
     </main>
     <!-- horizontal rule -->
     <hr>
-    <!-- indicate how to contact and social media -->
+    
     <footer>
-      <p>Copyright &copy; ...</p>
+      <p>Copyright &copy; 2023 Yuang Tong. All rights reserved.</p>
     </footer>
   </body>
  

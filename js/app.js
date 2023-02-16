@@ -1,5 +1,5 @@
 function alertButton(){
-    alert("Yuyu caca!")
+    alert("Hello World!")
 }
 
 // Adding a "bouncing" animation to the header text
