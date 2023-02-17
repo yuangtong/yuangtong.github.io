@@ -1,122 +1,155 @@
+/* Style the whole content */
 body {
- 
-    font-family: Arial, sans-serif;
-    font-size: 16px;
-    color: #000000;
-    margin: 0;
-    padding: 0;
-    background: #4801FF;
-  /* display: flex;
-  flex-direction: column;
+
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  color: #000000;
+  margin: 0;
+  padding: 0;
+  background: #ffffff;
+
+}
+
+header {
+  
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 36px;
+  margin: 0;
+}
+
+.navbar {
+  display: flex; /* Use flexbox to arrange the links */
+  align-items: center; /* Align the links vertically */
+  justify-content: flex-end; /* Align the links to the right */
+  position: fixed; /* Make the navbar stick to the top */
+  top: 0; /* Position the navbar at the top */
+  left: 0; /* Position the navbar at the left */
+  width: 100%; /* Make the navbar span the whole width of the browser */
+  height: 50px; /* Set the height of the navbar */
+  /* background-color: #333; Set the background color of the navbar */
+
+  font-family: "fot-rodin-pron", sans-serif;
+  font-weight: 600;
+  font-style: bold;
+  font-size: 12.5px;
+  line-height: 19px;
+  display: flex;
   align-items: center;
-  padding: 0px 0px 28px;
-  gap: 112px;
-  
-  position: absolute;
-  width: 1512px;
-  height: 957.27px;
-  left: 0px;
-  top: 0px; */
-  }
-  
-  header {
-    
-    color: #fff;
-    padding: 20px;
-    text-align: center;
-  }
-  
-  header h1 {
-    font-size: 36px;
-    margin: 0;
-  }
-  .navbar {
-    display: flex; /* Use flexbox to arrange the links */
-    align-items: center; /* Align the links vertically */
-    justify-content: flex-end; /* Align the links to the right */
-    position: fixed; /* Make the navbar stick to the top */
-    top: 0; /* Position the navbar at the top */
-    left: 0; /* Position the navbar at the left */
-    width: 100%; /* Make the navbar span the whole width of the browser */
-    height: 50px; /* Set the height of the navbar */
-    /* background-color: #333; Set the background color of the navbar */
-  
-    font-family: "fot-rodin-pron", sans-serif;
-    font-weight: 600;
-    font-style: bold;
-    font-size: 12.5px;
-    line-height: 19px;
-    display: flex;
-    align-items: center;
-    letter-spacing: 0.666667px;
-    text-transform: uppercase;
-  
-  
-  }
-  
-  .navbar a {
-    color: rgba(81, 218, 76, 1); /* Set the color of the links */
-    text-decoration: none; /* Remove the underline from the links */
-    padding: 15px; /* Add some padding to the links */
-  }
-  
-  .navbar a:hover {
-    /* background-color: #ddd; /* Change the background color of the links on hover */
-    color: rgba(81, 218, 76, 0.5); /* Change the color of the links on hover */
-  } 
-  
-  main {
-    padding: 20px;
-  }
-  
-  footer {
-    background-color: #696969;
-    color: #fff;
-    padding: 10px;
-    text-align: left;
-    font-size: 9px;
-    position: fixed;
-    padding: 10px 10px 0px 10px;
-    bottom: 0;
-    width: 100%;
-    /* Height of the footer*/
-    height: 40px;
-  }
-  
-  /* Style the container */
-  .container {
-    background-color: #f2f2f2;
-    padding: 20px;
-    width: 50%;
-    margin: auto;
-  }
+  letter-spacing: 0.666667px;
+  text-transform: uppercase;  
+}
+
+/* Style the navbar */
+.navbar a {
+  color: rgba(81, 218, 76, 1); /* Set the color of the links */
+  text-decoration: none; /* Remove the underline from the links */
+  padding: 15px; /* Add some padding to the links */
+}
+
+/* Style the navbar on hover */
+.navbar a:hover {
+  /* background-color: #ddd; /* Change the background color of the links on hover */
+  color: rgba(81, 218, 76, 0.5); /* Change the color of the links on hover */
+} 
+
+main {
+  padding: 20px;
+}
+
+/* Style the container */
+.container {
+  background-color: #f2f2f2;
+  padding: 20px;
+  width: 50%;
+  margin: auto;
+}
+
+/* Style the contact titles */
+.contact {
+  margin: 10px;
+  text-align: center; /* center horizontally */
+  align-items: center; /* center vertically */
+  display: flex; /* make it a flex container */
+  justify-content: center; /* center it horizontally */
+  height: 100vh; /* set the height of the container to fill the viewport */
+}
+
+form {
+width: 50%; /* set a fixed or relative width for the form */
+}
 
 /* Style the input elements */
 input[type=text], input[type=email], textarea {
-    margin-top: 6px;
-    margin-bottom: 16px;
-    display: inline-block;
-    resize: both;
-    width: 100px; /* The specified width of the input source box */
-    padding: 10px; /* The padding around the content of the input source box */
-    border: 1px solid #ccc; /* The border around the input source box */
-    box-sizing: content-box; /* The box-sizing property that makes the width only include the content */
-  }
-  textarea {
-    flex: 0.5; /* Make the text area grow to fill the available space */
-    margin: 10px; /* Add some margin around the text area */
-  }
-  /* Style the submit button */
-  input[type=submit] {
-    background-color: #4CAF50;
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    cursor: pointer;
-  }
-  
-  /* Style the submit button on hover */
-  input[type=submit]:hover {
-    background-color: #45a049;
-  }
+  margin-top: 6px;
+  margin-bottom: 16px;
+  display: inline-block;
+  resize: both;
+  width: 100px; /* The specified width of the input source box */
+  padding: 10px; /* The padding around the content of the input source box */
+  border: 1px solid #ccc; /* The border around the input source box */
+  box-sizing: content-box; /* The box-sizing property that makes the width only include the content */
+  /* Position */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px 0px 28px;
+  gap: 100px;
+  width: 150px;
+  height: 20px;
+  left: 0px;
+  top: 0px;
+  flex: 0.5; /* Make the text area grow to fill the available space */
+  margin: 0 auto; /* Add some margin around the text area */
+}
 
+/* Style the text area */
+textarea {
+  height: 50px;
+  flex: 0.5; /* Make the text area grow to fill the available space */
+  margin: 0 auto; /* Add some margin around the text area */
+}
+
+/* Style the submit button */
+input[type=submit] {
+
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  
+  background: #D9D9D9;
+  border: 1px solid #000000;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+}
+
+/* Style the submit button on hover */
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+/* Style the icons*/
+.icons {
+  position: sticky;
+  bottom: auto;
+}  
+
+footer {
+  background-color: #696969;
+  color: #fff;
+  padding: 10px;
+  text-align: left;
+  font-size: 10px;
+  position: fixed;
+  padding: 10px 10px 0px 10px;
+  bottom: 0;
+  width: 100%;
+  /* Height of the footer*/
+  height: 40px;
+}
