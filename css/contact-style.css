@@ -1,61 +1,8 @@
-/* Style the whole content */
-body {
+@import url(main-style.css);
 
-  font-family: Arial, sans-serif;
-  font-size: 16px;
-  color: #000000;
-  margin: 0;
-  padding: 0;
-  background: #ffffff;
-
+.left {
+  justify-content: first baseline left;
 }
-
-header {
-  
-  color: #fff;
-  padding: 20px;
-  text-align: center;
-}
-
-header h1 {
-  font-size: 36px;
-  margin: 0;
-}
-
-.navbar {
-  display: flex; /* Use flexbox to arrange the links */
-  align-items: center; /* Align the links vertically */
-  justify-content: flex-end; /* Align the links to the right */
-  position: fixed; /* Make the navbar stick to the top */
-  top: 0; /* Position the navbar at the top */
-  left: 0; /* Position the navbar at the left */
-  width: 100%; /* Make the navbar span the whole width of the browser */
-  height: 50px; /* Set the height of the navbar */
-  /* background-color: #333; Set the background color of the navbar */
-
-  font-family: "fot-rodin-pron", sans-serif;
-  font-weight: 600;
-  font-style: bold;
-  font-size: 12.5px;
-  line-height: 19px;
-  display: flex;
-  align-items: center;
-  letter-spacing: 0.666667px;
-  text-transform: uppercase;  
-}
-
-/* Style the navbar */
-.navbar a {
-  color: rgba(81, 218, 76, 1); /* Set the color of the links */
-  text-decoration: none; /* Remove the underline from the links */
-  padding: 15px; /* Add some padding to the links */
-}
-
-/* Style the navbar on hover */
-.navbar a:hover {
-  /* background-color: #ddd; /* Change the background color of the links on hover */
-  color: rgba(81, 218, 76, 0.5); /* Change the color of the links on hover */
-} 
 
 main {
   padding: 20px;
@@ -124,14 +71,15 @@ input[type=submit] {
   position: absolute;
   
   background: #D9D9D9;
-  border: 1px solid #000000;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 5px;
+  border-radius: 10px;
+  background: #707070;
+  box-shadow:  2px 2px 4px #5f5f5f,
+              -2px -2px 4px #818181;
 }
 
 /* Style the submit button on hover */
 input[type=submit]:hover {
-  background-color: #45a049;
+  background-color: #22725d;
 }
 
 /* Style the icons*/
