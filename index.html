@@ -46,51 +46,56 @@
   </head>
 
   <body>
-    <nav class="navbar">
-      <a href="#home">home</a>
-      <a href="#about">about</a>
-      <a href="#services">services</a>
-      <a href="contact.html">contact</a>
-    </nav>
-
+    <!-- header -->
+    <header>
+      <!-- nav bar -->
+      <nav class="navbar">
+        <a href="#home">home</a>
+        <a href="#about">about</a>
+        <a href="#services">services</a>
+        <a href="contact.html">contact</a>
+      </nav>
+    </header>
+    <!-- main -->
     <main>
-      <!-- intro -->
-      <section class="introduction">
+      <!-- main cover -->
+      <section class="main-cover">
         <h1>yuang tong</h1>
+        <h2>junior web developer</h2>
+        <p>webabcdefghijlkmnopqrstuvwxyz</p>
       </section>
-    </main>
-
-    <div>
-      <!-- about -->
-      <section id="about">
+      <!-- body cover -->
+      <section class="body-cover">
+        <!-- about -->
         <h2>about</h2>
         <p class="minor-body">
-          raised in Lima, Peru <br />
+          based in lima, peru <br />
           Passionate about technology, information and design <br />
           Information Engineering student at PUCP - Pontifical Catholic
           University of Peru
         </p>
-      </section>
-
       <!-- services -->
-      <section id="services">
-        <h2>services</h2>
-        <p class="minor-body">
-          As a junior web developer, my areas of experience include HTML, CSS,
-          JavaScript, and design softwares like Photoshop, Illustrator, and
-          Figma. I provide services to assist you establish and improve your
-          online presence, ranging from layout design to interactive web page
-          development. If interested in developing a user-friendly, eye-catching
-          website that interests your audience, feel free to contact me.
-        </p>
+        <div>
+          <h2>services</h2>
+          <p class="minor-body">
+            As a junior web developer, my areas of experience include HTML, CSS,
+            JavaScript, and design softwares like Photoshop, Illustrator, and
+            Figma. I provide services to assist you establish and improve your
+            online presence, ranging from layout design to interactive web page
+            development. If interested in developing a user-friendly, eye-catching
+            website that interests your audience, feel free to contact me.
+          </p>
+        </div>
+        <!-- samples -->
+        <div class="sample-cover"> 
+          <h2>samples</h2>
+          <div class="seccion-botones">
+            <button onclick="alertButton()">try dark theme</button>
+            <button onclick="">try retro theme</button>
+          </div>
+        </div>
       </section>
-
-      <!-- samples -->
-      <h2>samples</h2>
-      <section>
-        <button onclick="alertButton()">Click me</button>
-      </section>
-    </div>
+    </main>
 
     <footer>
       <p>Copyright &copy; 2023 Yuang Tong. All rights reserved.</p>
