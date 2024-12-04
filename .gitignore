@@ -1,0 +1,13 @@
+# Archivos del sistema operativo
+.DS_Store
+
+# Archivos temporales
+nohup.out
+
+# Archivos de configuración de entorno
+yuangtong.github.io.code-workspace
+.hintrc
+
+# Archivos de implementación o herramientas específicas
+amplify.yml
+
