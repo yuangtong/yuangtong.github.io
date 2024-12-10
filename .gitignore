@@ -1,14 +1,37 @@
 # Archivos del sistema operativo
 .DS_Store
+Thumbs.db
 
 # Archivos temporales
 nohup.out
+*.log
+*.tmp
 
 # Archivos de configuración de entorno
 yuangtong.github.io.code-workspace
 .hintrc
+.env
+.env.local
+.env.development
+.env.production
+.env.test
 
 # Archivos de implementación o herramientas específicas
 amplify.yml
 
-node_modules
+# Node.js y dependencias
+node_modules/
+package-lock.json
+yarn.lock
+
+# Builds y archivos generados
+dist/
+.vite/
+
+# Configuración de editores de texto
+.vscode/
+.idea/
+*.code-workspace
+
+# Otros
+tailwind.config.js
