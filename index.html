@@ -1,104 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <title>Yuang Tong's Portfolio</title>
-    <meta
-      name="description"
-      content="Junior Web Developer with experience in creating clean and organized web pages."
-    />
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/png" href="logo.png" />
-    <link rel="stylesheet" type="text/css" href="css/home-style.css" />
-    <script src="js/app.js"></script>
-    <!-- New Rodin Font -->
-    <script>
-      (function (d) {
-        var config = {
-            kitId: "vsk7ziv",
-            scriptTimeout: 3000,
-            async: true,
-          },
-          h = d.documentElement,
-          t = setTimeout(function () {
-            h.className =
-              h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive";
-          }, config.scriptTimeout),
-          tk = d.createElement("script"),
-          f = false,
-          s = d.getElementsByTagName("script")[0],
-          a;
-        h.className += " wf-loading";
-        tk.src = "https://use.typekit.net/" + config.kitId + ".js";
-        tk.async = true;
-        tk.onload = tk.onreadystatechange = function () {
-          a = this.readyState;
-          if (f || (a && a != "complete" && a != "loaded")) return;
-          f = true;
-          clearTimeout(t);
-          try {
-            Typekit.load(config);
-          } catch (e) {}
-        };
-        s.parentNode.insertBefore(tk, s);
-      })(document);
-    </script>
+    <title>Site Maintenance</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
   </head>
-
   <body>
-    <!-- header -->
-    <header>
-      <!-- nav bar -->
-      <nav class="navbar">
-        <a href="#home">home</a>
-        <a href="#about">about</a>
-        <a href="#services">services</a>
-        <a href="contact.html">contact</a>
-      </nav>
-    </header>
-    <!-- main -->
-    <main>
-      <!-- main cover -->
-      <section class="main-cover">
-        <h1>yuang tong</h1>
-        <h2>junior web developer</h2>
-        <p>webabcdefghijlkmnopqrstuvwxyz</p>
-      </section>
-      <!-- body cover -->
-      <section class="body-cover">
-        <!-- about -->
-        <h2>about</h2>
-        <p class="minor-body">
-          based in lima, peru <br />
-          Passionate about technology, information and design <br />
-          Information Engineering student at PUCP - Pontifical Catholic
-          University of Peru
-        </p>
-      <!-- services -->
-        <div>
-          <h2>services</h2>
-          <p class="minor-body">
-            As a junior web developer, my areas of experience include HTML, CSS,
-            JavaScript, and design softwares like Photoshop, Illustrator, and
-            Figma. I provide services to assist you establish and improve your
-            online presence, ranging from layout design to interactive web page
-            development. If interested in developing a user-friendly, eye-catching
-            website that interests your audience, feel free to contact me.
-          </p>
-        </div>
-        <!-- samples -->
-        <div class="sample-cover"> 
-          <h2>samples</h2>
-          <div class="seccion-botones">
-            <button onclick="alertButton()">try dark theme</button>
-            <button onclick="">try retro theme</button>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer>
-      <p>Copyright &copy; 2025 Yuang Tong. All rights reserved.</p>
-    </footer>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
