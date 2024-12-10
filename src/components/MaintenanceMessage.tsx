@@ -11,14 +11,14 @@ export function MaintenanceMessage() {
       subtitle: "I'm making some improvements!",
       description: "I'm working my magic on this site. It'll be back before you can say \"sudo make me a sandwich\" 🥪",
       expectedTime: 'Expected downtime: A few moments ⏳',
-      downloadCV: 'Download My CV',
+      downloadCV: 'Download CV',
     },
     es: {
       title: 'En Mantenimiento',
       subtitle: '¡Estoy haciendo mejoras!',
       description: 'Estoy trabajando en la magia de este sitio. ¡Volverá antes de que puedas decir "sudo hazme un sándwich" 🥪',
       expectedTime: 'Tiempo estimado: Unos momentos ⏳',
-      downloadCV: 'Descargar mi CV',
+      downloadCV: 'Descargar CV',
     },
   };
 

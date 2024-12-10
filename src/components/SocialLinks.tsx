@@ -1,20 +1,20 @@
-import { Github, Linkedin, Twitter } from 'lucide-react';
+import { X, Linkedin, Github } from 'lucide-react';
 
 export function SocialLinks() {
   const links = [
     {
       icon: Github,
-      href: 'https://github.com',
+      href: 'https://github.com/yuangtong',
       label: 'GitHub',
     },
     {
       icon: Linkedin,
-      href: 'https://linkedin.com',
+      href: 'https://linkedin.com/yuangtong',
       label: 'LinkedIn',
     },
     {
-      icon: Twitter,
-      href: 'https://twitter.com',
+      icon: X,
+      href: 'https://x.com/yuang_tong',
       label: 'Twitter',
     },
   ];
