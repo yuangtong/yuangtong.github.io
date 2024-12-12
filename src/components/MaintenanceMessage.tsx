@@ -50,7 +50,7 @@ export function MaintenanceMessage() {
         </div>
 
         <a
-          href="/YuangtongCV.pdf"
+          href="/IngenieroInformatico_YuangTong_CV.pdf"
           download
           className="w-full max-w-md flex items-center justify-center gap-2 p-4 md:p-6 bg-white dark:bg-neutral-800 border-4 border-black dark:border-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:shadow-[8px_8px_0px_0px_rgba(255,255,255,1)] hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none transition-all"
         >
