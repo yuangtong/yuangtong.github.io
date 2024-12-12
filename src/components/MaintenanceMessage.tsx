@@ -9,14 +9,14 @@ export function MaintenanceMessage() {
     en: {
       title: 'Under Maintenance',
       subtitle: "I'm making some improvements!",
-      description: "I'm working my magic on this site. It'll be back before you can say \"sudo make me a sandwich\" 🥪",
+      description: "I'm working my magic on this site. It'll be back before you can say \"sudo make me a sandwich\" 🥪!",
       expectedTime: 'Expected downtime: A few moments ⏳',
       downloadCV: 'Download CV',
     },
     es: {
       title: 'En Mantenimiento',
       subtitle: '¡Estoy haciendo mejoras!',
-      description: 'Estoy trabajando en la magia de este sitio. ¡Volverá antes de que puedas decir "sudo hazme un sándwich" 🥪',
+      description: 'Estoy trabajando en la magia de este sitio. ¡Volverá antes de que puedas decir "sudo hazme un sándwich" 🥪!',
       expectedTime: 'Tiempo estimado: Unos momentos ⏳',
       downloadCV: 'Descargar CV',
     },
