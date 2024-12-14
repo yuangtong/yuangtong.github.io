@@ -1,50 +1,99 @@
-# Portfolio - Junior Web Developer and Designer
+# Yuang Tong
 
-Welcome to my portfolio repository! This repository showcases my skills and projects as a junior web developer and designer. Here you will find an overview of my work, including websites I have built, designs I have created, and other relevant information. Feel free to explore and get to know more about my capabilities.
+## 👋 About Me
 
-## Table of Contents
+23-year-old student in the 7th semester of Computer Engineering at the Pontificia Universidad Católica del Perú (PUCP). Passionate about engineering, design, innovation, and new information technologies. Equipped with effective communication skills and customer-oriented solutions, I aim to tackle challenges with innovative approaches.
 
-- [About Me](#about-me)
-- [Skills](#skills)
-- [Projects](#projects)
-- [Contact](#contact)
+---
 
-## About Me
+## 📚 Education
 
-I am a passionate and enthusiastic junior web developer and designer. I love creating beautiful and functional websites that provide great user experiences. With a strong foundation in HTML, CSS, and JavaScript, I strive to expand my skills and stay updated with the latest web technologies.
+- **Computer Engineering** (March 2023 – Present)
+  - Pontificia Universidad Católica del Perú, Lima, Perú
+- **Specialization in Backend Development** (March 2023 – September 2023)
+  - Oracle Next Education
 
-## Skills
+---
 
-Here are some of the skills and technologies I have experience with:
+## 💼 Professional Experience
 
-- HTML5, CSS3, and JavaScript
-- Responsive web design
-- UI/UX design principles
-- Front-end frameworks (e.g., Bootstrap, React)
-- Version control (e.g., Git, GitHub)
-- Adobe Creative Suite (Photoshop, Illustrator, XD)
-- Wireframing and prototyping
+### Assistant in Process Engineering, Automation, and IT
+**Corporación Congrains** (July 2024 – Present)
+- Optimized processes and implemented automation technologies to enhance operational efficiency.
 
-## Projects
+### IT Helpdesk Associate Operations Representative
+**Teleperformance Perú S.A.C.** (July 2022 – September 2022)
+- Delivered effective technical support to ensure user satisfaction.
+- Collaborated on system and network maintenance.
 
-Here are a few highlighted projects that demonstrate my capabilities:
+---
 
-1. **Project 1**: [Project Name](link-to-project) - Description of the project and my contributions.
+## 💻 Projects
 
-2. **Project 2**: [Project Name](link-to-project) - Description of the project and my contributions.
+- **Institutional Website for IBVM Perú** (September 2023 – November 2023)
+  - [Visit Project](https://ibvmperu.com)
+  - Full development of a dynamic and functional website using WordPress.
 
-3. **Project 3**: [Project Name](link-to-project) - Description of the project and my contributions.
+- **E-commerce Store for MyC Estudios** (January 2024)
+  - [Visit Project](http://estudiosmyc.com/tienda)
+  - Designed and customized the store, integrating APIs and secure payment gateways for a seamless shopping experience.
 
-For more details and a complete list of my projects, please visit my [portfolio website](link-to-portfolio).
+- **Podcast Portal Redesign: El Brifin** (March 2024)
+  - [Visit Project](http://elbrifin.com)
+  - Enhanced user experience through intuitive design and responsive optimization for the Dominican Republic-based podcast platform.
 
-## Contact
+- **Corporate Website for CMN S.A.C.** (November 2024)
+  - [Visit Project](http://www.cmnsac.com)
+  - Managed complete development of the corporate website using WordPress.
 
-I am open to new opportunities and collaborations. If you would like to get in touch, you can reach me via:
+---
 
-- Email: [your-email@example.com](mailto:your-email@example.com)
-- LinkedIn: [Yuang Tong](https://www.linkedin.com/in/your-profile)
-- Portfolio Website: [Your Portfolio Website](link-to-portfolio)
+## 🛠 Skills
 
-Feel free to contact me for any inquiries, feedback, or potential projects. I look forward to connecting with you!
+### Programming Languages
+- **Beginner**: Typescript, JavaScript
+- **Intermediate**: C++, Java, Python
 
-Thank you for visiting my portfolio repository. I hope you enjoy exploring my work!
+### Tools and Frameworks
+- **Frontend**: HTML, CSS, JavaScript, Bootstrap, React
+- **Backend**: Java Spring, Python
+- **Version Control**: Git
+- **CMS**: WordPress, Webflow, WixStudio
+- **Design Tools**: Photoshop, Figma, Sketch, Illustrator, XD
+
+### Other Skills
+- Wireframe Development: Balsamiq, Figma, Lucidchart
+- Microsoft Office Suite (Intermediate): Word, Excel, PowerPoint
+- Effective communication (written and verbal)
+- Problem-solving and critical thinking
+
+---
+
+## 🎓 Certifications
+
+- **Introduction to User Experience Design** (November 2022)
+  - Georgia Institute of Technology (Coursera)
+- **Java Programming** (August 2023)
+  - Oracle Next Education
+- **Java and Spring Boot** (October 2023)
+  - Oracle Next Education
+- **Web Development with Python** (March 2024)
+  - Fabricum, Pontificia Universidad Católica del Perú
+
+---
+
+## 🌐 Languages
+
+- **Spanish**: Native
+- **English**: Advanced (Certified)
+
+---
+
+## 📞 Contact
+
+- **Email**: [yuang.tong@outlook.com](mailto:yuang.tong@outlook.com)
+- **LinkedIn**: [linkedin.com/in/yuangtong](https://www.linkedin.com/in/yuangtong)
+- **GitHub**: [github.com/yuangtong](https://github.com/yuangtong)
+- **Portfolio**: [yuangtong.dev](http://www.yuangtong.dev)
+- **Behance**: [behance.net/yuangtong](https://www.behance.net/yuangtong)
+
