@@ -1,14 +1,8 @@
-import { useState } from 'react';
 import { Send } from 'lucide-react';
 import { useLanguage } from '../hooks/useLanguage';
 
 export function ContactForm() {
   const { language } = useLanguage();
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
-  });
 
   const labels = {
     en: {
@@ -27,20 +21,15 @@ export function ContactForm() {
     },
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // TODO: Implement form submission
-    console.log('Form submitted:', formData);
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
   const t = labels[language];
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-md w-full mx-auto space-y-4">
+    <form 
+      name="contact"
+      method="POST"
+      data-netlify="true"
+      className="max-w-md w-full mx-auto space-y-4"
+    >
       <h2 className="text-2xl font-bold mb-6">{t.title}</h2>
       
       <div className="space-y-2">
@@ -48,8 +37,6 @@ export function ContactForm() {
           type="text"
           name="name"
           placeholder={t.name}
-          value={formData.name}
-          onChange={handleChange}
           required
           className="w-full p-3 bg-white dark:bg-neutral-800 border-4 border-black dark:border-white focus:outline-none focus:ring-2 focus:ring-[#4FFFB0] dark:focus:ring-[#6B2B9E]"
         />
@@ -60,8 +47,6 @@ export function ContactForm() {
           type="email"
           name="email"
           placeholder={t.email}
-          value={formData.email}
-          onChange={handleChange}
           required
           className="w-full p-3 bg-white dark:bg-neutral-800 border-4 border-black dark:border-white focus:outline-none focus:ring-2 focus:ring-[#4FFFB0] dark:focus:ring-[#6B2B9E]"
         />
@@ -71,8 +56,6 @@ export function ContactForm() {
         <textarea
           name="message"
           placeholder={t.message}
-          value={formData.message}
-          onChange={handleChange}
           required
           rows={4}
           className="w-full p-3 bg-white dark:bg-neutral-800 border-4 border-black dark:border-white focus:outline-none focus:ring-2 focus:ring-[#4FFFB0] dark:focus:ring-[#6B2B9E]"
