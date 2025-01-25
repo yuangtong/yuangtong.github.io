@@ -45,7 +45,7 @@ export function MaintenanceMessage() {
       </div>
 
       <div className="flex flex-col items-center gap-4">
-        <div className="w-full max-w-md p-4 md:p-6 bg-[#4FFFB0] dark:bg-[#FF6B6B] border-4 border-black dark:border-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:shadow-[8px_8px_0px_0px_rgba(255,255,255,1)] hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none transition-all">
+        <div className="w-full max-w-md p-4 md:p-6 bg-[#4FFFB0] dark:bg-[#6B2B9E] border-4 border-black dark:border-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:shadow-[8px_8px_0px_0px_rgba(255,255,255,1)] hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none transition-all">
           <p className="text-base sm:text-lg md:text-xl font-bold">
             {t.expectedTime}
           </p>
@@ -66,7 +66,7 @@ export function MaintenanceMessage() {
           href="https://github.com/yuangtong/yuangtong.github.io"
           target="_blank"
           rel="noopener noreferrer"
-          className="w-full max-w-md flex items-center justify-center gap-2 p-4 md:p-6 bg-[#4FFFB0] dark:bg-[#FF6B6B] border-4 border-black dark:border-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:shadow-[8px_8px_0px_0px_rgba(255,255,255,1)] hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none transition-all"
+          className="w-full max-w-md flex items-center justify-center gap-2 p-4 md:p-6 bg-[#4FFFB0] dark:bg-[#6B2B9E] border-4 border-black dark:border-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:shadow-[8px_8px_0px_0px_rgba(255,255,255,1)] hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none transition-all"
         >
           <Github className="w-5 h-5 md:w-6 md:h-6" />
           <span className="text-base sm:text-lg md:text-xl font-bold">

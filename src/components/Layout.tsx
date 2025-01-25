@@ -10,7 +10,7 @@ interface LayoutProps {
 
 export function Layout({ children }: LayoutProps) {
   return (
-    <div className="min-h-screen bg-[#f0f0f0] dark:bg-neutral-900 text-black dark:text-white transition-colors">
+    <div className="min-h-screen bg-[#f0f0f0] dark:bg-[#121212] text-black dark:text-white transition-colors">
       <Header />
       <ThemeToggle />
       <LanguageToggle />
@@ -19,7 +19,7 @@ export function Layout({ children }: LayoutProps) {
         {children}
       </main>
 
-      <footer className="h-24 bg-[#f0f0f0] dark:bg-neutral-900 border-t-4 border-black dark:border-white">
+      <footer className="h-24 bg-[#f0f0f0] dark:bg-[#121212] border-t-4 border-black dark:border-white">
         <div className="container mx-auto h-full flex items-center justify-center px-4">
           <SocialLinks />
         </div>
