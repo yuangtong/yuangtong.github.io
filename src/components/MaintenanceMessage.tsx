@@ -1,4 +1,4 @@
-import { Bolt, FileDown } from 'lucide-react';
+import { Bolt, FileDown, Github } from 'lucide-react';
 import { useLanguage } from '../hooks/useLanguage';
 import { ContactForm } from './ContactForm';
 
@@ -12,6 +12,7 @@ export function MaintenanceMessage() {
       description: "I'm working my magic on this site. It'll be back before you can say \"sudo make me a sandwich\" 🥪!",
       expectedTime: 'Expected downtime: A few moments ⏳',
       downloadCV: 'Download CV',
+      viewGithub: 'View on GitHub',
     },
     es: {
       title: 'En Mantenimiento',
@@ -19,6 +20,7 @@ export function MaintenanceMessage() {
       description: 'Estoy trabajando en la magia de este sitio. ¡Volverá antes de que puedas decir "sudo hazme un sándwich" 🥪!',
       expectedTime: 'Tiempo estimado: Unos momentos ⏳',
       downloadCV: 'Descargar CV',
+      viewGithub: 'Ver en GitHub',
     },
   };
 
@@ -59,7 +61,21 @@ export function MaintenanceMessage() {
             {t.downloadCV}
           </span>
         </a>
+
+        <a
+          href="https://github.com/yuangtong/yuangtong.github.io"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-full max-w-md flex items-center justify-center gap-2 p-4 md:p-6 bg-[#4FFFB0] dark:bg-[#FF6B6B] border-4 border-black dark:border-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:shadow-[8px_8px_0px_0px_rgba(255,255,255,1)] hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none transition-all"
+        >
+          <Github className="w-5 h-5 md:w-6 md:h-6" />
+          <span className="text-base sm:text-lg md:text-xl font-bold">
+            {t.viewGithub}
+          </span>
+        </a>
       </div>
+
+      <div className="w-full max-w-md mx-auto h-1 bg-black dark:bg-white" />
 
       <div className="mt-12">
         <ContactForm />
