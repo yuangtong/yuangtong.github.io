@@ -42,8 +42,9 @@ export function ContactForm() {
   const t = labels[language];
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    // Let Netlify handle the form submission
-    // The form will be submitted and redirected to Netlify's success page
+    e.preventDefault();
+    const form = e.target as HTMLFormElement;
+    form.submit();
   };
   
   const handleReasonChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -55,7 +56,12 @@ export function ContactForm() {
       <form name="contact" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
         <input type="text" name="name" />
         <input type="email" name="email" />
-        <select name="reason"></select>
+        <select name="reason">
+          <option value="inquiry">Inquiry</option>
+          <option value="quote">Quote</option>
+          <option value="general">General Message</option>
+          <option value="other">Other</option>
+        </select>
         <input type="text" name="otherReason" />
         <textarea name="message"></textarea>
       </form>
