@@ -41,29 +41,11 @@ export function ContactForm() {
 
   const t = labels[language];
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    const myForm = event.target as HTMLFormElement;
-    const formData = new FormData(myForm);
-
-    fetch("/", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams(formData as any).toString(),
-    })
-      .then(() => {
-        // Clear form
-        myForm.reset();
-        // Show success message
-        alert("Message sent successfully!");
-      })
-      .catch((error) => {
-        console.error(error);
-        alert("Error sending message. Please try again.");
-      });
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    // Let Netlify handle the form submission
+    // The form will be submitted and redirected to Netlify's success page
   };
-
+  
   const handleReasonChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setShowOtherReason(e.target.value === 'other');
   };
