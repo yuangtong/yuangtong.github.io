@@ -6,20 +6,6 @@ export function ContactForm() {
   const { language } = useLanguage();
   const [showOtherReason, setShowOtherReason] = useState(false);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    const myForm = event.target as HTMLFormElement;
-    const formData = new FormData(myForm);
-    const formDataObject = Object.fromEntries(formData) as Record<string, string>;
-
-    // Let Netlify handle the form submission directly
-    myForm.submit();
-
-    // Remove the fetch call since we're letting the form submit naturally
-    console.log("Form submitted");
-  };
-
   const labels = {
     en: {
       title: 'Get in Touch',
@@ -50,10 +36,33 @@ export function ContactForm() {
         general: 'Mensaje General',
         other: 'Otro'
       }
-    },
+    }
   };
 
   const t = labels[language];
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const myForm = event.target as HTMLFormElement;
+    const formData = new FormData(myForm);
+
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams(formData as any).toString(),
+    })
+      .then(() => {
+        // Clear form
+        myForm.reset();
+        // Show success message
+        alert("Message sent successfully!");
+      })
+      .catch((error) => {
+        console.error(error);
+        alert("Error sending message. Please try again.");
+      });
+  };
 
   const handleReasonChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setShowOtherReason(e.target.value === 'other');
@@ -61,16 +70,24 @@ export function ContactForm() {
 
   return (
     <>
-      {/* Hidden form remains the same */}
-      
+      <form name="contact" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+        <input type="text" name="name" />
+        <input type="email" name="email" />
+        <select name="reason"></select>
+        <input type="text" name="otherReason" />
+        <textarea name="message"></textarea>
+      </form>
+
       <form 
         name="contact"
         method="POST"
         data-netlify="true"
+        netlify-honeypot="bot-field"
         onSubmit={handleSubmit}
         className="max-w-md w-full mx-auto space-y-4"
       >
         <input type="hidden" name="form-name" value="contact" />
+        <input type="hidden" name="bot-field" />
         
         {/* Rest of your form remains the same */}
         <h2 className="text-2xl font-bold mb-6">{t.title}</h2>
