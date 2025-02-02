@@ -6,6 +6,24 @@ export function ContactForm() {
   const { language } = useLanguage();
   const [showOtherReason, setShowOtherReason] = useState(false);
 
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const myForm = event.target as HTMLFormElement;
+    const formData = new FormData(myForm);
+    const formDataObject = Object.fromEntries(formData) as Record<string, string>;
+
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams(formDataObject).toString()
+    })
+      .then(() => {
+        console.log("Form submitted successfully");
+      })
+      .catch(error => alert(error));
+  };
+
   const labels = {
     en: {
       title: 'Get in Touch',
@@ -47,22 +65,18 @@ export function ContactForm() {
 
   return (
     <>
-      {/* Hidden form for Netlify detection */}
-      <form name="contact" data-netlify="true" hidden>
-        <input type="text" name="name" />
-        <input type="email" name="email" />
-        <select name="reason"></select>
-        <input type="text" name="otherReason" />
-        <textarea name="message"></textarea>
-      </form>
-
+      {/* Hidden form remains the same */}
+      
       <form 
         name="contact"
         method="POST"
         data-netlify="true"
+        onSubmit={handleSubmit}
         className="max-w-md w-full mx-auto space-y-4"
       >
         <input type="hidden" name="form-name" value="contact" />
+        
+        {/* Rest of your form remains the same */}
         <h2 className="text-2xl font-bold mb-6">{t.title}</h2>
         
         <div className="space-y-2">
