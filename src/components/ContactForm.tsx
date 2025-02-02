@@ -13,15 +13,11 @@ export function ContactForm() {
     const formData = new FormData(myForm);
     const formDataObject = Object.fromEntries(formData) as Record<string, string>;
 
-    fetch("/", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams(formDataObject).toString()
-    })
-      .then(() => {
-        console.log("Form submitted successfully");
-      })
-      .catch(error => alert(error));
+    // Let Netlify handle the form submission directly
+    myForm.submit();
+
+    // Remove the fetch call since we're letting the form submit naturally
+    console.log("Form submitted");
   };
 
   const labels = {
