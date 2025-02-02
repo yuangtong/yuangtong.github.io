@@ -60,7 +60,6 @@ export function ContactForm() {
         name="contact"
         method="POST"
         data-netlify="true"
-        action="/success"
         className="max-w-md w-full mx-auto space-y-4"
       >
         <input type="hidden" name="form-name" value="contact" />
