@@ -85,7 +85,7 @@ const Hero = () => {
             </motion.a>
 
             <motion.a
-              href="https://github.com/yourusername/portfolio"
+              href="https://github.com/yuangtong/yuangtong.github.io"
               target="_blank"
               rel="noopener noreferrer"
               initial={{ opacity: 0, y: 20 }}
