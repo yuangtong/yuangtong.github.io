@@ -9,7 +9,7 @@ export function SocialLinks() {
     },
     {
       icon: Linkedin,
-      href: 'https://linkedin.com/yuangtong',
+      href: 'https://linkedin.com/in/yuangtong',
       label: 'LinkedIn',
     },
     {
