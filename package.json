@@ -10,13 +10,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "deepl-node": "^1.16.0",
     "framer-motion": "^11.18.2",
     "lucide-react": "^0.344.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-globe.gl": "^2.27.1",
     "react-router-dom": "^6.22.3",
-    "three": "^0.162.0"
+    "three": "^0.173.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.1",

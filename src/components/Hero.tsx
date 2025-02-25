@@ -1,11 +1,72 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Code2, Palette, Zap, FileDown, Github } from 'lucide-react';
 import BackgroundShapes from './BackgroundShapes';
+import { useTranslation } from '../context/TranslationContext';
 
 const Hero = () => {
+  const { language, translate } = useTranslation();
+  const [translatedContent, setTranslatedContent] = useState({
+    greeting: "hey, i'm yuang tong",
+    role: "designer & developer",
+    tagline: "I create bold, functional, and memorable digital experiences",
+    downloadCV: "Download my CV",
+    viewGithub: "View on GitHub"
+  });
+
+  const initialFeatures = [
+    { Icon: Code2, text: 'Clean Code' },
+    { Icon: Palette, text: 'Bold Design' },
+    { Icon: Zap, text: 'Fast Performance' }
+  ];
+  
+  const [features, setFeatures] = useState(initialFeatures);
+
+  useEffect(() => {
+    const translateContent = async () => {
+      if (language === 'en') {
+        setTranslatedContent({
+          greeting: "hey, i'm yuang tong",
+          role: "designer & developer",
+          tagline: "I create bold, functional, and memorable digital experiences",
+          downloadCV: "Download my CV",
+          viewGithub: "View on GitHub"
+        });
+        setFeatures(initialFeatures);
+        return;
+      }
+
+      const [greeting, role, tagline, downloadCV, viewGithub] = await Promise.all([
+        translate("hey, i'm yuang tong"),
+        translate("designer & developer"),
+        translate("I create bold, functional, and memorable digital experiences"),
+        translate("Download my CV"),
+        translate("View on GitHub")
+      ]);
+
+      setTranslatedContent({
+        greeting,
+        role,
+        tagline,
+        downloadCV,
+        viewGithub
+      });
+
+      // Translate features
+      const translatedFeatures = await Promise.all(
+        initialFeatures.map(async (feature) => ({
+          ...feature,
+          text: await translate(feature.text)
+        }))
+      );
+      setFeatures(translatedFeatures);
+    };
+
+    translateContent();
+  }, [language, translate]);
+
   return (
-    <section className="min-h-screen pt-20 bg-gradient-to-br from-yellow-300 via-pink-500 to-purple-600 relative overflow-hidden">
+    <section className="min-h-screen pt-20 bg-gradient-to-br from-yellow-300 via-green-500 to-blue-600 relative overflow-hidden">
       <BackgroundShapes />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
@@ -21,10 +82,10 @@ const Hero = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 }}
           >
-            Hi, I'm Yuang Tong
+            {translatedContent.greeting}
             <br />
             <motion.span 
-              className="text-pink-500"
+              className="text-blue-500"
               animate={{ 
                 scale: [1, 1.02, 1],
                 rotate: [-1, 1, -1]
@@ -35,20 +96,16 @@ const Hero = () => {
                 repeatType: "reverse"
               }}
             >
-              Designer & Developer
+              {translatedContent.role}
             </motion.span>
           </motion.h1>
           
           <p className="text-xl md:text-2xl mb-8 font-mono">
-            I create bold, functional, and memorable digital experiences
+            {translatedContent.tagline}
           </p>
 
           <div className="flex flex-wrap gap-4 mb-8">
-            {[
-              { Icon: Code2, text: 'Clean Code' },
-              { Icon: Palette, text: 'Bold Design' },
-              { Icon: Zap, text: 'Fast Performance' }
-            ].map(({ Icon, text }, index) => (
+            {features.map(({ Icon, text }, index) => (
               <motion.div
                 key={text}
                 initial={{ opacity: 0, y: 20 }}
@@ -69,7 +126,7 @@ const Hero = () => {
 
           <div className="flex flex-wrap gap-4">
             <motion.a
-              href="/cv.pdf"
+              href="/Yuang-Tong-CV.pdf"
               download
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -78,10 +135,10 @@ const Hero = () => {
                 scale: 1.05,
                 boxShadow: '6px 6px 0px 0px rgba(0,0,0,1)'
               }}
-              className="flex items-center space-x-2 bg-pink-500 text-white px-6 py-3 border-2 border-black font-bold transition-all hover:bg-yellow-300 hover:text-black"
+              className="flex items-center space-x-2 bg-blue-500 text-white px-6 py-3 border-2 border-black font-bold transition-all hover:bg-yellow-300 hover:text-black"
             >
               <FileDown size={20} />
-              <span>Download my CV</span>
+              <span>{translatedContent.downloadCV}</span>
             </motion.a>
 
             <motion.a
@@ -98,7 +155,7 @@ const Hero = () => {
               className="flex items-center space-x-2 bg-white text-black px-6 py-3 border-2 border-black font-bold transition-all hover:bg-black hover:text-white"
             >
               <Github size={20} />
-              <span>View on GitHub</span>
+              <span>{translatedContent.viewGithub}</span>
             </motion.a>
           </div>
         </motion.div>

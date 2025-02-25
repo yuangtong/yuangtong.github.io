@@ -13,33 +13,36 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import Cursor from './components/Cursor';
 import { useTheme } from './context/ThemeContext';
+import { TranslationProvider } from './context/TranslationContext';
 
 function App() {
   const { isDark } = useTheme();
   
   return (
-    <Router>
-      <div className={`relative ${isDark ? 'dark' : ''}`}>
-        <Cursor />
-        <Header />
-        <Routes>
-          <Route path="/" element={
-            <main className="relative overflow-hidden">
-              <Hero />
-              <About />
-              <Work />
-              <Projects />
-              <BlogPage />
-              <Contact />
-            </main>
-          } />
-          <Route path="/blog/:slug" element={<BlogPost />} />
-          <Route path="/projects/:slug" element={<ProjectDetails />} />
-          <Route path="/work/:slug" element={<WorkDetails />} />
-        </Routes>
-        <Footer />
-      </div>
-    </Router>
+    <TranslationProvider>
+      <Router>
+        <div className={`relative ${isDark ? 'dark' : ''}`}>
+          <Cursor />
+          <Header />
+          <Routes>
+            <Route path="/" element={
+              <main className="relative overflow-hidden">
+                <Hero />
+                <About />
+                { /* <Work /> */ }
+                { /* <Projects /> */ }
+                { /* <BlogPage /> */ }
+                <Contact /> 
+              </main>
+            } />
+            <Route path="/blog/:slug" element={<BlogPost />} />
+            <Route path="/projects/:slug" element={<ProjectDetails />} />
+            <Route path="/work/:slug" element={<WorkDetails />} />
+          </Routes>
+          <Footer />
+        </div>
+      </Router>
+    </TranslationProvider>
   );
 }
 

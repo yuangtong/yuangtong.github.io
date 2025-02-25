@@ -1,14 +1,107 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Send } from 'lucide-react';
 import Globe from './Globe';
+import { useTranslation } from '../context/TranslationContext';
 
 const Contact = () => {
+  const { language, translate } = useTranslation();
   const [submitted, setSubmitted] = useState(false);
   const [otherReason, setOtherReason] = useState('');
   const [selectedReason, setSelectedReason] = useState('Inquiry');
+  
+  const initialContactReasons = ['Inquiry', 'Quote', 'General message', 'Other'];
+  const [contactReasons, setContactReasons] = useState(initialContactReasons);
 
-  const contactReasons = ['Inquiry', 'Quote', 'General message', 'Other'];
+  const [translatedContent, setTranslatedContent] = useState({
+    thankYou: 'Thank You!',
+    confirmation: "Your message has been received. I'll get back to you soon!",
+    letsWork: "Let's Work Together!",
+    projectInMind: "Have a project in mind? Let's create something amazing.",
+    namePlaceholder: 'Name',
+    emailPlaceholder: 'Email',
+    reasonLabel: 'Reason for Contact',
+    otherReasonPlaceholder: 'Please specify',
+    messagePlaceholder: 'Your Message',
+    sendMessage: 'Send Message',
+    projectsAcross: 'Projects completed across',
+    countries: '7 countries'
+  });
+
+  useEffect(() => {
+    const translateContent = async () => {
+      if (language === 'en') {
+        setTranslatedContent({
+          thankYou: 'Thank You!',
+          confirmation: "Your message has been received. I'll get back to you soon!",
+          letsWork: "Let's Work Together!",
+          projectInMind: "Have a project in mind? Let's create something amazing.",
+          namePlaceholder: 'Name',
+          emailPlaceholder: 'Email',
+          reasonLabel: 'Reason for Contact',
+          otherReasonPlaceholder: 'Please specify',
+          messagePlaceholder: 'Your Message',
+          sendMessage: 'Send Message',
+          projectsAcross: 'Projects completed across',
+          countries: '7 countries'
+        });
+        setContactReasons(initialContactReasons);
+        return;
+      }
+
+      // Translate all static content
+      const [
+        thankYou,
+        confirmation,
+        letsWork,
+        projectInMind,
+        namePlaceholder,
+        emailPlaceholder,
+        reasonLabel,
+        otherReasonPlaceholder,
+        messagePlaceholder,
+        sendMessage,
+        projectsAcross,
+        countries
+      ] = await Promise.all([
+        translate('Thank You!'),
+        translate("Your message has been received. I'll get back to you soon!"),
+        translate("Let's Work Together!"),
+        translate("Have a project in mind? Let's create something amazing."),
+        translate('Name'),
+        translate('Email'),
+        translate('Reason for Contact'),
+        translate('Please specify'),
+        translate('Your Message'),
+        translate('Send Message'),
+        translate('Projects completed across'),
+        translate('7 countries')
+      ]);
+
+      setTranslatedContent({
+        thankYou,
+        confirmation,
+        letsWork,
+        projectInMind,
+        namePlaceholder,
+        emailPlaceholder,
+        reasonLabel,
+        otherReasonPlaceholder,
+        messagePlaceholder,
+        sendMessage,
+        projectsAcross,
+        countries
+      });
+
+      // Translate contact reasons
+      const translatedReasons = await Promise.all(
+        initialContactReasons.map(reason => translate(reason))
+      );
+      setContactReasons(translatedReasons);
+    };
+
+    translateContent();
+  }, [language, translate]);
 
   if (submitted) {
     return (
@@ -19,9 +112,9 @@ const Contact = () => {
             animate={{ opacity: 1 }}
             className="max-w-2xl mx-auto text-center"
           >
-            <h2 className="text-5xl font-bold mb-8">Thank You!</h2>
+            <h2 className="text-5xl font-bold mb-8">{translatedContent.thankYou}</h2>
             <p className="font-mono text-xl">
-              Your message has been received. I'll get back to you soon!
+              {translatedContent.confirmation}
             </p>
           </motion.div>
         </div>
@@ -38,9 +131,9 @@ const Contact = () => {
             whileInView={{ opacity: 1 }}
             className="max-w-2xl"
           >
-            <h2 className="text-5xl font-bold mb-8">Let's Work Together!</h2>
+            <h2 className="text-5xl font-bold mb-8">{translatedContent.letsWork}</h2>
             <p className="font-mono text-xl mb-12">
-              Have a project in mind? Let's create something amazing.
+              {translatedContent.projectInMind}
             </p>
 
             <form
@@ -64,7 +157,7 @@ const Contact = () => {
                   whileFocus={{ scale: 1.02 }}
                   type="text"
                   name="name"
-                  placeholder="Name"
+                  placeholder={translatedContent.namePlaceholder}
                   required
                   className="w-full p-4 bg-white border-4 border-pink-500 text-black font-mono placeholder-gray-500 focus:outline-none focus:border-yellow-300"
                 />
@@ -72,14 +165,14 @@ const Contact = () => {
                   whileFocus={{ scale: 1.02 }}
                   type="email"
                   name="email"
-                  placeholder="Email"
+                  placeholder={translatedContent.emailPlaceholder}
                   required
                   className="w-full p-4 bg-white border-4 border-pink-500 text-black font-mono placeholder-gray-500 focus:outline-none focus:border-yellow-300"
                 />
               </div>
 
               <div className="space-y-2">
-                <label className="block font-mono text-sm">Reason for Contact</label>
+                <label className="block font-mono text-sm">{translatedContent.reasonLabel}</label>
                 <select
                   name="contactReason"
                   value={selectedReason}
@@ -97,7 +190,7 @@ const Contact = () => {
                     animate={{ opacity: 1, y: 0 }}
                     type="text"
                     name="otherReason"
-                    placeholder="Please specify"
+                    placeholder={translatedContent.otherReasonPlaceholder}
                     value={otherReason}
                     onChange={(e) => setOtherReason(e.target.value)}
                     required
@@ -110,7 +203,7 @@ const Contact = () => {
                 whileFocus={{ scale: 1.02 }}
                 name="message"
                 rows={6}
-                placeholder="Your Message"
+                placeholder={translatedContent.messagePlaceholder}
                 required
                 className="w-full p-4 bg-white border-4 border-pink-500 text-black font-mono placeholder-gray-500 focus:outline-none focus:border-yellow-300"
               />
@@ -121,7 +214,7 @@ const Contact = () => {
                 whileTap={{ scale: 0.95 }}
                 className="group bg-pink-500 text-white px-8 py-4 border-4 border-white font-bold text-lg flex items-center justify-center space-x-2 hover:bg-yellow-300 hover:text-black transition-colors"
               >
-                <span>Send Message</span>
+                <span>{translatedContent.sendMessage}</span>
                 <Send className="group-hover:translate-x-2 transition-transform" />
               </motion.button>
             </form>
@@ -135,9 +228,9 @@ const Contact = () => {
             <Globe />
             <div className="absolute bottom-0 right-0 bg-black bg-opacity-80 p-4 border-4 border-pink-500">
               <p className="font-mono text-sm">
-                Projects completed across
+                {translatedContent.projectsAcross}
                 <br />
-                <span className="text-pink-500 font-bold text-xl">7 countries</span>
+                <span className="text-pink-500 font-bold text-xl">{translatedContent.countries}</span>
               </p>
             </div>
           </motion.div>
