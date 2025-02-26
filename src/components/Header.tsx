@@ -1,14 +1,94 @@
-export function Header() {
+import React from 'react';
+import { Menu, Github, Linkedin, Mail, Globe } from 'lucide-react';
+import { motion } from 'framer-motion';
+import ThemeToggle from './ThemeToggle';
+import { useTranslation } from '../context/TranslationContext';
+import { useEffect, useState } from 'react';
+
+const Header = () => {
+  const { language, setLanguage, translate } = useTranslation();
+  const navItems = ['home', 'about', 'work', 'projects', 'blog', 'contact'];
+  const [translatedNavItems, setTranslatedNavItems] = useState(navItems);
+
+  useEffect(() => {
+    const translateNavItems = async () => {
+      if (language === 'en') {
+        setTranslatedNavItems(navItems);
+        return;
+      }
+      
+      const translated = await Promise.all(
+        navItems.map(item => translate(item))
+      );
+      setTranslatedNavItems(translated);
+    };
+
+    translateNavItems();
+  }, [language, translate]);
+
   return (
-    <header className="fixed top-3 left-3 md:top-4 md:left-4 z-50">
-      <a 
-        href="/"
-        className="inline-block p-2.5 md:p-3 bg-[#4FFFB0] dark:bg-[#6B2B9E] border-4 border-black dark:border-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none transition-all"
-      >
-        <span className="text-base md:text-lg font-bold whitespace-nowrap">
-          yuangtong.dev
-        </span>
-      </a>
+    <header className="fixed w-full top-0 z-50 bg-white dark:bg-gray-900 border-b-4 border-black">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16">
+          <motion.a 
+            href="#"
+            whileHover={{ scale: 1.1 }}
+            className="text-2xl font-bold cursor-pointer dark:text-white"
+          >
+            YT
+          </motion.a>
+          
+          <nav className="hidden md:flex space-x-8">
+            {translatedNavItems.map((item) => (
+              <motion.a
+                key={item}
+                whileHover={{ scale: 1.1, rotate: -2 }}
+                className="text-black dark:text-white hover:text-pink-500 font-mono text-lg"
+                href={`#${navItems[translatedNavItems.indexOf(item)].toLowerCase()}`}
+              >
+                {item}
+              </motion.a>
+            ))}
+          </nav>
+
+          <div className="hidden md:flex items-center space-x-4">
+            <ThemeToggle />
+            {[
+              { Icon: Github, href: 'https://github.com/yuangtong' },
+              { Icon: Linkedin, href: 'https://linkedin.com/in/yuangtong' },
+              { Icon: Mail, href: 'mailto:yuang.tong@outlook.com' }
+            ].map(({ Icon, href }) => (
+              <motion.a
+                key={href}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.2, rotate: 15 }}
+                className="hover:text-pink-500 dark:text-white"
+              >
+                <Icon size={24} />
+              </motion.a>
+            ))}
+            <select
+              value={language}
+              onChange={(e) => setLanguage(e.target.value)}
+              className="bg-transparent border border-gray-300 dark:border-gray-700 rounded px-2 py-1 text-sm dark:text-white"
+              aria-label="Select language"
+              title="Language selector"
+            >
+              <option value="en">EN</option>
+              <option value="es">ES</option>
+              <option value="zh">中文</option>
+            </select>
+          </div>
+
+          <div className="md:hidden dark:text-white">
+            <Menu size={24} />
+          </div>
+        </div>
+      </div>
     </header>
   );
-}
+};
+
+export default Header;
