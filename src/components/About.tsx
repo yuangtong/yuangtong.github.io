@@ -7,7 +7,7 @@ const About = () => {
   const { language, translate } = useTranslation();
   const [translatedContent, setTranslatedContent] = useState({
     title: 'About Me',
-    paragraph1: "I'm a passionate developer and designer with over 5 years of experience in creating digital solutions that make a difference. My approach combines clean code with stunning design to deliver exceptional user experiences.",
+    paragraph1: "I'm a passionate developer and designer with over 2 years of experience in creating digital solutions that make a difference. My approach combines clean code with stunning design to deliver exceptional user experiences.",
     paragraph2: "When I'm not coding, you can find me exploring new technologies, contributing to open-source projects, or sharing my knowledge through technical writing.",
   });
   
@@ -25,7 +25,7 @@ const About = () => {
       if (language === 'en') {
         setTranslatedContent({
           title: 'About Me',
-          paragraph1: "I'm a passionate developer and designer with over 5 years of experience in creating digital solutions that make a difference. My approach combines clean code with stunning design to deliver exceptional user experiences.",
+          paragraph1: "I'm a passionate developer and designer with over 2 years of experience in creating digital solutions that make a difference. My approach combines clean code with stunning design to deliver exceptional user experiences.",
           paragraph2: "When I'm not coding, you can find me exploring new technologies, contributing to open-source projects, or sharing my knowledge through technical writing.",
         });
         setSkills(initialSkills);
@@ -34,7 +34,7 @@ const About = () => {
 
       const [title, p1, p2] = await Promise.all([
         translate('About Me'),
-        translate("I'm a passionate developer and designer with over 5 years of experience in creating digital solutions that make a difference. My approach combines clean code with stunning design to deliver exceptional user experiences."),
+        translate("I'm a passionate developer and designer with over 2 years of experience in creating digital solutions that make a difference. My approach combines clean code with stunning design to deliver exceptional user experiences."),
         translate("When I'm not coding, you can find me exploring new technologies, contributing to open-source projects, or sharing my knowledge through technical writing."),
       ]);
 
