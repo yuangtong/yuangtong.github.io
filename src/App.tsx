@@ -3,12 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
-import Work from './components/Work';
 import Projects from './components/Projects';
-import { BlogPage } from './pages/blog/BlogPage';
-import { BlogPost } from './pages/blog/BlogPost';
 import { ProjectDetails } from './pages/projects/ProjectDetails';
-import { WorkDetails } from './pages/work/WorkDetails';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import Cursor from './components/Cursor';
@@ -30,14 +26,13 @@ function App() {
                 <Hero />
                 <About />
                 { /* <Work /> */ }
-                { /* <Projects /> */ }
+                { <Projects /> }
                 { /* <BlogPage /> */ }
                 <Contact /> 
               </main>
             } />
-            <Route path="/blog/:slug" element={<BlogPost />} />
-            <Route path="/projects/:slug" element={<ProjectDetails />} />
-            <Route path="/work/:slug" element={<WorkDetails />} />
+            <Route path="/projects" element={<Projects />} />
+            <Route path="/project/:slug" element={<ProjectDetails />} />
           </Routes>
           <Footer />
         </div>

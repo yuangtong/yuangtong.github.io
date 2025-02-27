@@ -50,7 +50,7 @@ export const ContentCard: React.FC<ContentCardProps> = ({ type, item }) => {
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       whileHover={{ y: -5 }}
-      className="bg-white dark:bg-gray-900 border-4 border-black overflow-hidden group"
+      className="bg-white dark:bg-gray-900 border-4 border-black overflow-hidden group hover:bg-yellow-300 transition-colors"
     >
       <Link to={`/${type}/${item.slug}`}>
         <div className="relative h-48 overflow-hidden">

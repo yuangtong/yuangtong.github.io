@@ -2,7 +2,7 @@ import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft, ExternalLink, Github } from 'lucide-react';
-import { projects } from './projectsData';
+import { projects } from '../../data/projects';
 
 export const ProjectDetails = () => {
   const { slug } = useParams();
@@ -25,7 +25,7 @@ export const ProjectDetails = () => {
     <div className="py-20 bg-white">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <Link 
-          to="/projects"
+          to="/#projects"
           className="inline-flex items-center text-pink-500 hover:text-pink-600 mb-8"
         >
           <ArrowLeft className="mr-2" />
@@ -42,10 +42,17 @@ export const ProjectDetails = () => {
               alt={project.title}
               className="w-full h-full object-cover"
             />
+            {project.category && (
+              <div className="absolute top-4 left-4">
+                <span className="bg-yellow-300 px-3 py-1 font-mono text-sm border-2 border-black">
+                  {project.category}
+                </span>
+              </div>
+            )}
           </div>
 
-          <h1 className="text-4xl font-bold mb-6">{project.title}</h1>
-          <p className="text-lg mb-8 font-mono">{project.fullDescription}</p>
+          <h1 className="text-4xl font-bold mb-6 dark:text-white">{project.title}</h1>
+          <p className="text-lg mb-8 font-mono dark:text-gray-300">{project.fullDescription}</p>
 
           <div className="flex flex-wrap gap-2 mb-8">
             {project.tech.map((tech) => (
