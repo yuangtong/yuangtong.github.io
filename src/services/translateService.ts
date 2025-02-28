@@ -19,10 +19,15 @@ export async function translateText(text: string, targetLang: TargetLanguageCode
     });
 
     if (!response.ok) {
-      throw new Error(`Translation failed: ${response.statusText}`);
+      const errorData = await response.json();
+      throw new Error(errorData.error || `Translation failed: ${response.statusText}`);
     }
 
     const data = await response.json();
+    if (!data.translations?.[0]?.text) {
+      throw new Error('Invalid response format from translation service');
+    }
+    
     return data.translations[0].text;
   } catch (error) {
     console.error('Translation error:', error);

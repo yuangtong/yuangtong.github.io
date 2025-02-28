@@ -1,7 +1,6 @@
 const axios = require('axios');
 
 exports.handler = async function(event, context) {
-  // Only allow POST requests
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, body: 'Method Not Allowed' };
   }
@@ -22,14 +21,31 @@ exports.handler = async function(event, context) {
       },
     });
 
+    // Return the response in the exact format the client expects
     return {
       statusCode: 200,
-      body: JSON.stringify(response.data),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        translations: [
+          {
+            text: response.data.translations[0].text
+          }
+        ]
+      }),
     };
   } catch (error) {
+    console.error('Translation error:', error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: error.message }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ 
+        error: error.message,
+        details: error.response?.data || 'No additional details available'
+      }),
     };
   }
 };
