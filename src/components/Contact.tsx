@@ -129,7 +129,7 @@ const Contact = () => {
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            className="max-w-2xl"
+            className="max-w-2xl order-2 lg:order-1"
           >
             <h2 className="text-5xl font-bold mb-8">{translatedContent.letsWork}</h2>
             <p className="font-mono text-xl mb-12">
@@ -212,7 +212,7 @@ const Contact = () => {
                 type="submit"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="group bg-pink-500 text-white px-8 py-4 border-4 border-white font-bold text-lg flex items-center justify-center space-x-2 hover:bg-yellow-300 hover:text-black transition-colors"
+                className="group bg-pink-500 text-white px-8 py-4 border-4 border-white font-bold text-lg flex items-center justify-center space-x-2 hover:bg-yellow-300 hover:text-black transition-colors w-full md:w-auto md:ml-auto"
               >
                 <span>{translatedContent.sendMessage}</span>
                 <Send className="group-hover:translate-x-2 transition-transform" />
@@ -223,10 +223,10 @@ const Contact = () => {
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
-            className="relative h-[400px] lg:h-[600px] block -ml-0 lg:-ml-12"
+            className="relative h-[500px] lg:h-[600px] block -ml-0 lg:-ml-12 order-1 lg:order-2"
           >
-            <Globe />
-            <div className="absolute bottom-0 right-0 bg-black bg-opacity-80 p-4 border-4 border-pink-500">
+            <Globe disableInteractionOnMobile={true} />
+            <div className="absolute left-1/2 transform -translate-x-1/2 bottom-4 md:bottom-0 md:right-0 md:left-auto md:transform-none bg-black bg-opacity-80 p-4 border-4 border-pink-500 w-[280px] md:w-auto text-center md:text-left">
               <p className="font-mono text-sm">
                 {translatedContent.projectsAcross}
                 <br />

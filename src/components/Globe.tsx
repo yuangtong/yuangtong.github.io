@@ -10,22 +10,38 @@ interface Country {
 }
 
 const countries: Country[] = [
-  { lat: 40.4168, lng: -3.7038, name: 'Spain', projects: 5 },
-  { lat: 51.5074, lng: -0.1278, name: 'United Kingdom', projects: 3 },
-  { lat: 52.5200, lng: 13.4050, name: 'Germany', projects: 4 },
-  { lat: 48.8566, lng: 2.3522, name: 'France', projects: 2 },
-  { lat: 37.7749, lng: -122.4194, name: 'United States', projects: 6 },
-  { lat: 35.6762, lng: 139.6503, name: 'Japan', projects: 3 },
-  { lat: -33.8688, lng: 151.2093, name: 'Australia', projects: 2 }
+  { lat: 37.7749, lng: -77.4194, name: 'United States (VA)', projects: 5 },
+  { lat: -12.0464, lng: -77.0428, name: 'Peru', projects: 3 },
+  { lat: 18.4861, lng: -69.9312, name: 'Dominican Republic', projects: 4 },
+  { lat: 45.4215, lng: -75.6972, name: 'Canada', projects: 2 },
+  { lat: 40.4168, lng: -3.7038, name: 'Spain', projects: 4 },
+  { lat: -6.3690, lng: 34.8888, name: 'Tanzania', projects: 3 },
+  { lat: -15.7975, lng: -47.8919, name: 'Brazil', projects: 3 }
 ];
 
-const GlobeVisualization = () => {
+interface GlobeProps {
+  disableInteractionOnMobile?: boolean;
+}
+
+const GlobeVisualization: React.FC<GlobeProps> = ({ disableInteractionOnMobile = true }) => {
   const globeRef = useRef<any>();
+  const isMobile = window.innerWidth < 768;
 
   useEffect(() => {
     if (globeRef.current) {
-      globeRef.current.controls().autoRotate = true;
-      globeRef.current.controls().autoRotateSpeed = 0.5;
+      const controls = globeRef.current.controls();
+      
+      // Set auto-rotation
+      controls.autoRotate = true;
+      controls.autoRotateSpeed = 0.5;
+      
+      // Disable interactions on mobile if specified
+      if (isMobile && disableInteractionOnMobile) {
+        controls.enableZoom = false;
+        controls.enablePan = false;
+        controls.enableRotate = false;
+        controls.autoRotate = true;
+      }
       
       // Add ambient light for better visibility
       const ambientLight = globeRef.current.scene().children.find(obj => obj.type === 'AmbientLight');
@@ -35,20 +51,34 @@ const GlobeVisualization = () => {
 
       // Adjust camera position for better mobile view
       const camera = globeRef.current.camera();
-      camera.position.z = window.innerWidth < 768 ? 400 : 300;
+      camera.position.z = isMobile ? 400 : 300;
     }
 
     // Handle resize
     const handleResize = () => {
       if (globeRef.current) {
         const camera = globeRef.current.camera();
-        camera.position.z = window.innerWidth < 768 ? 400 : 300;
+        const newIsMobile = window.innerWidth < 768;
+        camera.position.z = newIsMobile ? 400 : 300;
+
+        // Update controls on resize
+        const controls = globeRef.current.controls();
+        if (newIsMobile && disableInteractionOnMobile) {
+          controls.enableZoom = false;
+          controls.enablePan = false;
+          controls.enableRotate = false;
+          controls.autoRotate = true;
+        } else {
+          controls.enableZoom = true;
+          controls.enablePan = true;
+          controls.enableRotate = true;
+        }
       }
     };
 
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  }, [disableInteractionOnMobile, isMobile]);
 
   return (
     <motion.div
@@ -58,8 +88,8 @@ const GlobeVisualization = () => {
     >
       <Globe
         ref={globeRef}
-        width={window.innerWidth < 768 ? 400 : 800}
-        height={window.innerWidth < 768 ? 400 : 800}
+        width={window.innerWidth < 768 ? 600 : 900}
+        height={window.innerWidth < 768 ? 600 : 900}
         globeImageUrl="//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
         bumpImageUrl="//unpkg.com/three-globe/example/img/earth-topology.png"
         backgroundColor="rgba(0,0,0,0)"

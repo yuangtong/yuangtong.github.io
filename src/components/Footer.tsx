@@ -44,7 +44,7 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-center">
           <motion.p 
             whileHover={{ scale: 1.05 }}
-            className="font-mono mb-4 md:mb-0"
+            className="font-mono mb-4 md:mb-0 text-center md:text-left"
           >
             {translatedContent.rights}
           </motion.p>
