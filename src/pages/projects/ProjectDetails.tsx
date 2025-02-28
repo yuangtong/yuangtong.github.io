@@ -51,8 +51,11 @@ export const ProjectDetails = () => {
             )}
           </div>
 
-          <h1 className="text-4xl font-bold mb-6 dark:text-white">{project.title}</h1>
-          <p className="text-lg mb-8 font-mono dark:text-gray-300">{project.fullDescription}</p>
+          <h1 className="text-4xl font-bold mb-6">{project.title}</h1>
+          <div 
+            className="text-lg mb-8 font-mono whitespace-pre-line"
+            dangerouslySetInnerHTML={{ __html: project.fullDescription }}
+          />
 
           <div className="flex flex-wrap gap-2 mb-8">
             {project.tech.map((tech) => (
@@ -68,6 +71,8 @@ export const ProjectDetails = () => {
           <div className="flex space-x-6">
             <a
               href={project.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center space-x-2 bg-black text-white px-6 py-3 hover:bg-pink-500 transition-colors"
             >
               <ExternalLink size={20} />
@@ -75,6 +80,8 @@ export const ProjectDetails = () => {
             </a>
             <a
               href={project.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center space-x-2 border-2 border-black px-6 py-3 hover:bg-yellow-300 transition-colors"
             >
               <Github size={20} />

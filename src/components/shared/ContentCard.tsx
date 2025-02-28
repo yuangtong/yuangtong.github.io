@@ -31,11 +31,21 @@ export const ContentCard: React.FC<ContentCardProps> = ({ type, item }) => {
     if (type === 'project' || type === 'work') {
       return (
         <div className="flex space-x-4 mt-4">
-          <a href={item.liveUrl} className="flex items-center space-x-2 hover:text-pink-500">
+          <a 
+            href={item.liveUrl} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="flex items-center space-x-2 hover:text-pink-500"
+          >
             <ExternalLink size={20} />
             <span>Live Demo</span>
           </a>
-          <a href={item.githubUrl} className="flex items-center space-x-2 hover:text-pink-500">
+          <a 
+            href={item.githubUrl} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="flex items-center space-x-2 hover:text-pink-500"
+          >
             <Github size={20} />
             <span>Code</span>
           </a>
