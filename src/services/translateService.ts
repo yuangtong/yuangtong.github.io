@@ -3,11 +3,11 @@
 // const DEEPL_API_URL = 'https://api-free.deepl.com/v2/translate';
 // const CORS_PROXY = 'https://cors-anywhere.herokuapp.com/';
 
-export type TargetLanguageCode = 'EN' | 'ES' | 'ZH';
+export type TargetLanguageCode = 'en' | 'es' | 'zh';
 
 export async function translateText(text: string, targetLang: TargetLanguageCode) {
   try {
-    const response = await fetch('/.netlify/functions/translate', {
+    const response = await fetch('/api/translate', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -17,12 +17,12 @@ export async function translateText(text: string, targetLang: TargetLanguageCode
         targetLang,
       }),
     });
-
+  
     if (!response.ok) {
       const errorData = await response.json();
       throw new Error(errorData.error || `Translation failed: ${response.statusText}`);
     }
-
+  
     const data = await response.json();
     if (!data.translations?.[0]?.text) {
       throw new Error('Invalid response format from translation service');

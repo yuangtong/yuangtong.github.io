@@ -2,7 +2,11 @@ const axios = require('axios');
 
 exports.handler = async function(event, context) {
   if (event.httpMethod !== 'POST') {
-    return { statusCode: 405, body: 'Method Not Allowed' };
+    return { 
+      statusCode: 405, 
+      body: 'Method Not Allowed',
+      headers: { 'Access-Control-Allow-Origin': '*' } // CORS aquí también
+    };
   }
 
   try {
@@ -13,26 +17,24 @@ exports.handler = async function(event, context) {
       url: 'https://api-free.deepl.com/v2/translate',
       headers: {
         'Authorization': `DeepL-Auth-Key ${process.env.DEEPL_API_KEY}`,
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded', // Modificado
       },
-      data: {
-        text: [text],
-        target_lang: targetLang,
-      },
+      data: new URLSearchParams({ // Cuerpo en formato correcto
+        text: text,
+        target_lang: targetLang.toLowerCase()
+      }).toString()
     });
 
-    // Return the response in the exact format the client expects
     return {
       statusCode: 200,
       headers: {
         'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*' // CORS añadido
       },
       body: JSON.stringify({
-        translations: [
-          {
-            text: response.data.translations[0].text
-          }
-        ]
+        translations: [{
+          text: response.data.translations[0].text
+        }]
       }),
     };
   } catch (error) {
@@ -41,10 +43,11 @@ exports.handler = async function(event, context) {
       statusCode: 500,
       headers: {
         'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*' // CORS en errores
       },
       body: JSON.stringify({ 
         error: error.message,
-        details: error.response?.data || 'No additional details available'
+        details: error.response?.data || 'No additional details'
       }),
     };
   }
