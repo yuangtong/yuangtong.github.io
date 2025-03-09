@@ -7,6 +7,7 @@ import { useTranslation } from '../context/TranslationContext';
 const Header = () => {
   const { language, setLanguage, translate } = useTranslation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
   const navItems = ['home', 'about', 'work', 'projects', 'blog', 'contact'];
   const [translatedNavItems, setTranslatedNavItems] = useState(navItems);
 
@@ -25,6 +26,38 @@ const Header = () => {
 
     translateNavItems();
   }, [language, translate]);
+
+  // Close language dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = () => {
+      setIsLangMenuOpen(false);
+    };
+    
+    document.addEventListener('click', handleClickOutside);
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
+
+  const handleLangButtonClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIsLangMenuOpen(!isLangMenuOpen);
+  };
+
+  // Language options with their display names
+  const languageOptions = [
+    { value: 'en', label: 'English' },
+    { value: 'es', label: 'Español' },
+    { value: 'pt-BR', label: 'Português' },
+    { value: 'ja', label: '日本語' },
+    { value: 'zh', label: '简体中文' },
+  ];
+
+  // Get current language display name
+  const getCurrentLanguageLabel = () => {
+    const currentLang = languageOptions.find(option => option.value === language);
+    return currentLang ? currentLang.label : 'English';
+  };
 
   return (
     <header className="fixed w-full top-0 z-50 bg-white dark:bg-gray-900 border-b-4 border-black">
@@ -71,17 +104,49 @@ const Header = () => {
                 <Icon size={24} />
               </motion.a>
             ))}
-            <select
-              value={language}
-              onChange={(e) => setLanguage(e.target.value)}
-              className="bg-transparent border border-gray-300 dark:border-gray-700 rounded px-2 py-1 text-sm dark:text-white"
-              aria-label="Select language"
-              title="Language selector"
-            >
-              <option value="en">EN</option>
-              <option value="es">ES</option>
-              <option value="zh">中文</option>
-            </select>
+            
+            {/* Language Selector Dropdown */}
+            <div className="relative">
+              <button 
+                onClick={handleLangButtonClick}
+                className="flex items-center space-x-1 text-black dark:text-white hover:text-pink-500 focus:outline-none"
+                aria-label="Select language"
+                title="Language selector"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-languages">
+                  <path d="m5 8 6 6"></path>
+                  <path d="m4 14 6-6 2-3"></path>
+                  <path d="M2 5h12"></path>
+                  <path d="M7 2h1"></path>
+                  <path d="m22 22-5-10-5 10"></path>
+                  <path d="M14 18h6"></path>
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-chevron-down">
+                  <path d="m6 9 6 6 6-6"></path>
+                </svg>
+              </button>
+              
+              {isLangMenuOpen && (
+                <div className="absolute right-0 mt-2 w-40 bg-white dark:bg-gray-800 rounded-md shadow-lg py-1 z-50 border border-gray-200 dark:border-gray-700">
+                  {languageOptions.map((option) => (
+                    <button
+                      key={option.value}
+                      onClick={() => {
+                        setLanguage(option.value);
+                        setIsLangMenuOpen(false);
+                      }}
+                      className={`block w-full text-left px-4 py-2 text-sm ${
+                        language === option.value 
+                          ? 'text-pink-500 font-medium' 
+                          : 'text-gray-700 dark:text-gray-300'
+                      } hover:bg-gray-100 dark:hover:bg-gray-700`}
+                    >
+                      {option.label}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Mobile Menu Button */}
@@ -137,15 +202,49 @@ const Header = () => {
                 ))}
               </div>
               
-              <select
-                value={language}
-                onChange={(e) => setLanguage(e.target.value)}
-                className="w-full bg-transparent border border-gray-300 dark:border-gray-700 rounded px-2 py-1 text-sm dark:text-white"
-              >
-                <option value="en">EN</option>
-                <option value="es">ES</option>
-                <option value="zh">中文</option>
-              </select>
+              {/* Mobile Language Selector */}
+              <div className="relative">
+                <button 
+                  onClick={handleLangButtonClick}
+                  className="flex items-center justify-between w-full px-3 py-2 text-black dark:text-white border border-gray-300 dark:border-gray-700 rounded"
+                >
+                  <div className="flex items-center space-x-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-languages">
+                      <path d="m5 8 6 6"></path>
+                      <path d="m4 14 6-6 2-3"></path>
+                      <path d="M2 5h12"></path>
+                      <path d="M7 2h1"></path>
+                      <path d="m22 22-5-10-5 10"></path>
+                      <path d="M14 18h6"></path>
+                    </svg>
+                    <span>{getCurrentLanguageLabel()}</span>
+                  </div>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-chevron-down">
+                    <path d="m6 9 6 6 6-6"></path>
+                  </svg>
+                </button>
+                
+                {isLangMenuOpen && (
+                  <div className="absolute left-0 right-0 mt-1 bg-white dark:bg-gray-800 rounded-md shadow-lg py-1 z-50 border border-gray-200 dark:border-gray-700">
+                    {languageOptions.map((option) => (
+                      <button
+                        key={option.value}
+                        onClick={() => {
+                          setLanguage(option.value);
+                          setIsLangMenuOpen(false);
+                        }}
+                        className={`block w-full text-left px-4 py-2 text-sm ${
+                          language === option.value 
+                            ? 'text-pink-500 font-medium' 
+                            : 'text-gray-700 dark:text-gray-300'
+                        } hover:bg-gray-100 dark:hover:bg-gray-700`}
+                      >
+                        {option.label}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
           </motion.div>
         )}

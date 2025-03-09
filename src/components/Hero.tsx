@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Code2, Palette, Zap, FileDown, Github } from 'lucide-react';
-import BackgroundShapes from './BackgroundShapes';
 import { useTranslation } from '../context/TranslationContext';
 
 const Hero = () => {
@@ -67,8 +66,7 @@ const Hero = () => {
 
   return (
     <section className="min-h-screen pt-20 bg-gradient-to-br from-yellow-300 via-green-500 to-blue-600 relative overflow-hidden">
-      <BackgroundShapes />
-
+      
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
