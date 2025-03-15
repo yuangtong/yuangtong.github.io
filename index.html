@@ -61,21 +61,67 @@
         height: 630px;
         object-fit: cover;
       }
+      #loading {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        flex-direction: column;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      }
+      #error-message {
+        display: none;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        flex-direction: column;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        color: #e53e3e;
+      }
     </style>
   </head>
   <body>
     <div id="root"></div>
-    <!-- Añadir un mensaje de carga para mejor experiencia de usuario -->
-    <div id="loading" style="display: flex; justify-content: center; align-items: center; height: 100vh; flex-direction: column;">
+    
+    <!-- Mensaje de carga para mejor experiencia de usuario -->
+    <div id="loading">
       <h1>Cargando...</h1>
       <p>Si esta pantalla persiste, por favor verifica tu conexión a internet o contacta al desarrollador.</p>
     </div>
+    
+    <!-- Mensaje de error que se mostrará si hay problemas -->
+    <div id="error-message">
+      <h1>¡Ups! Algo salió mal</h1>
+      <p>No se pudo cargar la aplicación. Por favor, intenta recargar la página o contacta al desarrollador.</p>
+      <button onclick="window.location.reload()" style="margin-top: 20px; padding: 10px 20px; background-color: #4299e1; color: white; border: none; border-radius: 5px; cursor: pointer;">
+        Recargar página
+      </button>
+    </div>
+    
     <script>
+      // Establecer un tiempo máximo de carga
+      const loadTimeout = setTimeout(function() {
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('error-message').style.display = 'flex';
+        console.error('La aplicación no se cargó dentro del tiempo esperado');
+      }, 10000); // 10 segundos
+      
       // Ocultar el mensaje de carga cuando la aplicación se cargue
       window.addEventListener('load', function() {
+        clearTimeout(loadTimeout);
         document.getElementById('loading').style.display = 'none';
       });
+      
+      // Capturar errores de carga
+      window.addEventListener('error', function(event) {
+        if (event.target.tagName === 'SCRIPT' || event.target.tagName === 'LINK') {
+          document.getElementById('loading').style.display = 'none';
+          document.getElementById('error-message').style.display = 'flex';
+          console.error('Error al cargar recurso:', event.target.src || event.target.href);
+        }
+      }, true);
     </script>
-    <script type="module" src="/src/main.tsx"></script>
+    
+    <script type="module" src="/src/main.tsx" onerror="document.getElementById('loading').style.display = 'none'; document.getElementById('error-message').style.display = 'flex';"></script>
   </body>
 </html>

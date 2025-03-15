@@ -7,6 +7,8 @@ import viteImagemin from 'vite-plugin-imagemin';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  // Asegurarse de que la base sea correcta para GitHub Pages o Netlify
+  base: '/',
   plugins: [
     react(),
     splitVendorChunkPlugin(),
@@ -70,9 +72,9 @@ export default defineConfig({
     minify: 'terser',
     terserOptions: {
       compress: {
-        drop_console: true,
-        drop_debugger: true,
-        pure_funcs: ['console.log', 'console.info', 'console.debug', 'console.warn']
+        drop_console: false, // Cambiado a false para depuración
+        drop_debugger: false, // Cambiado a false para depuración
+        pure_funcs: [] // Eliminado para depuración
       },
       mangle: {
         safari10: true
@@ -104,8 +106,8 @@ export default defineConfig({
       }
     },
     chunkSizeWarningLimit: 1000,
-    // Enable source maps for production (helps with debugging)
-    sourcemap: false,
+    // Habilitar sourcemaps para depuración
+    sourcemap: true,
     // Improve CSS handling
     cssCodeSplit: true,
     assetsInlineLimit: 4096, // 4kb
