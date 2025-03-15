@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ExternalLink, Github } from 'lucide-react';
+import { optimizeImageUrl } from '../../utils/performance';
 
 interface ProjectCardProps {
   project: {
@@ -22,8 +23,11 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => (
   >
     <div className="relative h-48 mb-4 overflow-hidden border-2 border-black">
       <img
-        src={project.image}
+        src={optimizeImageUrl(project.image, 400, 80)}
         alt={project.title}
+        loading="lazy"
+        width="400"
+        height="300"
         className="w-full h-full object-cover transition-transform group-hover:scale-110"
       />
     </div>
