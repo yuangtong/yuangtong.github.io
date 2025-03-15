@@ -7,7 +7,8 @@ export type TargetLanguageCode = 'en' | 'es' | 'zh';
 
 export async function translateText(text: string, targetLang: TargetLanguageCode) {
   try {
-    const response = await fetch('/api/translate', {
+    // Change from '/api/translate' to '/.netlify/functions/translate'
+    const response = await fetch('/.netlify/functions/translate', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
