@@ -19,9 +19,9 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => (
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
     whileHover={{ y: -5 }}
-    className="group border-4 border-black bg-white p-4 hover:bg-yellow-300 transition-colors"
+    className="group border-4 border-black dark:border-gray-600 bg-white dark:bg-gray-800 p-4 hover:bg-yellow-300 dark:hover:bg-purple-700 transition-colors"
   >
-    <div className="relative h-48 mb-4 overflow-hidden border-2 border-black">
+    <div className="relative h-48 mb-4 overflow-hidden border-2 border-black dark:border-gray-600">
       <img
         src={optimizeImageUrl(project.image, 400, 80)}
         alt={project.title}
@@ -32,14 +32,14 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => (
       />
     </div>
 
-    <h3 className="text-2xl font-bold mb-2">{project.title}</h3>
-    <p className="font-mono mb-4">{project.description}</p>
+    <h3 className="text-2xl font-bold mb-2 dark:text-white">{project.title}</h3>
+    <p className="font-mono mb-4 dark:text-gray-300">{project.description}</p>
 
     <div className="flex flex-wrap gap-2 mb-4">
       {project.tech.map((tech) => (
         <span
           key={tech}
-          className="bg-black text-white px-2 py-1 text-sm font-mono"
+          className="bg-black dark:bg-purple-800 text-white px-2 py-1 text-sm font-mono"
         >
           {tech}
         </span>
@@ -49,14 +49,14 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => (
     <div className="flex space-x-4">
       <a
         href={project.liveUrl}
-        className="flex items-center space-x-2 hover:text-pink-500"
+        className="flex items-center space-x-2 hover:text-pink-500 dark:text-white dark:hover:text-purple-400"
       >
         <ExternalLink size={20} />
         <span>Live Demo</span>
       </a>
       <a
         href={project.githubUrl}
-        className="flex items-center space-x-2 hover:text-pink-500"
+        className="flex items-center space-x-2 hover:text-pink-500 dark:text-white dark:hover:text-purple-400"
       >
         <Github size={20} />
         <span>Code</span>

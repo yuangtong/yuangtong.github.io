@@ -35,7 +35,7 @@ export const ContentCard: React.FC<ContentCardProps> = ({ type, item }) => {
             href={item.liveUrl} 
             target="_blank" 
             rel="noopener noreferrer"
-            className="flex items-center space-x-2 hover:text-pink-500"
+            className="flex items-center space-x-2 hover:text-pink-500 dark:text-white dark:hover:text-purple-400"
           >
             <ExternalLink size={20} />
             <span>Live Demo</span>
@@ -44,7 +44,7 @@ export const ContentCard: React.FC<ContentCardProps> = ({ type, item }) => {
             href={item.githubUrl} 
             target="_blank" 
             rel="noopener noreferrer"
-            className="flex items-center space-x-2 hover:text-pink-500"
+            className="flex items-center space-x-2 hover:text-pink-500 dark:text-white dark:hover:text-purple-400"
           >
             <Github size={20} />
             <span>Code</span>
@@ -60,7 +60,7 @@ export const ContentCard: React.FC<ContentCardProps> = ({ type, item }) => {
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       whileHover={{ y: -5 }}
-      className="bg-white dark:bg-gray-900 border-4 border-black overflow-hidden group hover:bg-yellow-300 transition-colors"
+      className="bg-white dark:bg-gray-800 border-4 border-black dark:border-gray-600 overflow-hidden group hover:bg-yellow-300 dark:hover:bg-purple-700 transition-colors"
     >
       <Link to={`/${type}/${item.slug}`}>
         <div className="relative h-48 overflow-hidden">
@@ -71,7 +71,7 @@ export const ContentCard: React.FC<ContentCardProps> = ({ type, item }) => {
           />
           {item.category && (
             <div className="absolute top-4 left-4">
-              <span className="bg-yellow-300 px-3 py-1 font-mono text-sm border-2 border-black">
+              <span className="bg-yellow-300 dark:bg-purple-600 px-3 py-1 font-mono text-sm border-2 border-black dark:border-gray-600">
                 {item.category}
               </span>
             </div>
@@ -80,7 +80,7 @@ export const ContentCard: React.FC<ContentCardProps> = ({ type, item }) => {
         <div className="p-6">
           {renderMeta()}
           <h3 className="text-xl font-bold mb-2 dark:text-white">{item.title}</h3>
-          <p className="text-gray-600 dark:text-gray-400 mb-4 font-mono">
+          <p className="text-gray-600 dark:text-gray-300 mb-4 font-mono">
             {item.description || item.excerpt}
           </p>
           {item.tech && (
@@ -88,7 +88,7 @@ export const ContentCard: React.FC<ContentCardProps> = ({ type, item }) => {
               {item.tech.map((tech: string) => (
                 <span
                   key={tech}
-                  className="bg-black text-white px-2 py-1 text-sm font-mono"
+                  className="bg-black dark:bg-purple-800 text-white px-2 py-1 text-sm font-mono"
                 >
                   {tech}
                 </span>
@@ -96,7 +96,7 @@ export const ContentCard: React.FC<ContentCardProps> = ({ type, item }) => {
             </div>
           )}
           {renderLinks()}
-          <span className="inline-block mt-4 text-pink-500 hover:text-pink-600 font-bold">
+          <span className="inline-block mt-4 text-pink-500 dark:text-purple-400 hover:text-pink-600 dark:hover:text-purple-300 font-bold">
             Read More →
           </span>
         </div>
