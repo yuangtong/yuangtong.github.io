@@ -8,7 +8,7 @@ const Header = () => {
   const { language, setLanguage, translate } = useTranslation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
-  const navItems = ['home', 'about', 'work', 'projects', 'blog', 'contact'];
+  const navItems = ['home', 'about', 'projects', 'contact'];
   const [translatedNavItems, setTranslatedNavItems] = useState(navItems);
 
   useEffect(() => {
@@ -168,21 +168,25 @@ const Header = () => {
             className="md:hidden"
           >
             <nav className="py-4 space-y-2">
-              {navItems.map((item) => (
-                <motion.a
-                  key={item}
-                  whileTap={{ scale: 0.95 }}
-                  className="block text-black dark:text-white hover:text-pink-500 font-mono text-lg px-4 py-2"
-                  href={`#${item.toLowerCase()}`}
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {item}
-                </motion.a>
+              {navItems.map((item, index) => (
+                <React.Fragment key={item}>
+                  <motion.a
+                    whileTap={{ scale: 0.95 }}
+                    className="block text-black dark:text-white hover:text-pink-500 font-mono text-lg px-4 py-2 text-center"
+                    href={`#${item.toLowerCase()}`}
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {item}
+                  </motion.a>
+                  {index < navItems.length - 1 && (
+                    <div className="border-t border-gray-200 dark:border-gray-700 mx-8 my-1"></div>
+                  )}
+                </React.Fragment>
               ))}
             </nav>
             
             <div className="px-4 py-4 border-t border-gray-200 dark:border-gray-700 space-y-4">
-              <div className="flex items-center space-x-4">
+              <div className="flex items-center justify-center space-x-6">
                 <ThemeToggle />
                 {[
                   { Icon: Github, href: 'https://github.com/yuangtong' },

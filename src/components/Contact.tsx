@@ -136,6 +136,20 @@ const Contact = () => {
               {translatedContent.projectInMind}
             </p>
 
+            {/* Formulario oculto para Netlify */}
+            <form name="contact" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+              <input type="text" name="name" />
+              <input type="email" name="email" />
+              <select name="contactReason">
+                {initialContactReasons.map((reason) => (
+                  <option key={reason} value={reason}>{reason}</option>
+                ))}
+              </select>
+              <input type="text" name="otherReason" />
+              <textarea name="message"></textarea>
+            </form>
+
+            {/* Formulario visible para el usuario */}
             <form
               name="contact"
               method="POST"
@@ -143,13 +157,16 @@ const Contact = () => {
               data-netlify-honeypot="bot-field"
               onSubmit={(e) => {
                 e.preventDefault();
+                const form = e.target as HTMLFormElement;
+                form.submit();
                 setSubmitted(true);
               }}
               className="space-y-6"
             >
               <input type="hidden" name="form-name" value="contact" />
               <div className="hidden">
-                <input name="bot-field" />
+                <label htmlFor="bot-field" className="sr-only">Bot Field</label>
+                <input id="bot-field" name="bot-field" aria-hidden="true" />
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -161,6 +178,7 @@ const Contact = () => {
                   required
                   className="w-full p-4 bg-white border-4 border-pink-500 text-black font-mono placeholder-gray-500 focus:outline-none focus:border-yellow-300"
                 />
+                
                 <motion.input
                   whileFocus={{ scale: 1.02 }}
                   type="email"
@@ -174,6 +192,7 @@ const Contact = () => {
               <div className="space-y-2">
                 <label className="block font-mono text-sm">{translatedContent.reasonLabel}</label>
                 <select
+                  aria-label={translatedContent.reasonLabel}
                   name="contactReason"
                   value={selectedReason}
                   onChange={(e) => setSelectedReason(e.target.value)}
