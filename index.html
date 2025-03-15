@@ -93,6 +93,7 @@
     <div id="error-message">
       <h1>¡Ups! Algo salió mal</h1>
       <p>No se pudo cargar la aplicación. Por favor, intenta recargar la página o contacta al desarrollador.</p>
+      <div id="error-details" style="margin-top: 20px; padding: 10px; background-color: #f8d7da; color: #721c24; border-radius: 5px; max-width: 600px; margin-left: auto; margin-right: auto; text-align: left; font-family: monospace; white-space: pre-wrap;"></div>
       <button onclick="window.location.reload()" style="margin-top: 20px; padding: 10px 20px; background-color: #4299e1; color: white; border: none; border-radius: 5px; cursor: pointer;">
         Recargar página
       </button>
@@ -104,7 +105,7 @@
         document.getElementById('loading').style.display = 'none';
         document.getElementById('error-message').style.display = 'flex';
         console.error('La aplicación no se cargó dentro del tiempo esperado');
-      }, 10000); // 10 segundos
+      }, 15000);
       
       // Ocultar el mensaje de carga cuando la aplicación se cargue
       window.addEventListener('load', function() {
@@ -112,14 +113,34 @@
         document.getElementById('loading').style.display = 'none';
       });
       
-      // Capturar errores de carga
+      // Capturar errores de carga y runtime
       window.addEventListener('error', function(event) {
-        if (event.target.tagName === 'SCRIPT' || event.target.tagName === 'LINK') {
-          document.getElementById('loading').style.display = 'none';
-          document.getElementById('error-message').style.display = 'flex';
-          console.error('Error al cargar recurso:', event.target.src || event.target.href);
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('error-message').style.display = 'flex';
+        
+        const errorDetails = document.getElementById('error-details');
+        if (errorDetails) {
+          errorDetails.textContent = 'Error: ' + (event.error?.message || event.message) + 
+                                    '\nLocation: ' + (event.filename || 'unknown') + 
+                                    '\nLine: ' + (event.lineno || 'unknown');
         }
+        
+        console.error('Error captured:', event);
       }, true);
+      
+      // Capture unhandled promise rejections
+      window.addEventListener('unhandledrejection', function(event) {
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('error-message').style.display = 'flex';
+        
+        const errorDetails = document.getElementById('error-details');
+        if (errorDetails) {
+          errorDetails.textContent = 'Unhandled Promise Rejection: ' + 
+                                    (event.reason?.message || event.reason || 'Unknown reason');
+        }
+        
+        console.error('Unhandled rejection:', event.reason);
+      });
     </script>
     
     <script type="module" src="/src/main.tsx" onerror="document.getElementById('loading').style.display = 'none'; document.getElementById('error-message').style.display = 'flex';"></script>

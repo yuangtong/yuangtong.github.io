@@ -2,17 +2,13 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { VitePWA } from 'vite-plugin-pwa';
-import { splitVendorChunkPlugin } from 'vite';
 import viteImagemin from 'vite-plugin-imagemin';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  // Asegurarse de que la base sea correcta para GitHub Pages o Netlify
   base: '/',
   plugins: [
     react(),
-    splitVendorChunkPlugin(),
-    // Add imagemin plugin to optimize images
     viteImagemin({
       gifsicle: {
         optimizationLevel: 7,
@@ -60,6 +56,10 @@ export default defineConfig({
             type: 'image/png'
           }
         ]
+      },
+      // Add this configuration to increase the size limit
+      workbox: {
+        maximumFileSizeToCacheInBytes: 6 * 1024 * 1024, // 6 MiB
       }
     }),
     visualizer({
@@ -70,11 +70,13 @@ export default defineConfig({
   ],
   build: {
     minify: 'terser',
+    emptyOutDir: true,
+    reportCompressedSize: true,
+    chunkSizeWarningLimit: 1500,
     terserOptions: {
       compress: {
-        drop_console: false, // Cambiado a false para depuración
-        drop_debugger: false, // Cambiado a false para depuración
-        pure_funcs: [] // Eliminado para depuración
+        drop_console: false,
+        drop_debugger: false
       },
       mangle: {
         safari10: true
@@ -82,12 +84,32 @@ export default defineConfig({
     },
     rollupOptions: {
       output: {
-        manualChunks: {
-          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
-          'framer-motion': ['framer-motion'],
-          'ui-components': ['lucide-react']
+        manualChunks(id) {
+          // React and related packages
+          if (id.includes('node_modules/react') || 
+              id.includes('node_modules/react-dom') || 
+              id.includes('node_modules/scheduler')) {
+            return 'react-vendor';
+          }
+          
+          // Router
+          if (id.includes('node_modules/react-router') || 
+              id.includes('node_modules/react-router-dom') ||
+              id.includes('node_modules/@remix-run')) {
+            return 'router-vendor';
+          }
+          
+          // UI libraries
+          if (id.includes('node_modules/framer-motion') || 
+              id.includes('node_modules/lucide-react')) {
+            return 'ui-vendor';
+          }
+          
+          // Other third-party libraries
+          if (id.includes('node_modules')) {
+            return 'vendor';
+          }
         },
-        // Optimize code splitting
         chunkFileNames: 'assets/js/[name]-[hash].js',
         entryFileNames: 'assets/js/[name]-[hash].js',
         assetFileNames: ({name}) => {
@@ -99,18 +121,11 @@ export default defineConfig({
           }
           return 'assets/[name]-[hash][extname]';
         }
-      },
-      // Tree shaking to remove unused code
-      treeshake: {
-        moduleSideEffects: false,
       }
     },
-    chunkSizeWarningLimit: 1000,
-    // Habilitar sourcemaps para depuración
     sourcemap: true,
-    // Improve CSS handling
     cssCodeSplit: true,
-    assetsInlineLimit: 4096, // 4kb
+    assetsInlineLimit: 4096
   },
   server: {
     open: true
