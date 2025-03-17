@@ -22,39 +22,40 @@ export const ContentCard: React.FC<ContentCardProps> = ({ type, item }) => {
 
   useEffect(() => {
     const translateCardContent = async () => {
+      console.log(`Translating card content for ${item.title}, language: ${language}`);
+      
       if (language === 'en') {
-        setTranslatedContent({
-          title: item.title,
-          description: item.description || item.excerpt,
-          category: item.category || '',
-          readMore: 'Read More →',
-          liveDemo: 'Live Demo',
-          code: 'Code'
-        });
+        // English content handling...
         return;
       }
 
-      const [title, description, category, readMore, liveDemo, code] = await Promise.all([
-        translate(item.title),
-        translate(item.description || item.excerpt),
-        item.category ? translate(item.category) : '',
-        translate('Read More →'),
-        translate('Live Demo'),
-        translate('Code')
-      ]);
+      try {
+        const [title, description, category, readMore, liveDemo, code] = await Promise.all([
+          translate(item.title),
+          translate(item.description || item.excerpt),
+          item.category ? translate(item.category) : '',
+          translate('Read More →'),
+          translate('Live Demo'),
+          translate('Code')
+        ]);
 
-      setTranslatedContent({
-        title,
-        description,
-        category,
-        readMore,
-        liveDemo,
-        code
-      });
+        console.log(`Translation complete for ${item.title}:`, { title, description });
+        
+        setTranslatedContent({
+          title,
+          description,
+          category,
+          readMore,
+          liveDemo,
+          code
+        });
+      } catch (error) {
+        console.error(`Translation error for ${item.title}:`, error);
+      }
     };
 
     translateCardContent();
-  }, [language, translate, item]);
+  }, [language, translate, item.title, item.description, item.excerpt, item.category]);
 
   const renderMeta = () => {
     if (type === 'blog') {

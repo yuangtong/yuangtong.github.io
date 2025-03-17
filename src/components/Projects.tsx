@@ -7,16 +7,19 @@ import { useTranslation } from '../context/TranslationContext';
 const Projects = () => {
   const { language, translate } = useTranslation();
   const [translatedTitle, setTranslatedTitle] = useState('Selected Projects');
+  // Force re-render of child components when language changes
+  const [key, setKey] = useState(0);
 
   useEffect(() => {
     const translateContent = async () => {
       if (language === 'en') {
         setTranslatedTitle('Selected Projects');
-        return;
+      } else {
+        const title = await translate('Selected Projects');
+        setTranslatedTitle(title);
       }
-
-      const title = await translate('Selected Projects');
-      setTranslatedTitle(title);
+      // Update key to force re-render of child components
+      setKey(prev => prev + 1);
     };
 
     translateContent();
@@ -36,7 +39,7 @@ const Projects = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
             <ContentCard
-              key={project.title}
+              key={`${project.title}-${language}-${key}`}
               type="project"
               item={project}
             />
