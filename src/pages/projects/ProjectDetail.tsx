@@ -16,7 +16,8 @@ export const ProjectDetail = () => {
     liveDemo: 'Live Demo',
     viewCode: 'View Code',
     backToProjects: 'Back to Projects',
-    technologies: 'Technologies Used:'
+    technologies: 'Technologies Used:',
+    keyFeatures: 'Key Features:'
   });
 
   useEffect(() => {
@@ -30,7 +31,8 @@ export const ProjectDetail = () => {
           liveDemo: 'Live Demo',
           viewCode: 'View Code',
           backToProjects: 'Back to Projects',
-          technologies: 'Technologies Used:'
+          technologies: 'Technologies Used:',
+          keyFeatures: 'Key Features:'
         });
         return;
       }
@@ -42,14 +44,16 @@ export const ProjectDetail = () => {
         liveDemo, 
         viewCode, 
         backToProjects,
-        technologies
+        technologies,
+        keyFeatures
       ] = await Promise.all([
         translate(project.title),
         translate(project.description),
         translate('Live Demo'),
         translate('View Code'),
         translate('Back to Projects'),
-        translate('Technologies Used:')
+        translate('Technologies Used:'),
+        translate('Key Features:')
       ]);
 
       setTranslatedContent({
@@ -58,7 +62,8 @@ export const ProjectDetail = () => {
         liveDemo,
         viewCode,
         backToProjects,
-        technologies
+        technologies,
+        keyFeatures
       });
     };
 
@@ -95,6 +100,14 @@ export const ProjectDetail = () => {
 
         <div className="prose prose-lg dark:prose-invert mb-8 max-w-none">
           <p className="text-lg font-mono">{translatedContent.description}</p>
+          
+          {/* Key Features section */}
+          <h3 className="text-xl font-bold mt-6 mb-4">{translatedContent.keyFeatures}</h3>
+          <ul className="list-disc pl-5 space-y-2 font-mono">
+            {project.features && project.features.map((feature, index) => (
+              <li key={index}>{feature}</li>
+            ))}
+          </ul>
           
           <h3 className="text-xl font-bold mt-6 mb-4">{translatedContent.technologies}</h3>
           <div className="flex flex-wrap gap-2 mb-8">

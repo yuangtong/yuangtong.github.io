@@ -1,12 +1,68 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft, ExternalLink, Github } from 'lucide-react';
 import { projects } from '../../data/projects';
+import { useTranslation } from '../../context/TranslationContext';
 
 export const ProjectDetails = () => {
   const { slug } = useParams();
   const project = projects.find(p => p.slug === slug);
+  const { language, translate } = useTranslation();
+  
+  const [translatedContent, setTranslatedContent] = useState({
+    title: project?.title || '',
+    description: project?.description || '',
+    liveDemo: 'Live Demo',
+    viewCode: 'View Code',
+    backToProjects: 'Back to Projects',
+    technologies: 'Technologies Used:'
+  });
+
+  useEffect(() => {
+    const translateProjectContent = async () => {
+      if (!project) return;
+      
+      if (language === 'en') {
+        setTranslatedContent({
+          title: project.title,
+          description: project.description,
+          liveDemo: 'Live Demo',
+          viewCode: 'View Code',
+          backToProjects: 'Back to Projects',
+          technologies: 'Technologies Used:'
+        });
+        return;
+      }
+
+      const [
+        title, 
+        description, 
+        liveDemo, 
+        viewCode, 
+        backToProjects,
+        technologies
+      ] = await Promise.all([
+        translate(project.title),
+        translate(project.description),
+        translate('Live Demo'),
+        translate('View Code'),
+        translate('Back to Projects'),
+        translate('Technologies Used:')
+      ]);
+
+      setTranslatedContent({
+        title,
+        description,
+        liveDemo,
+        viewCode,
+        backToProjects,
+        technologies
+      });
+    };
+
+    translateProjectContent();
+  }, [project, language, translate]);
 
   if (!project) {
     return (
@@ -14,7 +70,7 @@ export const ProjectDetails = () => {
         <div className="text-center">
           <h1 className="text-4xl font-bold mb-4">Project not found</h1>
           <Link to="/projects" className="text-pink-500 hover:text-pink-600">
-            Back to Projects
+            {translatedContent.backToProjects}
           </Link>
         </div>
       </div>
@@ -29,7 +85,7 @@ export const ProjectDetails = () => {
           className="inline-flex items-center text-pink-500 hover:text-pink-600 mb-8"
         >
           <ArrowLeft className="mr-2" />
-          Back to Projects
+          {translatedContent.backToProjects}
         </Link>
 
         <motion.div
@@ -51,12 +107,13 @@ export const ProjectDetails = () => {
             )}
           </div>
 
-          <h1 className="text-4xl font-bold mb-6">{project.title}</h1>
+          <h1 className="text-4xl font-bold mb-6">{translatedContent.title}</h1>
           <div 
             className="text-lg mb-8 font-mono whitespace-pre-line"
-            dangerouslySetInnerHTML={{ __html: project.fullDescription }}
+            dangerouslySetInnerHTML={{ __html: translatedContent.description }}
           />
 
+          <h3 className="text-xl font-bold mb-4">{translatedContent.technologies}</h3>
           <div className="flex flex-wrap gap-2 mb-8">
             {project.tech.map((tech) => (
               <span
@@ -76,7 +133,7 @@ export const ProjectDetails = () => {
               className="flex items-center space-x-2 bg-black text-white px-6 py-3 hover:bg-pink-500 transition-colors"
             >
               <ExternalLink size={20} />
-              <span className="font-mono">View Live Demo</span>
+              <span className="font-mono">{translatedContent.liveDemo}</span>
             </a>
             <a
               href={project.githubUrl}
@@ -85,7 +142,7 @@ export const ProjectDetails = () => {
               className="flex items-center space-x-2 border-2 border-black px-6 py-3 hover:bg-yellow-300 transition-colors"
             >
               <Github size={20} />
-              <span className="font-mono">View Source Code</span>
+              <span className="font-mono">{translatedContent.viewCode}</span>
             </a>
           </div>
         </motion.div>
