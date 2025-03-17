@@ -65,7 +65,7 @@ const Hero = () => {
   }, [language, translate]);
 
   return (
-    <section className="min-h-screen pt-20 bg-gradient-to-br from-yellow-300 via-green-500 to-blue-600 dark:from-purple-900 dark:via-indigo-800 dark:to-blue-900 relative overflow-hidden">
+    <section id="home" className="min-h-screen pt-20 bg-gradient-to-br from-yellow-300 via-green-500 to-blue-600 dark:from-purple-900 dark:via-indigo-800 dark:to-blue-900 relative overflow-hidden">
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
         <motion.div

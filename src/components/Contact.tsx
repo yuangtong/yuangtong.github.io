@@ -231,7 +231,7 @@ const Contact = () => {
                 type="submit"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="group bg-pink-500 text-white px-8 py-4 border-4 border-white font-bold text-lg flex items-center justify-center space-x-2 hover:bg-yellow-300 hover:text-black transition-colors w-full md:w-auto md:ml-auto"
+                className="group bg-pink-500 text-white px-8 py-4 border-4 border-white font-bold text-lg flex items-center justify-center space-x-2 hover:bg-yellow-300 hover:text-black transition-colors w-full md:w-auto md:mr-auto"
               >
                 <span>{translatedContent.sendMessage}</span>
                 <Send className="group-hover:translate-x-2 transition-transform" />

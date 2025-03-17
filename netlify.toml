@@ -3,6 +3,12 @@
   publish = "dist"
   command = "npm run build"
 
+# Add a specific rule for the CV file to prevent it from being redirected to index.html
+[[redirects]]
+  from = "/Yuang-Tong-CV.pdf"
+  to = "/Yuang-Tong-CV.pdf"
+  status = 200
+
 [[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/:splat"
