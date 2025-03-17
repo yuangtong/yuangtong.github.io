@@ -1,94 +1,25 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
-import './index.css'
-import { ThemeProvider } from './context/ThemeContext' // Import your custom ThemeProvider
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
+import App from './App';
+import './index.css';
+import { TranslationProvider } from './context/TranslationContext';
+import { ThemeProvider } from './context/ThemeContext';
+import { optimizeFontLoading } from './utils/fontOptimization';
+import { loadNonCriticalScripts } from './utils/scriptLoader';
 
-// Define types for the ErrorBoundary component
-interface ErrorBoundaryProps {
-  children: React.ReactNode;
-}
+// Initialize optimizations
+optimizeFontLoading();
+loadNonCriticalScripts();
 
-interface ErrorBoundaryState {
-  hasError: boolean;
-  error: Error | null;
-}
-
-// Error boundary for the entire application
-class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
-  constructor(props: ErrorBoundaryProps) {
-    super(props);
-    this.state = { hasError: false, error: null };
-  }
-
-  static getDerivedStateFromError(error: Error): ErrorBoundaryState {
-    return { hasError: true, error };
-  }
-
-  componentDidCatch(error: Error, errorInfo: React.ErrorInfo): void {
-    console.error("React error boundary caught an error:", error, errorInfo);
-    
-    // Display error in the error-details element
-    const errorDetails = document.getElementById('error-details');
-    if (errorDetails) {
-      errorDetails.textContent = `React Error: ${error.message}\n\nComponent Stack: ${errorInfo.componentStack}`;
-    }
-    
-    // Show error message
-    const loadingEl = document.getElementById('loading');
-    const errorMessageEl = document.getElementById('error-message');
-    
-    if (loadingEl) loadingEl.style.display = 'none';
-    if (errorMessageEl) errorMessageEl.style.display = 'flex';
-  }
-
-  render(): React.ReactNode {
-    if (this.state.hasError) {
-      return null; // The error UI is handled by the HTML
-    }
-    return this.props.children;
-  }
-}
-
-// Make sure the root element exists before trying to render
-const rootElement = document.getElementById('root');
-
-if (rootElement) {
-  try {
-    ReactDOM.createRoot(rootElement).render(
-      <ErrorBoundary>
-        <ThemeProvider>
-          <React.StrictMode>
-            <App />
-          </React.StrictMode>
-        </ThemeProvider>
-      </ErrorBoundary>
-    );
-  } catch (error: unknown) {
-    console.error("Failed to render React application:", error);
-    
-    const loadingEl = document.getElementById('loading');
-    const errorMessageEl = document.getElementById('error-message');
-    const errorDetails = document.getElementById('error-details');
-    
-    if (loadingEl) loadingEl.style.display = 'none';
-    if (errorMessageEl) errorMessageEl.style.display = 'flex';
-    
-    if (errorDetails) {
-      errorDetails.textContent = `Render Error: ${error instanceof Error ? error.message : String(error)}`;
-    }
-  }
-} else {
-  console.error("Root element not found");
-  
-  const loadingEl = document.getElementById('loading');
-  const errorMessageEl = document.getElementById('error-message');
-  const errorDetails = document.getElementById('error-details');
-  
-  if (loadingEl) loadingEl.style.display = 'none';
-  if (errorMessageEl) errorMessageEl.style.display = 'flex';
-  
-  if (errorDetails) {
-    errorDetails.textContent = "Root element with id 'root' not found in the document";
-  }
-}
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <ThemeProvider>
+        <TranslationProvider>
+          <App />
+        </TranslationProvider>
+      </ThemeProvider>
+    </BrowserRouter>
+  </React.StrictMode>
+);

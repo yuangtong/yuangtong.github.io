@@ -1,11 +1,25 @@
 // Lazy loading utility for components
 import { lazy, ComponentType } from 'react';
 
+// Enhance the existing lazyLoad function
 export function lazyLoad<T extends ComponentType<any>>(
   importFunc: () => Promise<{ default: T }>,
   fallback: React.ReactNode = null
 ): { Component: React.LazyExoticComponent<T>; fallback: React.ReactNode } {
   const Component = lazy(importFunc);
+  
+  // Add prefetching capability
+  if (typeof window !== 'undefined') {
+    // Prefetch after initial load when browser is idle
+    window.requestIdleCallback = window.requestIdleCallback || function(cb) {
+      return setTimeout(cb, 1);
+    };
+    
+    window.requestIdleCallback(() => {
+      importFunc().catch(() => {});
+    });
+  }
+  
   return { Component, fallback };
 }
 
