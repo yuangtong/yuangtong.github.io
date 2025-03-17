@@ -15,7 +15,7 @@
   status = 200
   force = true
 
-# Esta redirección es crucial para aplicaciones SPA
+# Redirección  crucial para aplicaciones SPA
 [[redirects]]
   from = "/*"
   to = "/index.html"

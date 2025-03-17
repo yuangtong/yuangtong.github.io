@@ -1,6 +1,7 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Globe from 'react-globe.gl';
 import { motion } from 'framer-motion';
+import * as THREE from 'three';
 
 interface Country {
   lat: number;
@@ -26,8 +27,17 @@ interface GlobeProps {
 const GlobeVisualization: React.FC<GlobeProps> = ({ disableInteractionOnMobile = true }) => {
   const globeRef = useRef<any>();
   const isMobile = window.innerWidth < 768;
+  
+  // Add state for dimensions that updates on resize
+  const [dimensions, setDimensions] = React.useState({
+    width: isMobile ? 320 : 600,
+    height: isMobile ? 320 : 600
+  });
 
   useEffect(() => {
+    // Set initial dimensions
+    updateDimensions();
+    
     if (globeRef.current) {
       const controls = globeRef.current.controls();
       
@@ -44,7 +54,7 @@ const GlobeVisualization: React.FC<GlobeProps> = ({ disableInteractionOnMobile =
       }
       
       // Add ambient light for better visibility
-      const ambientLight = globeRef.current.scene().children.find(obj => obj.type === 'AmbientLight');
+      const ambientLight = globeRef.current.scene().children.find((obj: THREE.Object3D) => obj.type === 'AmbientLight');
       if (ambientLight) {
         ambientLight.intensity = 1.2;
       }
@@ -54,8 +64,35 @@ const GlobeVisualization: React.FC<GlobeProps> = ({ disableInteractionOnMobile =
       camera.position.z = isMobile ? 400 : 300;
     }
 
+    // Function to update dimensions based on container size and screen width
+    function updateDimensions() {
+      const containerWidth = window.innerWidth;
+      let newWidth, newHeight;
+      
+      if (containerWidth < 768) {
+        // Mobile sizes
+        newWidth = Math.min(containerWidth - 40, 320);
+        newHeight = newWidth;
+      } else if (containerWidth < 1024) {
+        // Tablet sizes
+        newWidth = Math.min(containerWidth * 0.6, 500);
+        newHeight = newWidth;
+      } else {
+        // Desktop sizes
+        newWidth = Math.min(containerWidth * 0.4, 600);
+        newHeight = newWidth;
+      }
+      
+      setDimensions({
+        width: newWidth,
+        height: newHeight
+      });
+    }
+
     // Handle resize
     const handleResize = () => {
+      updateDimensions();
+      
       if (globeRef.current) {
         const camera = globeRef.current.camera();
         const newIsMobile = window.innerWidth < 768;
@@ -84,12 +121,12 @@ const GlobeVisualization: React.FC<GlobeProps> = ({ disableInteractionOnMobile =
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="h-full w-full"
+      className="h-full w-full flex items-center justify-center"
     >
       <Globe
         ref={globeRef}
-        width={window.innerWidth < 768 ? 600 : 900}
-        height={window.innerWidth < 768 ? 600 : 900}
+        width={dimensions.width}
+        height={dimensions.height}
         globeImageUrl="//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
         bumpImageUrl="//unpkg.com/three-globe/example/img/earth-topology.png"
         backgroundColor="rgba(0,0,0,0)"
@@ -98,13 +135,13 @@ const GlobeVisualization: React.FC<GlobeProps> = ({ disableInteractionOnMobile =
         pointLng="lng"
         pointColor={() => '#F0ABFC'}
         pointAltitude={0.12}
-        pointRadius={window.innerWidth < 768 ? 0.1 : 0.08}
+        pointRadius={isMobile ? 0.12 : 0.08}
         pointsMerge={true}
         atmosphereColor="#F0ABFC"
         atmosphereAltitude={0.15}
         labelText="name"
-        labelSize={window.innerWidth < 768 ? 2.5 : 2.0}
-        labelDotRadius={window.innerWidth < 768 ? 0.8 : 0.6}
+        labelSize={isMobile ? 2.5 : 2.0}
+        labelDotRadius={isMobile ? 0.8 : 0.6}
         labelColor={() => '#F0ABFC'}
         labelResolution={2}
         labelAltitude={0.01}
@@ -112,12 +149,12 @@ const GlobeVisualization: React.FC<GlobeProps> = ({ disableInteractionOnMobile =
         hexPolygonsData={[]}
         hexPolygonResolution={3}
         hexPolygonMargin={0.3}
-        hexPolygonColor={() => '#1a1a1a'}
-        glowCoefficient={0.3}
-        atmosphereGlowCoefficient={8}
-        atmosphereGlowColor="#F0ABFC"
-        atmosphereGlowPower={4}
-        atmosphereGlowRadiusScale={1.2}
+        hexPolygonColor={() => '#1a1a1a'}        
+        // glowCoefficient={0.3}
+        // atmosphereGlowCoefficient={8}
+        // atmosphereGlowColor="#F0ABFC"
+        // atmosphereGlowPower={4}
+        // atmosphereGlowRadiusScale={1.2}
       />
     </motion.div>
   );
