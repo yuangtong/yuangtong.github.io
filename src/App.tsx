@@ -10,6 +10,7 @@ import Footer from './components/Footer';
 import Cursor from './components/Cursor';
 import { useTheme } from './context/ThemeContext';
 import { TranslationProvider } from './context/TranslationContext';
+import Testimonials from './components/Testimonials';
 
 function App() {
   const { isDark } = useTheme();
@@ -27,8 +28,9 @@ function App() {
                 <About />
                 { /* <Work /> */ }
                 { <Projects /> }
+                { <Testimonials /> }
                 { /* <BlogPage /> */ }
-                <Contact /> 
+                { <Contact /> }
               </main>
             } />
             <Route path="/projects" element={<Projects />} />
