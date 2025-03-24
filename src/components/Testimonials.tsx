@@ -1,32 +1,77 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Quote } from 'lucide-react';
+import { useTranslation } from '../context/TranslationContext';
 
-const testimonials = [
+const initialTestimonials = [
   {
     name: 'Emilio R.',
     role: 'CEO at TechFlow',
-    image: '',
+    // image: '',
     quote: 'Yuang is great at his work, an excellent communicator, and works very fast. Got the WordPress theme install and site redesign done very quickly. Will hire again in the future.',
     company: 'El Brifin'
   },
   {
     name: 'Marcus Rodriguez',
     role: 'Creative Director',
-    image: '',
+    // image: '',
     quote: 'The level of creativity and technical expertise Yuang brings to projects is exceptional. They delivered a website that perfectly captures our brand essence.',
     company: 'Design Studio X'
   },
   {
     name: 'Emily Thompson',
     role: 'Product Manager',
-    image: '',
+    // image: '',
     quote: "Yuang's ability to translate complex requirements into elegant solutions is remarkable. They're not just a developer, but a true partner in success.",
     company: 'InnovateTech'
   }
 ];
 
 const Testimonials = () => {
+  const { language, translate } = useTranslation();
+  const [translatedTestimonials, setTranslatedTestimonials] = React.useState(initialTestimonials);
+  const [translatedSectionContent, setTranslatedSectionContent] = React.useState({
+    title: 'Client Testimonials',
+    subtitle: 'What people are saying about working with me'
+  });
+
+  React.useEffect(() => {
+    const translateContent = async () => {
+      if (language === 'en') {
+        setTranslatedTestimonials(initialTestimonials);
+        setTranslatedSectionContent({
+          title: 'Client Testimonials',
+          subtitle: 'What people are saying about working with me'
+        });
+        return;
+      }
+
+      // Translate section headers
+      const [translatedTitle, translatedSubtitle] = await Promise.all([
+        translate('Client Testimonials'),
+        translate('What people are saying about working with me')
+      ]);
+
+      // Translate testimonials
+      const translated = await Promise.all(
+        initialTestimonials.map(async (testimonial) => ({
+          ...testimonial,
+          quote: await translate(testimonial.quote),
+          role: await translate(testimonial.role),
+          company: await translate(testimonial.company)
+        }))
+      );
+
+      setTranslatedSectionContent({
+        title: translatedTitle,
+        subtitle: translatedSubtitle
+      });
+      setTranslatedTestimonials(translated);
+    };
+
+    translateContent();
+  }, [language, translate]);
+
   return (
     <section className="py-20 bg-black text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -35,15 +80,15 @@ const Testimonials = () => {
           whileInView={{ opacity: 1, y: 0 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl font-bold mb-4">Client Testimonials</h2>
+          <h2 className="text-4xl font-bold mb-4">{translatedSectionContent.title}</h2>
           <p className="text-lg font-mono text-gray-400">
-            What people are saying about working with me
+            {translatedSectionContent.subtitle}
           </p>
         </motion.div>
 
         {/* Changed from grid to flex with overflow for horizontal scrolling on smaller screens */}
         <div className="flex overflow-x-auto pb-6 gap-8 lg:grid lg:grid-cols-3 lg:overflow-visible scrollbar-hide">
-          {testimonials.map((testimonial, index) => (
+          {translatedTestimonials.map((testimonial, index) => (
             <motion.div
               key={testimonial.name}
               initial={{ opacity: 0, y: 20 }}
@@ -55,11 +100,11 @@ const Testimonials = () => {
                 whileHover={{ scale: 1.05 }}
                 className="absolute -top-6 left-6"
               >
-                <img
+                {/* <img
                   src={testimonial.image}
                   alt={testimonial.name}
                   className="w-12 h-12 rounded-none border-4 border-black object-cover"
-                />
+                />  */}
               </motion.div>
 
               <Quote 
@@ -92,7 +137,7 @@ const Testimonials = () => {
         
         {/* Optional: Add scroll indicators for mobile */}
         <div className="flex justify-center mt-6 gap-2 lg:hidden">
-          {testimonials.map((_, index) => (
+          {translatedTestimonials.map((_, index) => (
             <div 
               key={index} 
               className="w-2 h-2 rounded-full bg-gray-600"
