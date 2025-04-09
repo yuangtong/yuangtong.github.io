@@ -10,6 +10,7 @@ import Footer from './components/Footer';
 import Cursor from './components/Cursor';
 import { useTheme } from './context/ThemeContext';
 import { TranslationProvider } from './context/TranslationContext';
+import PaymentsPage from './pages/payment/PaymentsPage';
 
 function App() {
   const { isDark } = useTheme();
@@ -33,6 +34,7 @@ function App() {
             } />
             <Route path="/projects" element={<Projects />} />
             <Route path="/project/:slug" element={<ProjectDetails />} />
+            <Route path="/paynow" element={<PaymentsPage />} />
           </Routes>
           <Footer />
         </div>
