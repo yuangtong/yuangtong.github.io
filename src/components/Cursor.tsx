@@ -4,6 +4,28 @@ import { useMousePosition } from '../hooks/useMousePosition';
 
 const Cursor = () => {
   const mousePosition = useMousePosition();
+  const [hasHoverSupport, setHasHoverSupport] = React.useState(false);
+  
+  React.useEffect(() => {
+    // Check if device supports hover
+    const mediaQuery = window.matchMedia('(hover: hover)');
+    setHasHoverSupport(mediaQuery.matches);
+    
+    // Listen for changes (e.g., when connecting external mouse to mobile)
+    const handleMediaChange = (e: MediaQueryListEvent) => {
+      setHasHoverSupport(e.matches);
+    };
+    
+    mediaQuery.addEventListener('change', handleMediaChange);
+    return () => {
+      mediaQuery.removeEventListener('change', handleMediaChange);
+    };
+  }, []);
+
+  // Don't render cursor on devices without hover support (mobile)
+  if (!hasHoverSupport) {
+    return null;
+  }
 
   return (
     <>

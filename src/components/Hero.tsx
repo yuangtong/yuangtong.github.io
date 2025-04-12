@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Code2, Palette, Zap, FileDown, Github } from 'lucide-react';
+import { Code2, Palette, Zap, FileDown, Github, ExternalLink, Calendar } from 'lucide-react';
 import { useTranslation } from '../context/TranslationContext';
 
 const Hero = () => {
@@ -10,7 +10,9 @@ const Hero = () => {
     role: "designer & developer",
     tagline: "I create bold, functional, and memorable digital experiences",
     downloadCV: "Download my CV",
-    viewGithub: "View on GitHub"
+    viewGithub: "View on GitHub",
+    hireUpwork: "Hire me on Upwork",
+    scheduleCall: "Schedule a free consultation"
   });
 
   const initialFeatures = [
@@ -29,18 +31,22 @@ const Hero = () => {
           role: "designer & developer",
           tagline: "I create bold, functional, and memorable digital experiences",
           downloadCV: "Download my CV",
-          viewGithub: "View on GitHub"
+          viewGithub: "View on GitHub",
+          hireUpwork: "Hire me on Upwork",
+          scheduleCall: "Schedule a free consultation"
         });
         setFeatures(initialFeatures);
         return;
       }
 
-      const [greeting, role, tagline, downloadCV, viewGithub] = await Promise.all([
+      const [greeting, role, tagline, downloadCV, viewGithub, hireUpwork, scheduleCall] = await Promise.all([
         translate("hey, i'm yuang tong"),
         translate("designer & developer"),
         translate("I create bold, functional, and memorable digital experiences"),
         translate("Download my CV"),
-        translate("View on GitHub")
+        translate("View on GitHub"),
+        translate("Hire me on Upwork"),
+        translate("Schedule a free consultation")
       ]);
 
       setTranslatedContent({
@@ -48,7 +54,9 @@ const Hero = () => {
         role,
         tagline,
         downloadCV,
-        viewGithub
+        viewGithub,
+        hireUpwork,
+        scheduleCall
       });
 
       // Translate features
@@ -66,6 +74,39 @@ const Hero = () => {
 
   return (
     <section id="home" className="min-h-screen pt-20 bg-gradient-to-br from-yellow-300 via-green-500 to-blue-600 dark:from-purple-900 dark:via-indigo-800 dark:to-blue-900 relative overflow-hidden">
+      
+      {/* Floating Button Animation */}
+      <motion.div
+        className="absolute right-8 bottom-12 z-20 md:right-16 lg:right-24"
+        initial={{ y: 0, rotate: 0 }}
+        animate={{ 
+          y: [0, -10, 0],
+          rotate: [0, 3, 0, -3, 0],
+        }}
+        transition={{ 
+          y: { duration: 2, repeat: Infinity, repeatType: "reverse" },
+          rotate: { duration: 4, repeat: Infinity, repeatType: "reverse" }
+        }}
+      >
+        <motion.div 
+          className="relative rounded-none bg-yellow-400 dark:bg-purple-600 border-4 border-black dark:border-gray-300 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:shadow-[6px_6px_0px_0px_rgba(76,29,149,1)] p-3"
+          whileHover={{ 
+            scale: 1.05,
+            boxShadow: '8px 8px 0px 0px rgba(0,0,0,1)',
+          }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <a 
+            href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ3M-X60wSMYrYspDOQYRdAG8rNibLIpe9YoKZmwrdJ0cs8MvNxWtr3N8I507RyETNvDZ-qj_8ji" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="relative z-10 flex items-center space-x-2 text-black dark:text-white font-bold"
+          >
+            <Calendar size={24} />
+            <span className="text-sm md:text-base">{translatedContent.scheduleCall}</span>
+          </a>
+        </motion.div>
+      </motion.div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
         <motion.div
@@ -154,6 +195,23 @@ const Hero = () => {
             >
               <Github size={20} />
               <span>{translatedContent.viewGithub}</span>
+            </motion.a>
+            
+            <motion.a
+              href="https://www.upwork.com/freelancers/yuangt" 
+              target="_blank"
+              rel="noopener noreferrer"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.9 }}
+              whileHover={{ 
+                scale: 1.05,
+                boxShadow: '6px 6px 0px 0px rgba(0,0,0,1)'
+              }}
+              className="flex items-center space-x-2 bg-[#14a800] text-white px-6 py-3 border-2 border-black dark:border-gray-600 font-bold transition-all hover:bg-[#0e8600]"
+            >
+              <ExternalLink size={20} />
+              <span>{translatedContent.hireUpwork}</span>
             </motion.a>
           </div>
         </motion.div>
