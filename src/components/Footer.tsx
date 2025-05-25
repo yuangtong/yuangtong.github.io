@@ -39,12 +39,12 @@ const Footer = () => {
   }, [language, translate]);
 
   return (
-    <footer className="bg-white border-t-4 border-black py-8">
+    <footer className="bg-white dark:bg-gray-800 border-t-4 border-black dark:border-gray-600 py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <motion.p 
             whileHover={{ scale: 1.05 }}
-            className="font-mono mb-4 md:mb-0 text-center md:text-left"
+            className="font-mono mb-4 md:mb-0 text-center md:text-left dark:text-white"
           >
             {translatedContent.rights}
           </motion.p>
@@ -52,10 +52,10 @@ const Footer = () => {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="flex items-center space-x-2 font-mono"
+            className="flex items-center space-x-2 font-mono dark:text-white"
           >
             <span>{translatedContent.madeWith}</span>
-            <Heart className="text-pink-500" size={20} />
+            <Heart className="text-pink-500 dark:text-pink-400" size={20} />
             <span>{translatedContent.inReact}</span>
           </motion.div>
         </div>

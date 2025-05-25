@@ -83,9 +83,9 @@ const About = () => {
                 whileHover={{ scale: 1.05 }}
                 className="p-6 border-4 border-black dark:border-white bg-yellow-300 dark:bg-purple-600"
               >
-                <Icon className="w-8 h-8 mb-4" />
-                <h3 className="text-xl font-bold mb-2">{label}</h3>
-                <p className="font-mono text-sm">{desc}</p>
+                <Icon className="w-8 h-8 mb-4 dark:text-white" />
+                <h3 className="text-xl font-bold mb-2 dark:text-white">{label}</h3>
+                <p className="font-mono text-sm dark:text-white">{desc}</p>
               </motion.div>
             ))}
           </div>
