@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ExternalLink, Github, Award } from 'lucide-react';
-import { featuredWorks } from '../pages/work/workData';
+import { featuredWorks } from '../../pages/work/workData';
 
 const Work = () => {
   return (

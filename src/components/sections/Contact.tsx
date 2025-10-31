@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Send } from 'lucide-react';
-import Globe from './Globe';
-import { useTranslation } from '../context/TranslationContext';
+import Globe from '../ui/Globe';
+import { useTranslation } from '../../context/TranslationContext';
 
 const Contact = () => {
   const { language, translate } = useTranslation();

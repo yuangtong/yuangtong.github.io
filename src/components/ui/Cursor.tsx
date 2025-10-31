@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { useMousePosition } from '../hooks/useMousePosition';
+import { useMousePosition } from '../../hooks/useMousePosition';
 
 const Cursor = () => {
   const mousePosition = useMousePosition();

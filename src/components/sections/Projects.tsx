@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { ContentCard } from './shared/ContentCard';
-import { projects as staticProjects } from '../data/projects';
-import { useTranslation } from '../context/TranslationContext';
+import { ContentCard } from '../ui';
+import { projects as staticProjects } from '../../data/projects';
+import { useTranslation } from '../../context/TranslationContext';
 
 const Projects = () => {
   const { language, translate } = useTranslation();

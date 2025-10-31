@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Code, Palette, Globe, Coffee } from 'lucide-react';
-import { useTranslation } from '../context/TranslationContext';
+import { useTranslation } from '../../context/TranslationContext';
 
 const About = () => {
   const { language, translate } = useTranslation();

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Heart } from 'lucide-react';
-import { useTranslation } from '../context/TranslationContext';
+import { useTranslation } from '../../context/TranslationContext';
 
 const Footer = () => {
   const { language, translate } = useTranslation();

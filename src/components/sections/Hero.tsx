@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Code2, Palette, Zap, FileDown, Github, ExternalLink, Calendar } from 'lucide-react';
-import { useTranslation } from '../context/TranslationContext';
+import { useTranslation } from '../../context/TranslationContext';
 import { TypeAnimation } from 'react-type-animation';
-import CVDownloadModal from './Feature/CVDownloadModal';
+import CVDownloadModal from '../Feature/CVDownloadModal';
 
 const Hero = () => {
   const { language, translate } = useTranslation();

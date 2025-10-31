@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Quote } from 'lucide-react';
-import { useTranslation } from '../context/TranslationContext';
+import { useTranslation } from '../../context/TranslationContext';
 
 const initialTestimonials = [
   {

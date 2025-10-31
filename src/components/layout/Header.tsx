@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Menu, Github, Linkedin, Mail, Globe } from 'lucide-react';
 import { motion } from 'framer-motion';
 import ThemeToggle from './ThemeToggle';
-import { useTranslation } from '../context/TranslationContext';
+import { useTranslation } from '../../context/TranslationContext';
 
 const Header = () => {
   const { language, setLanguage, translate } = useTranslation();
