@@ -1,0 +1,137 @@
+{
+  "projects": [
+    {
+      "_type": "project",
+      "_id": "project-1",
+      "title": "E-Commerce Platform",
+      "slug": {
+        "_type": "slug",
+        "current": "ecommerce-platform"
+      },
+      "shortDescription": "A modern e-commerce solution built with React and Node.js",
+      "longDescription": "A comprehensive e-commerce platform with features like cart management, payment processing, and order tracking. Built with scalability and performance in mind.",
+      "image": {
+        "_type": "image",
+        "asset": {
+          "_type": "reference",
+          "_ref": "image-1"
+        },
+        "alt": "E-Commerce Platform"
+      },
+      "technologies": [
+        "React",
+        "Node.js",
+        "MongoDB"
+      ],
+      "liveUrl": "#",
+      "githubUrl": "#",
+      "category": "Web Development",
+      "featured": true,
+      "order": 0
+    },
+    {
+      "_type": "project",
+      "_id": "project-2",
+      "title": "Portfolio Generator",
+      "slug": {
+        "_type": "slug",
+        "current": "portfolio-generator"
+      },
+      "shortDescription": "Generate stunning portfolios with a few clicks",
+      "longDescription": "A tool that helps developers create professional portfolios quickly and easily. Features include customizable templates and real-time preview.",
+      "image": {
+        "_type": "image",
+        "asset": {
+          "_type": "reference",
+          "_ref": "image-2"
+        },
+        "alt": "Portfolio Generator"
+      },
+      "technologies": [
+        "Vue.js",
+        "Firebase"
+      ],
+      "liveUrl": "#",
+      "githubUrl": "#",
+      "category": "Web Development",
+      "featured": true,
+      "order": 1
+    }
+  ],
+  "blogs": [
+    {
+      "_type": "blog",
+      "_id": "blog-1",
+      "title": "Building Scalable React Applications",
+      "slug": {
+        "_type": "slug",
+        "current": "building-scalable-react-applications"
+      },
+      "excerpt": "Learn the best practices for building large-scale React applications with modern tools and techniques.",
+      "content": "Building scalable React applications requires careful consideration of architecture, state management, and performance optimization. In this post, we'll explore the best practices and patterns that help maintain large codebases.\n\nFirst, we'll look at project structure and code organization. Then, we'll dive into state management solutions and when to use them. Finally, we'll cover performance optimization techniques.",
+      "date": "2024-03-15",
+      "readTime": "5 min read",
+      "category": "React",
+      "image": {
+        "_type": "image",
+        "asset": {
+          "_type": "reference",
+          "_ref": "blog-image-1"
+        },
+        "alt": "Building Scalable React Applications"
+      },
+      "author": "Yuang Tong",
+      "tags": [
+        "React",
+        "Architecture",
+        "Performance"
+      ],
+      "published": true
+    },
+    {
+      "_type": "blog",
+      "_id": "blog-2",
+      "title": "The Future of Web Development",
+      "slug": {
+        "_type": "slug",
+        "current": "future-of-web-development"
+      },
+      "excerpt": "Exploring upcoming trends and technologies that will shape the future of web development.",
+      "content": "The web development landscape is constantly evolving. New technologies and approaches emerge regularly, changing how we build applications. Let's explore what the future might hold.\n\nWe'll discuss emerging technologies like Web Assembly, Edge Computing, and AI-assisted development. We'll also look at how these technologies might impact the way we work.",
+      "date": "2024-03-10",
+      "readTime": "4 min read",
+      "category": "Trends",
+      "image": {
+        "_type": "image",
+        "asset": {
+          "_type": "reference",
+          "_ref": "blog-image-2"
+        },
+        "alt": "The Future of Web Development"
+      },
+      "author": "Yuang Tong",
+      "tags": [
+        "WebAssembly",
+        "Edge Computing",
+        "AI"
+      ],
+      "published": true
+    }
+  ],
+  "siteSettings": {
+    "_type": "siteSettings",
+    "_id": "site-settings",
+    "title": "Yuang Tong Portfolio",
+    "description": "Full-stack developer and software engineer portfolio",
+    "author": "Yuang Tong",
+    "social": {
+      "github": "https://github.com/yuangtong",
+      "linkedin": "https://linkedin.com/in/yuangtong",
+      "email": "contact@yuangtong.dev"
+    },
+    "seo": {
+      "metaTitle": "Yuang Tong - Full Stack Developer",
+      "metaDescription": "Portfolio of Yuang Tong, a full-stack developer specializing in React, Node.js, and modern web technologies."
+    }
+  }
+}

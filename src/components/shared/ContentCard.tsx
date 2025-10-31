@@ -78,25 +78,33 @@ export const ContentCard: React.FC<ContentCardProps> = ({ type, item }) => {
   const renderLinks = () => {
     if (type === 'project' || type === 'work') {
       return (
-        <div className="flex space-x-4 mt-4">
-          <a 
-            href={item.liveUrl} 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="flex items-center space-x-2 hover:text-pink-500 dark:text-white dark:hover:text-purple-400"
-          >
-            <ExternalLink size={20} />
-            <span>{translatedContent.liveDemo}</span>
-          </a>
-          <a 
-            href={item.githubUrl} 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="flex items-center space-x-2 hover:text-pink-500 dark:text-white dark:hover:text-purple-400"
-          >
-            <Github size={20} />
-            <span>{translatedContent.code}</span>
-          </a>
+        <div className="flex space-x-4 mt-4" onClick={(e) => e.preventDefault()}>
+          {item.liveUrl && (
+            <button 
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                window.open(item.liveUrl, '_blank', 'noopener,noreferrer');
+              }}
+              className="flex items-center space-x-2 hover:text-pink-500 dark:text-white dark:hover:text-purple-400"
+            >
+              <ExternalLink size={20} />
+              <span>{translatedContent.liveDemo}</span>
+            </button>
+          )}
+          {item.githubUrl && (
+            <button 
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                window.open(item.githubUrl, '_blank', 'noopener,noreferrer');
+              }}
+              className="flex items-center space-x-2 hover:text-pink-500 dark:text-white dark:hover:text-purple-400"
+            >
+              <Github size={20} />
+              <span>{translatedContent.code}</span>
+            </button>
+          )}
         </div>
       );
     }

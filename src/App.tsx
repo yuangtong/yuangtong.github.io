@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
 import Projects from './components/Projects';
+import Work from './components/Work';
 import { ProjectDetails } from './pages/projects/ProjectDetails';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
@@ -27,7 +28,7 @@ function App() {
               <main className="relative overflow-hidden">
                 <Hero />
                 <About />
-                { /* <Work /> */ }
+                { <Work /> }
                 { <Projects /> }
                 { <Testimonials /> }
                 { /* <BlogPage /> */ }

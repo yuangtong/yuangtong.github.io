@@ -1,0 +1,59 @@
+[
+  {
+    "_type": "project",
+    "_id": "project-1",
+    "title": "E-Commerce Platform",
+    "slug": {
+      "_type": "slug",
+      "current": "ecommerce-platform"
+    },
+    "shortDescription": "A modern e-commerce solution built with React and Node.js",
+    "longDescription": "A comprehensive e-commerce platform with features like cart management, payment processing, and order tracking. Built with scalability and performance in mind.",
+    "image": {
+      "_type": "image",
+      "asset": {
+        "_type": "reference",
+        "_ref": "image-1"
+      },
+      "alt": "E-Commerce Platform"
+    },
+    "technologies": [
+      "React",
+      "Node.js",
+      "MongoDB"
+    ],
+    "liveUrl": "#",
+    "githubUrl": "#",
+    "category": "Web Development",
+    "featured": true,
+    "order": 0
+  },
+  {
+    "_type": "project",
+    "_id": "project-2",
+    "title": "Portfolio Generator",
+    "slug": {
+      "_type": "slug",
+      "current": "portfolio-generator"
+    },
+    "shortDescription": "Generate stunning portfolios with a few clicks",
+    "longDescription": "A tool that helps developers create professional portfolios quickly and easily. Features include customizable templates and real-time preview.",
+    "image": {
+      "_type": "image",
+      "asset": {
+        "_type": "reference",
+        "_ref": "image-2"
+      },
+      "alt": "Portfolio Generator"
+    },
+    "technologies": [
+      "Vue.js",
+      "Firebase"
+    ],
+    "liveUrl": "#",
+    "githubUrl": "#",
+    "category": "Web Development",
+    "featured": true,
+    "order": 1
+  }
+]

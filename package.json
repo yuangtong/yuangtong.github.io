@@ -7,9 +7,15 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "studio:dev": "cd studio && npm run dev",
+    "studio:build": "cd studio && npm run build",
+    "studio:deploy": "cd studio && npm run deploy",
+    "migrate:sanity": "node scripts/migrate-to-sanity.js"
   },
   "dependencies": {
+    "@sanity/client": "^7.8.2",
+    "@sanity/image-url": "^1.1.0",
     "axios": "^1.8.1",
     "deepl-node": "^1.16.0",
     "framer-motion": "^11.18.2",
