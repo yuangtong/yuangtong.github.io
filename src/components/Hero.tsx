@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Code2, Palette, Zap, FileDown, Github, ExternalLink, Calendar } from 'lucide-react';
 import { useTranslation } from '../context/TranslationContext';
 import { TypeAnimation } from 'react-type-animation';
+import CVDownloadModal from './Feature/CVDownloadModal';
 
 const Hero = () => {
   const { language, translate } = useTranslation();
@@ -15,6 +16,9 @@ const Hero = () => {
     hireUpwork: "Hire me on Upwork",
     scheduleCall: "Schedule a free consultation"
   });
+
+  // Estado para el modal de descarga del CV
+  const [isCVModalOpen, setIsCVModalOpen] = useState(false);
 
   // Referencia para la sección hero
   const heroRef = useRef<HTMLElement | null>(null);
@@ -301,9 +305,8 @@ const Hero = () => {
           </div>
 
           <div className="flex flex-wrap gap-4">
-            <motion.a
-              href="/Yuang-Tong-CV.pdf"
-              download
+            <motion.button
+              onClick={() => setIsCVModalOpen(true)}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.7 }}
@@ -315,7 +318,7 @@ const Hero = () => {
             >
               <FileDown size={20} />
               <span>{translatedContent.downloadCV}</span>
-            </motion.a>
+            </motion.button>
 
             <motion.a
               href="https://github.com/yuangtong/yuangtong.github.io"
@@ -353,6 +356,12 @@ const Hero = () => {
           </div>
         </motion.div>
       </div>
+
+      {/* Modal de descarga del CV */}
+      <CVDownloadModal 
+        isOpen={isCVModalOpen} 
+        onClose={() => setIsCVModalOpen(false)} 
+      />
     </section>
   );
 };
