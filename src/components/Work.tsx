@@ -1,35 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ExternalLink, Github, Award, Loader2 } from 'lucide-react';
-import { useWork } from '../hooks/useWork';
+import { ExternalLink, Github, Award } from 'lucide-react';
+import { featuredWorks } from '../pages/work/workData';
 
 const Work = () => {
-  const { works, loading, error, getImageUrl } = useWork();
-
-  if (loading) {
-    return (
-      <section id="work" className="py-20 bg-white dark:bg-gray-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-center items-center h-64">
-            <Loader2 className="w-8 h-8 animate-spin dark:text-white" />
-          </div>
-        </div>
-      </section>
-    );
-  }
-
-  if (error) {
-    return (
-      <section id="work" className="py-20 bg-white dark:bg-gray-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center text-red-500">
-            <p>Error loading work: {error}</p>
-          </div>
-        </div>
-      </section>
-    );
-  }
-
   return (
     <section id="work" className="py-20 bg-white dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -43,9 +17,9 @@ const Work = () => {
         </motion.div>
 
         <div className="space-y-20">
-          {works.map((work, index) => (
+          {featuredWorks.map((work, index) => (
             <motion.div
-              key={work._id}
+              key={work.slug}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.2 }}
@@ -57,7 +31,7 @@ const Work = () => {
                   className="relative z-10 border-4 border-black dark:border-white overflow-hidden"
                 >
                   <img
-                    src={getImageUrl(work.image, work.title)}
+                    src={work.image}
                     alt={work.title}
                     className="w-full h-[400px] object-cover"
                   />
@@ -71,7 +45,7 @@ const Work = () => {
                 </span>
                 <h3 className="text-3xl font-bold mb-4 dark:text-white">
                   <a 
-                    href={`/work/${work.slug.current}`}
+                    href={`/work/${work.slug}`}
                     className="hover:text-pink-500 transition-colors"
                   >
                     {work.title}
