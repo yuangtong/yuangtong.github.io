@@ -75,7 +75,7 @@ const Hero = () => {
           role: "designer & developer",
           tagline: "I create bold, functional, and memorable digital experiences",
           downloadCV: "Download my CV",
-          viewGithub: "View on GitHub",
+          viewGithub: "View my GitHub",
           hireUpwork: "Hire me on Upwork",
           scheduleCall: "Schedule a free consultation"
         });
@@ -98,7 +98,7 @@ const Hero = () => {
         translate("designer & developer"),
         translate("I create bold, functional, and memorable digital experiences"),
         translate("Download my CV"),
-        translate("View on GitHub"),
+        translate("View my GitHub"),
         translate("Hire me on Upwork"),
         translate("Schedule a free consultation")
       ]);
@@ -321,7 +321,7 @@ const Hero = () => {
             </motion.button>
 
             <motion.a
-              href="https://github.com/yuangtong/yuangtong.github.io"
+              href="https://github.com/yuangtong"
               target="_blank"
               rel="noopener noreferrer"
               initial={{ opacity: 0, y: 20 }}
