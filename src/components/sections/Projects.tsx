@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { ContentCard } from '../ui';
+import { ContentCard, Button } from '../ui';
+import { Link } from 'react-router-dom';
 import { projects as staticProjects } from '../../data/projects';
 import { useTranslation } from '../../context/TranslationContext';
 
@@ -47,9 +48,17 @@ const Projects = () => {
             />
           ))}
         </div>
+
+        <div className="mt-12 flex justify-center">
+          <Link to="/projects" aria-label="View all projects">
+            <Button variant="secondary" size="md" className="min-w-[220px]">
+              View all projects
+            </Button>
+          </Link>
+        </div>
       </div>
     </section>
   );
-};
+}; 
 
 export default Projects;

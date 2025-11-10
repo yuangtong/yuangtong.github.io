@@ -146,13 +146,27 @@ export const useCVDownload = () => {
     dispatch({ type: 'SET_SUBMITTING', payload: true });
 
     try {
-      // Simular envío a analytics o base de datos
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      // Log para analytics (en producción enviarías a tu servicio)
-      console.log('CV Download Request:', {
-        ...state.formData,
-        timestamp: new Date().toISOString()
+      // Enviar a Netlify Forms para que aparezca en el panel
+      const encode = (data: Record<string, string>) =>
+        Object.keys(data)
+          .map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
+          .join('&');
+
+      const payload = {
+        'form-name': 'cv-download',
+        name: state.formData.name,
+        email: state.formData.email,
+        company: state.formData.company,
+        position: state.formData.position,
+        reason: state.formData.reason,
+        customReason: state.formData.customReason || '',
+        message: state.formData.message || ''
+      };
+
+      await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: encode(payload)
       });
 
       // Iniciar descarga

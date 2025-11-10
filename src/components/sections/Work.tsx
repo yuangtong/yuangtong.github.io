@@ -2,6 +2,8 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ExternalLink, Github, Award } from 'lucide-react';
 import { featuredWorks } from '../../pages/work/workData';
+import { Button } from '../ui';
+import { Link } from 'react-router-dom';
 
 const Work = () => {
   return (
@@ -90,6 +92,14 @@ const Work = () => {
               </div>
             </motion.div>
           ))}
+        </div>
+
+        <div className="mt-12 flex justify-center">
+          <Link to="/work" aria-label="View all works">
+            <Button variant="primary" size="md" className="min-w-[220px]">
+              View all works
+            </Button>
+          </Link>
         </div>
       </div>
     </section>

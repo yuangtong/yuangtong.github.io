@@ -81,7 +81,7 @@ export const ProjectDetails = () => {
     <div className="py-20 bg-white">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <Link 
-          to="/#projects"
+          to="/projects"
           className="inline-flex items-center text-pink-500 hover:text-pink-600 mb-8"
         >
           <ArrowLeft className="mr-2" />

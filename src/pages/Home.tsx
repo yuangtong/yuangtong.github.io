@@ -10,12 +10,14 @@ import Work from '../components/sections/Work';
 import Projects from '../components/sections/Projects';
 import Testimonials from '../components/sections/Testimonials';
 import Contact from '../components/sections/Contact';
+import Timeline from '../components/sections/Timeline';
 
 const Home: React.FC = () => {
   return (
     <main className="relative overflow-hidden">
       <Hero />
       <About />
+      <Timeline />
       <Work />
       <Projects />
       <Testimonials />

@@ -35,3 +35,28 @@ export type CVDownloadAction =
   | { type: 'SET_ERRORS'; payload: Partial<CVFormData> }
   | { type: 'SET_SUBMITTING'; payload: boolean }
   | { type: 'RESET_FORM' };
+
+/**
+ * Tipos para la línea de tiempo profesional extraída del PDF
+ */
+export type TimelineIconKey =
+  | 'briefcase'
+  | 'graduation'
+  | 'award'
+  | 'code'
+  | 'management'
+  | 'milestone';
+
+export interface CareerMilestone {
+  id: string;
+  dateRange: string; // Ej: "2019 – 2021"
+  title: string; // Puesto o hito
+  organization?: string; // Empresa/organización
+  description?: string; // Resumen breve
+  iconKey?: TimelineIconKey; // Ícono representativo
+}
+
+export interface CVTimelineData {
+  milestones: CareerMilestone[];
+  source: 'pdf' | 'fallback';
+}

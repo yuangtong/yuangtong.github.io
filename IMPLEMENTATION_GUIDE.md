@@ -239,6 +239,37 @@ Servicios a completar:
 - `src/services/supabase.ts`: cliente, inserciones, lecturas, analytics, util IP/Session
 - Hooks: `src/hooks/useContentful.ts` para projects, posts, work
 
+### 4.1 Modelo de Contentful: TimelineEntry (interno)
+
+```
+Content Type ID: timelineEntry
+Fields:
+├── title (Short text) - Required
+├── organization (Short text)
+├── description (Long text)
+├── startDate (Date) - Required
+├── endDate (Date)
+├── dateRangeDisplay (Short text) - Ej: "2024 – Present" (opcional)
+├── iconKey (Short text) - enum: briefcase | graduation | award | code | management | milestone
+└── order (Integer) - Required (para ordenación ascendente)
+
+Notas:
+- Si `dateRangeDisplay` no se rellena, se formateará a partir de `startDate` y `endDate`.
+- `iconKey` se mapea directamente al UI de la Timeline.
+- Se recomienda separar este modelo de WorkExperience.
+```
+
+Adapter mínimo listo en código:
+```
+// src/types/contentful.ts
+export interface TimelineEntryFields { /* ya definido */ }
+export type TimelineEntry = ContentfulEntry<TimelineEntryFields>;
+
+// src/services/contentful.ts
+contentfulService.getTimeline(): Promise<CareerMilestone[]> // stub y mapper
+contentfulService.mapTimelineEntryToMilestone(entry: TimelineEntry): CareerMilestone
+```
+
 ---
 
 ## 5. Testing y Validación

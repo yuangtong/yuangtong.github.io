@@ -99,6 +99,20 @@ export interface SiteSettingsFields {
   };
 }
 
+// Modelo: Timeline (para futura integración CMS)
+export interface TimelineEntryFields {
+  title: string;
+  organization?: string;
+  description?: string;
+  startDate: string; // ISO date
+  endDate?: string; // ISO date or undefined for present
+  dateRangeDisplay: string; // e.g., "2024 – Present"
+  iconKey?: 'briefcase' | 'graduation' | 'award' | 'code' | 'management' | 'milestone';
+  order: number;
+}
+
+export type TimelineEntry = ContentfulEntry<TimelineEntryFields>;
+
 // Tipos de entrada completos
 export type ProjectEntry = ContentfulEntry<ProjectFields>;
 export type BlogEntry = ContentfulEntry<BlogFields>;
