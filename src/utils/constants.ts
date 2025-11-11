@@ -37,8 +37,12 @@ export const APP_CONFIG = {
 } as const;
 
 // Límite de elementos visibles en Home
+// - HOME_PROJECTS_LIMIT: Máximo de proyectos en Home
+// - HOME_WORKS_LIMIT: Máximo de trabajos en Home (sección Work)
 export const DISPLAY_CONFIG = {
-  HOME_PROJECTS_LIMIT: 6
+  HOME_PROJECTS_LIMIT: 6,
+  HOME_WORKS_LIMIT: 6,
+  HOME_BLOGS_LIMIT: 6
 } as const;
 
 // Rutas de la aplicación

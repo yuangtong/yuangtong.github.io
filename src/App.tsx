@@ -6,6 +6,8 @@ import { ProjectsPage } from './pages/projects/ProjectsPage';
 import { ProjectDetails } from './pages/projects/ProjectDetails';
 import { WorkPage } from './pages/work/WorkPage';
 import { WorkDetails } from './pages/work/WorkDetails';
+import { BlogPage } from './pages/blog/BlogPage';
+import { BlogPost } from './pages/blog/BlogPost';
 import PaymentsPage from './pages/payment/PaymentsPage';
 import { TranslationProvider } from './context/TranslationContext';
 
@@ -20,6 +22,8 @@ function App() {
             <Route path="/project/:slug" element={<ProjectDetails />} />
             <Route path="/work" element={<WorkPage />} />
             <Route path="/work/:slug" element={<WorkDetails />} />
+            <Route path="/blog" element={<BlogPage />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/paynow" element={<PaymentsPage />} />
           </Routes>
         </Layout>

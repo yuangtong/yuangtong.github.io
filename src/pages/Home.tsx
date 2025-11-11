@@ -8,6 +8,7 @@ import Hero from '../components/sections/Hero';
 import About from '../components/sections/About';
 import Work from '../components/sections/Work';
 import Projects from '../components/sections/Projects';
+import Blog from '../components/sections/Blog';
 import Testimonials from '../components/sections/Testimonials';
 import Timeline from '../components/sections/Timeline';
 
@@ -19,6 +20,7 @@ const Home: React.FC = () => {
       <Timeline />
       <Work />
       <Projects />
+      <Blog />
       <Testimonials />
     </main>
   );

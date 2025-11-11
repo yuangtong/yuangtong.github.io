@@ -1,9 +1,12 @@
+// Archivo: Work.tsx
+// Propósito: Sección Home de "Work" con grilla limitada e interacción para ver todo.
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ExternalLink, Github, Award } from 'lucide-react';
 import { featuredWorks } from '../../pages/work/workData';
 import { Button } from '../ui';
 import { Link } from 'react-router-dom';
+import { DISPLAY_CONFIG } from '../../utils/constants';
 
 const Work = () => {
   return (
@@ -18,8 +21,11 @@ const Work = () => {
           <p className="text-lg font-mono dark:text-gray-300">Showcasing some of my best professional projects</p>
         </motion.div>
 
+        {/* Limitar elementos visibles en Home para replicar Projects */}
         <div className="space-y-20">
-          {featuredWorks.map((work, index) => (
+          {featuredWorks
+            .slice(0, DISPLAY_CONFIG.HOME_WORKS_LIMIT)
+            .map((work, index) => (
             <motion.div
               key={work.slug}
               initial={{ opacity: 0, y: 20 }}
