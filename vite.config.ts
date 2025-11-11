@@ -14,33 +14,36 @@ export default defineConfig({
   },
   plugins: [
     react(),
-    viteImagemin({
-      gifsicle: {
-        optimizationLevel: 7,
-        interlaced: false,
-      },
-      optipng: {
-        optimizationLevel: 7,
-      },
-      mozjpeg: {
-        quality: 80,
-      },
-      pngquant: {
-        quality: [0.7, 0.8],
-        speed: 4,
-      },
-      webp: {
-        quality: 75,
-      },
-      svgo: {
-        plugins: [
-          {
-            name: 'removeViewBox',
-            active: false,
-          },
-        ],
-      },
-    }),
+    // Skip imagemin in CI/Netlify environments due to native binary dependency issues
+    ...(process.env.CI || process.env.NETLIFY ? [] : [
+      viteImagemin({
+        gifsicle: {
+          optimizationLevel: 7,
+          interlaced: false,
+        },
+        optipng: {
+          optimizationLevel: 7,
+        },
+        mozjpeg: {
+          quality: 80,
+        },
+        pngquant: {
+          quality: [0.7, 0.8],
+          speed: 4,
+        },
+        webp: {
+          quality: 75,
+        },
+        svgo: {
+          plugins: [
+            {
+              name: 'removeViewBox',
+              active: false,
+            },
+          ],
+        },
+      })
+    ]),
     VitePWA({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.png', 'robots.txt', 'apple-touch-icon.png'],
