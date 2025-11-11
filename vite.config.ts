@@ -77,19 +77,12 @@ export default defineConfig({
     })
   ],
   build: {
-    minify: 'terser',
+    // Use Vite default (esbuild) for safer minification across browsers
+    minify: 'esbuild',
     emptyOutDir: true,
     reportCompressedSize: true,
     chunkSizeWarningLimit: 1500,
-    terserOptions: {
-      compress: {
-        drop_console: false,
-        drop_debugger: false
-      },
-      mangle: {
-        safari10: true
-      }
-    },
+    // Removed terserOptions to avoid runtime errors in vendor chunks (Cannot access 'n' before initialization)
     rollupOptions: {
       output: {
         manualChunks(id) {
