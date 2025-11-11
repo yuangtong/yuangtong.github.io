@@ -6,6 +6,7 @@
  */
 import React from 'react';
 import { MotionConfig, motion } from 'framer-motion';
+import { twMerge } from 'tailwind-merge';
 
 export interface AboutSkillCardProps {
   title: string;
@@ -17,16 +18,16 @@ export interface AboutSkillCardProps {
 const AboutSkillCard: React.FC<AboutSkillCardProps> = ({ title, subtitle, Icon, className = '' }) => {
   return (
     <MotionConfig transition={{ type: 'spring', bounce: 0.5 }}>
-      <motion.div whileHover="hovered" className={`group w-full border-2 border-black bg-emerald-300 ${className}`}>
+      <motion.div whileHover="hovered" className={twMerge('group w-full border-2 border-black', className)}>
         <motion.div
           initial={{ x: 0, y: 0 }}
           variants={{ hovered: { x: -8, y: -8 } }}
-          className={`-m-0.5 border-2 border-black bg-emerald-300 ${className}`}
+          className={twMerge('-m-0.5 border-2 border-black', className)}
         >
           <motion.div
             initial={{ x: 0, y: 0 }}
             variants={{ hovered: { x: -8, y: -8 } }}
-            className={`relative -m-0.5 flex h-72 flex-col justify-between overflow-hidden border-2 border-black bg-emerald-300 p-8 ${className}`}
+            className={twMerge('relative -m-0.5 flex h-72 flex-col justify-between overflow-hidden border-2 border-black p-8', className)}
           >
             {/* Encabezado con icono y título */}
             <p className="flex items-center text-2xl font-medium">
