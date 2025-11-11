@@ -3,7 +3,8 @@ import { Menu, Github, Linkedin, Mail } from 'lucide-react';
 import { motion } from 'framer-motion';
 import ThemeToggle from './ThemeToggle';
 import { useTranslation } from '../../context/TranslationContext';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import FlyoutNav from './FlyoutNav';
 // Back/Home removidos del Header; ahora se muestran solo en vistas de detalle
 
 const Header = () => {
@@ -82,19 +83,23 @@ const Header = () => {
     return currentLang ? currentLang.label : 'English';
   };
 
+  const location = useLocation();
+  const isHome = location.pathname === '/';
+
   return (
     <header ref={headerRef} className="fixed w-full top-0 z-50 bg-white dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          <motion.div whileHover={{ scale: 1.05 }} className="flex items-center">
-            <Link
-              to="/"
-              aria-label="Go to home"
-              className="text-2xl font-bold cursor-pointer dark:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-pink-500"
-            >
-              YT
-            </Link>
-          </motion.div>
+        {!isHome && (
+          <div className="flex justify-between items-center h-16">
+            <motion.div whileHover={{ scale: 1.05 }} className="flex items-center">
+              <Link
+                to="/"
+                aria-label="Go to home"
+                className="text-2xl font-bold cursor-pointer dark:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-pink-500"
+              >
+                YT
+              </Link>
+            </motion.div>
           
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
@@ -188,10 +193,17 @@ const Header = () => {
           >
             <Menu size={24} />
           </button>
-        </div>
+          </div>
+        )}
+
+        {isHome && (
+          <div className="relative">
+            <FlyoutNav />
+          </div>
+        )}
 
         {/* Mobile Menu */}
-        {isMenuOpen && (
+        {!isHome && isMenuOpen && (
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
