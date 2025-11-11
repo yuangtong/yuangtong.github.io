@@ -104,6 +104,7 @@ const Header = () => {
   const linkColorClass = isHome ? (scrolled ? 'text-black dark:text-white' : 'text-white') : 'text-black dark:text-white';
   const actionColorClass = isHome ? (scrolled ? 'text-black dark:text-white' : 'text-white') : 'text-black dark:text-white';
   const logoColorClass = isHome ? (scrolled ? 'text-black dark:text-white' : 'text-white dark:text-white') : 'text-black dark:text-white';
+  const menuIconColorClass = isHome && !scrolled ? 'text-white' : 'text-black dark:text-white';
 
   return (
     <header ref={headerRef} className={`fixed w-full top-0 z-50 transition-all duration-300 ease-out ${headerBgClass}`}>
@@ -206,7 +207,7 @@ const Header = () => {
           {/* Mobile Menu Button */}
           <button 
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden dark:text-white p-2"
+            className={`md:hidden ${menuIconColorClass} hover:text-pink-500 p-2`}
             aria-label="Toggle menu"
           >
             <Menu size={24} />

@@ -58,13 +58,12 @@ const MagnetButton: React.FC<MagnetButtonProps> = ({ href }) => {
       onMouseLeave={handleMouseLeave}
       onKeyDown={onKeyDown}
       aria-label="Schedule a Free Consultation"
-      style={{ transform }}
+      style={{ transform, willChange: 'transform' }}
       transition={{ type: 'spring', stiffness: 200, damping: 20 }}
-      className="group relative grid h-24 w-24 sm:h-28 sm:w-28 md:h-32 md:w-32 lg:h-36 lg:w-36 place-content-center rounded-full border-2 border-black transition-all duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-pink-500"
+      className="group relative grid h-[clamp(64px,20vw,144px)] w-[clamp(64px,20vw,144px)] place-content-center rounded-full border-2 border-black transition-all duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-pink-500"
     >
-      {/* Tamaños responsivos del botón con relación estable entre icono y texto circular */}
-      {/* Icono FontAwesome: cambia en hover */}
-      <span className="pointer-events-none absolute bottom-2 right-2 md:absolute md:inset-0 md:flex md:items-center md:justify-center z-10 transition-all duration-300 ease-out group-hover:rotate-0">
+      {/* Icono centrado en todas las resoluciones móviles */}
+      <span className="pointer-events-none absolute inset-0 flex items-center justify-center z-10 transition-all duration-300 ease-out group-hover:rotate-0">
         <FontAwesomeIcon icon={phone} className="text-white text-xl sm:text-2xl md:text-3xl lg:text-4xl group-hover:hidden" />
         <FontAwesomeIcon icon={phoneVolume} className="hidden text-black text-xl sm:text-2xl md:text-3xl lg:text-4xl group-hover:inline" />
       </span>
@@ -79,7 +78,7 @@ const MagnetButton: React.FC<MagnetButtonProps> = ({ href }) => {
         animate={{ rotate: 360 }}
         transition={{ duration: 25, repeat: Infinity, repeatType: 'loop', ease: 'linear' }}
         style={{ top: '50%', left: '50%', x: '-50%', y: '-50%' }}
-        className="pointer-events-none absolute z-10 w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32"
+        className="pointer-events-none absolute z-10 w-[85%] h-[85%]"
         viewBox="0 0 100 100"
       >
         {/* Radio proporcional al viewBox (100x100) para legibilidad en todos los tamaños */}
