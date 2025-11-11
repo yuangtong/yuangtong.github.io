@@ -28,7 +28,10 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ className = '', topClass 
       aria-label="Detail navigation"
       role="navigation"
     >
-      <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`}>
+      <div
+        className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-4 md:mb-6`}
+        style={{ transition: 'margin 0.3s ease' }}
+      >
         <motion.div
           initial={{ opacity: 0, y: -8 }}
           animate={{ opacity: 1, y: 0 }}
