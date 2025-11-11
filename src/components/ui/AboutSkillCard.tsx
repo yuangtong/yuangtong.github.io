@@ -39,23 +39,7 @@ const AboutSkillCard: React.FC<AboutSkillCardProps> = ({ title, subtitle, Icon, 
               </p>
             </div>
 
-            {/* Círculo rotatorio con texto decorativo */}
-            <motion.svg
-              initial={{ rotate: 0 }}
-              animate={{ rotate: 360 }}
-              transition={{ duration: 25, repeat: Infinity, repeatType: 'loop', ease: 'linear' }}
-              style={{ top: '0', right: '0', x: '50%', y: '-50%', scale: 0.75 }}
-              width="200"
-              height="200"
-              className="pointer-events-none absolute z-10 rounded-full"
-            >
-              <path id="circlePath" d="M100,100 m-100,0 a100,100 0 1,0 200,0 a100,100 0 1,0 -200,0" fill="none" />
-              <text>
-                <textPath href="#circlePath" fill="black" className="fill-black text-2xl font-black uppercase opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100">
-                  LEARN MORE • LEARN MORE • LEARN MORE • LEARN MORE •
-                </textPath>
-              </text>
-            </motion.svg>
+            {/* Rotating label decorativo removido por petición del usuario */}
           </motion.div>
         </motion.div>
       </motion.div>
