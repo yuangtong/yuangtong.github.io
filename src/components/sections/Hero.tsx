@@ -67,6 +67,47 @@ const Hero = () => {
   
   const [features, setFeatures] = useState(initialFeatures);
 
+  // --- Mobile typing container height fix ---
+  const typeContainerRef = useRef<HTMLSpanElement | null>(null);
+  const [isMobile, setIsMobile] = useState<boolean>(typeof window !== 'undefined' ? window.innerWidth < 768 : true);
+  const [typeMaxHeight, setTypeMaxHeight] = useState<number | undefined>(undefined);
+
+  useEffect(() => {
+    const onResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, []);
+
+  useEffect(() => {
+    if (!isMobile) {
+      setTypeMaxHeight(undefined);
+      return;
+    }
+    const container = typeContainerRef.current;
+    if (!container) return;
+
+    // Create a hidden measurer inside the same container to match width and styles
+    const measurer = document.createElement('span');
+    measurer.style.position = 'absolute';
+    measurer.style.visibility = 'hidden';
+    measurer.style.whiteSpace = 'normal';
+    measurer.className = 'inline-block';
+    container.appendChild(measurer);
+
+    // Extract strings from sequence and measure their rendered height
+    const strings = animationSequence.filter((v) => typeof v === 'string') as string[];
+    let max = 0;
+    for (const s of strings) {
+      measurer.textContent = s;
+      const h = measurer.offsetHeight;
+      if (h > max) max = h;
+    }
+
+    container.removeChild(measurer);
+    // Add a small buffer to avoid clipping due to font rendering nuances
+    setTypeMaxHeight(max > 0 ? max + 2 : undefined);
+  }, [animationSequence, isMobile]);
+
   useEffect(() => {
     const translateContent = async () => {
       if (language === 'en') {
@@ -271,12 +312,21 @@ const Hero = () => {
             {translatedContent.greeting}
             <br />
             <span className="text-blue-500 dark:text-purple-400">
-              <TypeAnimation
-                sequence={animationSequence}
-                speed={50}
-                repeat={Infinity}
+              <span
+                ref={typeContainerRef}
                 className="inline-block"
-              />
+                style={{
+                  height: isMobile && typeMaxHeight ? `${typeMaxHeight}px` : undefined,
+                  overflow: isMobile ? 'hidden' as const : undefined,
+                }}
+              >
+                <TypeAnimation
+                  sequence={animationSequence}
+                  speed={50}
+                  repeat={Infinity}
+                  className="inline-block"
+                />
+              </span>
             </span>
           </motion.h1>
           
