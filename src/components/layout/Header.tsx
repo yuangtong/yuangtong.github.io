@@ -86,17 +86,24 @@ const Header = () => {
   const isHome = location.pathname === '/';
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
-    const onScroll = () => setScrolled(!isHome || window.scrollY > 0);
-    onScroll();
-    window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+    // Sólo activar el comportamiento de scroll en Home.
+    if (isHome) {
+      const onScroll = () => setScrolled(window.scrollY > 0);
+      onScroll();
+      window.addEventListener('scroll', onScroll);
+      return () => window.removeEventListener('scroll', onScroll);
+    } else {
+      // En páginas internas, forzar estado legible: fondo sólido y texto oscuro.
+      setScrolled(true);
+      return () => {};
+    }
+  }, [isHome, location.pathname]);
   const headerBgClass = isHome
     ? (scrolled ? 'bg-white dark:bg-gray-900 shadow-xl' : 'bg-transparent')
     : 'bg-white dark:bg-gray-900';
-  const linkColorClass = scrolled ? 'text-black dark:text-white' : 'text-white';
-  const actionColorClass = scrolled ? 'text-black dark:text-white' : 'text-white';
-  const logoColorClass = scrolled ? 'dark:text-white' : 'text-white dark:text-white';
+  const linkColorClass = isHome ? (scrolled ? 'text-black dark:text-white' : 'text-white') : 'text-black dark:text-white';
+  const actionColorClass = isHome ? (scrolled ? 'text-black dark:text-white' : 'text-white') : 'text-black dark:text-white';
+  const logoColorClass = isHome ? (scrolled ? 'text-black dark:text-white' : 'text-white dark:text-white') : 'text-black dark:text-white';
 
   return (
     <header ref={headerRef} className={`fixed w-full top-0 z-50 transition-all duration-300 ease-out ${headerBgClass}`}>
