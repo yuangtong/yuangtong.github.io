@@ -7,6 +7,7 @@ import { useTranslation } from '../../context/TranslationContext';
 import { TypeAnimation } from 'react-type-animation';
 import CVDownloadModal from '../Feature/CVDownloadModal';
 import AuroraBackground from '../ui/AuroraBackground';
+import MagnetButton from '../ui/MagnetButton';
 
 const Hero = () => {
   const { language, translate } = useTranslation();
@@ -249,57 +250,10 @@ const Hero = () => {
       />
       */}
       
-      {/* Floating Button Animation */}
-      <motion.div
-        className="absolute right-8 bottom-12 z-20 md:right-16 lg:right-24 flex items-center justify-center"
-        initial={{ scale: 0.9, y: 20, opacity: 0 }}
-        animate={{ 
-          scale: [0.9, 1.1, 1],
-          y: 0,
-          opacity: 1,
-          rotate: 0 // Aseguramos ninguna rotación
-        }}
-        transition={{ 
-          duration: 0.6,
-          ease: "easeOut"
-        }}
-        style={{ transform: 'rotate(0deg)' }} // Fuerza la rotación a 0
-      >
-        <motion.div 
-          className="relative rounded-none bg-yellow-400 dark:bg-purple-600 border-4 border-black dark:border-gray-300 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:shadow-[6px_6px_0px_0px_rgba(76,29,149,1)] p-3"
-          whileHover={{ 
-            scale: 1.1,
-            boxShadow: '8px 8px 0px 0px rgba(0,0,0,1)',
-            transition: { duration: 0.2 }
-          }}
-          whileTap={{ scale: 0.95 }}
-          animate={{
-            scale: [1, 1.05, 1],
-            boxShadow: [
-              '6px 6px 0px 0px rgba(0,0,0,1)',
-              '8px 8px 0px 0px rgba(0,0,0,1)',
-              '6px 6px 0px 0px rgba(0,0,0,1)'
-            ]
-          }}
-          transition={{
-            duration: 1.5,
-            repeat: Infinity,
-            repeatType: 'reverse',
-            ease: 'easeInOut'
-          }}
-        >
-          <a 
-            href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ3M-X60wSMYrYspDOQYRdAG8rNibLIpe9YoKZmwrdJ0cs8MvNxWtr3N8I507RyETNvDZ-qj_8ji" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="relative z-10 flex items-center justify-center space-x-2 text-black dark:text-white font-bold"
-            style={{ transform: 'rotate(0deg)' }}
-          >
-            <Calendar size={24} />
-            <span className="text-sm md:text-base">{translatedContent.scheduleCall}</span>
-          </a>
-        </motion.div>
-      </motion.div>
+      {/* Magnet Button (Schedule) */}
+      <div className="absolute right-8 bottom-12 z-20 md:right-16 lg:right-24">
+        <MagnetButton href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ3M-X60wSMYrYspDOQYRdAG8rNibLIpe9YoKZmwrdJ0cs8MvNxWtr3N8I507RyETNvDZ-qj_8ji" />
+      </div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
         <motion.div
