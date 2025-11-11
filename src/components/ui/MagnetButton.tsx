@@ -52,6 +52,7 @@ const MagnetButton: React.FC<MagnetButtonProps> = ({ href }) => {
   };
 
   return (
+    // Tamaños responsivos del botón con relación estable entre icono y texto circular
     <motion.button
       ref={ref}
       onMouseMove={handleMouseMove}
@@ -60,33 +61,34 @@ const MagnetButton: React.FC<MagnetButtonProps> = ({ href }) => {
       aria-label="Schedule a Free Consultation"
       style={{ transform }}
       transition={{ type: 'spring', stiffness: 200, damping: 20 }}
-      className="group relative grid h-28 w-28 sm:h-32 sm:w-32 md:h-36 md:w-36 lg:h-40 lg:w-40 place-content-center rounded-full border-2 border-black transition-all duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-pink-500"
+      className="group relative grid h-24 w-24 sm:h-28 sm:w-28 md:h-32 md:w-32 lg:h-36 lg:w-36 place-content-center rounded-full border-2 border-black transition-all duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-pink-500"
     >
       {/* Icono FontAwesome: cambia en hover */}
       <span className="pointer-events-none absolute bottom-3 right-3 md:relative md:bottom-auto md:right-auto z-10 text-black transition-all duration-300 ease-out group-hover:rotate-0">
-        <FontAwesomeIcon icon={phone} className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl group-hover:hidden" />
-        <FontAwesomeIcon icon={phoneVolume} className="hidden text-2xl sm:text-3xl md:text-4xl lg:text-5xl group-hover:inline" />
+        <FontAwesomeIcon icon={phone} className="text-xl sm:text-2xl md:text-3xl lg:text-4xl group-hover:hidden" />
+        <FontAwesomeIcon icon={phoneVolume} className="hidden text-xl sm:text-2xl md:text-3xl lg:text-4xl group-hover:inline" />
       </span>
 
       {/* Burbuja de fondo */}
       <div className="pointer-events-none absolute inset-0 z-0 scale-0 rounded-full bg-white transition-transform duration-700 ease-out group-hover:scale-100" />
 
       {/* Texto circular */}
+      // SVG con viewBox estable para escalar proporcionalmente con CSS
       <motion.svg
         initial={{ rotate: 0 }}
         animate={{ rotate: 360 }}
         transition={{ duration: 25, repeat: Infinity, repeatType: 'loop', ease: 'linear' }}
         style={{ top: '50%', left: '50%', x: '-50%', y: '-50%' }}
-        className="pointer-events-none absolute z-10 w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-36 lg:h-36"
-        className="pointer-events-none absolute z-10"
+        className="pointer-events-none absolute z-10 w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32"
+        viewBox="0 0 100 100"
       >
-        {/* Radio reducido para dejar margen dentro del botón y mejorar legibilidad */}
-        <path id="circlePathMagnet" d="M100,100 m-85,0 a85,85 0 1,0 170,0 a85,85 0 1,0 -170,0" fill="none" />
+        {/* Radio proporcional al viewBox (100x100) para legibilidad en todos los tamaños */}
+        <path id="circlePathMagnet" d="M50,50 m-42,0 a42,42 0 1,0 84,0 a42,42 0 1,0 -84,0" fill="none" />
         <text>
           <textPath
             href="#circlePathMagnet"
             fill="black"
-            className="fill-black text-xs sm:text-sm font-mono uppercase opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100"
+            className="fill-black text-[10px] sm:text-xs md:text-sm font-mono uppercase opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100"
             startOffset="0%"
             style={{ letterSpacing: '1px' }}
           >
