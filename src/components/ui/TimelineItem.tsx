@@ -3,6 +3,7 @@
  * Muestra un hito con fecha, icono, título, organización y descripción
  */
 import React from 'react';
+import styles from './TimelineItem.module.css';
 import { Briefcase, GraduationCap, Award, Code, Gauge } from 'lucide-react';
 import type { CareerMilestone } from '../../types/cv';
 import { useScrollReveal } from '../../hooks/useScrollReveal';
@@ -32,7 +33,7 @@ export const TimelineItem: React.FC<TimelineItemProps> = ({ milestone }) => {
 
       {/* Carta neobrutalista */}
       <div className={`transform-gpu will-change-[transform,opacity] transition-opacity transition-transform duration-300 md:duration-500 ease-out motion-reduce:transition-none motion-reduce:opacity-100 motion-reduce:translate-y-0 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
-        <article className="bg-white dark:bg-gray-800 border-4 border-black dark:border-gray-600 overflow-hidden group hover:bg-yellow-300 dark:hover:bg-purple-700 transition-colors">
+        <article className={`bg-white dark:bg-gray-800 border-4 border-black dark:border-gray-600 overflow-hidden group hover:bg-yellow-300 dark:hover:bg-purple-700 transition-colors ${styles.card}`}>
           <div className="p-6 md:p-8">
             <div className="flex items-center gap-4 mb-2">
               <Icon className="w-7 h-7 text-black dark:text-white" aria-hidden="true" />

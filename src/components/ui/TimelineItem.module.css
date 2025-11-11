@@ -1,0 +1,42 @@
+/*
+ * Propósito: Estilos de hover para el div de contenido del TimelineItem.
+ * - Replica la rotación del enlace `a` (rotate: -2deg) al hacer hover.
+ * - Añade un borde simulado y sombra rosa mediante box-shadow.
+ * - Usa transiciones suaves (300ms) y optimiza con transform.
+ * - Aplica interacciones equivalentes en dispositivos sin hover vía :active.
+ */
+
+.card {
+  /* Performance and base transition */
+  will-change: transform, box-shadow;
+  transition: transform 300ms ease, box-shadow 300ms ease;
+}
+
+/* Hover-enabled devices */
+@media (hover: hover) {
+  .card:hover {
+    /* Match nav <a> rotation: -2deg */
+    transform: rotate(-2deg);
+    /* Pink outline + offset shadow in neobrutal style */
+    box-shadow:
+      0 0 0 2px #FF69B4,
+      6px 6px 0 0 #FF69B4;
+  }
+}
+
+/* Touch devices (no hover): use :active for tap interaction */
+@media (hover: none) {
+  .card:active {
+    transform: rotate(-2deg);
+    box-shadow:
+      0 0 0 2px #FF69B4,
+      6px 6px 0 0 #FF69B4;
+  }
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    transition: none;
+  }
+}
