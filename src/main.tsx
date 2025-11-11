@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
+import './lib/fontawesome'
 import './index.css'
 import { ThemeProvider } from './context/ThemeContext' // Import your custom ThemeProvider
 

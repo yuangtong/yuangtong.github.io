@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Code2, Palette, Zap, FileDown, Github, ExternalLink, Calendar } from 'lucide-react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { findIconDefinition, IconLookup } from '@fortawesome/fontawesome-svg-core';
 import { useTranslation } from '../../context/TranslationContext';
 import { TypeAnimation } from 'react-type-animation';
 import CVDownloadModal from '../Feature/CVDownloadModal';
@@ -354,7 +356,7 @@ const Hero = () => {
             ))}
           </div>
 
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-nowrap md:flex-wrap items-center gap-3 md:gap-4 w-full">
             <motion.button
               onClick={() => setIsCVModalOpen(true)}
               initial={{ opacity: 0, y: 20 }}
@@ -364,10 +366,11 @@ const Hero = () => {
                 scale: 1.05,
                 boxShadow: '6px 6px 0px 0px rgba(0,0,0,1)'
               }}
-              className="flex items-center space-x-2 bg-blue-500 dark:bg-purple-600 text-white px-6 py-3 border-2 border-black dark:border-gray-600 font-bold transition-all hover:bg-yellow-300 dark:hover:bg-indigo-500 hover:text-black dark:hover:text-white"
+              aria-label={translatedContent.downloadCV}
+              className="flex-1 flex items-center justify-center space-x-2 bg-blue-500 dark:bg-purple-600 text-white px-3 md:px-6 py-2 md:py-3 border-2 border-black dark:border-gray-600 font-bold transition-all hover:bg-yellow-300 dark:hover:bg-indigo-500 hover:text-black dark:hover:text-white active:scale-[0.98]"
             >
               <FileDown size={20} />
-              <span>{translatedContent.downloadCV}</span>
+              <span className="hidden md:inline">{translatedContent.downloadCV}</span>
             </motion.button>
 
             <motion.a
@@ -381,10 +384,11 @@ const Hero = () => {
                 scale: 1.05,
                 boxShadow: '6px 6px 0px 0px rgba(0,0,0,1)'
               }}
-              className="flex items-center space-x-2 bg-white dark:bg-gray-700 text-black dark:text-white px-6 py-3 border-2 border-black dark:border-gray-600 font-bold transition-all hover:bg-black hover:text-white dark:hover:bg-gray-900"
+              aria-label={translatedContent.viewGithub}
+              className="flex-1 flex items-center justify-center space-x-2 bg-white dark:bg-gray-700 text-black dark:text-white px-3 md:px-6 py-2 md:py-3 border-2 border-black dark:border-gray-600 font-bold transition-all hover:bg-black hover:text-white dark:hover:bg-gray-900 active:scale-[0.98]"
             >
               <Github size={20} />
-              <span>{translatedContent.viewGithub}</span>
+              <span className="hidden md:inline">{translatedContent.viewGithub}</span>
             </motion.a>
             
             <motion.a
@@ -398,10 +402,15 @@ const Hero = () => {
                 scale: 1.05,
                 boxShadow: '6px 6px 0px 0px rgba(0,0,0,1)'
               }}
-              className="flex items-center space-x-2 bg-[#14a800] text-white px-6 py-3 border-2 border-black dark:border-gray-600 font-bold transition-all hover:bg-[#0e8600]"
+              aria-label={translatedContent.hireUpwork}
+              className="flex-1 flex items-center justify-center space-x-2 bg-[#14a800] text-white px-3 md:px-6 py-2 md:py-3 border-2 border-black dark:border-gray-600 font-bold transition-all hover:bg-[#0e8600] active:scale-[0.98]"
             >
-              <ExternalLink size={20} />
-              <span>{translatedContent.hireUpwork}</span>
+              {(() => {
+                const upworkLookup: IconLookup = { prefix: 'fab', iconName: 'square-upwork' as any };
+                const icon = findIconDefinition(upworkLookup) || findIconDefinition({ prefix: 'fab', iconName: 'upwork' as any });
+                return <FontAwesomeIcon icon={icon} className="text-white" />;
+              })()}
+              <span className="hidden md:inline">{translatedContent.hireUpwork}</span>
             </motion.a>
           </div>
         </motion.div>
