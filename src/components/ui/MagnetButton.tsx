@@ -64,7 +64,7 @@ const MagnetButton: React.FC<MagnetButtonProps> = ({ href }) => {
       className="group relative grid h-24 w-24 sm:h-28 sm:w-28 md:h-32 md:w-32 lg:h-36 lg:w-36 place-content-center rounded-full border-2 border-black transition-all duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-pink-500"
     >
       {/* Icono FontAwesome: cambia en hover */}
-      <span className="pointer-events-none absolute bottom-3 right-3 md:relative md:bottom-auto md:right-auto z-10 text-black transition-all duration-300 ease-out group-hover:rotate-0">
+      <span className="pointer-events-none absolute bottom-2 right-2 z-10 text-black transition-all duration-300 ease-out group-hover:rotate-0">
         <FontAwesomeIcon icon={phone} className="text-xl sm:text-2xl md:text-3xl lg:text-4xl group-hover:hidden" />
         <FontAwesomeIcon icon={phoneVolume} className="hidden text-xl sm:text-2xl md:text-3xl lg:text-4xl group-hover:inline" />
       </span>
@@ -83,14 +83,14 @@ const MagnetButton: React.FC<MagnetButtonProps> = ({ href }) => {
         viewBox="0 0 100 100"
       >
         {/* Radio proporcional al viewBox (100x100) para legibilidad en todos los tamaños */}
-        <path id="circlePathMagnet" d="M50,50 m-42,0 a42,42 0 1,0 84,0 a42,42 0 1,0 -84,0" fill="none" />
+        <path id="circlePathMagnet" d="M50,50 m-46,0 a46,46 0 1,0 92,0 a46,46 0 1,0 -92,0" fill="none" />
         <text>
           <textPath
             href="#circlePathMagnet"
             fill="black"
             className="fill-black text-[10px] sm:text-xs md:text-sm font-mono uppercase opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100"
-            startOffset="0%"
-            style={{ letterSpacing: '1px' }}
+            startOffset="25%"
+            style={{ letterSpacing: '0.5px' }}
           >
             Schedule a Free Consultation • Schedule a Free Consultation • Schedule a Free Consultation •
           </textPath>
