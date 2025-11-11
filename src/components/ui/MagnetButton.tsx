@@ -52,7 +52,6 @@ const MagnetButton: React.FC<MagnetButtonProps> = ({ href }) => {
   };
 
   return (
-    {/* Tamaños responsivos del botón con relación estable entre icono y texto circular */}
     <motion.button
       ref={ref}
       onMouseMove={handleMouseMove}
@@ -63,10 +62,11 @@ const MagnetButton: React.FC<MagnetButtonProps> = ({ href }) => {
       transition={{ type: 'spring', stiffness: 200, damping: 20 }}
       className="group relative grid h-24 w-24 sm:h-28 sm:w-28 md:h-32 md:w-32 lg:h-36 lg:w-36 place-content-center rounded-full border-2 border-black transition-all duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-pink-500"
     >
+      {/* Tamaños responsivos del botón con relación estable entre icono y texto circular */}
       {/* Icono FontAwesome: cambia en hover */}
-      <span className="pointer-events-none absolute bottom-2 right-2 z-10 text-black transition-all duration-300 ease-out group-hover:rotate-0">
-        <FontAwesomeIcon icon={phone} className="text-xl sm:text-2xl md:text-3xl lg:text-4xl group-hover:hidden" />
-        <FontAwesomeIcon icon={phoneVolume} className="hidden text-xl sm:text-2xl md:text-3xl lg:text-4xl group-hover:inline" />
+      <span className="pointer-events-none absolute bottom-2 right-2 md:absolute md:inset-0 md:flex md:items-center md:justify-center z-10 transition-all duration-300 ease-out group-hover:rotate-0">
+        <FontAwesomeIcon icon={phone} className="text-white text-xl sm:text-2xl md:text-3xl lg:text-4xl group-hover:hidden" />
+        <FontAwesomeIcon icon={phoneVolume} className="hidden text-black text-xl sm:text-2xl md:text-3xl lg:text-4xl group-hover:inline" />
       </span>
 
       {/* Burbuja de fondo */}
