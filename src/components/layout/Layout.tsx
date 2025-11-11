@@ -9,7 +9,6 @@ import Footer from './Footer';
 import Cursor from '../ui/Cursor';
 import { useTheme } from '../../context/ThemeContext';
 import { useLocation } from 'react-router-dom';
-import NavigationBar from '../ui/NavigationBar';
 import Contact from '../sections/Contact';
 
 interface LayoutProps {
@@ -19,13 +18,14 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const { isDark } = useTheme();
   const location = useLocation();
-  const isArchiveRoute = /^\/(projects|work|blog)\/?$/.test(location.pathname);
+  // Nota: Las páginas de archivo (projects, work, blog) gestionan su propia NavigationBar.
+  // Evitamos renderizar una barra duplicada desde Layout.
 
   return (
     <div className={`relative ${isDark ? 'dark' : ''}`}>
       <Cursor />
       <Header />
-      {isArchiveRoute && <NavigationBar />}
+      {/* NavigationBar removida del Layout para evitar duplicidad en páginas de archivo */}
       {children}
       <Contact />
       <Footer />
