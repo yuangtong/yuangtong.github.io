@@ -1,8 +1,9 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowLeft, ExternalLink, Github, Award } from 'lucide-react';
+import { ExternalLink, Github, Award } from 'lucide-react';
 import { featuredWorks } from './workData';
+import NavigationBar from '../../components/ui/NavigationBar';
 
 const WorkDetail = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -18,7 +19,6 @@ const WorkDetail = () => {
             to="/#work" 
             className="inline-flex items-center px-6 py-3 bg-pink-500 text-white font-mono hover:bg-pink-600 transition-colors"
           >
-            <ArrowLeft className="mr-2" size={20} />
             Back to Work
           </Link>
         </div>
@@ -28,22 +28,13 @@ const WorkDetail = () => {
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900">
-      {/* Header */}
-      <div className="bg-black dark:bg-gray-800 text-white py-4">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Link 
-            to="/#work" 
-            className="inline-flex items-center text-pink-500 hover:text-pink-400 font-mono"
-          >
-            <ArrowLeft className="mr-2" size={20} />
-            Back to Work
-          </Link>
-        </div>
-      </div>
-
       {/* Hero Section */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Navegación contextual para vistas de detalle */}
+          <div className="mb-8">
+            <NavigationBar />
+          </div>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, x: -20 }}

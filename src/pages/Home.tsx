@@ -9,7 +9,6 @@ import About from '../components/sections/About';
 import Work from '../components/sections/Work';
 import Projects from '../components/sections/Projects';
 import Testimonials from '../components/sections/Testimonials';
-import Contact from '../components/sections/Contact';
 import Timeline from '../components/sections/Timeline';
 
 const Home: React.FC = () => {
@@ -21,7 +20,6 @@ const Home: React.FC = () => {
       <Work />
       <Projects />
       <Testimonials />
-      <Contact />
     </main>
   );
 };

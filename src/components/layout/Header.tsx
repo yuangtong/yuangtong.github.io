@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, Github, Linkedin, Mail, Globe } from 'lucide-react';
+import { Menu, Github, Linkedin, Mail } from 'lucide-react';
 import { motion } from 'framer-motion';
 import ThemeToggle from './ThemeToggle';
 import { useTranslation } from '../../context/TranslationContext';
+import { Link } from 'react-router-dom';
+// Back/Home removidos del Header; ahora se muestran solo en vistas de detalle
 
 const Header = () => {
   const { language, setLanguage, translate } = useTranslation();
@@ -60,16 +62,18 @@ const Header = () => {
   };
 
   return (
-    <header className="fixed w-full top-0 z-50 bg-white dark:bg-gray-900 border-b-4 border-black">
+    <header className="fixed w-full top-0 z-50 bg-white dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <motion.a 
-            href="#"
-            whileHover={{ scale: 1.1 }}
-            className="text-2xl font-bold cursor-pointer dark:text-white"
-          >
-            YT
-          </motion.a>
+          <motion.div whileHover={{ scale: 1.05 }} className="flex items-center">
+            <Link
+              to="/"
+              aria-label="Go to home"
+              className="text-2xl font-bold cursor-pointer dark:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-pink-500"
+            >
+              YT
+            </Link>
+          </motion.div>
           
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
@@ -104,6 +108,8 @@ const Header = () => {
                 <Icon size={24} />
               </motion.a>
             ))}
+
+            {/* Home icon removido para evitar duplicar navegación principal */}
             
             {/* Language Selector Dropdown */}
             <div className="relative">
@@ -167,6 +173,7 @@ const Header = () => {
             exit={{ opacity: 0, y: -20 }}
             className="md:hidden"
           >
+            {/* Acciones rápidas móviles eliminadas (Back/Home ahora viven en vistas de detalle) */}
             <nav className="py-4 space-y-2">
               {navItems.map((item, index) => (
                 <React.Fragment key={item}>

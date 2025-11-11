@@ -15,15 +15,15 @@ export const EXTERNAL_LINKS = {
 export const CMS_CONFIG = {
   // Contentful
   CONTENTFUL: {
-    SPACE_ID: process.env.VITE_CONTENTFUL_SPACE_ID || '',
-    ACCESS_TOKEN: process.env.VITE_CONTENTFUL_ACCESS_TOKEN || '',
-    ENVIRONMENT: process.env.VITE_CONTENTFUL_ENVIRONMENT || 'master'
+    SPACE_ID: import.meta.env.VITE_CONTENTFUL_SPACE_ID || '',
+    ACCESS_TOKEN: import.meta.env.VITE_CONTENTFUL_ACCESS_TOKEN || '',
+    ENVIRONMENT: import.meta.env.VITE_CONTENTFUL_ENVIRONMENT || 'master'
   },
   
   // Supabase
   SUPABASE: {
-    URL: process.env.VITE_SUPABASE_URL || '',
-    ANON_KEY: process.env.VITE_SUPABASE_ANON_KEY || ''
+    URL: import.meta.env.VITE_SUPABASE_URL || '',
+    ANON_KEY: import.meta.env.VITE_SUPABASE_ANON_KEY || ''
   }
 } as const;
 
@@ -34,6 +34,11 @@ export const APP_CONFIG = {
   AUTHOR: 'Yuang Tong',
   DEFAULT_LANGUAGE: 'en',
   SUPPORTED_LANGUAGES: ['en', 'es'] as const
+} as const;
+
+// Límite de elementos visibles en Home
+export const DISPLAY_CONFIG = {
+  HOME_PROJECTS_LIMIT: 6
 } as const;
 
 // Rutas de la aplicación

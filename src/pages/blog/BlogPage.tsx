@@ -1,6 +1,9 @@
+// Archivo: BlogPage.tsx
+// Propósito: Página de archivo de blogs; muestra tarjetas y navegación contextual (Back/Home).
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ContentCard } from '../../components/shared/ContentCard';
+// Corregido: ruta de ContentCard existente en UI
+import { ContentCard } from '../../components/ui/ContentCard';
 import { useContent } from '../../hooks/useContent';
 
 interface BlogPost {
@@ -29,10 +32,11 @@ export const BlogPage = () => {
           className="text-center mb-12"
         >
           <h1 className="text-5xl font-bold mb-4 dark:text-white">Blog</h1>
-          <p className="text-lg font-mono dark:text-gray-300">
-            Thoughts, tutorials, and insights about web development
-          </p>
-        </motion.div>
+        <p className="text-lg font-mono dark:text-gray-300">
+          Thoughts, tutorials, and insights about web development
+        </p>
+      </motion.div>
+
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {posts.map((post) => (

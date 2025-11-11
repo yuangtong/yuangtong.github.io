@@ -1,8 +1,9 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowLeft, ExternalLink, Github, Award } from 'lucide-react';
+import { ExternalLink, Github, Award } from 'lucide-react';
 import { featuredWorks } from './workData';
+import NavigationBar from '../../components/ui/NavigationBar';
 
 export const WorkDetails = () => {
   const { slug } = useParams();
@@ -24,13 +25,8 @@ export const WorkDetails = () => {
   return (
     <div className="py-20 bg-white">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <Link 
-          to="/work"
-          className="inline-flex items-center text-pink-500 hover:text-pink-600 mb-8"
-        >
-          <ArrowLeft className="mr-2" />
-          Back to Work
-        </Link>
+        {/* NavigationBar fijo en vistas de detalle */}
+        <NavigationBar />
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}

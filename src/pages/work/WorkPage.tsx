@@ -1,3 +1,5 @@
+// Archivo: WorkPage.tsx
+// Propósito: Página de archivo de trabajos; muestra items y navegación contextual (Back/Home).
 import React from 'react';
 import { motion } from 'framer-motion';
 import { WorkItem } from './FeaturedWork';

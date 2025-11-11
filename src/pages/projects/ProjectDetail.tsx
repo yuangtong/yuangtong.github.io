@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowLeft, ExternalLink, Github } from 'lucide-react';
+import { ExternalLink, Github } from 'lucide-react';
 import { projects } from '../../data/projects';
 import { useTranslation } from '../../context/TranslationContext';
+import NavigationBar from '../../components/ui/NavigationBar';
 
 export const ProjectDetail = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -74,13 +75,14 @@ export const ProjectDetail = () => {
     return <div>Project not found</div>;
   }
 
+  // Algunas entradas pueden incluir 'features' aunque no esté tipado en la fuente
+  const features: string[] | undefined = (project as unknown as { features?: string[] }).features;
+
   return (
     <div className="bg-white dark:bg-gray-900 min-h-screen py-12">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <Link to="/projects" className="inline-flex items-center text-pink-500 dark:text-purple-400 hover:text-pink-600 dark:hover:text-purple-300 mb-8">
-          <ArrowLeft size={20} className="mr-2" />
-          {translatedContent.backToProjects}
-        </Link>
+        {/* NavigationBar fijo en vistas de detalle */}
+        <NavigationBar />
 
         <motion.h1 
           initial={{ opacity: 0, y: -20 }}
@@ -102,12 +104,16 @@ export const ProjectDetail = () => {
           <p className="text-lg font-mono">{translatedContent.description}</p>
           
           {/* Key Features section */}
-          <h3 className="text-xl font-bold mt-6 mb-4">{translatedContent.keyFeatures}</h3>
-          <ul className="list-disc pl-5 space-y-2 font-mono">
-            {project.features && project.features.map((feature, index) => (
-              <li key={index}>{feature}</li>
-            ))}
-          </ul>
+          {Array.isArray(features) && features.length > 0 && (
+            <>
+              <h3 className="text-xl font-bold mt-6 mb-4">{translatedContent.keyFeatures}</h3>
+              <ul className="list-disc pl-5 space-y-2 font-mono">
+                {features.map((feature: string, index: number) => (
+                  <li key={index}>{feature}</li>
+                ))}
+              </ul>
+            </>
+          )}
           
           <h3 className="text-xl font-bold mt-6 mb-4">{translatedContent.technologies}</h3>
           <div className="flex flex-wrap gap-2 mb-8">

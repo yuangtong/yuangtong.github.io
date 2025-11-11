@@ -4,6 +4,7 @@ import { ContentCard, Button } from '../ui';
 import { Link } from 'react-router-dom';
 import { projects as staticProjects } from '../../data/projects';
 import { useTranslation } from '../../context/TranslationContext';
+import { DISPLAY_CONFIG } from '../../utils/constants';
 
 const Projects = () => {
   const { language, translate } = useTranslation();
@@ -12,6 +13,9 @@ const Projects = () => {
 
   // Use only static data
   const projects = staticProjects;
+
+  // Limitar la cantidad de proyectos mostrados en Home
+  const visibleProjects = projects.slice(0, DISPLAY_CONFIG.HOME_PROJECTS_LIMIT);
 
   useEffect(() => {
     const translateContent = async () => {
@@ -40,7 +44,7 @@ const Projects = () => {
         </motion.h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
+          {visibleProjects.map((project) => (
             <ContentCard
               key={`${project.title}-${language}-${key}`}
               type="project"

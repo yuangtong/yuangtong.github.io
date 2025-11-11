@@ -1,9 +1,12 @@
+// Archivo: ProjectDetails.tsx
+// Propósito: Vista de detalle de proyecto; muestra el contenido completo con formato y enlaces.
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowLeft, ExternalLink, Github } from 'lucide-react';
+import { ExternalLink, Github } from 'lucide-react';
 import { projects } from '../../data/projects';
 import { useTranslation } from '../../context/TranslationContext';
+import NavigationBar from '../../components/ui/NavigationBar';
 
 export const ProjectDetails = () => {
   const { slug } = useParams();
@@ -12,7 +15,7 @@ export const ProjectDetails = () => {
   
   const [translatedContent, setTranslatedContent] = useState({
     title: project?.title || '',
-    description: project?.description || '',
+    description: project?.fullDescription || project?.description || '',
     liveDemo: 'Live Demo',
     viewCode: 'View Code',
     backToProjects: 'Back to Projects',
@@ -26,7 +29,7 @@ export const ProjectDetails = () => {
       if (language === 'en') {
         setTranslatedContent({
           title: project.title,
-          description: project.description,
+          description: project.fullDescription || project.description,
           liveDemo: 'Live Demo',
           viewCode: 'View Code',
           backToProjects: 'Back to Projects',
@@ -44,7 +47,7 @@ export const ProjectDetails = () => {
         technologies
       ] = await Promise.all([
         translate(project.title),
-        translate(project.description),
+        translate(project.fullDescription || project.description),
         translate('Live Demo'),
         translate('View Code'),
         translate('Back to Projects'),
@@ -78,15 +81,10 @@ export const ProjectDetails = () => {
   }
 
   return (
-    <div className="py-20 bg-white">
+    <div className="py-20 bg-white min-h-screen">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <Link 
-          to="/projects"
-          className="inline-flex items-center text-pink-500 hover:text-pink-600 mb-8"
-        >
-          <ArrowLeft className="mr-2" />
-          {translatedContent.backToProjects}
-        </Link>
+  {/* NavigationBar fijo en vistas de detalle */}
+  <NavigationBar />
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}

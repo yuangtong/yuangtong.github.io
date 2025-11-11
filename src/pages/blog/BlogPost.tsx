@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { ContentDetail } from '../../components/shared/ContentDetail';
+import { ContentDetail } from '../../components/ui/ContentDetail';
 import { useContent } from '../../hooks/useContent';
 
 interface BlogPost {
