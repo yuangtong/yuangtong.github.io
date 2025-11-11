@@ -10,19 +10,26 @@ const Header = () => {
   const { language, setLanguage, translate } = useTranslation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
-  const navItems = ['home', 'about', 'projects', 'contact'];
-  const [translatedNavItems, setTranslatedNavItems] = useState(navItems);
+  // Definición de navegación con rutas relativas y anchors
+  const navLinks = [
+    { key: 'home', label: 'home', to: { pathname: '/' }, title: 'Go to Home' },
+    { key: 'about', label: 'about', to: { pathname: '/', hash: '#about' }, title: 'Go to About section' },
+    { key: 'works', label: 'works', to: { pathname: '/work' }, title: 'View all works' },
+    { key: 'projects', label: 'projects', to: { pathname: '/projects' }, title: 'View all projects' },
+    { key: 'blog', label: 'blog', to: { pathname: '/blog' }, title: 'View all blog posts' },
+    { key: 'contact', label: 'contact', to: { pathname: '/', hash: '#contact' }, title: 'Go to Contact section' },
+  ];
+  const [translatedNavItems, setTranslatedNavItems] = useState(navLinks.map(n => n.label));
   const headerRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     const translateNavItems = async () => {
       if (language === 'en') {
-        setTranslatedNavItems(navItems);
+        setTranslatedNavItems(navLinks.map(n => n.label));
         return;
       }
-      
       const translated = await Promise.all(
-        navItems.map(item => translate(item))
+        navLinks.map(item => translate(item.label))
       );
       setTranslatedNavItems(translated);
     };
@@ -91,16 +98,20 @@ const Header = () => {
           
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
-            {translatedNavItems.map((item) => (
-              <motion.a
-                key={item}
-                whileHover={{ scale: 1.1, rotate: -2 }}
-                className="text-black dark:text-white hover:text-pink-500 font-mono text-lg"
-                href={`#${navItems[translatedNavItems.indexOf(item)].toLowerCase()}`}
-              >
-                {item}
-              </motion.a>
-            ))}
+            {translatedNavItems.map((label, idx) => {
+              const link = navLinks[idx];
+              return (
+                <motion.div key={link.key} whileHover={{ scale: 1.1, rotate: -2 }}>
+                  <Link
+                    to={link.to as any}
+                    title={link.title}
+                    className="text-black dark:text-white hover:text-pink-500 font-mono text-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-pink-500 lowercase"
+                  >
+                    {label}
+                  </Link>
+                </motion.div>
+              );
+            })}
           </nav>
 
           {/* Desktop Actions */}
@@ -189,21 +200,26 @@ const Header = () => {
           >
             {/* Acciones rápidas móviles eliminadas (Back/Home ahora viven en vistas de detalle) */}
             <nav className="py-4 space-y-2">
-              {navItems.map((item, index) => (
-                <React.Fragment key={item}>
-                  <motion.a
-                    whileTap={{ scale: 0.95 }}
-                    className="block text-black dark:text-white hover:text-pink-500 font-mono text-lg px-4 py-2 text-center"
-                    href={`#${item.toLowerCase()}`}
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {item}
-                  </motion.a>
-                  {index < navItems.length - 1 && (
-                    <div className="border-t border-gray-200 dark:border-gray-700 mx-8 my-1"></div>
-                  )}
-                </React.Fragment>
-              ))}
+              {translatedNavItems.map((label, index) => {
+                const link = navLinks[index];
+                return (
+                  <React.Fragment key={link.key}>
+                    <motion.div whileTap={{ scale: 0.95 }}>
+                      <Link
+                        to={link.to as any}
+                        title={link.title}
+                        className="block text-black dark:text-white hover:text-pink-500 font-mono text-lg px-4 py-2 text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-pink-500 lowercase"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        {label}
+                      </Link>
+                    </motion.div>
+                    {index < translatedNavItems.length - 1 && (
+                      <div className="border-t border-gray-200 dark:border-gray-700 mx-8 my-1"></div>
+                    )}
+                  </React.Fragment>
+                );
+              })}
             </nav>
             
             <div className="px-4 py-4 border-t border-gray-200 dark:border-gray-700 space-y-4">
