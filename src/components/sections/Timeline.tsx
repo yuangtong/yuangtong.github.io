@@ -52,8 +52,8 @@ const Timeline: React.FC = () => {
               aria-hidden="true"
             />
             <div className="space-y-24 md:space-y-28 flex flex-col items-center">
-              {milestones.map((m) => (
-                <TimelineItem key={m.id} milestone={m} />
+              {milestones.map((m, idx) => (
+                <TimelineItem key={m.id} milestone={m} index={idx} />
               ))}
             </div>
           </div>

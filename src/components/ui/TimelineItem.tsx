@@ -10,6 +10,7 @@ import { useScrollReveal } from '../../hooks/useScrollReveal';
 
 interface TimelineItemProps {
   milestone: CareerMilestone;
+  index?: number; // para cascada secuencial
 }
 
 const iconMap = {
@@ -21,10 +22,13 @@ const iconMap = {
   milestone: Briefcase,
 };
 
-export const TimelineItem: React.FC<TimelineItemProps> = ({ milestone }) => {
+export const TimelineItem: React.FC<TimelineItemProps> = ({ milestone, index = 0 }) => {
   // Activación anticipada con offset de ~150px y umbral 0.2
   const { ref, isVisible } = useScrollReveal({ rootMargin: '0px 0px 150px 0px', threshold: 0.2 });
   const Icon = iconMap[milestone.iconKey || 'milestone'];
+  // Cascada: delay progresivo según índice y breakpoint
+  const isMd = typeof window !== 'undefined' ? window.matchMedia('(min-width: 768px)').matches : true;
+  const delayMs = (isMd ? 140 : 100) * index;
 
   return (
     <div ref={ref} className={`relative w-full max-w-3xl`}>      
@@ -32,7 +36,10 @@ export const TimelineItem: React.FC<TimelineItemProps> = ({ milestone }) => {
       <span className="absolute left-1/2 -translate-x-1/2 -top-6 w-4 h-4 rounded-full bg-yellow-300 dark:bg-purple-600 border-4 border-black dark:border-gray-600 shadow" aria-hidden="true" />
 
       {/* Carta neobrutalista */}
-      <div className={`transform-gpu will-change-[transform,opacity] transition-opacity transition-transform duration-300 md:duration-500 ease-out motion-reduce:transition-none motion-reduce:opacity-100 motion-reduce:translate-y-0 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
+      <div
+        className={`transform-gpu will-change-[transform,opacity] transition-opacity transition-transform duration-300 md:duration-500 ease-out motion-reduce:transition-none motion-reduce:opacity-100 motion-reduce:translate-y-0 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}
+        style={{ transitionDelay: isVisible ? `${delayMs}ms` : '0ms' }}
+      >
         <article className={`bg-white dark:bg-gray-800 border-4 border-black dark:border-gray-600 overflow-hidden group hover:bg-yellow-300 dark:hover:bg-purple-700 transition-colors ${styles.card}`}>
           <div className="p-6 md:p-8">
             <div className="flex items-center gap-4 mb-2">
