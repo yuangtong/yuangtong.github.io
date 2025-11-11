@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 // UI components
 import { ContentCard } from '../../components/ui/ContentCard';
 import { Button } from '../../components/ui';
+import NavigationBar from '../../components/ui/NavigationBar';
 import { useSearchParams } from 'react-router-dom';
 import { useContent } from '../../hooks/useContent';
 import { DISPLAY_CONFIG } from '../../utils/constants';
@@ -36,6 +37,8 @@ export const BlogPage = () => {
   return (
     <section className="py-20 bg-gray-100 dark:bg-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Navegación contextual para listados con sticky/fixed en scroll */}
+        <NavigationBar topClass="top-14 sm:top-16 md:top-20" />
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

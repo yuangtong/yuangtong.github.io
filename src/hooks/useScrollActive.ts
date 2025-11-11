@@ -5,12 +5,21 @@
  */
 import { useEffect, useState } from 'react';
 
-export function useScrollActive(threshold: number = 1) {
+export function useScrollActive(threshold: number = 100) {
   const [active, setActive] = useState(false);
 
   useEffect(() => {
+    let ticking = false;
+
     const onScroll = () => {
-      setActive(window.scrollY > threshold);
+      if (!ticking) {
+        ticking = true;
+        // Throttle con requestAnimationFrame: actualización en el próximo frame
+        window.requestAnimationFrame(() => {
+          setActive(window.scrollY > threshold);
+          ticking = false;
+        });
+      }
     };
 
     // Estado inicial por si ya hay desplazamiento

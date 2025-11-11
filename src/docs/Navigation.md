@@ -15,15 +15,16 @@ Este documento describe la implementación de navegación consistente a través 
   - Accesible: `aria-label="Go back"`, foco visible, área táctil adecuada.
   - Responsive: oculta el texto en mobile y muestra el ícono.
 
-- `src/components/layout/Header.tsx`
-  - Logo `YT` convertido en `Link` a `/`.
-  - Ícono Home (`lucide-react`) con estados `hover`/`active` y foco visible.
-  - `BackButton` incluido globalmente en acciones de escritorio y móvil.
+- `src/components/ui/NavigationBar.tsx`
+  - Barra de navegación reutilizable (Back + Home) para detalle y listados.
+  - Sticky/fixed cuando se activa el estado de scroll mediante `useScrollActive`.
+  - Usa `NavigationBarContent` con `BackButton` y `Link` a Home accesible.
+  - Se incluye en `ContentDetail`, `ProjectsPage`, `BlogPage`, `WorkPage`.
 
 ## Uso
 
-- No es necesario importar `BackButton` en cada página: el `Header` lo muestra globalmente.
-- Para navegación a Home, usar los `Link` definidos en el `Header` (logo e ícono Home).
+- En páginas de detalle y listados, usar `NavigationBar` para Back/Home consistente.
+- `ContentDetail` integra `NavigationBar` automáticamente.
 
 ## Accesibilidad
 
@@ -36,10 +37,10 @@ Este documento describe la implementación de navegación consistente a través 
 
 - Unitarias:
   - `BackButton.test.tsx`: navega con `navigate(-1)` y fallback a `/`.
-  - `HeaderNavigation.test.tsx`: el logo e ícono Home navegan a `/`.
 
 - Integración:
-  - `BackFromDetails.test.tsx`: desde `/project/:slug` se vuelve a `/projects` con el Back global.
+  - `DetailNavVisibility.test.tsx`: valida la presencia de Back/Home en `ContentDetail` y listados (provistos por `NavigationBar`).
+  - `BackFromDetails.test.tsx`: navegación desde detalles hacia listados.
 
 ## Diseño
 

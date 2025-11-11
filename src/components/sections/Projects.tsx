@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ContentCard, Button } from '../ui';
 import { Link } from 'react-router-dom';
-import { projects as staticProjects } from '../../data/projects';
+import { useContent } from '../../hooks/useContent';
 import { useTranslation } from '../../context/TranslationContext';
 import { DISPLAY_CONFIG } from '../../utils/constants';
 
@@ -11,8 +11,8 @@ const Projects = () => {
   const [translatedTitle, setTranslatedTitle] = useState('Selected Projects');
   const [key, setKey] = useState(0);
 
-  // Use only static data
-  const projects = staticProjects;
+  // Obtener proyectos desde content.json
+  const { items: projects, loading, error } = useContent<any>('projects');
 
   // Limitar la cantidad de proyectos mostrados en Home
   const visibleProjects = projects.slice(0, DISPLAY_CONFIG.HOME_PROJECTS_LIMIT);
@@ -35,6 +35,10 @@ const Projects = () => {
   return (
     <section id="projects" className="bg-white dark:bg-gray-900 py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Estados de carga/errores mínimos para Home */}
+        {loading && <div>Loading...</div>}
+        {error && <div>Error: {error}</div>}
+
         <motion.h2 
           initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}

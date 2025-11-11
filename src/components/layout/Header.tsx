@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import { Menu, Github, Linkedin, Mail } from 'lucide-react';
 import { motion } from 'framer-motion';
 import ThemeToggle from './ThemeToggle';
@@ -12,6 +12,7 @@ const Header = () => {
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
   const navItems = ['home', 'about', 'projects', 'contact'];
   const [translatedNavItems, setTranslatedNavItems] = useState(navItems);
+  const headerRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     const translateNavItems = async () => {
@@ -41,6 +42,19 @@ const Header = () => {
     };
   }, []);
 
+  // Medir altura del header y exponerla como CSS var para sticky offsets
+  useLayoutEffect(() => {
+    const updateHeaderHeightVar = () => {
+      const el = headerRef.current;
+      if (!el) return;
+      const h = el.offsetHeight;
+      document.documentElement.style.setProperty('--header-height', `${h}px`);
+    };
+    updateHeaderHeightVar();
+    window.addEventListener('resize', updateHeaderHeightVar);
+    return () => window.removeEventListener('resize', updateHeaderHeightVar);
+  }, []);
+
   const handleLangButtonClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     setIsLangMenuOpen(!isLangMenuOpen);
@@ -62,7 +76,7 @@ const Header = () => {
   };
 
   return (
-    <header className="fixed w-full top-0 z-50 bg-white dark:bg-gray-900">
+    <header ref={headerRef} className="fixed w-full top-0 z-50 bg-white dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <motion.div whileHover={{ scale: 1.05 }} className="flex items-center">

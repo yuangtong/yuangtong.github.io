@@ -3,12 +3,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ExternalLink, Github, Award } from 'lucide-react';
-import { featuredWorks } from '../../pages/work/workData';
+import { useContent } from '../../hooks/useContent';
 import { Button } from '../ui';
 import { Link } from 'react-router-dom';
 import { DISPLAY_CONFIG } from '../../utils/constants';
 
 const Work = () => {
+  const { items: works, loading, error } = useContent<any>('works');
   return (
     <section id="work" className="py-20 bg-white dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -22,8 +23,10 @@ const Work = () => {
         </motion.div>
 
         {/* Limitar elementos visibles en Home para replicar Projects */}
+        {loading && <div>Loading...</div>}
+        {error && <div>Error: {error}</div>}
         <div className="space-y-20">
-          {featuredWorks
+          {works
             .slice(0, DISPLAY_CONFIG.HOME_WORKS_LIMIT)
             .map((work, index) => (
             <motion.div

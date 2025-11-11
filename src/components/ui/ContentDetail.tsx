@@ -56,8 +56,8 @@ export const ContentDetail: React.FC<ContentDetailProps> = ({ type, item }) => {
   return (
     <article className="py-20 bg-white dark:bg-gray-900">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Barra de navegación: reemplaza DetailNav y puede fijarse con scroll */}
-        <NavigationBar />
+        {/* Barra de navegación para detalle con sticky/fixed en scroll */}
+        <NavigationBar topClass="top-14 sm:top-16 md:top-20" />
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
