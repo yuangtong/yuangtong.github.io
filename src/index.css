@@ -36,3 +36,18 @@ header {
 header a, header button, header svg {
   transition: color 300ms ease, fill 300ms ease, stroke 300ms ease;
 }
+
+/* Utilidad global: ocultar scrollbar horizontal/vertical de forma visual */
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+/* Mejora de scroll en dispositivos táctiles */
+.horizontal-scroll-touch {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+}

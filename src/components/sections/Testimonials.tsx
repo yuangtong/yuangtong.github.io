@@ -1,35 +1,20 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Quote } from 'lucide-react';
 import { useTranslation } from '../../context/TranslationContext';
-
-const initialTestimonials = [
-  {
-    name: 'Emilio R.',
-    role: 'CEO at TechFlow',
-    // image: '',
-    quote: 'Yuang is great at his work, an excellent communicator, and works very fast. Got the WordPress theme install and site redesign done very quickly. Will hire again in the future.',
-    company: 'El Brifin'
-  },
-  {
-    name: 'Marcus Rodriguez',
-    role: 'Creative Director',
-    // image: '',
-    quote: 'The level of creativity and technical expertise Yuang brings to projects is exceptional. They delivered a website that perfectly captures our brand essence.',
-    company: 'Design Studio X'
-  },
-  {
-    name: 'Emily Thompson',
-    role: 'Product Manager',
-    // image: '',
-    quote: "Yuang's ability to translate complex requirements into elegant solutions is remarkable. They're not just a developer, but a true partner in success.",
-    company: 'InnovateTech'
-  }
-];
+import { useContent } from '../../hooks/useContent';
+import { Testimonial } from '../../types';
+import HorizontalScrollControls from '../ui/HorizontalScrollControls';
+import { useEqualHeights } from '../../hooks/useEqualHeights';
+/**
+ * Datos de Testimonials ahora se consumen desde content.json a través del hook useContent.
+ * Tipado con la interfaz Testimonial para preparar futura integración con Contentful.
+ */
 
 const Testimonials = () => {
   const { language, translate } = useTranslation();
-  const [translatedTestimonials, setTranslatedTestimonials] = React.useState(initialTestimonials);
+  const { items, loading, error } = useContent<Testimonial>('testimonials');
+  const [translatedTestimonials, setTranslatedTestimonials] = React.useState<Testimonial[]>([]);
   const [translatedSectionContent, setTranslatedSectionContent] = React.useState({
     title: 'Client Testimonials',
     subtitle: 'What people are saying about working with me'
@@ -38,7 +23,7 @@ const Testimonials = () => {
   React.useEffect(() => {
     const translateContent = async () => {
       if (language === 'en') {
-        setTranslatedTestimonials(initialTestimonials);
+        setTranslatedTestimonials(items);
         setTranslatedSectionContent({
           title: 'Client Testimonials',
           subtitle: 'What people are saying about working with me'
@@ -54,7 +39,7 @@ const Testimonials = () => {
 
       // Translate testimonials
       const translated = await Promise.all(
-        initialTestimonials.map(async (testimonial) => ({
+        items.map(async (testimonial) => ({
           ...testimonial,
           quote: await translate(testimonial.quote),
           role: await translate(testimonial.role),
@@ -70,7 +55,13 @@ const Testimonials = () => {
     };
 
     translateContent();
-  }, [language, translate]);
+  }, [language, translate, items]);
+
+  const scrollRef = useRef<HTMLDivElement | null>(null);
+  // Igualar alturas al mayor contenido visible
+  useEqualHeights(scrollRef, '[data-equalize="card"]', [translatedTestimonials.length]);
+  if (loading) return null;
+  if (error) return null;
 
   return (
     <section className="py-20 bg-black text-white">
@@ -86,15 +77,21 @@ const Testimonials = () => {
           </p>
         </motion.div>
 
-        {/* Changed from grid to flex with overflow for horizontal scrolling on smaller screens */}
-        <div className="flex overflow-x-auto pb-6 gap-8 lg:grid lg:grid-cols-3 lg:overflow-visible scrollbar-hide">
+        {/* Flex con overflow en móviles; grid 3 columnas en desktop sin controles */}
+        <div className="relative">
+          <div
+            ref={scrollRef}
+            className="flex items-stretch overflow-x-auto horizontal-scroll-touch pb-6 gap-8 pl-12 pr-12 sm:px-6 scrollbar-hide snap-x snap-mandatory lg:grid lg:grid-cols-3 lg:gap-8 lg:px-0 lg:overflow-visible"
+            style={{ scrollPaddingLeft: '3rem', scrollPaddingRight: '3rem' }}
+          >
           {translatedTestimonials.map((testimonial, index) => (
             <motion.div
-              key={testimonial.name}
+              key={testimonial.id}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.2 }}
-              className="bg-gray-900 p-6 rounded-none border-4 border-pink-500 relative group flex-shrink-0 w-[85vw] sm:w-[40vw] md:w-[30vw] lg:w-auto"
+              className="bg-gray-900 p-6 rounded-none border-4 border-pink-500 relative group flex-shrink-0 w-[76vw] sm:w-[68vw] md:w-[55vw] lg:w-auto snap-start h-full"
+              data-equalize="card"
             >
               <motion.div
                 whileHover={{ scale: 1.05 }}
@@ -133,6 +130,9 @@ const Testimonials = () => {
               />
             </motion.div>
           ))}
+          </div>
+          {/* Ocultar controles en desktop y recalcular según cantidad */}
+          <HorizontalScrollControls targetRef={scrollRef} className="lg:hidden" deps={[translatedTestimonials.length]} />
         </div>
         
         {/* Optional: Add scroll indicators for mobile */}

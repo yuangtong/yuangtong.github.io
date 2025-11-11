@@ -10,7 +10,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { findIconDefinition, IconLookup } from '@fortawesome/fontawesome-svg-core';
 
 export interface MagnetButtonProps {
-  href: string;
+  href?: string; // opcional para compatibilidad
+  onClick?: () => void; // abre modal
 }
 
 const getSolidIcon = (name: string) => {
@@ -18,7 +19,7 @@ const getSolidIcon = (name: string) => {
   return findIconDefinition(lookup);
 };
 
-const MagnetButton: React.FC<MagnetButtonProps> = ({ href }) => {
+const MagnetButton: React.FC<MagnetButtonProps> = ({ href, onClick }) => {
   const ref = useRef<HTMLButtonElement | null>(null);
 
   const x = useMotionValue(0);
@@ -46,7 +47,11 @@ const MagnetButton: React.FC<MagnetButtonProps> = ({ href }) => {
 
   const onKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' || e.key === ' ') {
-      window.open(href, '_blank', 'noopener,noreferrer');
+      if (onClick) {
+        onClick();
+      } else if (href) {
+        window.open(href, '_blank', 'noopener,noreferrer');
+      }
       e.preventDefault();
     }
   };
@@ -56,6 +61,7 @@ const MagnetButton: React.FC<MagnetButtonProps> = ({ href }) => {
       ref={ref}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
+      onClick={onClick}
       onKeyDown={onKeyDown}
       aria-label="Schedule a Free Consultation"
       style={{ transform, willChange: 'transform' }}

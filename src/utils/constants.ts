@@ -40,8 +40,19 @@ export const APP_CONFIG = {
 // - HOME_PROJECTS_LIMIT: Máximo de proyectos en Home
 // - HOME_WORKS_LIMIT: Máximo de trabajos en Home (sección Work)
 export const DISPLAY_CONFIG = {
+  /**
+   * Máximo de elementos visibles en carrusel horizontal de Home.
+   * Se muestran 3 columnas y el resto con scroll horizontal.
+   */
   HOME_PROJECTS_LIMIT: 6,
-  HOME_WORKS_LIMIT: 6,
+  /**
+   * Máximo de trabajos a mostrar en Home.
+   * Requisito: actualizar a 2 sin cambios visuales en la sección.
+   */
+  HOME_WORKS_LIMIT: 2,
+  /**
+   * Máximo de posts visibles en Home con scroll horizontal.
+   */
   HOME_BLOGS_LIMIT: 6
 } as const;
 

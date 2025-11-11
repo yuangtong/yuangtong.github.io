@@ -1,15 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ContentCard, Button } from '../ui';
 import { Link } from 'react-router-dom';
 import { useContent } from '../../hooks/useContent';
 import { useTranslation } from '../../context/TranslationContext';
 import { DISPLAY_CONFIG } from '../../utils/constants';
+import HorizontalScrollControls from '../ui/HorizontalScrollControls';
+import { useEqualHeights } from '../../hooks/useEqualHeights';
 
 const Projects = () => {
   const { language, translate } = useTranslation();
   const [translatedTitle, setTranslatedTitle] = useState('Selected Projects');
   const [key, setKey] = useState(0);
+  const scrollRef = useRef<HTMLDivElement | null>(null);
 
   // Obtener proyectos desde content.json
   const { items: projects, loading, error } = useContent<any>('projects');
@@ -32,6 +35,9 @@ const Projects = () => {
     translateContent();
   }, [language, translate]);
 
+  // Igualar alturas al mayor contenido visible
+  useEqualHeights(scrollRef, '[data-equalize="card"]', [visibleProjects.length, language]);
+
   return (
     <section id="projects" className="bg-white dark:bg-gray-900 py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -47,14 +53,28 @@ const Projects = () => {
           {translatedTitle}
         </motion.h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Carrusel horizontal 1 fila x 3 columnas visibles con scroll (1x6) */}
+        <div className="relative">
+          <div
+            ref={scrollRef}
+            className="flex items-stretch overflow-x-auto horizontal-scroll-touch pb-6 gap-8 pl-12 pr-12 sm:px-6 scrollbar-hide snap-x snap-mandatory"
+            style={{ scrollPaddingLeft: '3rem', scrollPaddingRight: '3rem' }}
+          >
           {visibleProjects.map((project) => (
-            <ContentCard
-              key={`${project.title}-${language}-${key}`}
-              type="project"
-              item={project}
-            />
+            <div 
+              key={`${project.title}-${language}-${key}`} 
+              className="flex-shrink-0 w-[76vw] sm:w-[68vw] md:w-[50vw] lg:w-[33.3333%] snap-start"
+              data-equalize="card"
+            >
+              <ContentCard
+                type="project"
+                item={project}
+                className="h-full"
+              />
+            </div>
           ))}
+          </div>
+          <HorizontalScrollControls targetRef={scrollRef} deps={[visibleProjects.length]} />
         </div>
 
         <div className="mt-12 flex justify-center">

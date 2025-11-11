@@ -6,6 +6,7 @@ import { findIconDefinition, IconLookup } from '@fortawesome/fontawesome-svg-cor
 import { useTranslation } from '../../context/TranslationContext';
 import { TypeAnimation } from 'react-type-animation';
 import CVDownloadModal from '../Feature/CVDownloadModal';
+import WhatsAppConsultationModal from '../Feature/WhatsAppConsultationModal';
 import AuroraBackground from '../ui/AuroraBackground';
 import MagnetButton from '../ui/MagnetButton';
 
@@ -23,6 +24,8 @@ const Hero = () => {
 
   // Estado para el modal de descarga del CV
   const [isCVModalOpen, setIsCVModalOpen] = useState(false);
+  // Estado para el modal de consulta por WhatsApp
+  const [isConsultationOpen, setIsConsultationOpen] = useState(false);
 
   // Referencia para la sección hero
   const heroRef = useRef<HTMLElement | null>(null);
@@ -252,8 +255,11 @@ const Hero = () => {
       
       {/* Magnet Button (Schedule) */}
       <div className="absolute right-8 bottom-12 z-20 md:right-16 lg:right-24">
-        <MagnetButton href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ3M-X60wSMYrYspDOQYRdAG8rNibLIpe9YoKZmwrdJ0cs8MvNxWtr3N8I507RyETNvDZ-qj_8ji" />
+        <MagnetButton onClick={() => setIsConsultationOpen(true)} />
       </div>
+
+      {/* WhatsApp Consultation Modal */}
+      <WhatsAppConsultationModal isOpen={isConsultationOpen} onClose={() => setIsConsultationOpen(false)} />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
         <motion.div

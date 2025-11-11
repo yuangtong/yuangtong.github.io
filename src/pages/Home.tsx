@@ -11,6 +11,7 @@ import Projects from '../components/sections/Projects';
 import Blog from '../components/sections/Blog';
 import Testimonials from '../components/sections/Testimonials';
 import Timeline from '../components/sections/Timeline';
+import ScrollControls from '../components/ui/ScrollControls';
 
 const Home: React.FC = () => {
   return (
@@ -22,6 +23,8 @@ const Home: React.FC = () => {
       <Projects />
       <Blog />
       <Testimonials />
+      {/* Controles de scroll vertical: aparecen suavemente al detectar scroll */}
+      <ScrollControls />
     </main>
   );
 };

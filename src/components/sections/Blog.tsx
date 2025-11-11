@@ -1,11 +1,13 @@
 // Archivo: Blog.tsx
 // Propósito: Sección Home de Blog; muestra entradas limitadas desde content.json usando tarjetas reutilizables.
-import React from 'react';
+import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ContentCard, Button } from '../ui';
 import { useContent } from '../../hooks/useContent';
 import { DISPLAY_CONFIG } from '../../utils/constants';
+import HorizontalScrollControls from '../ui/HorizontalScrollControls';
+import { useEqualHeights } from '../../hooks/useEqualHeights';
 
 interface BlogPost {
   id: string;
@@ -21,6 +23,10 @@ interface BlogPost {
 const Blog = () => {
   const { items: posts, loading, error } = useContent<BlogPost>('blogs');
   const visiblePosts = posts.slice(0, DISPLAY_CONFIG.HOME_BLOGS_LIMIT);
+  const scrollRef = useRef<HTMLDivElement | null>(null);
+
+  // Igualar alturas al mayor contenido visible
+  useEqualHeights(scrollRef, '[data-equalize="card"]', [visiblePosts.length]);
 
   if (loading) return null;
   if (error) return null;
@@ -36,10 +42,20 @@ const Blog = () => {
           Latest Blog Posts
         </motion.h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {visiblePosts.map((post) => (
-            <ContentCard key={post.id} type="blog" item={post} />
-          ))}
+        {/* Carrusel horizontal 1 fila x 3 columnas visibles con scroll (1x6) */}
+        <div className="relative">
+          <div
+            ref={scrollRef}
+            className="flex items-stretch overflow-x-auto horizontal-scroll-touch pb-6 gap-8 pl-12 pr-12 sm:px-6 scrollbar-hide snap-x snap-mandatory"
+            style={{ scrollPaddingLeft: '3rem', scrollPaddingRight: '3rem' }}
+          >
+            {visiblePosts.map((post) => (
+              <div key={post.id} className="flex-shrink-0 w-[76vw] sm:w-[68vw] md:w-[55vw] lg:w-[33.3333%] snap-start" data-equalize="card">
+                <ContentCard type="blog" item={post} className="h-full" />
+              </div>
+            ))}
+          </div>
+          <HorizontalScrollControls targetRef={scrollRef} deps={[visiblePosts.length]} />
         </div>
 
         <div className="mt-12 flex justify-center">

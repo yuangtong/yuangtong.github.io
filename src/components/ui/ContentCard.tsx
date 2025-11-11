@@ -7,9 +7,10 @@ import { useTranslation } from '../../context/TranslationContext';
 interface ContentCardProps {
   type: 'blog' | 'project' | 'work';
   item: any;
+  className?: string;
 }
 
-export const ContentCard: React.FC<ContentCardProps> = ({ type, item }) => {
+export const ContentCard: React.FC<ContentCardProps> = ({ type, item, className = '' }) => {
   const { language, translate } = useTranslation();
   const [translatedContent, setTranslatedContent] = useState({
     title: item.title,
@@ -116,7 +117,7 @@ export const ContentCard: React.FC<ContentCardProps> = ({ type, item }) => {
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       whileHover={{ y: -5 }}
-      className="bg-white dark:bg-gray-800 border-4 border-black dark:border-gray-600 overflow-hidden group hover:bg-yellow-300 dark:hover:bg-purple-700 transition-colors"
+      className={`bg-white dark:bg-gray-800 border-4 border-black dark:border-gray-600 overflow-hidden group hover:bg-yellow-300 dark:hover:bg-purple-700 transition-colors ${className}`}
     >
       <Link to={`/${type}/${item.slug}`}>
         <div className="relative h-48 overflow-hidden">

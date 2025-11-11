@@ -105,4 +105,28 @@
       "githubUrl": "#"
     }
   ]
+  ,
+  "testimonials": [
+    {
+      "id": "t1",
+      "name": "Emilio R.",
+      "role": "CEO at TechFlow",
+      "quote": "Yuang is great at his work, an excellent communicator, and works very fast. Got the WordPress theme install and site redesign done very quickly. Will hire again in the future.",
+      "company": "El Brifin"
+    },
+    {
+      "id": "t2",
+      "name": "Marcus Rodriguez",
+      "role": "Creative Director",
+      "quote": "The level of creativity and technical expertise Yuang brings to projects is exceptional. They delivered a website that perfectly captures our brand essence.",
+      "company": "Design Studio X"
+    },
+    {
+      "id": "t3",
+      "name": "Emily Thompson",
+      "role": "Product Manager",
+      "quote": "Yuang's ability to translate complex requirements into elegant solutions is remarkable. They're not just a developer, but a true partner in success.",
+      "company": "InnovateTech"
+    }
+  ]
 }
