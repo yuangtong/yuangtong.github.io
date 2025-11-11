@@ -7,7 +7,6 @@ import { useTranslation } from '../../context/TranslationContext';
 import { TypeAnimation } from 'react-type-animation';
 import CVDownloadModal from '../Feature/CVDownloadModal';
 import AuroraBackground from '../ui/AuroraBackground';
-import CursorBeam2D from '../ui/CursorBeam2D';
 
 const Hero = () => {
   const { language, translate } = useTranslation();
@@ -217,8 +216,6 @@ const Hero = () => {
     >
       {/* Fondo "techy" tipo mesh gradient + estrellas */}
       <AuroraBackground />
-      {/* Haz 2D tipo estrella fugaz sobre el fondo */}
-      <CursorBeam2D containerRef={heroRef as React.RefObject<HTMLElement | null>} />
       {/* Patrón de puntos halftone */}
       {/* <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
         <div 
