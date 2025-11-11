@@ -74,19 +74,19 @@ export const useCVDownload = () => {
     
     switch (step) {
       case 1:
-        if (!state.formData.name.trim()) errors.name = 'El nombre es requerido';
-        if (!state.formData.email.trim()) errors.email = 'El email es requerido';
-        else if (!/\S+@\S+\.\S+/.test(state.formData.email)) errors.email = 'Email inválido';
+        if (!state.formData.name.trim()) errors.name = 'Name is required';
+        if (!state.formData.email.trim()) errors.email = 'Email is required';
+        else if (!/\S+@\S+\.\S+/.test(state.formData.email)) errors.email = 'Invalid email address';
         break;
-      
+
       case 2:
-        if (!state.formData.company.trim()) errors.company = 'La empresa es requerida';
-        if (!state.formData.position.trim()) errors.position = 'El cargo es requerido';
+        if (!state.formData.company.trim()) errors.company = 'Company is required';
+        if (!state.formData.position.trim()) errors.position = 'Position is required';
         break;
-      
+
       case 3:
         if (state.formData.reason === 'other' && !state.formData.customReason?.trim()) {
-          errors.customReason = 'Por favor especifica la razón';
+          errors.customReason = 'Please specify the reason';
         }
         break;
     }

@@ -10,6 +10,7 @@ import Modal from '../ui/Modal';
 import Stepper from '../ui/Stepper';
 import Button from '../ui/Button';
 import { useCVDownload } from '../../hooks/useCVDownload';
+import { useTranslation } from '../../context/TranslationContext';
 
 interface CVDownloadModalProps {
   isOpen: boolean;
@@ -18,6 +19,134 @@ interface CVDownloadModalProps {
 
 const CVDownloadModal: React.FC<CVDownloadModalProps> = ({ isOpen, onClose }) => {
   const { state, steps, nextStep, prevStep, updateForm, submitAndDownload } = useCVDownload();
+  const { language, translate } = useTranslation();
+
+  // UI text: English fallback, translated dynamically when language != 'en'
+  const defaultText = {
+    modalTitle: 'Download CV',
+    personalInfo: 'Personal Information',
+    fullNameLabel: 'Full name *',
+    fullNamePlaceholder: 'Your full name',
+    emailLabel: 'Email *',
+    emailPlaceholder: 'you@example.com',
+    professionalInfo: 'Professional Information',
+    companyLabel: 'Company *',
+    companyPlaceholder: 'Your company name',
+    positionLabel: 'Position *',
+    positionPlaceholder: 'Your current position',
+    interestReason: 'Reason of Interest',
+    whyNeedCV: 'Why do you need my CV? *',
+    optionHiring: 'Hiring process',
+    optionCollaboration: 'Collaboration opportunity',
+    optionNetworking: 'Professional networking',
+    optionOther: 'Other reason',
+    specifyReasonLabel: 'Specify the reason *',
+    specifyReasonPlaceholder: 'Describe your reason',
+    additionalMessageLabel: 'Additional message (optional)',
+    additionalMessagePlaceholder: 'Any additional information...',
+    prev: 'Previous',
+    next: 'Next',
+    download: 'Download CV',
+  };
+
+  const [uiText, setUiText] = React.useState(defaultText);
+
+  React.useEffect(() => {
+    let mounted = true;
+    (async () => {
+      if (language === 'en') {
+        if (mounted) setUiText(defaultText);
+        return;
+      }
+      try {
+        const translated = await Promise.all([
+          translate(defaultText.modalTitle),
+          translate(defaultText.personalInfo),
+          translate(defaultText.fullNameLabel),
+          translate(defaultText.fullNamePlaceholder),
+          translate(defaultText.emailLabel),
+          translate(defaultText.emailPlaceholder),
+          translate(defaultText.professionalInfo),
+          translate(defaultText.companyLabel),
+          translate(defaultText.companyPlaceholder),
+          translate(defaultText.positionLabel),
+          translate(defaultText.positionPlaceholder),
+          translate(defaultText.interestReason),
+          translate(defaultText.whyNeedCV),
+          translate(defaultText.optionHiring),
+          translate(defaultText.optionCollaboration),
+          translate(defaultText.optionNetworking),
+          translate(defaultText.optionOther),
+          translate(defaultText.specifyReasonLabel),
+          translate(defaultText.specifyReasonPlaceholder),
+          translate(defaultText.additionalMessageLabel),
+          translate(defaultText.additionalMessagePlaceholder),
+          translate(defaultText.prev),
+          translate(defaultText.next),
+          translate(defaultText.download),
+        ]);
+        const [
+          modalTitle,
+          personalInfo,
+          fullNameLabel,
+          fullNamePlaceholder,
+          emailLabel,
+          emailPlaceholder,
+          professionalInfo,
+          companyLabel,
+          companyPlaceholder,
+          positionLabel,
+          positionPlaceholder,
+          interestReason,
+          whyNeedCV,
+          optionHiring,
+          optionCollaboration,
+          optionNetworking,
+          optionOther,
+          specifyReasonLabel,
+          specifyReasonPlaceholder,
+          additionalMessageLabel,
+          additionalMessagePlaceholder,
+          prev,
+          next,
+          download,
+        ] = translated;
+        if (mounted)
+          setUiText({
+            modalTitle,
+            personalInfo,
+            fullNameLabel,
+            fullNamePlaceholder,
+            emailLabel,
+            emailPlaceholder,
+            professionalInfo,
+            companyLabel,
+            companyPlaceholder,
+            positionLabel,
+            positionPlaceholder,
+            interestReason,
+            whyNeedCV,
+            optionHiring,
+            optionCollaboration,
+            optionNetworking,
+            optionOther,
+            specifyReasonLabel,
+            specifyReasonPlaceholder,
+            additionalMessageLabel,
+            additionalMessagePlaceholder,
+            prev,
+            next,
+            download,
+          });
+      } catch (err) {
+        // Fallback silently to English
+        if (mounted) setUiText(defaultText);
+      }
+    })();
+    return () => {
+      mounted = false;
+    };
+  }, [language, translate]);
 
   const handleSubmit = async () => {
     const success = await submitAndDownload();
@@ -32,19 +161,19 @@ const CVDownloadModal: React.FC<CVDownloadModalProps> = ({ isOpen, onClose }) =>
         return (
           <div className="space-y-4 md:space-y-6">
             <h3 className="text-lg md:text-xl font-bold mb-4 dark:text-white font-mono text-center">
-              Información Personal
+              {uiText.personalInfo}
             </h3>
             
             <div>
               <label className="block text-sm font-bold mb-2 dark:text-white font-mono">
-                Nombre completo *
+                {uiText.fullNameLabel}
               </label>
               <input
                 type="text"
                 value={state.formData.name}
                 onChange={(e) => updateForm({ name: e.target.value })}
                 className="w-full px-3 md:px-4 py-2 md:py-3 border-2 border-black dark:border-white bg-white dark:bg-gray-800 dark:text-white font-mono text-sm md:text-base"
-                placeholder="Tu nombre completo"
+                placeholder={uiText.fullNamePlaceholder}
               />
               {state.errors.name && (
                 <p className="text-red-500 text-xs md:text-sm mt-1 font-mono">{state.errors.name}</p>
@@ -53,14 +182,14 @@ const CVDownloadModal: React.FC<CVDownloadModalProps> = ({ isOpen, onClose }) =>
 
             <div>
               <label className="block text-sm font-bold mb-2 dark:text-white font-mono">
-                Email *
+                {uiText.emailLabel}
               </label>
               <input
                 type="email"
                 value={state.formData.email}
                 onChange={(e) => updateForm({ email: e.target.value })}
                 className="w-full px-3 md:px-4 py-2 md:py-3 border-2 border-black dark:border-white bg-white dark:bg-gray-800 dark:text-white font-mono text-sm md:text-base"
-                placeholder="tu@email.com"
+                placeholder={uiText.emailPlaceholder}
               />
               {state.errors.email && (
                 <p className="text-red-500 text-xs md:text-sm mt-1 font-mono">{state.errors.email}</p>
@@ -73,19 +202,19 @@ const CVDownloadModal: React.FC<CVDownloadModalProps> = ({ isOpen, onClose }) =>
         return (
           <div className="space-y-4 md:space-y-6">
             <h3 className="text-lg md:text-xl font-bold mb-4 dark:text-white font-mono text-center">
-              Información Profesional
+              {uiText.professionalInfo}
             </h3>
             
             <div>
               <label className="block text-sm font-bold mb-2 dark:text-white font-mono">
-                Empresa *
+                {uiText.companyLabel}
               </label>
               <input
                 type="text"
                 value={state.formData.company}
                 onChange={(e) => updateForm({ company: e.target.value })}
                 className="w-full px-3 md:px-4 py-2 md:py-3 border-2 border-black dark:border-white bg-white dark:bg-gray-800 dark:text-white font-mono text-sm md:text-base"
-                placeholder="Nombre de tu empresa"
+                placeholder={uiText.companyPlaceholder}
               />
               {state.errors.company && (
                 <p className="text-red-500 text-xs md:text-sm mt-1 font-mono">{state.errors.company}</p>
@@ -94,14 +223,14 @@ const CVDownloadModal: React.FC<CVDownloadModalProps> = ({ isOpen, onClose }) =>
 
             <div>
               <label className="block text-sm font-bold mb-2 dark:text-white font-mono">
-                Cargo/Posición *
+                {uiText.positionLabel}
               </label>
               <input
                 type="text"
                 value={state.formData.position}
                 onChange={(e) => updateForm({ position: e.target.value })}
                 className="w-full px-3 md:px-4 py-2 md:py-3 border-2 border-black dark:border-white bg-white dark:bg-gray-800 dark:text-white font-mono text-sm md:text-base"
-                placeholder="Tu cargo actual"
+                placeholder={uiText.positionPlaceholder}
               />
               {state.errors.position && (
                 <p className="text-red-500 text-xs md:text-sm mt-1 font-mono">{state.errors.position}</p>
@@ -114,19 +243,19 @@ const CVDownloadModal: React.FC<CVDownloadModalProps> = ({ isOpen, onClose }) =>
         return (
           <div className="space-y-4 md:space-y-6">
             <h3 className="text-lg md:text-xl font-bold mb-4 dark:text-white font-mono text-center">
-              Motivo de Interés
+              {uiText.interestReason}
             </h3>
             
             <div>
               <label className="block text-sm font-bold mb-2 dark:text-white font-mono">
-                ¿Por qué necesitas mi CV? *
+                {uiText.whyNeedCV}
               </label>
               <div className="space-y-2 md:space-y-3">
                 {[
-                  { value: 'hiring', label: 'Proceso de contratación' },
-                  { value: 'collaboration', label: 'Oportunidad de colaboración' },
-                  { value: 'networking', label: 'Networking profesional' },
-                  { value: 'other', label: 'Otro motivo' }
+                  { value: 'hiring', label: uiText.optionHiring },
+                  { value: 'collaboration', label: uiText.optionCollaboration },
+                  { value: 'networking', label: uiText.optionNetworking },
+                  { value: 'other', label: uiText.optionOther }
                 ].map((option) => (
                   <label key={option.value} className="flex items-center space-x-2 md:space-x-3">
                     <input
@@ -146,14 +275,14 @@ const CVDownloadModal: React.FC<CVDownloadModalProps> = ({ isOpen, onClose }) =>
             {state.formData.reason === 'other' && (
               <div>
                 <label className="block text-sm font-bold mb-2 dark:text-white font-mono">
-                  Especifica el motivo *
+                  {uiText.specifyReasonLabel}
                 </label>
                 <input
                   type="text"
                   value={state.formData.customReason || ''}
                   onChange={(e) => updateForm({ customReason: e.target.value })}
                   className="w-full px-3 md:px-4 py-2 md:py-3 border-2 border-black dark:border-white bg-white dark:bg-gray-800 dark:text-white font-mono text-sm md:text-base"
-                  placeholder="Describe tu motivo"
+                  placeholder={uiText.specifyReasonPlaceholder}
                 />
                 {state.errors.customReason && (
                   <p className="text-red-500 text-xs md:text-sm mt-1 font-mono">{state.errors.customReason}</p>
@@ -163,14 +292,14 @@ const CVDownloadModal: React.FC<CVDownloadModalProps> = ({ isOpen, onClose }) =>
 
             <div>
               <label className="block text-sm font-bold mb-2 dark:text-white font-mono">
-                Mensaje adicional (opcional)
+                {uiText.additionalMessageLabel}
               </label>
               <textarea
                 value={state.formData.message || ''}
                 onChange={(e) => updateForm({ message: e.target.value })}
                 rows={3}
                 className="w-full px-3 md:px-4 py-2 md:py-3 border-2 border-black dark:border-white bg-white dark:bg-gray-800 dark:text-white font-mono resize-none text-sm md:text-base"
-                placeholder="Cualquier información adicional..."
+                placeholder={uiText.additionalMessagePlaceholder}
               />
             </div>
           </div>
@@ -182,7 +311,7 @@ const CVDownloadModal: React.FC<CVDownloadModalProps> = ({ isOpen, onClose }) =>
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size="lg" title="Descargar CV">
+    <Modal isOpen={isOpen} onClose={onClose} size="lg" title={uiText.modalTitle}>
       <div className="p-4 md:p-6">
         {/* Stepper */}
         <Stepper steps={steps} currentStep={state.currentStep} />
@@ -208,7 +337,7 @@ const CVDownloadModal: React.FC<CVDownloadModalProps> = ({ isOpen, onClose }) =>
             size="md"
             className="w-full sm:w-auto"
           >
-            Anterior
+            {uiText.prev}
           </Button>
 
           {state.currentStep < 3 ? (
@@ -219,7 +348,7 @@ const CVDownloadModal: React.FC<CVDownloadModalProps> = ({ isOpen, onClose }) =>
               size="md"
               className="w-full sm:w-auto"
             >
-              Siguiente
+              {uiText.next}
             </Button>
           ) : (
             <Button
@@ -230,7 +359,7 @@ const CVDownloadModal: React.FC<CVDownloadModalProps> = ({ isOpen, onClose }) =>
               size="md"
               className="w-full sm:w-auto"
             >
-              Descargar CV
+              {uiText.download}
             </Button>
           )}
         </div>
