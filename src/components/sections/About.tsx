@@ -64,10 +64,19 @@ const About = () => {
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
+          viewport={{ amount: 0.25 }}
           className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center"
         >
           <div>
-            <h2 className="text-4xl font-bold mb-6 dark:text-white">{translatedContent.title}</h2>
+            <motion.h2
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ amount: 0.3 }}
+              transition={{ duration: 0.5, ease: 'easeOut' }}
+              className="text-4xl font-bold mb-6 dark:text-white"
+            >
+              {translatedContent.title}
+            </motion.h2>
             <p className="text-lg mb-6 font-mono dark:text-gray-300">
               {translatedContent.paragraph1}
             </p>
@@ -77,17 +86,31 @@ const About = () => {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {skills.map(({ icon: Icon, label, desc }) => (
-              <motion.div
-                key={label}
-                whileHover={{ scale: 1.05 }}
-                className="p-6 border-4 border-black dark:border-white bg-yellow-300 dark:bg-purple-600"
-              >
-                <Icon className="w-8 h-8 mb-4 dark:text-white" />
-                <h3 className="text-xl font-bold mb-2 dark:text-white">{label}</h3>
-                <p className="font-mono text-sm dark:text-white">{desc}</p>
-              </motion.div>
-            ))}
+            {skills.map(({ icon: Icon, label, desc }, index) => {
+              const isLarge = typeof window !== 'undefined' ? window.matchMedia('(min-width: 768px)').matches : true;
+              const col = index % 2;
+              const row = Math.floor(index / 2);
+              // Ola en pantallas grandes: diagonal (row+col) * delay
+              const waveDelay = (row + col) * 0.15;
+              // Cascada en pantallas pequeñas: secuencial por índice
+              const cascadeDelay = index * 0.12;
+              const delay = isLarge ? waveDelay : cascadeDelay;
+              return (
+                <motion.div
+                  key={label}
+                  initial={{ opacity: 0, y: 18 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ amount: 0.25 }}
+                  transition={{ duration: 0.5, ease: 'easeOut', delay }}
+                  whileHover={{ scale: 1.05 }}
+                  className="p-6 border-4 border-black dark:border-white bg-yellow-300 dark:bg-purple-600"
+                >
+                  <Icon className="w-8 h-8 mb-4 dark:text-white" />
+                  <h3 className="text-xl font-bold mb-2 dark:text-white">{label}</h3>
+                  <p className="font-mono text-sm dark:text-white">{desc}</p>
+                </motion.div>
+              );
+            })}
           </div>
         </motion.div>
       </div>

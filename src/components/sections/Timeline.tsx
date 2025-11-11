@@ -3,6 +3,7 @@
  * Línea de tiempo vertical con hitos estáticos y traducción
  */
 import React from 'react';
+import { motion } from 'framer-motion';
 import { useCVTimeline } from '../../hooks/useCVTimeline';
 import TimelineItem from '../ui/TimelineItem';
 import { useTranslation } from '../../context/TranslationContext';
@@ -26,9 +27,14 @@ const Timeline: React.FC = () => {
     <section id="timeline" className="bg-white dark:bg-gray-900 py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <header className="text-left mb-12">
-          <h2 className="text-4xl font-bold mb-4 border-b-4 border-black dark:border-gray-600 dark:text-white pb-4">
+          <motion.h2
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ amount: 0.2 }}
+            className="text-4xl font-bold mb-4 border-b-4 border-black dark:border-gray-600 dark:text-white pb-4"
+          >
             {title}
-          </h2>
+          </motion.h2>
         </header>
 
         {loading && (

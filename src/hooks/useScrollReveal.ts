@@ -38,10 +38,8 @@ export function useScrollReveal(options: ScrollRevealOptions = { rootMargin: '0p
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setIsVisible(true);
-            observer.unobserve(entry.target);
-          }
+          // Re-trigger: marca visible al entrar y oculta al salir
+          setIsVisible(entry.isIntersecting);
         });
       },
       {

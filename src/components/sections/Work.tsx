@@ -16,6 +16,7 @@ const Work = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ amount: 0.2 }}
           className="text-center mb-12"
         >
           <h2 className="text-4xl font-bold dark:text-white my-4">Featured Work</h2>
@@ -71,7 +72,7 @@ const Work = () => {
                 </h3>
                 <p className="text-lg mb-6 font-mono dark:text-gray-300">{work.description}</p>
 
-                {work.awards && work.awards.map((award) => (
+                {work.awards && work.awards.map((award: string) => (
                   <div key={award} className="flex items-center mb-4 text-pink-500">
                     <Award size={20} className="mr-2" />
                     <span className="font-mono">{award}</span>
@@ -79,7 +80,7 @@ const Work = () => {
                 ))}
 
                 <div className="flex flex-wrap gap-2 mb-6">
-                  {work.tech.map((tech) => (
+                  {work.tech.map((tech: string) => (
                     <span
                       key={tech}
                       className="px-3 py-1 bg-black dark:bg-white text-white dark:text-black font-mono text-sm"

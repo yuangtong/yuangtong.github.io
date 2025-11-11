@@ -1,12 +1,13 @@
 // Archivo: ProjectDetails.tsx
-// Propósito: Vista de detalle de proyecto unificada; obtiene desde content.json via useContent y renderiza con ContentDetail.
+// Propósito: Vista canónica de detalle de proyecto; obtiene desde content.json via useContent y renderiza con ContentDetail.
+// Tipado: useParams con tipo explícito para slug.
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useContent } from '../../hooks/useContent';
 import { ContentDetail } from '../../components/ui/ContentDetail';
 
-export const ProjectDetails = () => {
-  const { slug } = useParams();
+export const ProjectDetails: React.FC = () => {
+  const { slug } = useParams<{ slug: string }>();
   const { getItemBySlug } = useContent<any>('projects');
   const project = slug ? getItemBySlug(slug) : null;
 
