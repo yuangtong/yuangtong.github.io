@@ -7,6 +7,7 @@ import { useTranslation } from '../../context/TranslationContext';
 import { TypeAnimation } from 'react-type-animation';
 import CVDownloadModal from '../Feature/CVDownloadModal';
 import AuroraBackground from '../ui/AuroraBackground';
+import CursorBeam2D from '../ui/CursorBeam2D';
 
 const Hero = () => {
   const { language, translate } = useTranslation();
@@ -216,6 +217,8 @@ const Hero = () => {
     >
       {/* Fondo "techy" tipo mesh gradient + estrellas */}
       <AuroraBackground />
+      {/* Haz 2D tipo estrella fugaz sobre el fondo */}
+      <CursorBeam2D containerRef={heroRef as React.RefObject<HTMLElement | null>} />
       {/* Patrón de puntos halftone */}
       {/* <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
         <div 
@@ -306,7 +309,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="relative z-10 bg-white dark:bg-gray-800 border-4 border-black dark:border-gray-600 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:shadow-[8px_8px_0px_0px_rgba(76,29,149,1)] p-8 md:p-12"
+          className="relative z-10 bg-white/92 dark:bg-gray-800/90 backdrop-blur-sm border-2 border-black dark:border-gray-600 shadow-[8px_8px_0_#0B1220] dark:shadow-[8px_8px_0_rgba(76,29,149,0.8)] p-8 md:p-12"
         >
           <motion.h1 
             className="text-5xl md:text-7xl font-bold mb-6 dark:text-white"
@@ -335,7 +338,7 @@ const Hero = () => {
             </span>
           </motion.h1>
           
-          <p className="text-xl md:text-2xl mb-8 font-mono dark:text-gray-300">
+          <p className="text-xl md:text-2xl mb-8 font-mono text-gray-700 dark:text-gray-200">
             {translatedContent.tagline}
           </p>
 
@@ -351,7 +354,7 @@ const Hero = () => {
                   rotate: -2,
                   boxShadow: '6px 6px 0px 0px rgba(0,0,0,1)'
                 }}
-                className="flex items-center space-x-2 bg-black text-white dark:bg-purple-700 px-4 py-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(76,29,149,0.8)]"
+                className="flex items-center space-x-2 bg-zinc-900 text-white/90 dark:bg-purple-600 px-4 py-2 shadow-[4px_4px_0_#0B1220] dark:shadow-[4px_4px_0_rgba(76,29,149,0.6)]"
               >
                 <Icon size={20} />
                 <span className="font-mono">{text}</span>
@@ -388,7 +391,7 @@ const Hero = () => {
                 boxShadow: '6px 6px 0px 0px rgba(0,0,0,1)'
               }}
               aria-label={translatedContent.viewGithub}
-              className="flex-1 flex items-center justify-center space-x-2 bg-white dark:bg-gray-700 text-black dark:text-white px-3 md:px-6 py-2 md:py-3 border-2 border-black dark:border-gray-600 font-bold transition-all hover:bg-black hover:text-white dark:hover:bg-gray-900 active:scale-[0.98]"
+              className="flex-1 flex items-center justify-center space-x-2 bg-white dark:bg-gray-700 text-black dark:text-white px-3 md:px-6 py-2 md:py-3 border-2 border-black/80 dark:border-gray-600 font-bold transition-all hover:bg-neutral-900 hover:text-white dark:hover:bg-gray-900 active:scale-[0.98]"
             >
               <Github size={20} />
               <span className="hidden md:inline">{translatedContent.viewGithub}</span>

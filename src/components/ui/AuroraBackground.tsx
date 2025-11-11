@@ -62,8 +62,8 @@ const AuroraBackground: React.FC<AuroraBackgroundProps> = ({ className = '' }) =
   }, []);
 
   // Gradiente radial animado; capa por encima del canvas de estrellas
-  // Aurora estilo ejemplo: base oscura + color animado, con centro móvil
-  const backgroundImage = useMotionTemplate`radial-gradient(125% 125% at ${cx}% ${cy}%, #020617 50%, ${color})`;
+  // Aurora estilo ejemplo: base menos oscura + color animado, con centro móvil
+  const backgroundImage = useMotionTemplate`radial-gradient(125% 125% at ${cx}% ${cy}%, #0B1220 50%, ${color})`;
 
   return (
     <motion.div
@@ -72,8 +72,11 @@ const AuroraBackground: React.FC<AuroraBackgroundProps> = ({ className = '' }) =
       style={{ backgroundImage }}
     >
       <Canvas className="absolute inset-0">
-        <Stars radius={50} count={1500} factor={3.5} fade speed={1.8} />
+        {/* Densidad adaptativa de estrellas para legibilidad y rendimiento */}
+        <Stars radius={50} count={typeof window !== 'undefined' && window.innerWidth < 768 ? 1000 : 1800} factor={typeof window !== 'undefined' && window.innerWidth < 768 ? 2.5 : 3.5} fade speed={typeof window !== 'undefined' && window.innerWidth < 768 ? 1.5 : 1.8} />
       </Canvas>
+      {/* Overlay azulado sutil en la mitad superior para mejorar legibilidad */}
+      <div className="absolute inset-0 bg-gradient-to-b from-cyan-500/20 to-transparent" />
     </motion.div>
   );
 };
