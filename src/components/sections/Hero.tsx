@@ -309,10 +309,10 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="relative z-10 bg-white/92 dark:bg-gray-800/90 backdrop-blur-sm border-2 border-black dark:border-gray-600 shadow-[8px_8px_0_#0B1220] dark:shadow-[8px_8px_0_rgba(76,29,149,0.8)] p-8 md:p-12"
+          className="relative z-10 bg-white dark:bg-gray-800 border-2 border-black dark:border-gray-600 shadow-[8px_8px_0_#0B1220] dark:shadow-[8px_8px_0_rgba(76,29,149,0.8)] p-8 md:p-12"
         >
           <motion.h1 
-            className="text-5xl md:text-7xl font-bold mb-6 dark:text-white"
+            className="text-5xl md:text-7xl font-bold mb-6 text-black dark:text-white"
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 }}

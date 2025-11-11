@@ -24,7 +24,7 @@ const CursorBeam2D: React.FC<CursorBeam2DProps> = ({ containerRef, enabled = tru
   return (
     <motion.div
       aria-hidden="true"
-      className="absolute pointer-events-none z-[5]"
+      className="absolute pointer-events-none z-[1]"
       style={{
         left: x,
         top: y,
