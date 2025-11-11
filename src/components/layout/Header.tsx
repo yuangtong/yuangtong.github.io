@@ -86,11 +86,15 @@ const Header = () => {
   const location = useLocation();
   const isHome = location.pathname === '/';
 
+  // En Home, devolvemos directamente el FlyoutNav y evitamos duplicar header/background
+  if (isHome) {
+    return <FlyoutNav />;
+  }
+
   return (
     <header ref={headerRef} className="fixed w-full top-0 z-50 bg-white dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {!isHome && (
-          <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-16">
             <motion.div whileHover={{ scale: 1.05 }} className="flex items-center">
               <Link
                 to="/"
@@ -193,17 +197,10 @@ const Header = () => {
           >
             <Menu size={24} />
           </button>
-          </div>
-        )}
-
-        {isHome && (
-          <div className="relative">
-            <FlyoutNav />
-          </div>
-        )}
+        </div>
 
         {/* Mobile Menu */}
-        {!isHome && isMenuOpen && (
+        {isMenuOpen && (
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
