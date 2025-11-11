@@ -6,6 +6,7 @@ import { findIconDefinition, IconLookup } from '@fortawesome/fontawesome-svg-cor
 import { useTranslation } from '../../context/TranslationContext';
 import { TypeAnimation } from 'react-type-animation';
 import CVDownloadModal from '../Feature/CVDownloadModal';
+import AuroraBackground from '../ui/AuroraBackground';
 
 const Hero = () => {
   const { language, translate } = useTranslation();
@@ -211,8 +212,10 @@ const Hero = () => {
     <section 
       id="home" 
       ref={heroRef}
-      className="min-h-screen pt-20 relative overflow-hidden bg-gradient-to-br from-yellow-300 via-green-500 to-blue-600 dark:from-purple-900 dark:via-indigo-800 dark:to-blue-900"
+      className="min-h-screen pt-20 relative overflow-hidden bg-gray-950 dark:bg-gray-900"
     >
+      {/* Fondo "techy" tipo mesh gradient + estrellas */}
+      <AuroraBackground />
       {/* Patrón de puntos halftone */}
       {/* <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
         <div 
