@@ -52,7 +52,7 @@ const MagnetButton: React.FC<MagnetButtonProps> = ({ href }) => {
   };
 
   return (
-    // Tamaños responsivos del botón con relación estable entre icono y texto circular
+    {/* Tamaños responsivos del botón con relación estable entre icono y texto circular */}
     <motion.button
       ref={ref}
       onMouseMove={handleMouseMove}
@@ -73,7 +73,7 @@ const MagnetButton: React.FC<MagnetButtonProps> = ({ href }) => {
       <div className="pointer-events-none absolute inset-0 z-0 scale-0 rounded-full bg-white transition-transform duration-700 ease-out group-hover:scale-100" />
 
       {/* Texto circular */}
-      // SVG con viewBox estable para escalar proporcionalmente con CSS
+      {/* SVG con viewBox estable para escalar proporcionalmente con CSS */}
       <motion.svg
         initial={{ rotate: 0 }}
         animate={{ rotate: 360 }}
