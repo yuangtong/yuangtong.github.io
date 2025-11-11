@@ -7,9 +7,42 @@ import { useContent } from '../../hooks/useContent';
 import { Button } from '../ui';
 import { Link } from 'react-router-dom';
 import { DISPLAY_CONFIG } from '../../utils/constants';
+import { useTranslation } from '../../context/TranslationContext';
 
 const Work = () => {
   const { items: works, loading, error } = useContent<any>('works');
+  const { language, translate } = useTranslation();
+
+  const [texts, setTexts] = React.useState({
+    title: 'Featured Work',
+    subtitle: 'Showcasing some of my best professional projects',
+    liveDemo: 'Live Demo',
+    viewCode: 'View Code',
+    viewAllWorks: 'View all works',
+  });
+
+  React.useEffect(() => {
+    (async () => {
+      if (language === 'en') {
+        setTexts({
+          title: 'Featured Work',
+          subtitle: 'Showcasing some of my best professional projects',
+          liveDemo: 'Live Demo',
+          viewCode: 'View Code',
+          viewAllWorks: 'View all works',
+        });
+        return;
+      }
+      const [title, subtitle, liveDemo, viewCode, viewAllWorks] = await Promise.all([
+        translate('Featured Work'),
+        translate('Showcasing some of my best professional projects'),
+        translate('Live Demo'),
+        translate('View Code'),
+        translate('View all works'),
+      ]);
+      setTexts({ title, subtitle, liveDemo, viewCode, viewAllWorks });
+    })();
+  }, [language, translate]);
   return (
     <section id="work" className="py-20 bg-white dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -19,8 +52,8 @@ const Work = () => {
           viewport={{ amount: 0.2 }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl font-bold dark:text-white my-4">Featured Work</h2>
-          <p className="text-lg font-mono dark:text-gray-300">Showcasing some of my best professional projects</p>
+          <h2 className="text-4xl font-bold dark:text-white my-4">{texts.title}</h2>
+          <p className="text-lg font-mono dark:text-gray-300">{texts.subtitle}</p>
         </motion.div>
 
         {/* Limitar elementos visibles en Home para replicar Projects */}
@@ -96,14 +129,14 @@ const Work = () => {
                     className="flex items-center space-x-2 text-black dark:text-white hover:text-pink-500"
                   >
                     <ExternalLink size={20} />
-                    <span className="font-mono">Live Demo</span>
+                    <span className="font-mono">{texts.liveDemo}</span>
                   </a>
                   <a
                     href={work.githubUrl}
                     className="flex items-center space-x-2 text-black dark:text-white hover:text-pink-500"
                   >
                     <Github size={20} />
-                    <span className="font-mono">View Code</span>
+                    <span className="font-mono">{texts.viewCode}</span>
                   </a>
                 </div>
               </div>
@@ -114,7 +147,7 @@ const Work = () => {
         <div className="mt-12 flex justify-center">
           <Link to="/work" aria-label="View all works">
             <Button variant="primary" size="md" className="min-w-[220px]">
-              View all works
+              {texts.viewAllWorks}
             </Button>
           </Link>
         </div>

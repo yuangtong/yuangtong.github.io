@@ -3,8 +3,9 @@
  * Gestiona el estado del formulario, validación y envío
  */
 
-import { useReducer, useMemo } from 'react';
+import { useReducer, useMemo, useEffect, useState } from 'react';
 import { CVFormData, CVDownloadState, CVDownloadAction, StepperStep } from '../types/cv';
+import { useTranslation } from '../context/TranslationContext';
 
 const initialFormData: CVFormData = {
   name: '',
@@ -67,6 +68,7 @@ function cvDownloadReducer(state: CVDownloadState, action: CVDownloadAction): CV
 
 export const useCVDownload = () => {
   const [state, dispatch] = useReducer(cvDownloadReducer, initialState);
+  const { language, translate } = useTranslation();
 
   // Validación por paso
   const validateStep = (step: number): boolean => {
@@ -99,30 +101,31 @@ export const useCVDownload = () => {
     return true;
   };
 
-  // Generar steps del stepper
-  const steps: StepperStep[] = useMemo(() => [
-    {
-      id: 1,
-      title: 'Información Personal',
-      description: '',
-      isCompleted: state.currentStep > 1,
-      isActive: state.currentStep === 1
-    },
-    {
-      id: 2,
-      title: 'Información Profesional',
-      description: '',
-      isCompleted: state.currentStep > 2,
-      isActive: state.currentStep === 2
-    },
-    {
-      id: 3,
-      title: 'Motivo de Interés',
-      description: '',
-      isCompleted: state.currentStep > 3,
-      isActive: state.currentStep === 3
-    }
-  ], [state.currentStep]);
+  // Steps con fallback en inglés y traducción dinámica
+  const [steps, setSteps] = useState<StepperStep[]>([
+    { id: 1, title: 'Personal Information', description: '', isCompleted: false, isActive: true },
+    { id: 2, title: 'Professional Information', description: '', isCompleted: false, isActive: false },
+    { id: 3, title: 'Reason of Interest', description: '', isCompleted: false, isActive: false },
+  ]);
+
+  useEffect(() => {
+    let mounted = true;
+    (async () => {
+      const baseTitles = ['Personal Information', 'Professional Information', 'Reason of Interest'];
+      const titles = language === 'en'
+        ? baseTitles
+        : await Promise.all(baseTitles.map((t) => translate(t)));
+      const updated: StepperStep[] = titles.map((title, idx) => ({
+        id: idx + 1,
+        title,
+        description: '',
+        isCompleted: state.currentStep > idx + 1,
+        isActive: state.currentStep === idx + 1,
+      }));
+      if (mounted) setSteps(updated);
+    })();
+    return () => { mounted = false; };
+  }, [language, translate, state.currentStep]);
 
   // Funciones de navegación
   const nextStep = () => {
