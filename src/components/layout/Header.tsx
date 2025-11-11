@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 import ThemeToggle from './ThemeToggle';
 import { useTranslation } from '../../context/TranslationContext';
 import { Link, useLocation } from 'react-router-dom';
-import FlyoutNav from './FlyoutNav';
 // Back/Home removidos del Header; ahora se muestran solo en vistas de detalle
 
 const Header = () => {
@@ -85,25 +84,30 @@ const Header = () => {
 
   const location = useLocation();
   const isHome = location.pathname === '/';
-
-  // En Home, devolvemos directamente el FlyoutNav y evitamos duplicar header/background
-  if (isHome) {
-    return <FlyoutNav />;
-  }
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 250);
+    onScroll();
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+  const headerBgClass = isHome
+    ? (scrolled ? 'bg-white dark:bg-gray-900 shadow-xl' : 'bg-transparent')
+    : 'bg-white dark:bg-gray-900';
 
   return (
-    <header ref={headerRef} className="fixed w-full top-0 z-50 bg-white dark:bg-gray-900">
+    <header ref={headerRef} className={`fixed w-full top-0 z-50 transition-all duration-300 ease-out ${headerBgClass}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-            <motion.div whileHover={{ scale: 1.05 }} className="flex items-center">
-              <Link
-                to="/"
-                aria-label="Go to home"
-                className="text-2xl font-bold cursor-pointer dark:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-pink-500"
-              >
-                YT
-              </Link>
-            </motion.div>
+          <motion.div whileHover={{ scale: 1.05 }} className="flex items-center">
+            <Link
+              to="/"
+              aria-label="Go to home"
+              className="text-2xl font-bold cursor-pointer dark:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-pink-500"
+            >
+              YT
+            </Link>
+          </motion.div>
           
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
