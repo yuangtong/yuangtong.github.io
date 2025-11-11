@@ -38,11 +38,17 @@ const Work = () => {
                   whileHover={{ scale: 1.02 }}
                   className="relative z-10 border-4 border-black dark:border-white overflow-hidden"
                 >
-                  <img
-                    src={work.image}
-                    alt={work.title}
-                    className="w-full h-[400px] object-cover"
-                  />
+                  <Link 
+                    to={`/work/${work.slug}`} 
+                    aria-label={`View details for ${work.title}`}
+                  >
+                    <img
+                      src={work.image}
+                      alt={work.title}
+                      loading="lazy"
+                      className="w-full h-[400px] object-cover"
+                    />
+                  </Link>
                 </motion.div>
                 <div className="absolute -z-10 top-4 left-4 w-full h-full bg-pink-500 border-4 border-black dark:border-white"></div>
               </div>
@@ -52,12 +58,13 @@ const Work = () => {
                   {work.category}
                 </span>
                 <h3 className="text-3xl font-bold mb-4 dark:text-white">
-                  <a 
-                    href={`/work/${work.slug}`}
-                    className="hover:text-pink-500 transition-colors"
+                  <Link 
+                    to={`/work/${work.slug}`}
+                    className="hover:text-pink-500 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-pink-500"
+                    aria-label={`Open details for ${work.title}`}
                   >
                     {work.title}
-                  </a>
+                  </Link>
                 </h3>
                 <p className="text-lg mb-6 font-mono dark:text-gray-300">{work.description}</p>
 
