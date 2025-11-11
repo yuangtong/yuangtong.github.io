@@ -23,15 +23,12 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ className = '', topClass 
 
   return (
     <div
-      className={`sticky left-0 right-0 z-40 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 ${topClass ? '' : ''}`}
+      className={`sticky left-0 right-0 z-40 bg-white dark:bg-gray-900 ${topClass ? '' : ''}`}
       style={{ top: 'var(--header-height, 64px)' }}
       aria-label="Detail navigation"
       role="navigation"
     >
-      <div
-        className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-4 md:mb-6`}
-        style={{ transition: 'margin 0.3s ease' }}
-      >
+      <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`}> 
         <motion.div
           initial={{ opacity: 0, y: -8 }}
           animate={{ opacity: 1, y: 0 }}

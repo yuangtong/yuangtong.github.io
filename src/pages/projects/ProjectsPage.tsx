@@ -18,13 +18,14 @@ export const ProjectsPage = () => {
         {/* Navegación contextual para listados con sticky/fixed en scroll */}
         <NavigationBar topClass="top-14 sm:top-16 md:top-20" />
 
-        <motion.h1
-          initial={{ opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          className="text-5xl font-bold mb-12 border-b-4 border-black pb-4"
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          className="text-center mb-12"
         >
-          Projects
-        </motion.h1>
+          <h1 className="text-5xl font-bold mb-4">Projects</h1>
+          <p className="text-lg font-mono">A selection of my best professional projects</p>
+        </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project: any) => (
