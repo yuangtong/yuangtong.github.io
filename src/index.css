@@ -10,6 +10,7 @@ html {
 /* Flyout underline animation for header nav links (no HTML changes) */
 header nav a {
   position: relative;
+  transition: color 300ms ease;
 }
 header nav a::after {
   content: "";
@@ -26,4 +27,12 @@ header nav a::after {
 }
 header nav a:hover::after {
   transform: scaleX(1);
+}
+
+/* Smooth color/background transitions for header */
+header {
+  transition: background-color 300ms ease, box-shadow 300ms ease;
+}
+header a, header button, header svg {
+  transition: color 300ms ease, fill 300ms ease, stroke 300ms ease;
 }

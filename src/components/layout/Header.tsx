@@ -86,7 +86,7 @@ const Header = () => {
   const isHome = location.pathname === '/';
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 250);
+    const onScroll = () => setScrolled(!isHome || window.scrollY > 0);
     onScroll();
     window.addEventListener('scroll', onScroll);
     return () => window.removeEventListener('scroll', onScroll);
@@ -94,6 +94,9 @@ const Header = () => {
   const headerBgClass = isHome
     ? (scrolled ? 'bg-white dark:bg-gray-900 shadow-xl' : 'bg-transparent')
     : 'bg-white dark:bg-gray-900';
+  const linkColorClass = scrolled ? 'text-black dark:text-white' : 'text-white';
+  const actionColorClass = scrolled ? 'text-black dark:text-white' : 'text-white';
+  const logoColorClass = scrolled ? 'dark:text-white' : 'text-white dark:text-white';
 
   return (
     <header ref={headerRef} className={`fixed w-full top-0 z-50 transition-all duration-300 ease-out ${headerBgClass}`}>
@@ -103,7 +106,7 @@ const Header = () => {
             <Link
               to="/"
               aria-label="Go to home"
-              className="text-2xl font-bold cursor-pointer dark:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-pink-500"
+              className={`text-2xl font-bold cursor-pointer ${logoColorClass} focus:outline-none focus-visible:ring-2 focus-visible:ring-pink-500`}
             >
               YT
             </Link>
@@ -118,7 +121,7 @@ const Header = () => {
                   <Link
                     to={link.to as any}
                     title={link.title}
-                    className="text-black dark:text-white hover:text-pink-500 font-mono text-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-pink-500 lowercase"
+                    className={`${linkColorClass} hover:text-pink-500 font-mono text-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-pink-500 lowercase`}
                   >
                     {label}
                   </Link>
@@ -141,7 +144,7 @@ const Header = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.2, rotate: 15 }}
-                className="hover:text-pink-500 dark:text-white"
+                className={`hover:text-pink-500 ${actionColorClass}`}
               >
                 <Icon size={24} />
               </motion.a>
@@ -153,7 +156,7 @@ const Header = () => {
             <div className="relative">
               <button 
                 onClick={handleLangButtonClick}
-                className="flex items-center space-x-1 text-black dark:text-white hover:text-pink-500 focus:outline-none"
+                className={`flex items-center space-x-1 ${actionColorClass} hover:text-pink-500 focus:outline-none`}
                 aria-label="Select language"
                 title="Language selector"
               >
