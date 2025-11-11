@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Code, Palette, Globe, Coffee } from 'lucide-react';
 import { useTranslation } from '../../context/TranslationContext';
+import AboutSkillCard from '../ui/AboutSkillCard';
 
 const About = () => {
   const { language, translate } = useTranslation();
@@ -87,27 +88,18 @@ const About = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {skills.map(({ icon: Icon, label, desc }, index) => {
-              const isLarge = typeof window !== 'undefined' ? window.matchMedia('(min-width: 768px)').matches : true;
-              const col = index % 2;
-              const row = Math.floor(index / 2);
-              // Ola en pantallas grandes: diagonal (row+col) * delay
-              const waveDelay = (row + col) * 0.15;
-              // Cascada en pantallas pequeñas: secuencial por índice
-              const cascadeDelay = index * 0.12;
-              const delay = isLarge ? waveDelay : cascadeDelay;
+              // Colores y posición idénticos al ejemplo (variaciones por tarjeta)
+              const bgVariants = ['bg-emerald-300', 'bg-indigo-300 sm:-translate-y-6', 'bg-red-300', 'bg-yellow-300 sm:-translate-y-6'];
+              const extraClass = bgVariants[index % bgVariants.length];
               return (
                 <motion.div
                   key={label}
                   initial={{ opacity: 0, y: 18 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ amount: 0.25 }}
-                  transition={{ duration: 0.5, ease: 'easeOut', delay }}
-                  whileHover={{ scale: 1.05 }}
-                  className="p-6 border-4 border-black dark:border-white bg-yellow-300 dark:bg-purple-600"
+                  transition={{ duration: 0.5, ease: 'easeOut', delay: index * 0.1 }}
                 >
-                  <Icon className="w-8 h-8 mb-4 dark:text-white" />
-                  <h3 className="text-xl font-bold mb-2 dark:text-white">{label}</h3>
-                  <p className="font-mono text-sm dark:text-white">{desc}</p>
+                  <AboutSkillCard title={label} subtitle={desc} Icon={Icon} className={extraClass} />
                 </motion.div>
               );
             })}
