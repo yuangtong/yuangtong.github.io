@@ -1,5 +1,9 @@
 // Test setup: jest-dom matchers and IntersectionObserver mock
-import '@testing-library/jest-dom';
+import { expect, afterEach } from 'vitest';
+import { cleanup } from '@testing-library/react';
+import matchers from '@testing-library/jest-dom/matchers';
+expect.extend(matchers);
+afterEach(() => cleanup());
 
 type IOCallback = (entries: IntersectionObserverEntry[], observer: IntersectionObserver) => void;
 
