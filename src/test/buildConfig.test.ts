@@ -15,8 +15,9 @@ describe('Vite build configuration', () => {
   });
 
   it('does not define terserOptions', () => {
-    // @ts-expect-error - aseguramos que esté ausente
-    expect(config.build?.terserOptions).toBeUndefined();
+    // Verifica ausencia sin usar anotaciones especiales
+    const hasTerserOptions = Object.prototype.hasOwnProperty.call(config.build ?? {}, 'terserOptions');
+    expect(hasTerserOptions).toBe(false);
   });
 
   it('has manualChunks returning vendor groups', () => {
