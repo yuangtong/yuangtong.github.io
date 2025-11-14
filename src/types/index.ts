@@ -10,6 +10,8 @@ export * from './contentful';
 
 // Tipos de Supabase
 export * from './supabase';
+// Tipos de Testimonials
+export * from './testimonials';
 
 // Tipos comunes de la aplicación
 export interface ApiResponse<T = any> {

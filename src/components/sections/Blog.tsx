@@ -1,86 +1,69 @@
-import React from 'react';
+// Archivo: Blog.tsx
+// Propósito: Sección Home de Blog; muestra entradas limitadas desde content.json usando tarjetas reutilizables.
+import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Calendar, Clock, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { ContentCard, Button } from '../ui';
+import { useContent } from '../../hooks/useContent';
+import { DISPLAY_CONFIG } from '../../utils/constants';
+import HorizontalScrollControls from '../ui/HorizontalScrollControls';
+import { useEqualHeights } from '../../hooks/useEqualHeights';
 
-const posts = [
-  {
-    title: 'Building Scalable React Applications',
-    excerpt: 'Learn the best practices for building large-scale React applications with modern tools and techniques.',
-    date: '2024-03-15',
-    readTime: '5 min read',
-    image: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&q=80&w=800&h=400',
-    link: '#'
-  },
-  {
-    title: 'The Future of Web Development',
-    excerpt: 'Exploring upcoming trends and technologies that will shape the future of web development.',
-    date: '2024-03-10',
-    readTime: '4 min read',
-    image: 'https://images.unsplash.com/photo-1664575602554-2087b04935a5?auto=format&fit=crop&q=80&w=800&h=400',
-    link: '#'
-  },
-  {
-    title: 'Mastering TypeScript',
-    excerpt: 'A comprehensive guide to using TypeScript effectively in your projects.',
-    date: '2024-03-05',
-    readTime: '6 min read',
-    image: 'https://images.unsplash.com/photo-1627398242454-45a1465c2479?auto=format&fit=crop&q=80&w=800&h=400',
-    link: '#'
-  }
-];
+interface BlogPost {
+  id: string;
+  slug: string;
+  title: string;
+  excerpt: string;
+  date: string;
+  readTime: string;
+  category: string;
+  image: string;
+}
 
 const Blog = () => {
-  return (
-    <section id="blog" className="py-20 bg-gray-100 dark:bg-gray-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          className="text-center mb-12"
-        >
-          <h2 className="text-4xl font-bold mb-4 dark:text-white">Latest Blog Posts</h2>
-          <p className="text-lg font-mono dark:text-gray-300">Thoughts, tutorials, and insights about web development</p>
-        </motion.div>
+  const { items: posts, loading, error } = useContent<BlogPost>('blogs');
+  const visiblePosts = posts.slice(0, DISPLAY_CONFIG.HOME_BLOGS_LIMIT);
+  const scrollRef = useRef<HTMLDivElement | null>(null);
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {posts.map((post, index) => (
-            <motion.article
-              key={post.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              className="bg-white dark:bg-gray-900 border-4 border-black dark:border-white overflow-hidden group"
-            >
-              <div className="relative h-48 overflow-hidden">
-                <img
-                  src={post.image}
-                  alt={post.title}
-                  className="w-full h-full object-cover transition-transform group-hover:scale-110"
-                />
+  // Igualar alturas al mayor contenido visible
+  useEqualHeights(scrollRef, '[data-equalize="card"]', [visiblePosts.length]);
+
+  if (loading) return null;
+  if (error) return null;
+
+  return (
+    <section id="blog" className="py-20 bg-white dark:bg-gray-900">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.h2
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          className="text-5xl font-bold mb-12 border-b-4 border-black dark:border-gray-600 dark:text-white pb-4"
+        >
+          Latest Blog Posts
+        </motion.h2>
+
+        {/* Carrusel horizontal 1 fila x 3 columnas visibles con scroll (1x6) */}
+        <div className="relative">
+          <div
+            ref={scrollRef}
+            className="flex items-stretch overflow-x-auto horizontal-scroll-touch pb-6 gap-8 pl-12 pr-12 sm:px-6 scrollbar-hide snap-x snap-mandatory"
+            style={{ scrollPaddingLeft: '3rem', scrollPaddingRight: '3rem' }}
+          >
+            {visiblePosts.map((post) => (
+              <div key={post.id} className="flex-shrink-0 w-[76vw] sm:w-[68vw] md:w-[55vw] lg:w-[33.3333%] snap-start" data-equalize="card">
+                <ContentCard type="blog" item={post} className="h-full" />
               </div>
-              <div className="p-6">
-                <div className="flex items-center space-x-4 mb-4 text-sm font-mono dark:text-gray-300">
-                  <span className="flex items-center">
-                    <Calendar size={16} className="mr-2" />
-                    {post.date}
-                  </span>
-                  <span className="flex items-center">
-                    <Clock size={16} className="mr-2" />
-                    {post.readTime}
-                  </span>
-                </div>
-                <h3 className="text-xl font-bold mb-2 dark:text-white">{post.title}</h3>
-                <p className="text-gray-600 dark:text-gray-400 mb-4 font-mono">{post.excerpt}</p>
-                <a
-                  href={post.link}
-                  className="inline-flex items-center text-pink-500 hover:text-pink-600 font-bold"
-                >
-                  Read More
-                  <ArrowRight size={16} className="ml-2 group-hover:translate-x-2 transition-transform" />
-                </a>
-              </div>
-            </motion.article>
-          ))}
+            ))}
+          </div>
+          <HorizontalScrollControls targetRef={scrollRef} deps={[visiblePosts.length]} />
+        </div>
+
+        <div className="mt-12 flex justify-center">
+          <Link to="/blog" aria-label="View all blog posts">
+            <Button variant="secondary" size="md" className="min-w-[220px]">
+              View all blog posts
+            </Button>
+          </Link>
         </div>
       </div>
     </section>

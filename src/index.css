@@ -1,3 +1,53 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Smooth scrolling for in-page anchors */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Flyout underline animation for header nav links (no HTML changes) */
+header nav a {
+  position: relative;
+  transition: color 300ms ease;
+}
+header nav a::after {
+  content: "";
+  position: absolute;
+  left: -0.25rem;
+  right: -0.25rem;
+  bottom: -0.375rem;
+  height: 3px;
+  background-color: #ec4899; /* pink-500 */
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 300ms ease-out;
+  border-radius: 9999px;
+}
+header nav a:hover::after {
+  transform: scaleX(1);
+}
+
+/* Smooth color/background transitions for header */
+header {
+  transition: background-color 300ms ease, box-shadow 300ms ease;
+}
+header a, header button, header svg {
+  transition: color 300ms ease, fill 300ms ease, stroke 300ms ease;
+}
+
+/* Utilidad global: ocultar scrollbar horizontal/vertical de forma visual */
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+/* Mejora de scroll en dispositivos táctiles */
+.horizontal-scroll-touch {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+}

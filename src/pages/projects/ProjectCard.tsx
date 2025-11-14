@@ -18,6 +18,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ amount: 0.2 }}
     whileHover={{ y: -5 }}
     className="group border-4 border-black dark:border-gray-600 bg-white dark:bg-gray-800 p-4 hover:bg-yellow-300 dark:hover:bg-purple-700 transition-colors"
   >
@@ -49,6 +50,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => (
     <div className="flex space-x-4">
       <a
         href={project.liveUrl}
+        aria-label={`Open live demo for ${project.title}`}
         className="flex items-center space-x-2 hover:text-pink-500 dark:text-white dark:hover:text-purple-400"
       >
         <ExternalLink size={20} />
@@ -56,6 +58,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => (
       </a>
       <a
         href={project.githubUrl}
+        aria-label={`Open source code for ${project.title}`}
         className="flex items-center space-x-2 hover:text-pink-500 dark:text-white dark:hover:text-purple-400"
       >
         <Github size={20} />

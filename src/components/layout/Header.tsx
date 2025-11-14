@@ -1,25 +1,35 @@
-import React, { useState, useEffect } from 'react';
-import { Menu, Github, Linkedin, Mail, Globe } from 'lucide-react';
+import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
+import { Menu, Github, Linkedin, Mail } from 'lucide-react';
 import { motion } from 'framer-motion';
 import ThemeToggle from './ThemeToggle';
 import { useTranslation } from '../../context/TranslationContext';
+import { Link, useLocation } from 'react-router-dom';
+// Back/Home removidos del Header; ahora se muestran solo en vistas de detalle
 
 const Header = () => {
   const { language, setLanguage, translate } = useTranslation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
-  const navItems = ['home', 'about', 'projects', 'contact'];
-  const [translatedNavItems, setTranslatedNavItems] = useState(navItems);
+  // Definición de navegación con rutas relativas y anchors
+  const navLinks = [
+    { key: 'home', label: 'home', to: { pathname: '/' }, title: 'Go to Home' },
+    { key: 'about', label: 'about', to: { pathname: '/', hash: '#about' }, title: 'Go to About section' },
+    { key: 'works', label: 'works', to: { pathname: '/work' }, title: 'View all works' },
+    { key: 'projects', label: 'projects', to: { pathname: '/projects' }, title: 'View all projects' },
+    { key: 'blog', label: 'blog', to: { pathname: '/blog' }, title: 'View all blog posts' },
+    { key: 'contact', label: 'contact', to: { pathname: '/', hash: '#contact' }, title: 'Go to Contact section' },
+  ];
+  const [translatedNavItems, setTranslatedNavItems] = useState(navLinks.map(n => n.label));
+  const headerRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     const translateNavItems = async () => {
       if (language === 'en') {
-        setTranslatedNavItems(navItems);
+        setTranslatedNavItems(navLinks.map(n => n.label));
         return;
       }
-      
       const translated = await Promise.all(
-        navItems.map(item => translate(item))
+        navLinks.map(item => translate(item.label))
       );
       setTranslatedNavItems(translated);
     };
@@ -37,6 +47,19 @@ const Header = () => {
     return () => {
       document.removeEventListener('click', handleClickOutside);
     };
+  }, []);
+
+  // Medir altura del header y exponerla como CSS var para sticky offsets
+  useLayoutEffect(() => {
+    const updateHeaderHeightVar = () => {
+      const el = headerRef.current;
+      if (!el) return;
+      const h = el.offsetHeight;
+      document.documentElement.style.setProperty('--header-height', `${h}px`);
+    };
+    updateHeaderHeightVar();
+    window.addEventListener('resize', updateHeaderHeightVar);
+    return () => window.removeEventListener('resize', updateHeaderHeightVar);
   }, []);
 
   const handleLangButtonClick = (e: React.MouseEvent) => {
@@ -59,30 +82,60 @@ const Header = () => {
     return currentLang ? currentLang.label : 'English';
   };
 
+  const location = useLocation();
+  const isHome = location.pathname === '/';
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    // Sólo activar el comportamiento de scroll en Home.
+    if (isHome) {
+      const onScroll = () => setScrolled(window.scrollY > 0);
+      onScroll();
+      window.addEventListener('scroll', onScroll);
+      return () => window.removeEventListener('scroll', onScroll);
+    } else {
+      // En páginas internas, forzar estado legible: fondo sólido y texto oscuro.
+      setScrolled(true);
+      return () => {};
+    }
+  }, [isHome, location.pathname]);
+  const headerBgClass = isHome
+    ? (scrolled ? 'bg-white dark:bg-gray-900 shadow-xl' : 'bg-transparent')
+    : 'bg-white dark:bg-gray-900';
+  const linkColorClass = isHome ? (scrolled ? 'text-black dark:text-white' : 'text-white') : 'text-black dark:text-white';
+  const actionColorClass = isHome ? (scrolled ? 'text-black dark:text-white' : 'text-white') : 'text-black dark:text-white';
+  const logoColorClass = isHome ? (scrolled ? 'text-black dark:text-white' : 'text-white dark:text-white') : 'text-black dark:text-white';
+  const menuIconColorClass = isHome && !scrolled ? 'text-white' : 'text-black dark:text-white';
+
   return (
-    <header className="fixed w-full top-0 z-50 bg-white dark:bg-gray-900 border-b-4 border-black">
+    <header ref={headerRef} className={`fixed w-full top-0 z-50 transition-all duration-300 ease-out ${headerBgClass}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <motion.a 
-            href="#"
-            whileHover={{ scale: 1.1 }}
-            className="text-2xl font-bold cursor-pointer dark:text-white"
-          >
-            YT
-          </motion.a>
+          <motion.div whileHover={{ scale: 1.05 }} className="flex items-center">
+            <Link
+              to="/"
+              aria-label="Go to home"
+              className={`text-2xl font-bold cursor-pointer ${logoColorClass} focus:outline-none focus-visible:ring-2 focus-visible:ring-pink-500`}
+            >
+              YT
+            </Link>
+          </motion.div>
           
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
-            {translatedNavItems.map((item) => (
-              <motion.a
-                key={item}
-                whileHover={{ scale: 1.1, rotate: -2 }}
-                className="text-black dark:text-white hover:text-pink-500 font-mono text-lg"
-                href={`#${navItems[translatedNavItems.indexOf(item)].toLowerCase()}`}
-              >
-                {item}
-              </motion.a>
-            ))}
+            {translatedNavItems.map((label, idx) => {
+              const link = navLinks[idx];
+              return (
+                <motion.div key={link.key} whileHover={{ scale: 1.1, rotate: -2 }}>
+                  <Link
+                    to={link.to as any}
+                    title={link.title}
+                    className={`${linkColorClass} hover:text-pink-500 font-mono text-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-pink-500 lowercase`}
+                  >
+                    {label}
+                  </Link>
+                </motion.div>
+              );
+            })}
           </nav>
 
           {/* Desktop Actions */}
@@ -99,17 +152,19 @@ const Header = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.2, rotate: 15 }}
-                className="hover:text-pink-500 dark:text-white"
+                className={`hover:text-pink-500 ${actionColorClass}`}
               >
                 <Icon size={24} />
               </motion.a>
             ))}
+
+            {/* Home icon removido para evitar duplicar navegación principal */}
             
             {/* Language Selector Dropdown */}
             <div className="relative">
               <button 
                 onClick={handleLangButtonClick}
-                className="flex items-center space-x-1 text-black dark:text-white hover:text-pink-500 focus:outline-none"
+                className={`flex items-center space-x-1 ${actionColorClass} hover:text-pink-500 focus:outline-none`}
                 aria-label="Select language"
                 title="Language selector"
               >
@@ -152,7 +207,7 @@ const Header = () => {
           {/* Mobile Menu Button */}
           <button 
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden dark:text-white p-2"
+            className={`md:hidden ${menuIconColorClass} hover:text-pink-500 p-2`}
             aria-label="Toggle menu"
           >
             <Menu size={24} />
@@ -167,22 +222,28 @@ const Header = () => {
             exit={{ opacity: 0, y: -20 }}
             className="md:hidden"
           >
+            {/* Acciones rápidas móviles eliminadas (Back/Home ahora viven en vistas de detalle) */}
             <nav className="py-4 space-y-2">
-              {navItems.map((item, index) => (
-                <React.Fragment key={item}>
-                  <motion.a
-                    whileTap={{ scale: 0.95 }}
-                    className="block text-black dark:text-white hover:text-pink-500 font-mono text-lg px-4 py-2 text-center"
-                    href={`#${item.toLowerCase()}`}
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {item}
-                  </motion.a>
-                  {index < navItems.length - 1 && (
-                    <div className="border-t border-gray-200 dark:border-gray-700 mx-8 my-1"></div>
-                  )}
-                </React.Fragment>
-              ))}
+              {translatedNavItems.map((label, index) => {
+                const link = navLinks[index];
+                return (
+                  <React.Fragment key={link.key}>
+                    <motion.div whileTap={{ scale: 0.95 }}>
+                      <Link
+                        to={link.to as any}
+                        title={link.title}
+                        className="block text-black dark:text-white hover:text-pink-500 font-mono text-lg px-4 py-2 text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-pink-500 lowercase"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        {label}
+                      </Link>
+                    </motion.div>
+                    {index < translatedNavItems.length - 1 && (
+                      <div className="border-t border-gray-200 dark:border-gray-700 mx-8 my-1"></div>
+                    )}
+                  </React.Fragment>
+                );
+              })}
             </nav>
             
             <div className="px-4 py-4 border-t border-gray-200 dark:border-gray-700 space-y-4">

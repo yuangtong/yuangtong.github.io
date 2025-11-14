@@ -51,6 +51,30 @@
       "liveUrl": "#",
       "githubUrl": "#",
       "featured": true
+    },
+    {
+      "id": "3",
+      "slug": "personal-portfolio",
+      "title": "Personal Portfolio",
+      "description": "Modern and interactive portfolio website with dark mode and multilingual support",
+      "fullDescription": "A modern, responsive portfolio website built with React and TypeScript. Features a clean, minimalist design with interactive elements and smooth animations.\n\nKey Features:\n• Dark/Light mode toggle\n• Multi-language support (EN/ES)\n• Interactive cursor effects\n• Smooth page transitions\n• Responsive design\n• Dynamic project showcase\n• Blog integration",
+      "image": "https://images.unsplash.com/photo-1545665277-5937489579f2?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "tech": ["React", "TypeScript", "TailwindCSS", "Framer Motion", "React Router", "Vite"],
+      "liveUrl": "https://yuangtong.dev",
+      "githubUrl": "https://github.com/yuangtong/yuangtong.github.io",
+      "category": "Web Development (This webpage!)"
+    },
+    {
+      "id": "4",
+      "slug": "passguard-password-generator",
+      "title": "Passguard: Password Generator",
+      "description": "A bold web solution built with React",
+      "fullDescription": "Passguard is a robust password generation tool that empowers users to create secure and customizable passwords.\n\nKey Features:\n• Custom password length settings\n• Multiple character type options\n• Password strength indicator\n• One-click copy functionality\n• Secure password storage",
+      "image": "https://images.unsplash.com/photo-1634804306598-f2efe3ead034?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "tech": ["React", "TypeScript", "TailwindCSS", "Framer Motion"],
+      "liveUrl": "https://yuangtong.github.io/passguard/",
+      "githubUrl": "https://github.com/yuangtong/passguard",
+      "category": "Web Application"
     }
   ],
   "works": [
@@ -79,6 +103,30 @@
       "tech": ["Next.js", "Node.js", "PostgreSQL"],
       "liveUrl": "#",
       "githubUrl": "#"
+    }
+  ]
+  ,
+  "testimonials": [
+    {
+      "id": "t1",
+      "name": "Emilio R.",
+      "role": "CEO at TechFlow",
+      "quote": "Yuang is great at his work, an excellent communicator, and works very fast. Got the WordPress theme install and site redesign done very quickly. Will hire again in the future.",
+      "company": "El Brifin"
+    },
+    {
+      "id": "t2",
+      "name": "Marcus Rodriguez",
+      "role": "Creative Director",
+      "quote": "The level of creativity and technical expertise Yuang brings to projects is exceptional. They delivered a website that perfectly captures our brand essence.",
+      "company": "Design Studio X"
+    },
+    {
+      "id": "t3",
+      "name": "Emily Thompson",
+      "role": "Product Manager",
+      "quote": "Yuang's ability to translate complex requirements into elegant solutions is remarkable. They're not just a developer, but a true partner in success.",
+      "company": "InnovateTech"
     }
   ]
 }

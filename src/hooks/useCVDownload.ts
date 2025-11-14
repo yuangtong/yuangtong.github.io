@@ -3,8 +3,9 @@
  * Gestiona el estado del formulario, validación y envío
  */
 
-import { useReducer, useMemo } from 'react';
+import { useReducer, useMemo, useEffect, useState } from 'react';
 import { CVFormData, CVDownloadState, CVDownloadAction, StepperStep } from '../types/cv';
+import { useTranslation } from '../context/TranslationContext';
 
 const initialFormData: CVFormData = {
   name: '',
@@ -67,6 +68,7 @@ function cvDownloadReducer(state: CVDownloadState, action: CVDownloadAction): CV
 
 export const useCVDownload = () => {
   const [state, dispatch] = useReducer(cvDownloadReducer, initialState);
+  const { language, translate } = useTranslation();
 
   // Validación por paso
   const validateStep = (step: number): boolean => {
@@ -74,19 +76,19 @@ export const useCVDownload = () => {
     
     switch (step) {
       case 1:
-        if (!state.formData.name.trim()) errors.name = 'El nombre es requerido';
-        if (!state.formData.email.trim()) errors.email = 'El email es requerido';
-        else if (!/\S+@\S+\.\S+/.test(state.formData.email)) errors.email = 'Email inválido';
+        if (!state.formData.name.trim()) errors.name = 'Name is required';
+        if (!state.formData.email.trim()) errors.email = 'Email is required';
+        else if (!/\S+@\S+\.\S+/.test(state.formData.email)) errors.email = 'Invalid email address';
         break;
-      
+
       case 2:
-        if (!state.formData.company.trim()) errors.company = 'La empresa es requerida';
-        if (!state.formData.position.trim()) errors.position = 'El cargo es requerido';
+        if (!state.formData.company.trim()) errors.company = 'Company is required';
+        if (!state.formData.position.trim()) errors.position = 'Position is required';
         break;
-      
+
       case 3:
         if (state.formData.reason === 'other' && !state.formData.customReason?.trim()) {
-          errors.customReason = 'Por favor especifica la razón';
+          errors.customReason = 'Please specify the reason';
         }
         break;
     }
@@ -99,30 +101,31 @@ export const useCVDownload = () => {
     return true;
   };
 
-  // Generar steps del stepper
-  const steps: StepperStep[] = useMemo(() => [
-    {
-      id: 1,
-      title: 'Información Personal',
-      description: '',
-      isCompleted: state.currentStep > 1,
-      isActive: state.currentStep === 1
-    },
-    {
-      id: 2,
-      title: 'Información Profesional',
-      description: '',
-      isCompleted: state.currentStep > 2,
-      isActive: state.currentStep === 2
-    },
-    {
-      id: 3,
-      title: 'Motivo de Interés',
-      description: '',
-      isCompleted: state.currentStep > 3,
-      isActive: state.currentStep === 3
-    }
-  ], [state.currentStep]);
+  // Steps con fallback en inglés y traducción dinámica
+  const [steps, setSteps] = useState<StepperStep[]>([
+    { id: 1, title: 'Personal Information', description: '', isCompleted: false, isActive: true },
+    { id: 2, title: 'Professional Information', description: '', isCompleted: false, isActive: false },
+    { id: 3, title: 'Reason of Interest', description: '', isCompleted: false, isActive: false },
+  ]);
+
+  useEffect(() => {
+    let mounted = true;
+    (async () => {
+      const baseTitles = ['Personal Information', 'Professional Information', 'Reason of Interest'];
+      const titles = language === 'en'
+        ? baseTitles
+        : await Promise.all(baseTitles.map((t) => translate(t)));
+      const updated: StepperStep[] = titles.map((title, idx) => ({
+        id: idx + 1,
+        title,
+        description: '',
+        isCompleted: state.currentStep > idx + 1,
+        isActive: state.currentStep === idx + 1,
+      }));
+      if (mounted) setSteps(updated);
+    })();
+    return () => { mounted = false; };
+  }, [language, translate, state.currentStep]);
 
   // Funciones de navegación
   const nextStep = () => {
@@ -146,13 +149,27 @@ export const useCVDownload = () => {
     dispatch({ type: 'SET_SUBMITTING', payload: true });
 
     try {
-      // Simular envío a analytics o base de datos
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      // Log para analytics (en producción enviarías a tu servicio)
-      console.log('CV Download Request:', {
-        ...state.formData,
-        timestamp: new Date().toISOString()
+      // Enviar a Netlify Forms para que aparezca en el panel
+      const encode = (data: Record<string, string>) =>
+        Object.keys(data)
+          .map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
+          .join('&');
+
+      const payload = {
+        'form-name': 'cv-download',
+        name: state.formData.name,
+        email: state.formData.email,
+        company: state.formData.company,
+        position: state.formData.position,
+        reason: state.formData.reason,
+        customReason: state.formData.customReason || '',
+        message: state.formData.message || ''
+      };
+
+      await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: encode(payload)
       });
 
       // Iniciar descarga

@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Calendar, Clock, ExternalLink, Github, Award } from 'lucide-react';
+import { Calendar, Clock, ExternalLink, Github, Award } from 'lucide-react';
+import NavigationBar from './NavigationBar';
 
 interface ContentDetailProps {
   type: 'blog' | 'project' | 'work';
@@ -55,13 +56,8 @@ export const ContentDetail: React.FC<ContentDetailProps> = ({ type, item }) => {
   return (
     <article className="py-20 bg-white dark:bg-gray-900">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <Link 
-          to={`/${type}s`}
-          className="inline-flex items-center text-pink-500 hover:text-pink-600 mb-8"
-        >
-          <ArrowLeft className="mr-2" />
-          Back to {type.charAt(0).toUpperCase() + type.slice(1)}s
-        </Link>
+        {/* Barra de navegación para detalle con sticky/fixed en scroll */}
+        <NavigationBar topClass="top-14 sm:top-16 md:top-20" />
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}

@@ -15,15 +15,15 @@ export const EXTERNAL_LINKS = {
 export const CMS_CONFIG = {
   // Contentful
   CONTENTFUL: {
-    SPACE_ID: process.env.VITE_CONTENTFUL_SPACE_ID || '',
-    ACCESS_TOKEN: process.env.VITE_CONTENTFUL_ACCESS_TOKEN || '',
-    ENVIRONMENT: process.env.VITE_CONTENTFUL_ENVIRONMENT || 'master'
+    SPACE_ID: import.meta.env.VITE_CONTENTFUL_SPACE_ID || '',
+    ACCESS_TOKEN: import.meta.env.VITE_CONTENTFUL_ACCESS_TOKEN || '',
+    ENVIRONMENT: import.meta.env.VITE_CONTENTFUL_ENVIRONMENT || 'master'
   },
   
   // Supabase
   SUPABASE: {
-    URL: process.env.VITE_SUPABASE_URL || '',
-    ANON_KEY: process.env.VITE_SUPABASE_ANON_KEY || ''
+    URL: import.meta.env.VITE_SUPABASE_URL || '',
+    ANON_KEY: import.meta.env.VITE_SUPABASE_ANON_KEY || ''
   }
 } as const;
 
@@ -34,6 +34,26 @@ export const APP_CONFIG = {
   AUTHOR: 'Yuang Tong',
   DEFAULT_LANGUAGE: 'en',
   SUPPORTED_LANGUAGES: ['en', 'es'] as const
+} as const;
+
+// Límite de elementos visibles en Home
+// - HOME_PROJECTS_LIMIT: Máximo de proyectos en Home
+// - HOME_WORKS_LIMIT: Máximo de trabajos en Home (sección Work)
+export const DISPLAY_CONFIG = {
+  /**
+   * Máximo de elementos visibles en carrusel horizontal de Home.
+   * Se muestran 3 columnas y el resto con scroll horizontal.
+   */
+  HOME_PROJECTS_LIMIT: 6,
+  /**
+   * Máximo de trabajos a mostrar en Home.
+   * Requisito: actualizar a 2 sin cambios visuales en la sección.
+   */
+  HOME_WORKS_LIMIT: 2,
+  /**
+   * Máximo de posts visibles en Home con scroll horizontal.
+   */
+  HOME_BLOGS_LIMIT: 6
 } as const;
 
 // Rutas de la aplicación

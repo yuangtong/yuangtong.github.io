@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import contentData from '../data/content.json';
 
-type ContentType = 'blogs' | 'projects' | 'works';
+type ContentType = 'blogs' | 'projects' | 'works' | 'testimonials';
 
 export function useContent<T>(type: ContentType): {
   items: T[];

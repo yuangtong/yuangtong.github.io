@@ -1,9 +1,14 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Code2, Palette, Zap, FileDown, Github, ExternalLink, Calendar } from 'lucide-react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { findIconDefinition, IconLookup } from '@fortawesome/fontawesome-svg-core';
 import { useTranslation } from '../../context/TranslationContext';
 import { TypeAnimation } from 'react-type-animation';
 import CVDownloadModal from '../Feature/CVDownloadModal';
+import WhatsAppConsultationModal from '../Feature/WhatsAppConsultationModal';
+import AuroraBackground from '../ui/AuroraBackground';
+import MagnetButton from '../ui/MagnetButton';
 
 const Hero = () => {
   const { language, translate } = useTranslation();
@@ -19,6 +24,8 @@ const Hero = () => {
 
   // Estado para el modal de descarga del CV
   const [isCVModalOpen, setIsCVModalOpen] = useState(false);
+  // Estado para el modal de consulta por WhatsApp
+  const [isConsultationOpen, setIsConsultationOpen] = useState(false);
 
   // Referencia para la sección hero
   const heroRef = useRef<HTMLElement | null>(null);
@@ -66,6 +73,47 @@ const Hero = () => {
   ];
   
   const [features, setFeatures] = useState(initialFeatures);
+
+  // --- Mobile typing container height fix ---
+  const typeContainerRef = useRef<HTMLSpanElement | null>(null);
+  const [isMobile, setIsMobile] = useState<boolean>(typeof window !== 'undefined' ? window.innerWidth < 768 : true);
+  const [typeMaxHeight, setTypeMaxHeight] = useState<number | undefined>(undefined);
+
+  useEffect(() => {
+    const onResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, []);
+
+  useEffect(() => {
+    if (!isMobile) {
+      setTypeMaxHeight(undefined);
+      return;
+    }
+    const container = typeContainerRef.current;
+    if (!container) return;
+
+    // Create a hidden measurer inside the same container to match width and styles
+    const measurer = document.createElement('span');
+    measurer.style.position = 'absolute';
+    measurer.style.visibility = 'hidden';
+    measurer.style.whiteSpace = 'normal';
+    measurer.className = 'inline-block';
+    container.appendChild(measurer);
+
+    // Extract strings from sequence and measure their rendered height
+    const strings = animationSequence.filter((v) => typeof v === 'string') as string[];
+    let max = 0;
+    for (const s of strings) {
+      measurer.textContent = s;
+      const h = measurer.offsetHeight;
+      if (h > max) max = h;
+    }
+
+    container.removeChild(measurer);
+    // Add a small buffer to avoid clipping due to font rendering nuances
+    setTypeMaxHeight(max > 0 ? max + 2 : undefined);
+  }, [animationSequence, isMobile]);
 
   useEffect(() => {
     const translateContent = async () => {
@@ -168,8 +216,10 @@ const Hero = () => {
     <section 
       id="home" 
       ref={heroRef}
-      className="min-h-screen pt-20 relative overflow-hidden bg-gradient-to-br from-yellow-300 via-green-500 to-blue-600 dark:from-purple-900 dark:via-indigo-800 dark:to-blue-900"
+      className="min-h-screen pt-20 relative overflow-hidden bg-gray-950 dark:bg-gray-900"
     >
+      {/* Fondo "techy" tipo mesh gradient + estrellas */}
+      <AuroraBackground />
       {/* Patrón de puntos halftone */}
       {/* <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
         <div 
@@ -203,67 +253,23 @@ const Hero = () => {
       />
       */}
       
-      {/* Floating Button Animation */}
-      <motion.div
-        className="absolute right-8 bottom-12 z-20 md:right-16 lg:right-24 flex items-center justify-center"
-        initial={{ scale: 0.9, y: 20, opacity: 0 }}
-        animate={{ 
-          scale: [0.9, 1.1, 1],
-          y: 0,
-          opacity: 1,
-          rotate: 0 // Aseguramos ninguna rotación
-        }}
-        transition={{ 
-          duration: 0.6,
-          ease: "easeOut"
-        }}
-        style={{ transform: 'rotate(0deg)' }} // Fuerza la rotación a 0
-      >
-        <motion.div 
-          className="relative rounded-none bg-yellow-400 dark:bg-purple-600 border-4 border-black dark:border-gray-300 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:shadow-[6px_6px_0px_0px_rgba(76,29,149,1)] p-3"
-          whileHover={{ 
-            scale: 1.1,
-            boxShadow: '8px 8px 0px 0px rgba(0,0,0,1)',
-            transition: { duration: 0.2 }
-          }}
-          whileTap={{ scale: 0.95 }}
-          animate={{
-            scale: [1, 1.05, 1],
-            boxShadow: [
-              '6px 6px 0px 0px rgba(0,0,0,1)',
-              '8px 8px 0px 0px rgba(0,0,0,1)',
-              '6px 6px 0px 0px rgba(0,0,0,1)'
-            ]
-          }}
-          transition={{
-            duration: 1.5,
-            repeat: Infinity,
-            repeatType: 'reverse',
-            ease: 'easeInOut'
-          }}
-        >
-          <a 
-            href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ3M-X60wSMYrYspDOQYRdAG8rNibLIpe9YoKZmwrdJ0cs8MvNxWtr3N8I507RyETNvDZ-qj_8ji" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="relative z-10 flex items-center justify-center space-x-2 text-black dark:text-white font-bold"
-            style={{ transform: 'rotate(0deg)' }}
-          >
-            <Calendar size={24} />
-            <span className="text-sm md:text-base">{translatedContent.scheduleCall}</span>
-          </a>
-        </motion.div>
-      </motion.div>
+      {/* Magnet Button (Schedule) */}
+      <div className="absolute right-8 bottom-12 z-20 md:right-16 lg:right-24">
+        <MagnetButton onClick={() => setIsConsultationOpen(true)} />
+      </div>
+
+      {/* WhatsApp Consultation Modal */}
+      <WhatsAppConsultationModal isOpen={isConsultationOpen} onClose={() => setIsConsultationOpen(false)} />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="relative z-10 bg-white dark:bg-gray-800 border-4 border-black dark:border-gray-600 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:shadow-[8px_8px_0px_0px_rgba(76,29,149,1)] p-8 md:p-12"
+          className="relative z-10 bg-white dark:bg-gray-800 border-2 border-black dark:border-gray-600 shadow-[8px_8px_0_#0B1220] dark:shadow-[8px_8px_0_rgba(76,29,149,0.8)] p-8 md:p-12"
         >
           <motion.h1 
-            className="text-5xl md:text-7xl font-bold mb-6 dark:text-white"
+            className="text-5xl md:text-7xl font-bold mb-6 text-black dark:text-white"
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 }}
@@ -271,16 +277,25 @@ const Hero = () => {
             {translatedContent.greeting}
             <br />
             <span className="text-blue-500 dark:text-purple-400">
-              <TypeAnimation
-                sequence={animationSequence}
-                speed={50}
-                repeat={Infinity}
+              <span
+                ref={typeContainerRef}
                 className="inline-block"
-              />
+                style={{
+                  height: isMobile && typeMaxHeight ? `${typeMaxHeight}px` : undefined,
+                  overflow: isMobile ? 'hidden' as const : undefined,
+                }}
+              >
+                <TypeAnimation
+                  sequence={animationSequence}
+                  speed={50}
+                  repeat={Infinity}
+                  className="inline-block"
+                />
+              </span>
             </span>
           </motion.h1>
           
-          <p className="text-xl md:text-2xl mb-8 font-mono dark:text-gray-300">
+          <p className="text-xl md:text-2xl mb-8 font-mono text-gray-700 dark:text-gray-200">
             {translatedContent.tagline}
           </p>
 
@@ -296,7 +311,7 @@ const Hero = () => {
                   rotate: -2,
                   boxShadow: '6px 6px 0px 0px rgba(0,0,0,1)'
                 }}
-                className="flex items-center space-x-2 bg-black text-white dark:bg-purple-700 px-4 py-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(76,29,149,0.8)]"
+                className="flex items-center space-x-2 bg-zinc-900 text-white/90 dark:bg-purple-600 px-4 py-2 shadow-[4px_4px_0_#0B1220] dark:shadow-[4px_4px_0_rgba(76,29,149,0.6)]"
               >
                 <Icon size={20} />
                 <span className="font-mono">{text}</span>
@@ -304,7 +319,7 @@ const Hero = () => {
             ))}
           </div>
 
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-nowrap md:flex-wrap items-center gap-3 md:gap-4 w-full">
             <motion.button
               onClick={() => setIsCVModalOpen(true)}
               initial={{ opacity: 0, y: 20 }}
@@ -314,10 +329,11 @@ const Hero = () => {
                 scale: 1.05,
                 boxShadow: '6px 6px 0px 0px rgba(0,0,0,1)'
               }}
-              className="flex items-center space-x-2 bg-blue-500 dark:bg-purple-600 text-white px-6 py-3 border-2 border-black dark:border-gray-600 font-bold transition-all hover:bg-yellow-300 dark:hover:bg-indigo-500 hover:text-black dark:hover:text-white"
+              aria-label={translatedContent.downloadCV}
+              className="flex-1 flex items-center justify-center space-x-2 bg-blue-500 dark:bg-purple-600 text-white px-3 md:px-6 py-2 md:py-3 border-2 border-black dark:border-gray-600 font-bold transition-all hover:bg-yellow-300 dark:hover:bg-indigo-500 hover:text-black dark:hover:text-white active:scale-[0.98]"
             >
               <FileDown size={20} />
-              <span>{translatedContent.downloadCV}</span>
+              <span className="hidden md:inline">{translatedContent.downloadCV}</span>
             </motion.button>
 
             <motion.a
@@ -331,10 +347,11 @@ const Hero = () => {
                 scale: 1.05,
                 boxShadow: '6px 6px 0px 0px rgba(0,0,0,1)'
               }}
-              className="flex items-center space-x-2 bg-white dark:bg-gray-700 text-black dark:text-white px-6 py-3 border-2 border-black dark:border-gray-600 font-bold transition-all hover:bg-black hover:text-white dark:hover:bg-gray-900"
+              aria-label={translatedContent.viewGithub}
+              className="flex-1 flex items-center justify-center space-x-2 bg-white dark:bg-gray-700 text-black dark:text-white px-3 md:px-6 py-2 md:py-3 border-2 border-black/80 dark:border-gray-600 font-bold transition-all hover:bg-neutral-900 hover:text-white dark:hover:bg-gray-900 active:scale-[0.98]"
             >
               <Github size={20} />
-              <span>{translatedContent.viewGithub}</span>
+              <span className="hidden md:inline">{translatedContent.viewGithub}</span>
             </motion.a>
             
             <motion.a
@@ -348,10 +365,15 @@ const Hero = () => {
                 scale: 1.05,
                 boxShadow: '6px 6px 0px 0px rgba(0,0,0,1)'
               }}
-              className="flex items-center space-x-2 bg-[#14a800] text-white px-6 py-3 border-2 border-black dark:border-gray-600 font-bold transition-all hover:bg-[#0e8600]"
+              aria-label={translatedContent.hireUpwork}
+              className="flex-1 flex items-center justify-center space-x-2 bg-[#14a800] text-white px-3 md:px-6 py-2 md:py-3 border-2 border-black dark:border-gray-600 font-bold transition-all hover:bg-[#0e8600] active:scale-[0.98]"
             >
-              <ExternalLink size={20} />
-              <span>{translatedContent.hireUpwork}</span>
+              {(() => {
+                const upworkLookup: IconLookup = { prefix: 'fab', iconName: 'square-upwork' as any };
+                const icon = findIconDefinition(upworkLookup) || findIconDefinition({ prefix: 'fab', iconName: 'upwork' as any });
+                return <FontAwesomeIcon icon={icon} className="text-white" />;
+              })()}
+              <span className="hidden md:inline">{translatedContent.hireUpwork}</span>
             </motion.a>
           </div>
         </motion.div>
