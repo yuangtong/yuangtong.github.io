@@ -16,12 +16,17 @@ update this file under `[Unreleased]` in the same commit. See
 Owner decisions and housekeeping, to pick up later:
 
 - [ ] Archive version 1: tag `v1.0.0` and an archive branch on commit `db6054a`.
-- [ ] Framework for version 2 (Next.js or keep Vite).
 - [ ] The narrative the horse carries through the site.
 - [ ] Which current projects stay here and which move to the studio's site.
 - [ ] Site languages and which one is the source.
 - [ ] Remove tracked leftovers: `node_modules 2/`, `package-lock 2.json`,
       `nohup.out` and three `vite.config.ts.timestamp-*.mjs` files.
+
+### Changed
+
+- Version 2 will be built on Next.js with the App Router instead of the Vite
+  single-page app (owner decision, 2026-11-14). Recorded in `CLAUDE.md`; no
+  code has been migrated yet.
 
 ### Added
 
