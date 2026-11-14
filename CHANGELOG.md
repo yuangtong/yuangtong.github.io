@@ -19,6 +19,18 @@ Owner decisions and housekeeping, to pick up later:
 - [ ] The narrative the horse carries through the site.
 - [ ] Which current projects stay here and which move to the studio's site.
 - [ ] Site languages and which one is the source.
+- [ ] Lab piece "Camara tramada": a live camera, photo or video rendered
+      through the site's dithering effects (two-ink Bayer, error diffusion,
+      dot mesh, tiles, glyphs), with the effect applied only inside moving
+      blobs over the untouched image. Prototyped outside the repository; to be
+      built as the first lab piece once the Next.js migration starts.
+- [ ] Refine the blobs of that piece: organic contour deformed by noise,
+      less regular motion, and an edge that dissolves into dither instead of
+      a hard per-cell cut. Consider a shader if more resolution is needed.
+- [ ] Hand tracking for that piece with MediaPipe in the browser
+      (`@mediapipe/tasks-vision`, hand landmarker): a blob follows the
+      fingertip and leaves a trail. Runs on the visitor's device, no Python
+      and no server; load the model only when the camera is turned on.
 - [ ] Remove tracked leftovers: `node_modules 2/`, `package-lock 2.json`,
       `nohup.out` and three `vite.config.ts.timestamp-*.mjs` files.
 
