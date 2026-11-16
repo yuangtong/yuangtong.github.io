@@ -42,6 +42,10 @@ Owner decisions and housekeeping, to pick up later:
 
 ### Added
 
+- Design treatment for home exploration F (`docs/design/treatment-f.md`) and a
+  filmography log (`docs/design/filmography.md`). The film notes in the
+  treatment are written from memory and marked unverified.
+
 - Cross-agent contract (`AGENTS.md`), repository rules (`CLAUDE.md`), this
   changelog and the versioning policy (`docs/VERSIONING.md`), adapted from the
   FOMMO Studio website. They define the UI agent and CMS agent roles, the
