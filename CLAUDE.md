@@ -57,6 +57,16 @@ Decided with the owner. Do not drift from these without asking.
   to the pieces in the lab, where the visitor is invited to play.
 - The horse stays as the recurring figure. Its narrative is the owner's to
   write and is still pending; do not invent story beats or final copy.
+- Never state "creative coder" in the copy. The visitor must infer it from
+  the work. The hero carries the owner's name, his Chinese name (唐源) and a
+  short statement, currently "¿yo?, hago lo que quiero".
+- The section about FOMMO is called "studio". It only says that the owner
+  directs FOMMO and sends visitors to the studio's site; no client projects
+  are shown on this site.
+- The lab holds every creative practice, not only code: creative coding,
+  photography and music (DJ sets).
+- The site is international. The language selector lists the languages the
+  owner wants to learn, on purpose. Not designed yet.
 - The page layer is minimal and editorial; the motion lives in the canvas.
   Content is always real DOM text. `prefers-reduced-motion` gets composed still
   frames, never a broken page.

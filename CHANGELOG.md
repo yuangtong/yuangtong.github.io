@@ -36,6 +36,10 @@ Owner decisions and housekeeping, to pick up later:
 
 ### Changed
 
+- Design direction in `CLAUDE.md`: no literal "creative coder" claim, the
+  "studio" section only points to FOMMO, the lab covers code, photography and
+  music, and the language selector lists languages the owner wants to learn.
+
 - Version 2 will be built on Next.js with the App Router instead of the Vite
   single-page app (owner decision, 2026-11-14). Recorded in `CLAUDE.md`; no
   code has been migrated yet.
