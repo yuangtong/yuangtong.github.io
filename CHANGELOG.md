@@ -36,6 +36,11 @@ Owner decisions and housekeeping, to pick up later:
 
 ### Changed
 
+- Hero copy direction in `CLAUDE.md`: the role label "diseñador web y
+  programador creativo" ("web designer and creative coder") replaces the
+  statement "¿yo?, hago lo que quiero". The lab will also cover Strudel and
+  Hydra.
+
 - Design direction in `CLAUDE.md`: no literal "creative coder" claim, the
   "studio" section only points to FOMMO, the lab covers code, photography and
   music, and the language selector lists languages the owner wants to learn.
