@@ -31,6 +31,7 @@ export const settings: Settings = {
   crumbs: {
     '/lab/sisifo': [{ label: 'lab', href: '/lab' }, { label: 'sísifo feliz', href: '/lab/sisifo' }],
     '/lab/lalande': [{ label: 'lab', href: '/lab' }, { label: 'lalande', href: '/lab/lalande' }],
+    '/notas/jinete': [{ label: 'notas', href: '/notas' }, { label: 'quitarle el jinete', href: '/notas/jinete' }],
     '/lab/archivo': [
       { label: 'lab', href: '/lab' },
       { label: 'archivo.exe', href: '/lab/archivo' },
