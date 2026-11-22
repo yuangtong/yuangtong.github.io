@@ -1,4 +1,4 @@
-import type { ArchivePage, ContactPage, HomePage, LabPage, NotesPage, NotFoundPage, StudioPage } from '../types';
+import type { ArchivePage, ContactPage, HomePage, LabPage, NotesPage, NotFoundPage, StoryPage, StudioPage } from '../types';
 
 export const home: HomePage = {
   intro: {
@@ -48,7 +48,7 @@ export const labPage: LabPage = {
   title: 'el lab',
   lead: 'historias, juegos con la cámara y mi archivo de fotos. cada pieza se puede retramar y compartir.',
   doors: [
-    { id: 'historias', title: 'historias', text: 'Sísifo con el caballo de Muybridge y Lalande con Clarice Lispector, contadas en píxeles.', cta: { label: 'ver historias', href: '/lab#pieza-medio' } },
+    { id: 'sisifo', title: 'Sísifo', text: 'el galope de Muybridge de 1878 contado como Sísifo: doce hilos, la colina y la roca que vuelve a rodar.', cta: { label: 'ver Sísifo', href: '/lab/sisifo' } },
     { id: 'camara', title: 'cámara', text: 'tu cámara tramada en vivo. elige la celda y guarda tu versión.', cta: { label: 'abrir la cámara', href: '/lab#pieza-camara' } },
     { id: 'archivo', title: 'archivo.exe', text: 'mis fotos de california y nevada, febrero de 2017. muévelas, ábrelas, pixélalas.', cta: { label: 'abrir archivo.exe', href: '/lab/archivo' } },
   ],
@@ -107,6 +107,13 @@ export const contactPage: ContactPage = {
   },
 };
 
+
+export const sisyphusPage: StoryPage = {
+  title: 'Sísifo',
+  label: 'Sísifo, el galope de Muybridge de 1878 contado con narración',
+  hint: 'baja para contar la historia',
+  replay: 'de nuevo',
+};
 
 export const archivePage: ArchivePage = {
   title: 'archivo.exe',

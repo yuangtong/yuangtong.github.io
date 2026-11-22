@@ -4,12 +4,14 @@ import { useEffect, useRef, useState } from 'react';
 import type { HomePage, Link, Settings } from '@/content/types';
 import { prefersReducedMotion } from '@/lib/dither';
 import { loadGallop } from '@/lib/media';
-import { canvasSize, createLanding, DESKTOP, fitConfig, MOBILE, span, type LandingConfig, type LandingDom } from '@/lib/landing-engine';
+import { canvasSize, createLanding, DESKTOP, fitConfig, MOBILE, sectionStart, span, type LandingConfig, type LandingDom } from '@/lib/landing-engine';
 import { CarcomaLink, useCarcoma } from './Carcoma';
 import { LimaClock } from './LimaClock';
 import { MobileMenu } from './MobileMenu';
 
-type Props = { page: HomePage; nav: Link[]; links: Link[]; ui: Settings['ui']; glyphFamily: string };
+/** As a lab piece the story plays on its own page: narrated, with no hero, header or sheets. */
+type Piece = { label: string; hint: string; replay: string };
+type Props = { page: HomePage; nav: Link[]; links: Link[]; ui: Settings['ui']; glyphFamily: string; piece?: Piece };
 
 const pad = (n: number) => (n < 10 ? '0' : '') + n;
 const MOBILE_MAX = 760;
@@ -22,8 +24,14 @@ const sectionIndex = (hash: string) => ORDER.indexOf(hash.replace(/^#/, ''));
  * on phones) on the tighter axis of the window and extends on the other, so the
  * dot grid fills the screen edge to edge. Page scroll drives the timeline.
  */
-export function Landing({ page, nav, links, ui, glyphFamily }: Props) {
+export function Landing({ page, nav, links, ui, glyphFamily, piece }: Props) {
   const go = useCarcoma();
+  const narrated = !!piece || page.intro.narrated;
+  // the piece ends when the horse has turned into letters, before the sheets
+  const end = (c: LandingConfig) => (piece ? sectionStart(c) - 1 : span(c));
+  const [top, setTop] = useState(0);
+  const [phase, setPhase] = useState<'start' | 'mid' | 'end'>('start');
+  const phaseRef = useRef(phase);
   const [fit, setFit] = useState<{ mobile: boolean; C: LandingConfig; s: number }>({ mobile: false, C: DESKTOP, s: 1 });
   const { mobile, C, s: scale } = fit;
   const fitKey = `${mobile ? 'm' : 'd'}${C.W}x${C.H}`;
@@ -47,7 +55,9 @@ export function Landing({ page, nav, links, ui, glyphFamily }: Props) {
   useEffect(() => {
     let t = 0;
     const apply = () => {
-      const m = window.innerWidth < MOBILE_MAX, f = fitConfig(m ? MOBILE : DESKTOP, window.innerWidth, window.innerHeight);
+      const head = piece ? (document.querySelector('.site-header') as HTMLElement | null)?.offsetHeight ?? 0 : 0;
+      setTop(head);
+      const m = window.innerWidth < MOBILE_MAX, f = fitConfig(m ? MOBILE : DESKTOP, window.innerWidth, window.innerHeight - head);
       scaleRef.current = f.s;
       setFit((old) => (old.mobile === m && old.C.W === f.C.W && old.C.H === f.C.H && old.s === f.s ? old : { mobile: m, C: f.C, s: f.s }));
     };
@@ -66,7 +76,7 @@ export function Landing({ page, nav, links, ui, glyphFamily }: Props) {
       if (dead) return;
       setFlight(g.flight);
       engineRef.current = createLanding({
-        C, canvas, gallop: g, dom: () => dom.current, reduce, mode: 1, narrated: page.intro.narrated, glyphFamily,
+        C, canvas, gallop: g, dom: () => dom.current, reduce, mode: 1, narrated, glyphFamily,
         title: page.jugar.title, glyphText: page.intro.glyphText, labels: { camera: ui.cameraCounter, frame: ui.frameCounter },
         onFrame: (k) => pickFrame(k, false),
       });
@@ -79,7 +89,11 @@ export function Landing({ page, nav, links, ui, glyphFamily }: Props) {
       raf = requestAnimationFrame(loop);
       const eng = engineRef.current; if (!eng) return;
       const s = scaleRef.current, rect = wrap.getBoundingClientRect();
-      const target = Math.min(span(C), Math.max(0, -rect.top / s));
+      const target = Math.min(end(C), Math.max(0, (top - rect.top) / s));
+      if (piece) {
+        const ph = target < 40 ? 'start' : target >= end(C) - 2 ? 'end' : 'mid';
+        if (ph !== phaseRef.current) { phaseRef.current = ph; setPhase(ph); }
+      }
       sys += (target - sys) * (reduce ? 1 : 0.16);
       if (Math.abs(target - sys) < 0.5) sys = target;
       eng.frame({ sys, now, ptr: ptr.current, manual: manual.current, selected: selRef.current });
@@ -87,15 +101,15 @@ export function Landing({ page, nav, links, ui, glyphFamily }: Props) {
     raf = requestAnimationFrame(loop);
     return () => { dead = true; cancelAnimationFrame(raf); engineRef.current = null; };
     // the engine is rebuilt when the stage changes size or switches frame
-  }, [fitKey]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [fitKey, top]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => { engineRef.current?.remeasure(); }, [scale, mobile]);
 
   const scrollToSection = (k: number, instant = false) => {
     const wrap = wrapRef.current, eng = engineRef.current; if (!wrap) return;
-    const top = wrap.getBoundingClientRect().top + window.scrollY;
+    const at = wrap.getBoundingClientRect().top + window.scrollY - top;
     const y = k < 0 ? 0 : (eng ? eng.jumpOffset(k) : 0) * scaleRef.current;
-    window.scrollTo({ top: top + y, behavior: instant || prefersReducedMotion() ? 'auto' : 'smooth' });
+    window.scrollTo({ top: at + y, behavior: instant || prefersReducedMotion() ? 'auto' : 'smooth' });
   };
   const jump = (k: number) => (e: React.MouseEvent) => { e.preventDefault(); scrollToSection(k); };
   // "/#jugar" scrolls inside the landing; any other route goes through the carcoma
@@ -128,8 +142,8 @@ export function Landing({ page, nav, links, ui, glyphFamily }: Props) {
   );
 
   return (
-    <section id="inicio" ref={wrapRef} className="landing" style={{ height: `calc(100svh + ${span(C) * scale}px)` }}>
-      <div className="landing__sticky">
+    <section id={piece ? undefined : 'inicio'} ref={wrapRef} className={piece ? 'landing landing--piece' : 'landing'} aria-label={piece?.label} style={{ height: `calc(100svh - ${top}px + ${end(C) * scale}px)` }}>
+      <div className="landing__sticky" style={piece ? { top, height: `calc(100svh - ${top}px)` } : undefined}>
         <div
           ref={stageRef}
           className="stage"
@@ -140,7 +154,7 @@ export function Landing({ page, nav, links, ui, glyphFamily }: Props) {
         >
           <canvas ref={canvasRef} key={fitKey} className="stage__canvas" width={cv.w} height={cv.h} role="img" aria-label={intro.canvasLabel} />
 
-          <div ref={(el) => { dom.current.hero = el; }} className="stage__hero">
+          {!piece && <div ref={(el) => { dom.current.hero = el; }} className="stage__hero">
             <h1 className="stage__name">
               {mobile ? <>{intro.name.split(' ')[0]}<br />{intro.name.split(' ').slice(1).join(' ')}</> : intro.name}
               <span lang="zh-Hant" className="stage__zh">({intro.nameZh})</span>
@@ -153,9 +167,9 @@ export function Landing({ page, nav, links, ui, glyphFamily }: Props) {
                 </a>
               ))}
             </div>
-          </div>
+          </div>}
 
-          {intro.narrated && (
+          {narrated && (
             <>
               {intro.narration.lines.map((line, i) => (
                 <div key={i} ref={(el) => { dom.current.narr[i] = el; }} className="stage__narr"><p className="mark">{line}</p></div>
@@ -184,7 +198,14 @@ export function Landing({ page, nav, links, ui, glyphFamily }: Props) {
             )}
           </div>
 
-          <div ref={(el) => { dom.current.sheets = el; }} className="sheets" aria-hidden="true">
+          {piece && (
+            <div className="piece__ui">
+              {phase === 'start' && <p className="label piece__hint">{piece.hint} <span aria-hidden="true">↓</span></p>}
+              {phase === 'end' && <button type="button" className="btn btn--ink piece__replay" onClick={() => scrollToSection(-1)}>{piece.replay} <span aria-hidden="true">↑</span></button>}
+            </div>
+          )}
+
+          {!piece && <div ref={(el) => { dom.current.sheets = el; }} className="sheets" aria-hidden="true">
             <section ref={setSh(0)} id="jugar" aria-label={jugar.title} className="sheet sheet--jugar">
               {head(0)}
               <div ref={setIn(0)} className="sheet__inner">
@@ -230,9 +251,9 @@ export function Landing({ page, nav, links, ui, glyphFamily }: Props) {
                 <CarcomaLink href={contact.href} className="btn btn--paper sheet__enter">{ui.enterLabel} <span aria-hidden="true">-&gt;</span></CarcomaLink>
               </div>
             </section>
-          </div>
+          </div>}
 
-          <header className="stage__header">
+          {!piece && <header className="stage__header">
             <span className="stage__status">
               <span aria-hidden="true" className="stage__dot" />
               {intro.availability} <LimaClock />
@@ -245,7 +266,7 @@ export function Landing({ page, nav, links, ui, glyphFamily }: Props) {
                 {nav.map((l) => <a key={l.href} href={l.href} onClick={(e) => navigate(l.href, e)}>{l.label}</a>)}
               </nav>
             )}
-          </header>
+          </header>}
         </div>
       </div>
       {menuOpen && (
