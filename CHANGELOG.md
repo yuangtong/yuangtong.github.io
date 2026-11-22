@@ -15,7 +15,7 @@ update this file under `[Unreleased]` in the same commit. See
 
 Owner decisions and housekeeping, to pick up later:
 
-- [ ] Archive version 1: tag `v1.0.0` and an archive branch on commit `db6054a`.
+- [ ] Push the tag `v1.0.0` on commit `db6054a` (the branch `version-2025` already holds version 1).
 - [ ] The narrative the horse carries through the site.
 - [ ] Which current projects stay here and which move to the studio's site.
 - [ ] Site languages and which one is the source.
@@ -31,8 +31,6 @@ Owner decisions and housekeeping, to pick up later:
       (`@mediapipe/tasks-vision`, hand landmarker): a blob follows the
       fingertip and leaves a trail. Runs on the visitor's device, no Python
       and no server; load the model only when the camera is turned on.
-- [ ] Remove tracked leftovers, now under `archive/v1/`: `node_modules 2/`,
-      `package-lock 2.json`, `nohup.out` and three `vite.config.ts.timestamp-*.mjs` files.
 - [ ] Mobile framing of the opening: on portrait screens the canvas is
       cropped like `object-fit: cover`; the horse needs its own framing there.
 - [ ] Real values for the placeholders in content: contact links and email,
@@ -61,10 +59,11 @@ Owner decisions and housekeeping, to pick up later:
 
 ### Changed
 
-- Version 1 (Vite) moved to `archive/v1/` on this branch; `main` keeps serving
-  it until the owner switches.
+- Version 1 (Vite) is archived in the branch `version-2025` on `db6054a` and
+  removed from version 2, leftovers included (`node_modules 2/`, `nohup.out`,
+  `vite.config.ts.timestamp-*.mjs`).
 - Hosting is Vercel only: `netlify.toml` and the version 1 translation
-  function moved to `archive/v1/`. `package.json` declares `engines.node >= 20.9`,
+  function are removed (they remain in `version-2025`). `package.json` declares `engines.node >= 20.9`,
   as Next.js 16 requires.
 - `CLAUDE.md`: hero role label "creative coder y diseñador web", the Sisyphus
   narrative for the horse, and the migration status.

@@ -30,15 +30,14 @@ full policy is in [`docs/VERSIONING.md`](docs/VERSIONING.md).
 
 - Hosting is Vercel; Netlify is no longer used (owner, 2026-11-22). Version 2
   builds there as Next.js (`vercel.json`).
-- `main` still holds version 1 of the site (React, Vite, Tailwind) and
-  keeps serving `yuangtong.dev` until the owner decides the switch. Version 1 is
-  to be preserved, not deleted.
+- Version 1 of the site (React, Vite, Tailwind) is preserved in the branch
+  `version-2025` (and the tag `v1.0.0`), both on commit `db6054a`. It is not
+  carried into version 2; do not delete that branch.
 - The redesign (version 2) is developed on feature branches.
 - The CMS is Sanity (owner decision, 2026-11-13).
 - Version 2 is built on Next.js with the App Router (owner decision,
   2026-11-14), replacing the Vite single-page app. The migration started on
-  2026-11-22 on the feature branch: the home page is built, and the version 1
-  sources sit in `archive/v1/` on that branch (excluded from the build).
+  2026-11-22: the home page is built.
 - The visual direction is still being explored: the owner is collecting
   references and several design versions will be produced and combined. Treat
   the direction below as the current baseline, not as final.

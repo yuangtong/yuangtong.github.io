@@ -20,10 +20,9 @@ Copy `.env.example` to `.env.local` and set `NEXT_PUBLIC_SITE_URL`.
 - `src/components/`: sections of the home page.
 - `src/content/`: the content contract (types, fixtures, loaders). See `AGENTS.md`.
 - `src/lib/`: canvas engines, shared media loading and canvas tokens.
-- `archive/v1/`: version 1 (Vite), kept for reference and excluded from the build.
 
 Rules for contributors, human or AI: `CLAUDE.md` and `AGENTS.md`.
-Changes: `CHANGELOG.md`.
+Changes: `CHANGELOG.md`. Version 1 lives in the branch `version-2025`.
 
 Credits: the gallop is Eadweard Muybridge's, public domain. Floating shapes:
 Acid Dither Shapes by Pixelbuddha, commercial license.

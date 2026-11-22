@@ -1,9 +1,0 @@
-# Version 2: Next.js (App Router). Netlify detects Next.js and applies its runtime.
-# The version 1 translation function lives in archive/v1/netlify/functions.
-[build]
-  command = "npm run build"
-  publish = ".next"
-
-[build.environment]
-  # Next.js 16 needs Node.js 20.9 or newer.
-  NODE_VERSION = "22"
