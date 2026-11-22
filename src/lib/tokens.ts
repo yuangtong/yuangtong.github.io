@@ -53,3 +53,12 @@ export const acidRamps = [
   ['#0b14c9', '#050a6b', '#7a82ff', '#c9ccff'],
   ['#a937e1', '#ff3d24', '#1847ff', '#ffe600'],
 ] as const;
+
+/** archivo.exe palettes: one ink, a ramp, or the photo's own color. */
+export const archivePalettes = {
+  tinta: { ink: '#141414' },
+  azul: { ink: '#0b14c9' },
+  rojo: { ink: '#c41d23' },
+  acida: { ramp: ['#141414', '#0b14c9', '#a937e1', '#ff3d24', '#ffe600', '#ededeb'] },
+  color: {},
+} as const;

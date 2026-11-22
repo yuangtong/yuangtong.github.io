@@ -18,6 +18,22 @@
   --night-soft: #b9b9b4;
   --dot-rule: #b3b3ae;
 
+  /* archivo.exe (G8): a 1998 desktop. Bevels, the teal desk and the palette swatches. */
+  --w98-hi: #ffffff;
+  --w98-shade: #8b8b86;
+  --w98-idle: #b7b7b1;
+  --w98-pressed: #e2e2de;
+  --w98-sheet: #fbfbf8;
+  --w98-teal: #0e7c7b;
+  --w98-teal-dot: rgba(237, 237, 235, 0.24);
+  --w98-shadow: rgba(20, 20, 20, 0.35);
+  --electric: #1847ff;
+  --rojo: #c41d23;
+  --acid-violet: #a937e1;
+  --acid-red: #ff3d24;
+  --acid-yellow: #ffe600;
+  --acid-green: #2fb35a;
+
   --font-sans: var(--font-host), 'Helvetica Neue', Arial, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, Menlo, monospace;
   --font-zh: var(--font-noto-tc), sans-serif;
