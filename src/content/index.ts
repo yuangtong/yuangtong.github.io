@@ -1,5 +1,5 @@
-import type { ArchivePage, ContactPage, HomePage, LabPage, NotesPage, NotFoundPage, Settings, StudioPage } from './types';
-import { archivePage, contactPage, home, labPage, notesPage, notFound, studioPage } from './fixtures/home';
+import type { ArchivePage, ContactPage, HomePage, LabPage, NotesPage, NotFoundPage, Settings, StoryPage, StudioPage } from './types';
+import { archivePage, contactPage, home, labPage, notesPage, notFound, sisyphusPage, studioPage } from './fixtures/home';
 import { settings } from './fixtures/settings';
 
 /*
@@ -37,4 +37,8 @@ export async function getContactPage(): Promise<ContactPage> {
 
 export async function getArchivePage(): Promise<ArchivePage> {
   return archivePage;
+}
+
+export async function getSisyphusPage(): Promise<StoryPage> {
+  return sisyphusPage;
 }

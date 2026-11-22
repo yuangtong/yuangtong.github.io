@@ -366,3 +366,9 @@ img, canvas { display: block; }
 .contact__globe canvas:active { cursor: grabbing; }
 .contact__hint { margin: 0; text-align: right; color: var(--quiet); }
 @media (max-width: 760px) { .contact__globe { min-height: 360px; } .contact__globe canvas { min-height: 340px; } }
+
+/* ---------- lab pieces told with the landing's engine (Sísifo) ---------- */
+.section--piece { padding: 0; gap: 0; display: block; }
+.piece__ui { position: absolute; inset: auto 0 0; z-index: 5; display: flex; justify-content: center; padding: var(--s-6); pointer-events: none; }
+.piece__hint { background: var(--paper); padding: var(--s-1) var(--s-2); color: var(--ink); }
+.piece__replay { pointer-events: auto; }
