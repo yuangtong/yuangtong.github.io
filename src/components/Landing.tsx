@@ -8,6 +8,7 @@ import { canvasSize, createLanding, DESKTOP, fitConfig, MOBILE, sectionStart, sp
 import { CarcomaLink, useCarcoma } from './Carcoma';
 import { LimaClock } from './LimaClock';
 import { MobileMenu } from './MobileMenu';
+import { StudioSheetFx } from './StudioSheetFx';
 
 /** As a lab piece the story plays on its own page: narrated, with no hero, header or sheets. */
 type Piece = { label: string; hint: string; replay: string };
@@ -42,12 +43,13 @@ export function Landing({ page, nav, links, ui, glyphFamily, piece }: Props) {
   const wrapRef = useRef<HTMLElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const dom = useRef<LandingDom>({ hero: null, counter: null, strip: null, sheets: null, title: null, jside: null, sh: [], inner: [], narr: [] });
+  const dom = useRef<LandingDom>({ hero: null, counter: null, strip: null, sheets: null, title: null, jside: null, sh: [], inner: [], narr: [], heads: [] });
   const ptr = useRef<{ x: number; y: number } | null>(null);
   const manual = useRef(false);
   const selRef = useRef<number | null>(null);
   const engineRef = useRef<ReturnType<typeof createLanding> | null>(null);
   const scaleRef = useRef(1);
+  const brandRef = useRef<HTMLSpanElement>(null);
 
   const pickFrame = (k: number, byHand: boolean) => { manual.current = byHand; selRef.current = k; setSelected(k); };
 
@@ -71,7 +73,7 @@ export function Landing({ page, nav, links, ui, glyphFamily, piece }: Props) {
     const canvas = canvasRef.current, wrap = wrapRef.current;
     if (!canvas || !wrap) return;
     const reduce = prefersReducedMotion();
-    let raf = 0, dead = false, sys = 0;
+    let raf = 0, dead = false, sys = 0, cursorOn = false;
     Promise.all([loadGallop(), piece ? Promise.resolve(null) : loadRider().catch(() => null)]).then(([g, rider]) => {
       if (dead) return;
       setFlight(g.flight);
@@ -97,9 +99,11 @@ export function Landing({ page, nav, links, ui, glyphFamily, piece }: Props) {
       sys += (target - sys) * (reduce ? 1 : 0.16);
       if (Math.abs(target - sys) < 0.5) sys = target;
       eng.frame({ sys, now, ptr: ptr.current, manual: manual.current, selected: selRef.current });
+      // the dithered cursor wakes up once the story is over
+      if (!piece) { const cur = sys >= C.VOID + C.STORY + C.TEXT * 0.3; if (cur !== cursorOn) { cursorOn = cur; document.documentElement.toggleAttribute('data-cursor', cur); } }
     };
     raf = requestAnimationFrame(loop);
-    return () => { dead = true; cancelAnimationFrame(raf); engineRef.current = null; };
+    return () => { dead = true; cancelAnimationFrame(raf); engineRef.current = null; if (!piece) document.documentElement.removeAttribute('data-cursor'); };
     // the engine is rebuilt when the stage changes size or switches frame
   }, [fitKey, top]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -218,7 +222,7 @@ export function Landing({ page, nav, links, ui, glyphFamily, piece }: Props) {
             <section ref={setSh(1)} id="lab" aria-label={lab.title} className="sheet">
               {head(1)}
               <div ref={setIn(1)} className="sheet__inner sheet__fill">
-                <h2 className="sheet__title">{lab.title}</h2>
+                <h2 className="sheet__title" aria-label={lab.title}><span ref={(el) => { dom.current.heads![1] = el; }} data-text={lab.title} aria-hidden="true">{lab.title}</span></h2>
                 <p className="sheet__line">{lab.line}</p>
                 <CarcomaLink href={lab.href} className="btn btn--ink sheet__enter">{ui.enterLabel} <span aria-hidden="true">-&gt;</span></CarcomaLink>
               </div>
@@ -227,7 +231,7 @@ export function Landing({ page, nav, links, ui, glyphFamily, piece }: Props) {
             <section ref={setSh(2)} id="notas" aria-label={notes.title} className="sheet">
               {head(2)}
               <div ref={setIn(2)} className="sheet__inner sheet__fill">
-                <h2 className="sheet__title">{notes.title}</h2>
+                <h2 className="sheet__title" aria-label={notes.title}><span ref={(el) => { dom.current.heads![2] = el; }} data-text={notes.title} aria-hidden="true">{notes.title}</span></h2>
                 <p className="sheet__line">{notes.line}</p>
                 <CarcomaLink href={notes.href} className="btn btn--ink sheet__enter">{ui.enterLabel} <span aria-hidden="true">-&gt;</span></CarcomaLink>
               </div>
@@ -236,7 +240,8 @@ export function Landing({ page, nav, links, ui, glyphFamily, piece }: Props) {
             <section ref={setSh(3)} id="studio" aria-label={studio.title} className="sheet sheet--studio">
               {head(3)}
               <div ref={setIn(3)} className="sheet__inner sheet__fill">
-                <p className="studio__lead">{studio.line}</p>
+                <StudioSheetFx word={brandRef} />
+                <p className="studio__lead">{studio.line.split(studio.brand)[0]}<span ref={brandRef} className="studio__brand">{studio.brand}</span>{studio.line.split(studio.brand).slice(1).join(studio.brand)}</p>
                 <p className="studio__sub">{studio.sub}</p>
                 <CarcomaLink href={studio.href} className="btn btn--paper-signal sheet__enter">{ui.enterLabel} <span aria-hidden="true">-&gt;</span></CarcomaLink>
               </div>
@@ -245,7 +250,7 @@ export function Landing({ page, nav, links, ui, glyphFamily, piece }: Props) {
             <section ref={setSh(4)} id="contacto" aria-label={contact.title} className="sheet sheet--contact">
               {head(4)}
               <div ref={setIn(4)} className="sheet__inner sheet__fill">
-                <h2 className="contact__title">{contact.title}</h2>
+                <h2 className="contact__title" aria-label={contact.title}><span ref={(el) => { dom.current.heads![4] = el; }} data-text={contact.title} aria-hidden="true">{contact.title}</span></h2>
                 <p className="contact__lead">{contact.line} <a href={contact.email.href}>{contact.email.label}</a></p>
                 <CarcomaLink href={contact.href} className="btn btn--paper sheet__enter">{ui.enterLabel} <span aria-hidden="true">-&gt;</span></CarcomaLink>
               </div>

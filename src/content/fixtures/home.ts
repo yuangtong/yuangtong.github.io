@@ -31,7 +31,7 @@ export const home: HomePage = {
   sheets: {
     lab: { title: 'el lab', line: 'historias, juegos con la cámara y mi archivo de fotos.', href: '/lab' },
     notes: { title: 'notas', line: 'cómo está hecha cada pieza, escrito mientras la construyo.', href: '/notas' },
-    studio: { title: 'studio', line: 'dirijo FOMMO, un bespoke studio. el trabajo para clientes vive ahí.', sub: 'marca, producto y desarrollo, hechos a medida.', href: '/studio' },
+    studio: { title: 'studio', line: 'dirijo FOMMO, un bespoke studio. el trabajo para clientes vive ahí.', sub: 'marca, producto y desarrollo, hechos a medida.', brand: 'FOMMO', href: '/studio' },
     contact: { title: 'hablemos', line: 'escríbeme a', email: { label: 'hola@yuangtong.dev', href: 'mailto:hola@yuangtong.dev' }, href: '/contacto' },
   },
 };
