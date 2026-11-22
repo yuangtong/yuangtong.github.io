@@ -3,3 +3,7 @@
 [build]
   command = "npm run build"
   publish = ".next"
+
+[build.environment]
+  # Next.js 16 needs Node.js 20.9 or newer.
+  NODE_VERSION = "22"
