@@ -69,6 +69,8 @@ export type LandingInput = {
 export type LandingOptions = {
   C: LandingConfig; canvas: HTMLCanvasElement; gallop: Gallop; dom: () => LandingDom;
   reduce: boolean; mode: 0 | 1 | 2; narrated: boolean; glyphFamily: string;
+  /** The rider in the hero; he lets go of the horse as the void opens. */
+  rider?: Uint8Array[] | null;
   title: string; glyphText: string; labels: { camera: string; frame: string };
   /** The pointer chose a frame in the air. */
   onFrame: (k: number) => void;
@@ -99,6 +101,8 @@ export function createLanding(o: LandingOptions) {
   const VOID = C.VOID, STORY = C.STORY, TEXT = C.TEXT, SECT = C.SECT, SEC0 = sectionStart(C);
   const frames = o.gallop.frames, flight = o.gallop.flight, hoofLow = o.gallop.hoof || 172;
   const horse = (f: number, x: number, y: number) => { f = ((f % NF) + NF) % NF; return x < 0 || y < 0 || x >= FW || y >= FH ? 0 : frames[f][(y | 0) * FW + (x | 0)]; };
+  const riders = o.rider ?? null;
+  const rider = (f: number, x: number, y: number) => { if (!riders) return 0; f = ((f % NF) + NF) % NF; return x < 0 || y < 0 || x >= FW || y >= FH ? 0 : riders[f][(y | 0) * FW + (x | 0)]; };
 
   // disc masks for one P x P cell; the radius is in units of the 6 px grid
   const RS = (CS / 6) * K, MASK: Uint8Array[] = [];
@@ -178,6 +182,8 @@ export function createLanding(o: LandingOptions) {
     const ox = hcx - 150 / s1, oy = hcy - 88 / s1, f = step % NF;
     const acidAmt = o.mode === 0 ? 0 : o.mode === 2 ? 1 : smooth(0.25, 0.5, pB) * (1 - smooth(0.72, 0.9, pB));
     const openA = m * 1.35, echoes = hb < 0.7;
+    // the rider dissolves cell by cell, through the same ordered threshold, before the void opens
+    const riderAmt = riders ? 1 - smooth(0.02, 0.11, p) : 0;
     for (let r = 0; r < GR; r++) {
       const brow = (r & 3) * 4;
       for (let c = 0; c < GC; c++) {
@@ -194,6 +200,16 @@ export function createLanding(o: LandingOptions) {
         }
         const val = horse(f, (c - ox) * s1, (r - oy) * s1);
         if (val) { fg = HORSE; msk = mi(0.4 + 2.6 * (0.5 + (0.5 * (val - 120)) / 135)); }
+        else if (riderAmt > 0 && ACT[idx] < riderAmt) {
+          // the rider keeps the photo's tones, in the horse's blue
+          const rv = rider(f, (c - ox) * s1, (r - oy) * s1);
+          if (rv > 30) { fg = HORSE; msk = mi(0.4 + 2.6 * (0.5 + (0.5 * (rv - 120)) / 135)); }
+          else if (!isVoid && echoes) {
+            let hit = 0;
+            for (let e = 1; e <= 6; e++) if (horse(f - e, (c - ox) * s1 + e * 15.3, (r - oy) * s1)) { hit = e; break; }
+            if (hit) { fg = ECHO; msk = mi(Math.max(0.8, 2.4 - hit * 0.25)); }
+          }
+        }
         else if (!isVoid && echoes) {
           let hit = 0;
           for (let e = 1; e <= 6; e++) if (horse(f - e, (c - ox) * s1 + e * 15.3, (r - oy) * s1)) { hit = e; break; }

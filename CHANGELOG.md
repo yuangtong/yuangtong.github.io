@@ -44,6 +44,7 @@ Owner decisions and housekeeping, to pick up later:
 - [ ] Logo and favicon: pick one of the proposals in the design canvas.
 
 ### Added
+- The landing opens with the rider on the horse, in the same dot grid and the horse's blue, with the photograph's tones (dark jacket and cap, light breeches). As the void starts to open he dissolves cell by cell through the ordered threshold, and only the horse goes on (owner, 2026-11-22). The rider (`public/media/galope-jinete.png`, 15 frames of 300 x 176, tones on the horse's scale) is taken out of Muybridge's original photographs (public domain) and aligned to the silhouettes; `loadRider` loads them, and the engine's `rider` option draws them. The lab piece of sísifo feliz starts without him.
 - Travesía ácida as a piece in the lab at `/lab/travesia` (canvas "lab: travesía ácida"), with the crumb "02 el lab / travesía ácida" and its door in the lab. It is the landing's void with no bottom: nested squares turn in the dot grid, the zoom never ends, and every twelve layers the acid changes (azul, violeta, rojo, amarillo), dithered over three layers.
   - Scroll moves you through it, forward and back, and it also drifts on its own. While the pointer is over it, the scroll moves the tunnel and not the page. The centre follows the cursor.
   - On phones, swiping up goes deeper and a tap changes the colour.

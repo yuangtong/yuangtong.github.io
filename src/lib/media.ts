@@ -49,6 +49,25 @@ export function loadGallop(): Promise<Gallop> {
   }));
 }
 
+/**
+ * The rider, taken out of the original photographs and aligned to the
+ * silhouettes (same 15 frames, 300 x 176): the landing opens with him on the
+ * horse and lets him go as the void opens.
+ */
+let rider: Promise<Uint8Array[]> | null = null;
+export function loadRider(): Promise<Uint8Array[]> {
+  return (rider ??= loadImage('/media/galope-jinete.png').then((im) => {
+    const { w, h, count } = GALLOP;
+    const x = draw(im, w * count, h), out: Uint8Array[] = [];
+    for (let f = 0; f < count; f++) {
+      const d = x.getImageData(f * w, 0, w, h).data, a = new Uint8Array(w * h);
+      for (let k = 0; k < a.length; k++) a[k] = d[k * 4];
+      out.push(a);
+    }
+    return out;
+  }));
+}
+
 let original: Promise<Float32Array[]> | null = null;
 export function loadOriginal(): Promise<Float32Array[]> {
   return (original ??= loadImage('/media/galope-original.jpg').then((im) => {
