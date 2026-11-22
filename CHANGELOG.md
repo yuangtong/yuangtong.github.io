@@ -59,7 +59,7 @@ Owner decisions and housekeeping, to pick up later:
 
 ### Changed
 
-- Version 1 (Vite) is archived in the branch `version-2025` on `db6054a` and
+- Version 1 (Vite) is kept in the branches `version-1` and `version-2025` on `db6054a` and
   removed from version 2, leftovers included (`node_modules 2/`, `nohup.out`,
   `vite.config.ts.timestamp-*.mjs`).
 - Hosting is Vercel only: `netlify.toml` and the version 1 translation

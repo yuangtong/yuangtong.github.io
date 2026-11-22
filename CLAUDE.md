@@ -30,9 +30,10 @@ full policy is in [`docs/VERSIONING.md`](docs/VERSIONING.md).
 
 - Hosting is Vercel; Netlify is no longer used (owner, 2026-11-22). Version 2
   builds there as Next.js (`vercel.json`).
-- Version 1 of the site (React, Vite, Tailwind) is preserved in the branch
-  `version-2025` (and the tag `v1.0.0`), both on commit `db6054a`. It is not
-  carried into version 2; do not delete that branch.
+- Version 1 of the site (React, Vite, Tailwind) is preserved in the branches
+  `version-1` and `version-2025`, both on commit `db6054a`, for the owner to
+  download. Version 2 replaces `main` completely; version 1 is not archived
+  inside it. Do not delete those branches.
 - The redesign (version 2) is developed on feature branches.
 - The CMS is Sanity (owner decision, 2026-11-13).
 - Version 2 is built on Next.js with the App Router (owner decision,

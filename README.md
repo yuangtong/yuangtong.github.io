@@ -22,7 +22,7 @@ Copy `.env.example` to `.env.local` and set `NEXT_PUBLIC_SITE_URL`.
 - `src/lib/`: canvas engines, shared media loading and canvas tokens.
 
 Rules for contributors, human or AI: `CLAUDE.md` and `AGENTS.md`.
-Changes: `CHANGELOG.md`. Version 1 lives in the branch `version-2025`.
+Changes: `CHANGELOG.md`. Version 1 lives in the branch `version-1`.
 
 Credits: the gallop is Eadweard Muybridge's, public domain. Floating shapes:
 Acid Dither Shapes by Pixelbuddha, commercial license.
