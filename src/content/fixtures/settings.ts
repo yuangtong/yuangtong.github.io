@@ -25,6 +25,8 @@ export const settings: Settings = {
     frameCounter: 'cuadro',
     readNoteLabel: 'leer la nota',
     enterLabel: 'entrar',
+    navLabel: 'Principal',
+    crumbLabel: 'Sección',
   },
   crumbs: {
     '/lab/archivo': [

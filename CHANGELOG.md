@@ -63,6 +63,7 @@ Owner decisions and housekeeping, to pick up later:
 
 ### Changed
 
+- The section pages share the landing's header (G7.4): the status and the navigation sit on the rule over a paper-2 band, and below it the section's folded strip, numbered as on the landing ("02 el lab"), with the crumb for a sub-level ("02 el lab / archivo.exe"). The active section is underlined in signal instead of a blue tab. The navigation and strip labels are content (`navLabel`, `crumbLabel`).
 - On phones the menu opens through the carcoma: the shapes cover the screen and the menu is there when they clear (owner idea, 2026-11-22). `useCarcoma()` now takes a path or a change to make while the screen is covered.
 - Home page moved to design G7.4 (desktop and phone): the hero gallop, the
   spiral void, Sisyphus without written narration (it stays available in
