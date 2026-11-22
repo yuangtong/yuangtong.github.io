@@ -44,6 +44,13 @@ Owner decisions and housekeeping, to pick up later:
 - [ ] Logo and favicon: pick one of the proposals in the design canvas.
 
 ### Added
+- Lalande, lágrimas de ángel, as a piece in the lab at `/lab/lalande` (design "Lalande v4", Historias project), with the crumb "02 el lab / Lalande". As you scroll:
+  - the horse in the air comes apart and its letters spell "Lalande";
+  - the word becomes a drop that falls on a small narcissus against a dithered blue sky, with two quotes from Clarice Lispector, and the pointer is the breeze;
+  - the narcissus spins and implodes into red, and the real book (Perto do coração selvagem, Rocco) is born from that point, turns and opens on its quote;
+  - the close is embroidered in cross-stitch and ends on "de nuevo".
+
+  The 1440 x 900 scene keeps its scale on the tighter axis, and the grid fills the rest. The lab gets its "Lalande" door. Dancing Script (OFL) is added for the embroidered close only (`--font-cursive`), and the book and scene colours are tokens. `LalandePage` and `getLalandePage` carry its copy.
 - Sísifo as a piece in the lab at `/lab/sisifo`, with the crumb "02 el lab / Sísifo": the landing's story on its own page with the narration on (the three lines, Camus' quote and the coda), from the gallop through the dive and the hill to the horse in letters, where "de nuevo" goes back to the start. The landing keeps telling it with the animation only. The lab's "historias" door becomes the "Sísifo" door; stories are pieces in the lab with their own names (owner decision, 2026-11-22). `StoryPage` and `getSisyphusPage` carry its copy.
 - Contact at `/contacto` from design G8 (contacto v2): a dot-grid globe with land from Natural Earth 1:110m (public domain), rasterized to 2-degree cells, that turns and can be dragged; a great-circle arc in dots joins Lima with the visitor's place, taken from the time zone without asking for a location. Two clocks (Lima and the visitor), the email and GitHub; Upwork and Instagram stay off until their real links are in content. `ContactPage` carries the clock, globe and place strings; `ContactLink` adds the handle.
 - Studio at `/studio` from design G8 (estudio v3): acid shapes land on the edges in FOMMO's colours and eat the paper, their front a flicker of glyphs; the colour heals through a Bayer threshold and falls as glyph rain, and "FOMMO Studio" splits its colour now and then. It leans toward the pointer. One line about the studio and "ir a la página de FOMMO"; no FOMMO typography. Reduced motion gets one composed still frame. `StudioPage` now carries `eyebrow`, `name`, `lead`, `cta` and `canvasLabel`; FOMMO's colours are tokens (`fommoLines`).

@@ -112,6 +112,15 @@ export type LabPage = { title: string; lead: string; doors: LabDoor[]; experimen
 /** A story in the lab, told with the landing's engine and its narration on. */
 export type StoryPage = { title: string; label: string; hint: string; replay: string };
 
+/** Lalande, historia 02: Clarice Lispector's narcissus and her book. */
+export type LalandePage = {
+  title: string; canvasLabel: string; hint: string; replay: string;
+  quotes: { text: string; source: string }[];
+  spec: string[]; breezeLabel: string; breezeHint: string;
+  book: { label: string; author: string; title: string; quote: string; quoteSource: string };
+  closeText: string; closeTitle: string;
+};
+
 export type ArchivePalette = 'tinta' | 'azul' | 'rojo' | 'acida' | 'color';
 
 /** A photo in archivo.exe. `cell` 0 is the original photo; `spot` places the print on the desk (0..1). */

@@ -1,4 +1,4 @@
-import type { ArchivePage, ContactPage, HomePage, LabPage, NotesPage, NotFoundPage, StoryPage, StudioPage } from '../types';
+import type { ArchivePage, ContactPage, HomePage, LabPage, LalandePage, NotesPage, NotFoundPage, StoryPage, StudioPage } from '../types';
 
 export const home: HomePage = {
   intro: {
@@ -49,6 +49,7 @@ export const labPage: LabPage = {
   lead: 'historias, juegos con la cámara y mi archivo de fotos. cada pieza se puede retramar y compartir.',
   doors: [
     { id: 'sisifo', title: 'Sísifo', text: 'el galope de Muybridge de 1878 contado como Sísifo: doce hilos, la colina y la roca que vuelve a rodar.', cta: { label: 'ver Sísifo', href: '/lab/sisifo' } },
+    { id: 'lalande', title: 'Lalande, lágrimas de ángel', text: 'una palabra de Clarice Lispector cae como gota sobre un narciso pequeño. tú eres la brisa.', cta: { label: 'ver Lalande', href: '/lab/lalande' } },
     { id: 'camara', title: 'cámara', text: 'tu cámara tramada en vivo. elige la celda y guarda tu versión.', cta: { label: 'abrir la cámara', href: '/lab#pieza-camara' } },
     { id: 'archivo', title: 'archivo.exe', text: 'mis fotos de california y nevada, febrero de 2017. muévelas, ábrelas, pixélalas.', cta: { label: 'abrir archivo.exe', href: '/lab/archivo' } },
   ],
@@ -113,6 +114,27 @@ export const sisyphusPage: StoryPage = {
   label: 'Sísifo, el galope de Muybridge de 1878 contado con narración',
   hint: 'baja para contar la historia',
   replay: 'de nuevo',
+};
+
+export const lalandePage: LalandePage = {
+  title: 'Lalande, lágrimas de ángel',
+  canvasLabel: 'El caballo de Muybridge, hecho de letras, se deshace y forma la palabra Lalande. La palabra se vuelve una gota que cae sobre un narciso pequeño contra un cielo azul. El narciso se mece, gira e implosiona, y en su lugar aparece el libro de Clarice Lispector entre lluvia de letras.',
+  hint: 'baja para leer',
+  replay: 'de nuevo',
+  quotes: [
+    { text: '«Lalande. Es como lágrimas de ángel.»', source: 'Clarice Lispector, Cerca del corazón salvaje' },
+    { text: '«…la brisa más ligera lo mueve a un lado y a otro.»', source: 'Clarice Lispector, Cerca del corazón salvaje' },
+  ],
+  spec: ['narciso pequeño', 'lágrimas de ángel'],
+  breezeLabel: 'brisa',
+  breezeHint: 'mueve el cursor: eres la brisa',
+  book: {
+    label: 'Perto do coração selvagem, de Clarice Lispector, edición de Rocco, con tapa roja',
+    author: 'clarice lispector', title: 'perto do coração selvagem',
+    quote: '«Libertad es poco. Lo que deseo aún no tiene nombre.»', quoteSource: 'Clarice Lispector',
+  },
+  closeText: 'Clarice Lispector',
+  closeTitle: 'Cerca del corazón salvaje, 1943',
 };
 
 export const archivePage: ArchivePage = {
