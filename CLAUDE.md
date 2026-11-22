@@ -28,7 +28,9 @@ full policy is in [`docs/VERSIONING.md`](docs/VERSIONING.md).
 
 ## State of the repository
 
-- `main` still holds version 1 of the site (React, Vite, Tailwind, Netlify) and
+- Hosting is Vercel; Netlify is no longer used (owner, 2026-11-22). Version 2
+  builds there as Next.js (`vercel.json`).
+- `main` still holds version 1 of the site (React, Vite, Tailwind) and
   keeps serving `yuangtong.dev` until the owner decides the switch. Version 1 is
   to be preserved, not deleted.
 - The redesign (version 2) is developed on feature branches.

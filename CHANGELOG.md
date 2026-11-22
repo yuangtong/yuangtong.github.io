@@ -62,12 +62,10 @@ Owner decisions and housekeeping, to pick up later:
 ### Changed
 
 - Version 1 (Vite) moved to `archive/v1/` on this branch; `main` keeps serving
-  it until the owner switches. Netlify now builds Next.js.
-- The version 1 translation function (`netlify/functions/translate.js`, which
-  needs `axios`) moved to `archive/v1/netlify/functions/`; version 2 does not
-  call it, and it broke the Netlify build.
-- Node.js 22 pinned for Netlify (`netlify.toml`) and `engines.node >= 20.9`
-  in `package.json`, as Next.js 16 requires.
+  it until the owner switches.
+- Hosting is Vercel only: `netlify.toml` and the version 1 translation
+  function moved to `archive/v1/`. `package.json` declares `engines.node >= 20.9`,
+  as Next.js 16 requires.
 - `CLAUDE.md`: hero role label "creative coder y diseñador web", the Sisyphus
   narrative for the horse, and the migration status.
 
