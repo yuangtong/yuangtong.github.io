@@ -34,8 +34,8 @@ export type Intro = {
   glyphText: string;
 };
 
-/** First sheet: the horse made of letters that move away from the pointer. */
-export type Jugar = { title: string; hint: string; hintTouch: string };
+/** First sheet: the horse made of letters; the pointer nudges them as it passes. */
+export type Jugar = { title: string };
 
 export type ExperimentVisual = 'medio' | 'camara' | 'dona' | 'fotos';
 
@@ -118,6 +118,8 @@ export type LalandePage = {
   quotes: { text: string; source: string }[];
   spec: string[]; breezeLabel: string; breezeHint: string;
   book: { label: string; author: string; title: string; quote: string; quoteSource: string };
+  /** The word the horse's letters spell. */
+  word: string;
   closeText: string; closeTitle: string;
 };
 

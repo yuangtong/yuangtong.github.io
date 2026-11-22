@@ -24,7 +24,8 @@ const smooth = (a: number, b: number, v: number) => { v = clamp((v - a) / (b - a
 const bell = (q: number, a: number, b: number) => smooth(a, a + 0.03, q) * (1 - smooth(b - 0.03, b, q));
 function h2(i: number, j: number) { let h = Math.imul(i, 374761393) ^ Math.imul(j, 668265263); h = Math.imul(h ^ (h >>> 13), 1274126177); return ((h ^ (h >>> 16)) >>> 0) / 4294967296; }
 const BAYN = BAYER.map((v) => (v + 0.5) / 16);
-const WORD = 'lalande', TEAR = 'lagrimasdeangel', RAIN = 'lalandelagrimasdeangelnarcisomarmadrugada';
+const WORD = 'lalande', // the letters the horse carries
+  TEAR = 'lagrimasdeangel', RAIN = 'lalandelagrimasdeangelnarcisomarmadrugada';
 type V3 = [number, number, number];
 const norm = (a: V3): V3 => { const l = Math.hypot(a[0], a[1], a[2]) || 1; return [a[0] / l, a[1] / l, a[2] / l]; };
 const cross = (a: V3, b: V3): V3 => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
@@ -37,7 +38,7 @@ export type LalandeOptions = {
   canvas: HTMLCanvasElement; gallop: Gallop; dom: () => LalandeDom; reduce: boolean;
   /** Grid size in design pixels (at least the frame). */
   W: number; H: number;
-  fonts: { word: string; mono: string; script: string }; closeText: string; breezeLabel: string;
+  fonts: { word: string; mono: string; script: string }; word: string; closeText: string; breezeLabel: string;
 };
 
 type FP = { ty: number; x?: number; y?: number; z?: number; g?: number; sl?: number; lx?: number; ly?: number; lz?: number; u?: V3; v?: V3; n?: V3; a?: number; pet?: number; rim?: boolean };
@@ -74,7 +75,7 @@ export function createLalande(o: LalandeOptions) {
     const oc = document.createElement('canvas'); oc.width = W; oc.height = H;
     const x = oc.getContext('2d', { willReadFrequently: true })!;
     x.fillStyle = '#000'; x.textAlign = 'center'; x.textBaseline = 'middle'; x.font = `300 330px ${o.fonts.word}`;
-    x.fillText('Lalande', CX, OY + 460);
+    x.fillText(o.word, CX, OY + 460);
     const d = x.getImageData(0, 0, W, H).data;
     wordCells = [];
     for (let r = 0; r < ROWS; r++) for (let c = 0; c < COLS; c++) { const px = c * G + G / 2, py = r * G + G / 2; if (d[(py * W + px) * 4 + 3] > 110) wordCells.push({ x: px, y: py, h: h2(c + 3, r + 5) }); }
