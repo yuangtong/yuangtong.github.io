@@ -63,6 +63,9 @@ Owner decisions and housekeeping, to pick up later:
 
 - Version 1 (Vite) moved to `archive/v1/` on this branch; `main` keeps serving
   it until the owner switches. Netlify now builds Next.js.
+- The version 1 translation function (`netlify/functions/translate.js`, which
+  needs `axios`) moved to `archive/v1/netlify/functions/`; version 2 does not
+  call it, and it broke the Netlify build.
 - `CLAUDE.md`: hero role label "creative coder y diseñador web", the Sisyphus
   narrative for the horse, and the migration status.
 
