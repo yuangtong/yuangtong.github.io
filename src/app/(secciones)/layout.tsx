@@ -1,5 +1,6 @@
 import { getContactPage, getHomePage, getSettings } from '@/content';
 import { SiteHeader } from '@/components/SiteHeader';
+import { CursorOn } from '@/components/CursorOn';
 
 const pad = (n: number) => String(n).padStart(2, '0');
 
@@ -16,6 +17,7 @@ export default async function SectionsLayout({ children }: { children: React.Rea
   ].map((s, i) => ({ ...s, n: pad(i + 2) }));
   return (
     <div className="section-shell">
+      <CursorOn />
       <SiteHeader nav={settings.nav} links={contact.links} ui={settings.ui} name={home.intro.name} nameZh={home.intro.nameZh} availability={home.intro.availability} crumbs={settings.crumbs} strips={strips} />
       {children}
     </div>

@@ -34,7 +34,7 @@ img, canvas { display: block; }
 .stage__hero { position: absolute; inset: 0; padding: 72px 32px 32px; display: flex; flex-direction: column; z-index: 2; pointer-events: none; }
 .stage__name { margin: 0; font-size: 208px; line-height: 0.84; font-weight: 300; letter-spacing: var(--track-display); }
 .stage__zh { margin-left: 20px; font-size: 72px; line-height: 1; letter-spacing: 0; vertical-align: top; font-family: var(--font-zh); font-weight: 300; }
-.stage__role { align-self: flex-start; margin: 28px 0 0; background: var(--paper); padding: 6px 12px 10px 4px; font-size: 48px; line-height: 1.05; font-weight: 300; letter-spacing: var(--track-title); }
+.stage__role { align-self: flex-start; margin: 64px 0 0; background: var(--paper); padding: 6px 12px 10px 4px; font-size: 48px; line-height: 1.05; font-weight: 300; letter-spacing: var(--track-title); }
 .stage__ctas { margin-top: auto; display: flex; justify-content: flex-end; pointer-events: auto; }
 
 .stage__narr { position: absolute; left: 32px; top: 104px; z-index: 2; max-width: 640px; opacity: 0; pointer-events: none; }
@@ -134,8 +134,8 @@ img, canvas { display: block; }
 /* ---------- phone frame (390 x 844) ---------- */
 .stage[data-frame='m'] .stage__hero { padding: 64px 16px 16px; }
 .stage[data-frame='m'] .stage__name { font-size: 112px; letter-spacing: -0.055em; }
-.stage[data-frame='m'] .stage__zh { margin-left: 10px; font-size: 30px; }
-.stage[data-frame='m'] .stage__role { margin-top: 18px; padding: 4px 8px 6px 2px; font-size: 26px; line-height: 1.08; letter-spacing: -0.02em; }
+.stage[data-frame='m'] .stage__zh { display: inline-block; margin-left: 12px; font-size: 38px; font-weight: 400; letter-spacing: 0.02em; vertical-align: 0.18em; }
+.stage[data-frame='m'] .stage__role { margin-top: 28px; padding: 4px 8px 6px 2px; font-size: 26px; line-height: 1.08; letter-spacing: -0.02em; }
 .stage[data-frame='m'] .stage__ctas { flex-direction: column; }
 .stage[data-frame='m'] .stage__ctas .btn { justify-content: space-between; min-height: 52px; padding: 0 18px; }
 .stage[data-frame='m'] .stage__narr { left: 16px; right: 16px; top: 76px; }
@@ -412,6 +412,12 @@ img, canvas { display: block; }
 .book__inside { left: 0; top: 0; width: 320px; height: 480px; transform: rotateY(180deg) translateZ(1px); background: var(--book-back); }
 @media (max-width: 760px) { .lalande__spec { top: auto; bottom: calc(96px / var(--s)); } }
 
+/* ---------- the dithered cursor (canvas "cursor tramado") ---------- */
+.dither-cursor { position: fixed; inset: 0; z-index: 45; pointer-events: none; image-rendering: pixelated; }
+.sheet--studio .sheet__inner { position: relative; }
+.sheet__fx { position: absolute; inset: 0; width: 100%; height: 100%; display: block; image-rendering: pixelated; font-family: var(--font-mono), var(--font-zh); pointer-events: none; }
+.sheet--studio .sheet__inner > :not(.sheet__fx) { position: relative; z-index: 1; }
+.studio__brand { display: inline-block; }
 /* ---------- travesía ácida (canvas "lab: travesía ácida") ---------- */
 .btn--line { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
 .btn--line:hover { background: var(--ink); color: var(--paper); }

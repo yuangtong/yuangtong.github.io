@@ -99,7 +99,8 @@ export type HomePage = {
   sheets: {
     lab: SheetPreview;
     notes: SheetPreview;
-    studio: SheetPreview & { sub: string };
+    /** `brand` is the word in `line` that glitches and lets FOMMO's colours out. */
+    studio: SheetPreview & { sub: string; brand: string };
     contact: SheetPreview & { email: Link };
   };
 };

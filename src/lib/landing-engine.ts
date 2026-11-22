@@ -60,6 +60,8 @@ export type LandingDom = {
   hero: HTMLElement | null; counter: HTMLElement | null; strip: HTMLElement | null;
   sheets: HTMLElement | null; title: HTMLElement | null; jside: HTMLElement | null;
   sh: (HTMLElement | null)[]; inner: (HTMLElement | null)[]; narr: (HTMLElement | null)[];
+  /** Sheet titles that decode as their sheet opens (lab, notes, contact); their real text is in data-text. */
+  heads?: (HTMLElement | null)[];
 };
 
 export type LandingInput = {
@@ -145,6 +147,30 @@ export function createLanding(o: LandingOptions) {
   let inp: LandingInput = { sys: 0, now: 0, ptr: null, manual: false, selected: null };
   const currentFrame = () => inp.selected ?? flight;
 
+  // G7.5: each stride, the hooves and the back throw blue sparks onto the grid;
+  // they drift behind the horse, twinkle and cool back into the grey dots
+  type Spark = { x: number; y: number; vx: number; vy: number; age: number; life: number; seed: number };
+  let sparks: Spark[] = [], sparkF = -1;
+  const SPARK = [ELEC, HORSE, u32(ip.cardMid), ECHO, u32(ip.cardLight)];
+  const sparkMap = new Map<number, number>();
+  function stepSparks(f: number, s1: number, ox: number, oy: number, on: boolean) {
+    if (f === sparkF) return;
+    sparkF = f;
+    for (const sp of sparks) { sp.x += sp.vx; sp.y += sp.vy; sp.vx *= 0.9; sp.vy += 0.04; sp.age++; }
+    sparks = sparks.filter((sp) => sp.age < sp.life && sp.x > -2);
+    if (on) {
+      let tries = 0, made = 0;
+      while (made < 13 && tries < 600) {
+        tries++;
+        const low = Math.random() < 0.75, sx = Math.random() * FW, sy = low ? FH * (0.62 + Math.random() * 0.38) : Math.random() * FH * 0.5;
+        if (horse(f, sx, sy) <= 30) continue;
+        made++;
+        sparks.push({ x: ox + sx / s1, y: oy + sy / s1, vx: -(1.2 + Math.random() * 3.2) * (6 / CS), vy: (low ? -0.25 : -0.5) * Math.random() * (6 / CS), age: 0, life: 14 + Math.floor(Math.random() * 22), seed: Math.random() * 6.28 });
+      }
+    }
+    if (sparks.length > 600) sparks.splice(0, sparks.length - 600);
+  }
+
   // 1. from the hero into the void
   function drawVoid(step: number, now: number, p: number) {
     const t = reduce ? 0 : (now - t0) / 1000;
@@ -184,6 +210,14 @@ export function createLanding(o: LandingOptions) {
     const openA = m * 1.35, echoes = hb < 0.7;
     // the rider dissolves cell by cell, through the same ordered threshold, before the void opens
     const riderAmt = riders ? 1 - smooth(0.02, 0.11, p) : 0;
+    stepSparks(f, s1, ox, oy, !reduce && p < 0.04);
+    sparkMap.clear();
+    for (const sp of sparks) {
+      const kc = Math.round(sp.x), kr = Math.round(sp.y);
+      if (kc < 0 || kr < 0 || kc >= GC || kr >= GR) continue;
+      const heat = (1 - sp.age / sp.life) * (0.6 + 0.4 * Math.sin(t * 9 + sp.seed)), k = kr * GC + kc, prev = sparkMap.get(k);
+      if (prev === undefined || prev < heat) sparkMap.set(k, heat);
+    }
     for (let r = 0; r < GR; r++) {
       const brow = (r & 3) * 4;
       for (let c = 0; c < GC; c++) {
@@ -199,7 +233,9 @@ export function createLanding(o: LandingOptions) {
           bg = lvl.bg; fg = lvl.fg; msk = lvl.m;
         }
         const val = horse(f, (c - ox) * s1, (r - oy) * s1);
+        const heat = isVoid ? undefined : sparkMap.get(idx);
         if (val) { fg = HORSE; msk = mi(0.4 + 2.6 * (0.5 + (0.5 * (val - 120)) / 135)); }
+        else if (heat !== undefined && !(riderAmt > 0 && ACT[idx] < riderAmt && rider(f, (c - ox) * s1, (r - oy) * s1) > 30)) { fg = SPARK[Math.min(4, Math.floor((1 - heat) * 5))]; msk = mi(0.9 + heat * 1.8); }
         else if (riderAmt > 0 && ACT[idx] < riderAmt) {
           // the rider keeps the photo's tones, in the horse's blue
           const rv = rider(f, (c - ox) * s1, (r - oy) * s1);
@@ -330,8 +366,8 @@ export function createLanding(o: LandingOptions) {
     return { x: 0, y: top + C.jugar.head, w: W, h: Math.max(0, h - C.jugar.head) };
   }
   const glyphFont = `600 12px ${o.glyphFamily}, ui-monospace, Menlo, monospace`;
-  // the pointer is no lens: letters it passes over are nudged along its path and settle back
-  let wakeX = new Float32Array(0), wakeY = new Float32Array(0), wakePtr: { x: number; y: number } | null = null;
+  // the dithered cursor: letters it passes over scramble into glyph noise for an instant and settle back
+  let scrA = new Float32Array(0);
   function drawGlyphs(step: number, now: number, m: number, reveal: number, glitch: number, rect: { x: number; y: number; w: number; h: number }, clip: { x: number; y: number; w: number; h: number } | null) {
     const G = CS * C.glyphB, cols = Math.ceil(W / G), rows = Math.ceil(H / G), tt = reduce ? 0 : Math.floor((now - t0) / 70);
     const hh = heldHorse(), tw = Math.min(rect.w * 1.1, (rect.h * 1.1 * FW) / FH), tcx = rect.x + rect.w / 2, tcy = rect.y + rect.h / 2;
@@ -342,9 +378,7 @@ export function createLanding(o: LandingOptions) {
     if (clip) { ctx.beginPath(); ctx.rect(clip.x, clip.y, clip.w, clip.h); ctx.clip(); }
     ctx.fillStyle = color.paper; ctx.fillRect(0, 0, W, H);
     ctx.font = glyphFont; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-    if (wakeX.length !== cols * rows) { wakeX = new Float32Array(cols * rows); wakeY = new Float32Array(cols * rows); }
-    const vx = ptr && wakePtr ? ptr.x - wakePtr.x : 0, vy = ptr && wakePtr ? ptr.y - wakePtr.y : 0;
-    wakePtr = ptr && !reduce ? { x: ptr.x, y: ptr.y } : null;
+    if (scrA.length !== cols * rows) scrA = new Float32Array(cols * rows);
     for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) {
       const x = c * G + G / 2, y = r * G + G / 2;
       if (clip && (x < clip.x - G || x > clip.x + clip.w + G || y < clip.y - G || y > clip.y + clip.h + G)) continue;
@@ -354,14 +388,11 @@ export function createLanding(o: LandingOptions) {
       const lim = reveal * 1.5 - h2(c, 99) * 0.5;
       if (r / rows > lim) continue;
       const head = r / rows > lim - 0.04 && reveal < 1;
-      const wi = r * cols + c, g2 = glitch;
-      if (ptr && !reduce && (vx || vy)) {
-        const ex = x - ptr.x, ey = y - ptr.y, d2 = ex * ex + ey * ey, R2 = RR * RR * 0.36;
-        if (d2 < R2) { const push = 1 - d2 / R2; wakeX[wi] += vx * push * 0.35; wakeY[wi] += vy * push * 0.35; }
-      }
-      wakeX[wi] = Math.max(-G, Math.min(G, wakeX[wi] * 0.86)); wakeY[wi] = Math.max(-G, Math.min(G, wakeY[wi] * 0.86));
-      const dx = wakeX[wi], dy = wakeY[wi];
-      const gx = x + dx, gy2 = y + dy, k = h2(c, r);
+      const wi = r * cols + c;
+      if (ptr && !reduce) { const ex = x - ptr.x, ey = y - ptr.y; if (ex * ex + ey * ey < RR * RR * 0.11) scrA[wi] = 1; }
+      scrA[wi] = Math.max(0, scrA[wi] - 0.1);
+      const g2 = Math.max(glitch, scrA[wi]);
+      const gx = x, gy2 = y, k = h2(c, r);
       if (k < 0.05 || head) { ctx.fillStyle = color.signal; ctx.fillRect(gx - G / 2 + 1, gy2 - G / 2 + 1, G - 2, G - 2); if (head) { ctx.fillStyle = color.white; ctx.fillText(NOISE[(c + r + tt) % NOISE.length], gx, gy2 + 1); } continue; }
       const scr = h3(c, r, tt) < g2;
       if (val > 205 || scr) {
@@ -407,8 +438,8 @@ export function createLanding(o: LandingOptions) {
     if (d.jside) d.jside.style.transform = enter < 1 ? `translateX(${(-(1 - ease(enter)) * 110).toFixed(1)}%)` : '';
     return geo;
   }
-  function decode(t: number) {
-    const T = o.title, n = Math.floor(T.length * clamp(t)), tt = Math.floor(performance.now() / 60);
+  function decode(t: number, T = o.title) {
+    const n = Math.floor(T.length * clamp(t)), tt = Math.floor(performance.now() / 60);
     let s = '';
     for (let i = 0; i < T.length; i++) s += i < n || T[i] === ' ' ? T[i] : NOISE[Math.floor(h3(i, 3, tt) * NOISE.length)];
     return s;
@@ -446,6 +477,15 @@ export function createLanding(o: LandingOptions) {
       let geo: Geo | null = null;
       if (d.sheets) { d.sheets.style.visibility = sheetsOn ? 'visible' : 'hidden'; d.sheets.style.pointerEvents = sheetsOn && enter > 0.9 ? 'auto' : 'none'; d.sheets.setAttribute('aria-hidden', sheetsOn ? 'false' : 'true'); }
       if (sheetsOn) geo = layoutSheets(d, x, enter);
+      // each sheet's title comes out of glyph noise as its sheet opens
+      if (geo && d.heads) {
+        const S = C.strip, open = H - 4 * S;
+        d.heads.forEach((el, k) => {
+          if (!el) return;
+          const T = el.dataset.text ?? '', u = reduce ? 1 : clamp(((geo!.hs[k] - S) / (open - S)) * 1.25);
+          setText(el, u >= 1 ? T : decode(u, T));
+        });
+      }
       setText(d.title, t5 < 1 ? decode((t5 - 0.62) / 0.33) : o.title);
       const glyphVisible = glyphMode && x < 1.05;
       if ((step !== drawn || moving || glyphVisible) && now - lastDraw > 28) {
