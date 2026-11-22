@@ -8,7 +8,7 @@ export default async function ArchivoPage() {
   const page = await getArchivePage();
   return (
     <main className="section section--archivo">
-      <h1 className="visually-hidden">{page.title}</h1>
+      <h1 className="vh">{page.title}</h1>
       <Archivo page={page} backHref="/lab" />
     </main>
   );
