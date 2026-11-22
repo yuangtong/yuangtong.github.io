@@ -46,3 +46,10 @@ export const introPalette = {
   cardMid: '#5d66e6',
   dotRule: '#b3b3ae',
 } as const;
+
+/** Carcoma ramps (G8): acid colors stay inside the shapes, never in the UI. */
+export const acidRamps = [
+  ['#ff3d24', '#a937e1', '#ffe600', '#ededeb'],
+  ['#0b14c9', '#050a6b', '#7a82ff', '#c9ccff'],
+  ['#a937e1', '#ff3d24', '#1847ff', '#ffe600'],
+] as const;
