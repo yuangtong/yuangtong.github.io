@@ -155,6 +155,21 @@ export type ArchivePage = {
     paletteNames: Record<ArchivePalette, string>;
   };
 };
+/** A block in a note: a paragraph, a code listing or a full-width figure. */
+export type NoteBlock =
+  | { type: 'p'; text: string }
+  | { type: 'code'; text: string }
+  | { type: 'figure'; src: string; alt: string; caption: string; width: number; height: number; paper?: boolean };
+
+/** One note (G, "notas: una nota"). */
+export type NotePage = {
+  slug: string; title: string; lead: string;
+  date: string; about: string; backLabel: string;
+  blocks: NoteBlock[];
+  links: { label: string; title: string; href: string }[];
+  credit: string;
+};
+
 export type NotesPage = { title: string; lead: string; items: Note[] };
 /** Studio (G8, estudio v3): the owner directs FOMMO; FOMMO's colours eat the paper. */
 export type StudioPage = { title: string; eyebrow: string; name: string; lead: string; cta: Link; canvasLabel: string };
@@ -170,4 +185,4 @@ export type ContactPage = {
   places: Record<string, string>;
 };
 
-export type NotFoundPage = { title: string; body: string; back: Link };
+export type NotFoundPage = { title: string; body: string; back: Link; lab: Link; canvasLabel: string };

@@ -1,5 +1,5 @@
-import type { ArchivePage, ContactPage, HomePage, LabPage, NotesPage, NotFoundPage, LalandePage, Settings, StoryPage, StudioPage, TravesiaPage } from './types';
-import { archivePage, contactPage, home, labPage, lalandePage, notesPage, notFound, sisyphusPage, studioPage, travesiaPage } from './fixtures/home';
+import type { ArchivePage, ContactPage, HomePage, LabPage, NotesPage, NotFoundPage, LalandePage, NotePage, Settings, StoryPage, StudioPage, TravesiaPage } from './types';
+import { archivePage, contactPage, home, labPage, lalandePage, notes, notesPage, notFound, sisyphusPage, studioPage, travesiaPage } from './fixtures/home';
 import { settings } from './fixtures/settings';
 
 /*
@@ -49,4 +49,12 @@ export async function getLalandePage(): Promise<LalandePage> {
 
 export async function getTravesiaPage(): Promise<TravesiaPage> {
   return travesiaPage;
+}
+
+export async function getNote(slug: string): Promise<NotePage | null> {
+  return notes.find((n) => n.slug === slug) ?? null;
+}
+
+export async function getNoteSlugs(): Promise<string[]> {
+  return notes.map((n) => n.slug);
 }

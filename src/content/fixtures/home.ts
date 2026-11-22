@@ -1,4 +1,4 @@
-import type { ArchivePage, ContactPage, HomePage, LabPage, LalandePage, NotesPage, TravesiaPage, NotFoundPage, StoryPage, StudioPage } from '../types';
+import type { ArchivePage, ContactPage, HomePage, LabPage, LalandePage, NotePage, NotesPage, NotFoundPage, StoryPage, StudioPage, TravesiaPage } from '../types';
 
 export const home: HomePage = {
   intro: {
@@ -36,10 +36,38 @@ export const home: HomePage = {
   },
 };
 
+export const notes: NotePage[] = [
+  {
+    slug: 'jinete',
+    title: 'quitarle el jinete a un galope de 1878',
+    lead: 'las fotos de Muybridge traen un jinete encima. el caballo de este sitio tenía que ir solo, así que lo borré con código.',
+    date: 'noviembre 2026',
+    about: 'sobre: medio tono',
+    backLabel: 'todas las notas',
+    blocks: [
+      { type: 'figure', src: '/notas/jinete-antes.jpg', alt: 'Quince fotografías de un caballo de carreras al galope con su jinete, tomadas por Muybridge', caption: 'antes: los quince cuadros originales, con jinete.', width: 1500, height: 600 },
+      { type: 'p', text: 'Eadweard Muybridge fotografió a un caballo al galope en quince cuadros. Son de dominio público y sirven perfecto para animar: el movimiento ya está resuelto. El problema es que el caballo lleva jinete.' },
+      { type: 'p', text: 'Primero separé la figura del fondo. Cada cuadro es una foto pequeña, de 300 por 200 píxeles, con el caballo oscuro sobre un cielo claro. Con un umbral de luz basta para quedarse con la silueta.' },
+      { type: 'p', text: 'Después, encontrar al jinete. En cada columna busco el primer píxel oscuro desde arriba; la columna donde ese punto queda más alto es la gorra. Alrededor de ella abro una ventana de unos setenta píxeles y, dentro, borro todo lo que esté por encima del lomo.' },
+      { type: 'p', text: 'El lomo no se ve, porque el jinete lo tapa. Lo reconstruyo con una curva suave entre la altura del cuello y la de la grupa, medidas justo fuera de la ventana. Debajo de la curva relleno; encima, nada.' },
+      { type: 'code', text: '// la gorra: la columna con el píxel oscuro más alto\nconst gorra = topes.indexOf(Math.min(...topes));\n\n// el lomo: una curva suave entre cuello y grupa\nfor (let x = x0; x <= x1; x++) {\n  const t = (x - x0) / (x1 - x0);\n  const y = y0 + (y1 - y0) * t * t * (3 - 2 * t);\n  borrarEncima(x, y);\n}' },
+      { type: 'p', text: 'Para terminar cierro la silueta con una dilatación y una erosión, y un filtro de mediana que limpia los bordes. No es perfecto: el lomo queda algo plano donde iba la montura. A doce cuadros por segundo casi no se nota.' },
+      { type: 'figure', src: '/notas/jinete-despues.png', alt: 'Las mismas quince posiciones convertidas en siluetas negras de un caballo sin jinete', caption: 'después: la silueta sin jinete, lista para dibujarse con puntos, letras o teselas.', width: 1500, height: 600, paper: true },
+    ],
+    links: [
+      { label: 'pruébalo en el lab', title: 'medio tono', href: '/lab#pieza-medio' },
+      { label: 'siguiente nota', title: 'ecos: dibujar el tiempo detrás de una figura', href: '/notas' },
+    ],
+    credit: 'fotografías: eadweard muybridge, dominio público',
+  },
+];
+
 export const notFound: NotFoundPage = {
   title: 'esta página no existe',
   body: 'el enlace puede estar mal escrito o la página cambió de lugar. el caballo sigue corriendo por el resto del sitio.',
   back: { label: 'volver al inicio', href: '/' },
+  lab: { label: 'ir al lab', href: '/lab' },
+  canvasLabel: 'el número 404 hecho de puntos; un caballo al galope choca contra él y lo desmorona.',
 };
 
 export const labPage: LabPage = {
@@ -64,7 +92,7 @@ export const notesPage: NotesPage = {
   title: 'notas',
   lead: 'cómo está hecha cada pieza, escrito mientras la construyo. cada nota lleva su imagen tramada.',
   items: [
-    { id: 'jinete', title: 'quitarle el jinete a un galope de 1878', excerpt: 'las fotos de Muybridge traen un jinete encima. lo borré con código para que el caballo fuera libre.', meta: '[fecha], [min] de lectura', href: '/notas', alt: 'La foto original del galope, tramada en azul', visual: 'foto', accent: 'azul' },
+    { id: 'jinete', title: 'quitarle el jinete a un galope de 1878', excerpt: 'las fotos de Muybridge traen un jinete encima. lo borré con código para que el caballo fuera libre.', meta: 'noviembre 2026, 2 min de lectura', href: '/notas/jinete', alt: 'La foto original del galope, tramada en azul', visual: 'foto', accent: 'azul' },
     { id: 'ecos', title: 'ecos: dibujar el tiempo detrás de una figura', excerpt: 'cómo la portada dibuja los cuadros anteriores del galope detrás del caballo.', meta: '[fecha], [min] de lectura', href: '/notas', alt: 'El caballo con sus ecos, tramado en rosado', visual: 'ecos', accent: 'rosado' },
     { id: 'dona', title: 'una dona 3d con cuatro teselas', excerpt: 'una dona en tres dimensiones sombreada solo con cuatro teselas de ocho por ocho.', meta: '[fecha], [min] de lectura', href: '/notas', alt: 'Una dona que gira, tramada en lima sobre tinta', visual: 'dona', accent: 'lima' },
   ],
