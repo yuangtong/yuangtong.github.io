@@ -1,0 +1,48 @@
+/**
+ * Token layer for canvas drawing. CSS reads the same values from
+ * `src/app/tokens.css`; keep both in sync. No component holds a hex value.
+ */
+
+export const color = {
+  paper: '#ededeb',
+  paper2: '#dcdcd8',
+  ink: '#141414',
+  body: '#2e2e2b',
+  quiet: '#4d4d49',
+  signal: '#0b14c9',
+  signalElectric: '#2a36ff',
+  white: '#ffffff',
+  black: '#000000',
+  dotOff: '#cfcfca',
+  echo: '#9aa0ea',
+} as const;
+
+/** Four tones per accent: base, shade, light, pale. */
+export const ramp = {
+  azul: ['#0b14c9', '#050a6b', '#7a82ff', '#c9ccff'],
+  rosado: ['#ff3ea5', '#9e0057', '#ff8fc8', '#ffd1e8'],
+  lima: ['#c8ff2e', '#5d8a00', '#8fbf00', '#e9ffb0'],
+} as const;
+
+/** Note cards: [dither ink, dither paper, button text]. */
+export const noteSwatch = {
+  azul: ['#0b14c9', '#ededeb', '#ffffff'],
+  rosado: ['#ff3ea5', '#ededeb', '#141414'],
+  lima: ['#c8ff2e', '#141414', '#141414'],
+} as const;
+
+/** Opening sequence palette (the void and the gallop). */
+export const introPalette = {
+  ink: '#181c24',
+  dim: '#2b2f3a',
+  wall: '#b3b3ae',
+  electric: '#1847ff',
+  light: '#7d93ff',
+  violet: '#a937e1',
+  red: '#ff3d24',
+  yellow: '#ffe600',
+  stripBg: '#dcdcd8',
+  cardLight: '#b9bff2',
+  cardMid: '#5d66e6',
+  dotRule: '#b3b3ae',
+} as const;

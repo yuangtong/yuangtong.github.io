@@ -1,0 +1,143 @@
+'use client';
+
+import { useEffect, useRef, useState } from 'react';
+import type { Experiment, ExperimentVisual, HomePage, Settings } from '@/content/types';
+import { BAYER, prefersReducedMotion, u32, type PixelView, pixelView } from '@/lib/dither';
+import { horseAt, loadGallop, loadOriginal, loadPhoto, type Gallop, type Luma } from '@/lib/media';
+import { color, introPalette } from '@/lib/tokens';
+import { AcidSticker } from './AcidSticker';
+
+const CELLS = [4, 8, 16] as const;
+type Media = { gallop?: Gallop; original?: Float32Array[]; photo?: Luma };
+
+function drawCard(v: PixelView, visual: ExperimentVisual, cs: number, step: number, m: Media) {
+  const CW = v.w, CH = v.h, bg = u32(color.white), ac = u32(color.signal), lt = u32(introPalette.cardLight), md = u32(introPalette.cardMid), ink = u32(color.ink);
+  const cols = Math.ceil(CW / cs), rows = Math.ceil(CH / cs), px = v.px;
+  const fill = (x0: number, y0: number, w: number, h: number, c: number) => { for (let y = y0; y < Math.min(CH, y0 + h); y++) for (let x = x0; x < Math.min(CW, x0 + w); x++) px[y * CW + x] = c; };
+  px.fill(bg);
+  if (visual === 'medio') {
+    if (!m.gallop) return;
+    const f = step % 15;
+    for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) {
+      const val = horseAt(m.gallop.frames, f, (c + 0.5) * cs * 0.62 + 40, (r + 0.5) * cs * 0.62 - 20);
+      if (!val) continue;
+      const cx = c * cs + cs / 2, cy = r * cs + cs / 2, rad = (cs / 2) * (0.35 + (0.65 * (val - 120)) / 135);
+      for (let y = Math.max(0, Math.floor(cy - rad)); y <= Math.min(CH - 1, Math.ceil(cy + rad)); y++) for (let x = Math.max(0, Math.floor(cx - rad)); x <= Math.min(CW - 1, Math.ceil(cx + rad)); x++) { const dx = x + 0.5 - cx, dy = y + 0.5 - cy; if (dx * dx + dy * dy <= rad * rad) px[y * CW + x] = ac; }
+    }
+  } else if (visual === 'camara') {
+    if (!m.original) return;
+    const Lm = m.original[step % 15];
+    for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) {
+      const sx = Math.min(299, Math.floor(90 + ((c + 0.5) * cs / CW) * 200)), sy = Math.min(199, Math.floor(((r + 0.5) * cs / CH) * 196));
+      const l = Lm[sy * 300 + sx] * 1.15 - 0.05;
+      if (l * 16 > BAYER[(r & 3) * 4 + (c & 3)] + 0.5) fill(c * cs, r * cs, cs, cs, ac);
+    }
+  } else if (visual === 'dona') {
+    const tt = step / 12, cx1 = Math.cos(tt * 0.9), sx1 = Math.sin(tt * 0.9), cy1 = Math.cos(tt * 0.55), sy1 = Math.sin(tt * 0.55);
+    const sdf = (qx: number, qy: number, qz: number) => { const y1 = qy * cx1 - qz * sx1, z1 = qy * sx1 + qz * cx1, x2 = qx * cy1 + z1 * sy1, z2 = -qx * sy1 + z1 * cy1, qq = Math.sqrt(x2 * x2 + z2 * z2) - 0.62; return Math.sqrt(qq * qq + y1 * y1) - 0.28; };
+    px.fill(ac);
+    for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) {
+      const u = ((c + 0.5) / cols * 2 - 1) * 1.2, w = ((r + 0.5) / rows * 2 - 1) * 1.2;
+      let z = -1.6, hit = false, d = 0;
+      for (let i = 0; i < 24; i++) { d = sdf(u, w, z); if (d < 0.012) { hit = true; break; } z += d; if (z > 1.6) break; }
+      if (!hit) continue;
+      const e = 0.02, nx = sdf(u + e, w, z) - d, ny = sdf(u, w + e, z) - d, nz = sdf(u, w, z + e) - d, ln = Math.sqrt(nx * nx + ny * ny + nz * nz) || 1, sh = (nx * -0.45 + ny * -0.65 + nz * -0.6) / ln;
+      for (let y = r * cs; y < Math.min(CH, r * cs + cs); y++) for (let x = c * cs; x < Math.min(CW, c * cs + cs); x++) {
+        const mx = Math.floor(((x - c * cs) * 8) / cs), my = Math.floor(((y - r * cs) * 8) / cs);
+        let lit: boolean;
+        if (sh > 0.72) lit = my % 4 < 3 && mx !== 7; else if (sh > 0.38) lit = mx % 4 !== 3 && my % 4 !== 3; else if (sh > 0.08) lit = !!(((mx >> 1) + (my >> 1)) & 1); else lit = false;
+        px[y * CW + x] = lit ? bg : ink;
+      }
+    }
+  } else if (visual === 'fotos') {
+    const p = m.photo; if (!p) return;
+    const gap = cs >= 8 ? 1 : 0;
+    for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) {
+      const sx = Math.min(p.w - 1, Math.floor((0.33 + ((c + 0.5) * cs / CW) * 0.6) * p.w)), sy = Math.min(p.h - 1, Math.floor(((r + 0.5) * cs / CH) * p.h)), l = p.data[sy * p.w + sx];
+      fill(c * cs, r * cs, cs - gap, cs - gap, l > 0.8 ? bg : l > 0.6 ? lt : l > 0.35 ? md : ac);
+    }
+  }
+  v.ctx.putImageData(v.img, 0, 0);
+}
+
+export function LabSection({ lab, ui }: { lab: HomePage['lab']; ui: Settings['ui'] }) {
+  const [cells, setCells] = useState<Record<string, number>>(() => Object.fromEntries(lab.experiments.map((e) => [e.id, e.defaultCell])));
+  const [copied, setCopied] = useState<string | null>(null);
+  const cellsRef = useRef(cells);
+  cellsRef.current = cells;
+  const canvases = useRef<Record<string, HTMLCanvasElement | null>>({});
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const media: Media = {};
+    const views: Record<string, PixelView | null> = {};
+    let raf = 0, dead = false, visible = false, dirty = true, last = -1, lastKey = '';
+    loadGallop().then((g) => { media.gallop = g; dirty = true; });
+    loadOriginal().then((o) => { media.original = o; dirty = true; });
+    loadPhoto().then((p) => { media.photo = p; dirty = true; });
+    const io = new IntersectionObserver(([e]) => { visible = e.isIntersecting; dirty = true; }, { rootMargin: '100px' });
+    if (sectionRef.current) io.observe(sectionRef.current);
+    const reduce = prefersReducedMotion(), t0 = performance.now();
+    const loop = (now: number) => {
+      if (dead) return;
+      raf = requestAnimationFrame(loop);
+      if (!visible) return;
+      const step = reduce ? 20 : Math.floor(((now - t0) / 1000) * 12);
+      const key = JSON.stringify(cellsRef.current);
+      if (step === last && !dirty && key === lastKey) return;
+      last = step; dirty = false; lastKey = key;
+      for (const e of lab.experiments) {
+        const el = canvases.current[e.id]; if (!el) continue;
+        let v = views[e.id];
+        if (!v) v = views[e.id] = pixelView(el);
+        if (v) drawCard(v, e.visual, cellsRef.current[e.id], step, media);
+      }
+    };
+    raf = requestAnimationFrame(loop);
+    return () => { dead = true; cancelAnimationFrame(raf); io.disconnect(); };
+  }, [lab.experiments]);
+
+  useEffect(() => { if (!copied) return; const id = setTimeout(() => setCopied(null), 1800); return () => clearTimeout(id); }, [copied]);
+
+  const copy = (e: Experiment) => {
+    const url = `${location.origin}/lab/${e.id}?celda=${cells[e.id]}`;
+    try { navigator.clipboard?.writeText(url).catch(() => {}); } catch {}
+    setCopied(e.id);
+  };
+
+  return (
+    <section id="lab" ref={sectionRef} className="lab">
+      <div className="section-head">
+        <h2 className="h2">{lab.title}</h2>
+        <div className="section-head__aside">
+          <p className="lead">{lab.lead}</p>
+          <a href={lab.more.href} className="link">{lab.more.label}</a>
+        </div>
+        <AcidSticker shape="f11" accent="rosado" className="acid--lab" />
+      </div>
+      <div className="lab__grid">
+        {lab.experiments.map((e) => (
+          <article key={e.id} className="lab-card">
+            <div className="lab-card__text">
+              <h3 className="lab-card__title">{e.title}</h3>
+              <span className="label">{e.meta}</span>
+              <span aria-hidden="true" className="dot-rule" />
+              <div className="lab-card__controls">
+                <div role="group" aria-label={`${ui.cellGroupLabel} ${e.title}`} className="seg">
+                  {CELLS.map((n) => (
+                    <button key={n} type="button" aria-pressed={cells[e.id] === n} onClick={() => setCells((c) => ({ ...c, [e.id]: n }))}>{n}px</button>
+                  ))}
+                </div>
+                <a href={e.href} className="btn btn--ink btn--sm">{ui.openLabel}</a>
+              </div>
+            </div>
+            <div className="lab-card__visual">
+              <canvas ref={(el) => { canvases.current[e.id] = el; }} width={344} height={338} role="img" aria-label={e.alt} />
+              <button type="button" className="chip" onClick={() => copy(e)}>{copied === e.id ? ui.copiedLabel : ui.copyLinkLabel}</button>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
