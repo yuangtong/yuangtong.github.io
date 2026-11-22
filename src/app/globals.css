@@ -228,8 +228,14 @@ img, canvas { display: block; }
 }
 
 /* ---------- not found ---------- */
-.notfound { min-height: 100vh; padding: var(--s-9) var(--gutter); display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: var(--s-5); }
-.notfound .h2 { font-size: var(--t-h2); }
+.notfound { flex: 1; display: flex; flex-direction: column; }
+.notfound__stage { position: relative; flex: 1; min-height: 360px; max-height: 560px; border-bottom: 1px solid var(--ink); }
+.notfound__cv { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.notfound__text { padding: var(--s-6) var(--gutter); display: flex; align-items: flex-start; justify-content: space-between; gap: var(--s-9); flex-wrap: wrap; }
+.notfound__copy { display: flex; flex-direction: column; gap: var(--s-3); }
+.notfound__title { margin: 0; font-size: clamp(36px, 3.9vw, 56px); line-height: 1; font-weight: 300; letter-spacing: -0.04em; }
+.notfound__body { margin: 0; max-width: 560px; font-size: var(--t-body-lg); line-height: 1.4; color: var(--body); }
+.notfound__ctas { display: flex; padding-top: var(--s-2); }
 
 @media (prefers-reduced-motion: reduce) {
   .cursor { animation: none; }
@@ -405,3 +411,34 @@ img, canvas { display: block; }
 .book__shine { left: 0; top: 0; width: 320px; height: 480px; background: linear-gradient(to right, rgba(255, 255, 255, 0.18), transparent 8%, transparent 92%, rgba(0, 0, 0, 0.18)); }
 .book__inside { left: 0; top: 0; width: 320px; height: 480px; transform: rotateY(180deg) translateZ(1px); background: var(--book-back); }
 @media (max-width: 760px) { .lalande__spec { top: auto; bottom: calc(96px / var(--s)); } }
+
+/* ---------- a note (design G, "notas: una nota") ---------- */
+.nota { gap: var(--s-7); padding-top: var(--s-7); }
+.nota__row { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: var(--s-7); }
+.nota__meta { display: flex; flex-direction: column; gap: 6px; padding-top: 14px; font-family: var(--font-mono); font-size: 13px; color: var(--quiet); }
+.nota__back { display: flex; align-items: center; min-height: 32px; font-family: var(--font-sans); font-size: var(--t-small); color: var(--ink); }
+.nota__head { display: flex; flex-direction: column; gap: 28px; }
+.nota__title { margin: 0; max-width: 1040px; font-size: clamp(48px, 6.7vw, 96px); line-height: 0.92; font-weight: 300; letter-spacing: -0.045em; }
+.nota__lead { margin: 0; max-width: 760px; font-size: clamp(20px, 1.8vw, 26px); line-height: 1.3; font-weight: 300; color: var(--body); }
+.nota__body { max-width: 680px; display: flex; flex-direction: column; gap: 22px; font-size: var(--t-body-lg); line-height: 1.55; color: var(--body); }
+.nota__body p { margin: 0; }
+.nota__code { margin: var(--s-2) 0; padding: 20px var(--s-5); border: 1px solid var(--ink); background: var(--code-bg); color: var(--ink); font-family: var(--font-mono); font-size: 14px; line-height: 1.6; white-space: pre; overflow-x: auto; }
+.nota__figure { margin: 0; display: flex; flex-direction: column; gap: var(--s-3); }
+.nota__figure img { width: 100%; height: auto; max-height: 550px; object-fit: cover; display: block; border: 1px solid var(--ink); }
+.nota__figure img.is-paper { background: var(--on-signal); object-fit: contain; }
+.nota__figure figcaption { padding-left: 288px; font-size: 14px; color: var(--quiet); }
+.nota__links { max-width: 1088px; display: flex; flex-direction: column; }
+.nota__link { display: flex; align-items: baseline; justify-content: space-between; gap: var(--s-5); padding: 18px 0; border-top: 1px solid var(--ink); text-decoration: none; }
+.nota__link:last-child { border-bottom: 1px solid var(--ink); }
+.nota__link > span:first-child { font-size: var(--t-small); color: var(--quiet); }
+.nota__link-title { font-size: var(--t-card); line-height: 1.05; font-weight: 300; letter-spacing: var(--track-title); text-align: right; }
+.nota__link:hover .nota__link-title { color: var(--signal); }
+.nota__credit { margin: 0; }
+@media (max-width: 760px) {
+  .nota__row { grid-template-columns: minmax(0, 1fr); gap: var(--s-4); }
+  .nota__row > span:empty { display: none; }
+  .nota__meta { padding-top: 0; }
+  .nota__figure figcaption { padding-left: 0; }
+  .nota__link { flex-direction: column; gap: var(--s-1); }
+  .nota__link-title { text-align: left; }
+}
