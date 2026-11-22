@@ -200,7 +200,16 @@ export function createLanding(o: LandingOptions) {
         }
         const val = horse(f, (c - ox) * s1, (r - oy) * s1);
         if (val) { fg = HORSE; msk = mi(0.4 + 2.6 * (0.5 + (0.5 * (val - 120)) / 135)); }
-        else if (riderAmt > 0 && ACT[idx] < riderAmt && rider(f, (c - ox) * s1, (r - oy) * s1)) { fg = INK; msk = mi(2.2); }
+        else if (riderAmt > 0 && ACT[idx] < riderAmt) {
+          // the rider keeps the photo's tones, in the horse's blue
+          const rv = rider(f, (c - ox) * s1, (r - oy) * s1);
+          if (rv > 30) { fg = HORSE; msk = mi(0.4 + 2.6 * (0.5 + (0.5 * (rv - 120)) / 135)); }
+          else if (!isVoid && echoes) {
+            let hit = 0;
+            for (let e = 1; e <= 6; e++) if (horse(f - e, (c - ox) * s1 + e * 15.3, (r - oy) * s1)) { hit = e; break; }
+            if (hit) { fg = ECHO; msk = mi(Math.max(0.8, 2.4 - hit * 0.25)); }
+          }
+        }
         else if (!isVoid && echoes) {
           let hit = 0;
           for (let e = 1; e <= 6; e++) if (horse(f - e, (c - ox) * s1 + e * 15.3, (r - oy) * s1)) { hit = e; break; }

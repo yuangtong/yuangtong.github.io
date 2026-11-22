@@ -44,7 +44,7 @@ Owner decisions and housekeeping, to pick up later:
 - [ ] Logo and favicon: pick one of the proposals in the design canvas.
 
 ### Added
-- The landing opens with the rider on the horse, drawn in ink in the same dot grid. As the void starts to open he dissolves cell by cell through the ordered threshold, and only the horse goes on (owner, 2026-11-22). The rider masks (`public/media/galope-jinete.png`, 15 frames of 300 x 176) are taken out of Muybridge's original photographs (public domain) and aligned to the silhouettes; `loadRider` loads them, and the engine's `rider` option draws them. The lab piece of sísifo feliz starts without him.
+- The landing opens with the rider on the horse, in the same dot grid and the horse's blue, with the photograph's tones (dark jacket and cap, light breeches). As the void starts to open he dissolves cell by cell through the ordered threshold, and only the horse goes on (owner, 2026-11-22). The rider (`public/media/galope-jinete.png`, 15 frames of 300 x 176, tones on the horse's scale) is taken out of Muybridge's original photographs (public domain) and aligned to the silhouettes; `loadRider` loads them, and the engine's `rider` option draws them. The lab piece of sísifo feliz starts without him.
 - Lalande, lágrimas de ángel, as a piece in the lab at `/lab/lalande` (design "Lalande v4", Historias project), with the crumb "02 el lab / Lalande". As you scroll:
   - the horse in the air comes apart and its letters spell "Lalande";
   - the word becomes a drop that falls on a small narcissus against a dithered blue sky, with two quotes from Clarice Lispector, and the pointer is the breeze;
