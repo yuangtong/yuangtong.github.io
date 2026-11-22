@@ -75,3 +75,12 @@ export const fommoSplit = ['#e8451a', '#8aadd6'] as const;
 
 /** Contact globe (G8, contacto v2): sea dots, land dots, the arc and the marks. */
 export const globe = { sea: '#d4d4ce', land: '#141414', arc: '#1847ff', arcHead: '#0b14c9', me: '#0b14c9', you: '#141414', label: '#ffffff' } as const;
+
+/** Lalande (historia 02): sky, reds, the narcissus and the rain. */
+export const lalande = {
+  paper: '#ededeb', ink: '#141414', signal: '#0b14c9', white: '#ffffff', pale: '#c9ccff', electric: '#1847ff',
+  sky: ['#0b14c9', '#1029e0', '#1847ff', '#3d64ff'],
+  red: ['#8e1218', '#c41d23', '#ff3d24', '#ff7468'],
+  bookRed: '#de2229', rainRed: '#ff7468', rainPink: '#ffd2cc',
+  stem: '#178846', stemLight: '#86e4bb', cup: '#ffe600', cupRim: '#ff8616',
+} as const;

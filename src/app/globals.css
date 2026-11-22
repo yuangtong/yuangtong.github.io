@@ -372,3 +372,37 @@ img, canvas { display: block; }
 .piece__ui { position: absolute; inset: auto 0 0; z-index: 5; display: flex; justify-content: center; padding: var(--s-6); pointer-events: none; }
 .piece__hint { background: var(--paper); padding: var(--s-1) var(--s-2); color: var(--ink); }
 .piece__replay { pointer-events: auto; }
+
+/* ---------- Lalande, historia 02 ---------- */
+.lalande { position: relative; }
+.lalande__sticky { position: sticky; overflow: hidden; background: var(--paper); }
+.lalande__canvas { position: absolute; left: 0; top: 0; display: block; font-family: var(--font-mono); --lalande-word: var(--font-sans); --lalande-script: var(--font-cursive); }
+.lalande__layer { --s: 1; position: absolute; left: 0; top: 0; transform-origin: 0 0; pointer-events: none; }
+.lalande__persp { position: absolute; inset: 0; perspective: 2200px; }
+.lalande__quote { position: absolute; left: 32px; top: 104px; z-index: 2; margin: 0; max-width: max(660px, calc(340px / var(--s))); display: flex; flex-direction: column; gap: var(--s-4); color: var(--on-signal); opacity: 0; }
+.lalande__quote blockquote { margin: 0; font-size: max(56px, calc(26px / var(--s))); line-height: 1.04; font-weight: 300; letter-spacing: -0.035em; }
+.lalande__quote figcaption, .lalande__spec { font-family: var(--font-mono); font-size: max(12.5px, calc(11px / var(--s))); }
+.lalande__spec { position: absolute; right: 32px; top: 104px; z-index: 2; display: flex; flex-direction: column; align-items: flex-end; gap: 2px; line-height: 1.5; color: var(--on-signal); opacity: 0; }
+.lalande__close { position: absolute; z-index: 2; margin: 0; font-size: 40px; line-height: 1.1; font-weight: 300; font-style: italic; letter-spacing: -0.02em; color: var(--book-spine); clip-path: inset(0 100% 0 0); }
+.lalande__cue { position: absolute; left: 50%; bottom: var(--s-6); z-index: 3; transform: translateX(-50%); background: var(--paper); padding: 6px 10px; color: var(--ink); }
+.lalande__replay { position: absolute; left: 50%; bottom: var(--s-6); z-index: 3; transform: translateX(-50%); }
+
+/* the real book: a box with covers and a block of pages, opened with CSS 3D */
+.book { position: absolute; left: 0; top: 0; width: 320px; height: 480px; transform-style: preserve-3d; visibility: hidden; }
+.book > div, .book__hinge > * { position: absolute; backface-visibility: hidden; }
+.book__edge { background: var(--book-edge); background-image: repeating-linear-gradient(to bottom, transparent 0 2px, var(--book-line) 2px 3px); opacity: 1; }
+.book__edge--fore { left: 298px; top: 2px; width: 44px; height: 476px; transform: rotateY(90deg); background-image: repeating-linear-gradient(to right, transparent 0 2px, var(--book-line) 2px 3px); }
+.book__edge--top { left: 2px; top: -22px; width: 316px; height: 44px; transform: rotateX(90deg); }
+.book__edge--bottom { left: 2px; top: 458px; width: 316px; height: 44px; transform: rotateX(-90deg); background-color: var(--book-edge-low); }
+.book__back { left: 0; top: 0; width: 320px; height: 480px; transform: rotateY(180deg) translateZ(22px); background: var(--book-red); }
+.book__spine { left: -22px; top: 0; width: 44px; height: 480px; transform: rotateY(-90deg); background: var(--book-spine); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.book__spine > span { writing-mode: vertical-rl; transform: rotate(180deg); white-space: pre; font-size: 13px; letter-spacing: 0.02em; color: var(--on-signal); }
+.book__spine-title { color: var(--book-gold); }
+.book__page { left: 2px; top: 3px; width: 312px; height: 474px; padding: 40px 30px; transform: translateZ(21px); background: var(--book-page); display: flex; flex-direction: column; justify-content: center; gap: 18px; }
+.book__page blockquote { margin: 0; font-size: 30px; line-height: 1.12; font-weight: 300; font-style: italic; letter-spacing: -0.02em; color: var(--ink); }
+.book__page span { font-family: var(--font-mono); font-size: 11px; color: var(--quiet); }
+.book__hinge { left: 0; top: 0; width: 320px; height: 480px; transform-origin: left center; transform-style: preserve-3d; transform: translateZ(22px); }
+.book__hinge img { left: 0; top: 0; width: 320px; height: 480px; object-fit: cover; display: block; }
+.book__shine { left: 0; top: 0; width: 320px; height: 480px; background: linear-gradient(to right, rgba(255, 255, 255, 0.18), transparent 8%, transparent 92%, rgba(0, 0, 0, 0.18)); }
+.book__inside { left: 0; top: 0; width: 320px; height: 480px; transform: rotateY(180deg) translateZ(1px); background: var(--book-back); }
+@media (max-width: 760px) { .lalande__spec { top: auto; bottom: calc(96px / var(--s)); } }

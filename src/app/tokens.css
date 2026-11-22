@@ -35,9 +35,21 @@
   --acid-yellow: #ffe600;
   --acid-green: #2fb35a;
 
+  /* Lalande (historia 02): the red book and its pages */
+  --book-red: #de2229;
+  --book-spine: #c41d23;
+  --book-gold: #f5b52a;
+  --book-page: #f7f4ec;
+  --book-edge: #f3efe4;
+  --book-edge-low: #e9e4d7;
+  --book-back: #ebe5d6;
+  --book-line: rgba(20, 20, 20, 0.08);
+
   --font-sans: var(--font-host), 'Helvetica Neue', Arial, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, Menlo, monospace;
   --font-zh: var(--font-noto-tc), sans-serif;
+  /* only Lalande's embroidered close */
+  --font-cursive: var(--font-script), cursive;
 
   /* type roles */
   --t-display: clamp(56px, 14.4vw, 208px);
