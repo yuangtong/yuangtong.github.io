@@ -83,6 +83,8 @@ export type Settings = {
     frameCounter: string;
     readNoteLabel: string;
     enterLabel: string;
+    navLabel: string;
+    crumbLabel: string;
   };
   /** Crumbs for sub-levels, keyed by path. */
   crumbs: Record<string, Link[]>;

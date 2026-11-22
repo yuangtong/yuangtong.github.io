@@ -12,18 +12,23 @@ type Props = {
   name: string; nameZh: string; availability: string;
   /** Crumbs for sub-levels, keyed by path, for example "lab / archivo.exe". */
   crumbs?: Settings['crumbs'];
+  /** The folded strip of each section, numbered as on the landing ("02 el lab"). */
+  strips: { href: string; n: string; title: string }[];
 };
 
 /**
- * Header for the section pages: the navigation from the design canvas, with
- * one active tab. Tabs do not pile up; a crumb appears only for a sub-level.
+ * Header for the section pages, the same as the landing's (G7.4): the status
+ * and the navigation sit on the rule, and below it the section's folded strip,
+ * numbered as on the landing, with the crumb for a sub-level.
  */
-export function SiteHeader({ nav, links, ui, name, nameZh, availability, crumbs }: Props) {
+export function SiteHeader({ nav, links, ui, name, nameZh, availability, crumbs, strips }: Props) {
   const pathname = usePathname();
   const crumb = crumbs?.[pathname];
   const go = useCarcoma();
   const [open, setOpen] = useState(false);
   const active = (href: string) => href !== '/#jugar' && (pathname === href || pathname.startsWith(href + '/'));
+  const strip = strips.find((s) => active(s.href));
+  const sub = crumb && crumb.length > 1 ? crumb.slice(1) : [];
   return (
     <header className="site-header">
       <div className="site-header__bar">
@@ -32,15 +37,17 @@ export function SiteHeader({ nav, links, ui, name, nameZh, availability, crumbs 
           {availability} <LimaClock />
           <span aria-hidden="true" className="cursor" />
         </CarcomaLink>
-        <nav aria-label="Principal" className="site-header__nav">
-          {nav.map((l) => <CarcomaLink key={l.href} href={l.href} className="tab" aria-current={active(l.href) ? 'page' : undefined}>{l.label}</CarcomaLink>)}
+        <nav aria-label={ui.navLabel} className="site-header__nav">
+          {nav.map((l) => <CarcomaLink key={l.href} href={l.href} className="site-header__link" aria-current={active(l.href) ? 'page' : undefined}>{l.label}</CarcomaLink>)}
         </nav>
         <button type="button" className="site-header__menu" aria-haspopup="dialog" aria-expanded={open} onClick={() => go(() => setOpen(true))}>{ui.menuLabel}</button>
       </div>
-      {crumb && crumb.length > 1 && (
-        <nav aria-label="Miga" className="crumb">
-          {crumb.map((c, i) => (
-            <span key={c.href}>{i > 0 && <span aria-hidden="true"> / </span>}{i < crumb.length - 1 ? <CarcomaLink href={c.href}>{c.label}</CarcomaLink> : <span aria-current="page">{c.label}</span>}</span>
+      {strip && (
+        <nav aria-label={ui.crumbLabel} className="site-header__strip">
+          <span className="label">{strip.n}</span>
+          {sub.length ? <CarcomaLink href={strip.href}>{strip.title}</CarcomaLink> : <span aria-current="page">{strip.title}</span>}
+          {sub.map((c, i) => (
+            <span key={c.href} className="site-header__sub"><span aria-hidden="true">/</span>{i < sub.length - 1 ? <CarcomaLink href={c.href}>{c.label}</CarcomaLink> : <span aria-current="page">{c.label}</span>}</span>
           ))}
         </nav>
       )}
