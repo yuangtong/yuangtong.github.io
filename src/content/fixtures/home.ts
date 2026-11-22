@@ -19,16 +19,14 @@ export const home: HomePage = {
         'quince cuadros, cuesta arriba, para siempre.',
         'arriba, la roca vuelve a caer. el loop empieza otra vez.',
       ],
-      quote: 'hay que imaginarse a Sísifo feliz.',
-      quoteSource: 'Albert Camus, El mito de Sísifo, 1942',
+      quote: 'hay que imaginarse a sísifo feliz.',
+      quoteSource: 'albert camus, el mito de sísifo, 1942',
       coda: 'programar es repetir el loop hasta encontrar el cuadro en el que vuelas.',
     },
     glyphText: 'yuangtong creative coder diseñador web lima ',
   },
   jugar: {
     title: 'jugar con los píxeles',
-    hint: 'mueve el cursor: las letras se apartan',
-    hintTouch: 'toca y arrastra: las letras se apartan',
   },
   sheets: {
     lab: { title: 'el lab', line: 'historias, juegos con la cámara y mi archivo de fotos.', href: '/lab' },
@@ -48,8 +46,8 @@ export const labPage: LabPage = {
   title: 'el lab',
   lead: 'historias, juegos con la cámara y mi archivo de fotos. cada pieza se puede retramar y compartir.',
   doors: [
-    { id: 'sisifo', title: 'Sísifo', text: 'el galope de Muybridge de 1878 contado como Sísifo: doce hilos, la colina y la roca que vuelve a rodar.', cta: { label: 'ver Sísifo', href: '/lab/sisifo' } },
-    { id: 'lalande', title: 'Lalande, lágrimas de ángel', text: 'una palabra de Clarice Lispector cae como gota sobre un narciso pequeño. tú eres la brisa.', cta: { label: 'ver Lalande', href: '/lab/lalande' } },
+    { id: 'sisifo', title: 'sísifo feliz', text: 'el galope de Muybridge de 1878 contado como sísifo: doce hilos, la colina y la roca que vuelve a rodar.', cta: { label: 'ver sísifo feliz', href: '/lab/sisifo' } },
+    { id: 'lalande', title: 'lalande, lágrimas de ángel', text: 'una palabra de clarice lispector cae como gota sobre un narciso pequeño. tú eres la brisa.', cta: { label: 'ver lalande', href: '/lab/lalande' } },
     { id: 'camara', title: 'cámara', text: 'tu cámara tramada en vivo. elige la celda y guarda tu versión.', cta: { label: 'abrir la cámara', href: '/lab#pieza-camara' } },
     { id: 'archivo', title: 'archivo.exe', text: 'mis fotos de california y nevada, febrero de 2017. muévelas, ábrelas, pixélalas.', cta: { label: 'abrir archivo.exe', href: '/lab/archivo' } },
   ],
@@ -110,31 +108,32 @@ export const contactPage: ContactPage = {
 
 
 export const sisyphusPage: StoryPage = {
-  title: 'Sísifo',
-  label: 'Sísifo, el galope de Muybridge de 1878 contado con narración',
+  title: 'sísifo feliz',
+  label: 'sísifo feliz, el galope de Muybridge de 1878 contado con narración',
   hint: 'baja para contar la historia',
   replay: 'de nuevo',
 };
 
 export const lalandePage: LalandePage = {
-  title: 'Lalande, lágrimas de ángel',
-  canvasLabel: 'El caballo de Muybridge, hecho de letras, se deshace y forma la palabra Lalande. La palabra se vuelve una gota que cae sobre un narciso pequeño contra un cielo azul. El narciso se mece, gira e implosiona, y en su lugar aparece el libro de Clarice Lispector entre lluvia de letras.',
+  title: 'lalande, lágrimas de ángel',
+  canvasLabel: 'el caballo de Muybridge, hecho de letras, se deshace y forma la palabra lalande. la palabra se vuelve una gota que cae sobre un narciso pequeño contra un cielo azul. el narciso se mece, gira e implosiona, y en su lugar aparece el libro de clarice lispector entre lluvia de letras.',
   hint: 'baja para leer',
   replay: 'de nuevo',
   quotes: [
-    { text: '«Lalande. Es como lágrimas de ángel.»', source: 'Clarice Lispector, Cerca del corazón salvaje' },
-    { text: '«…la brisa más ligera lo mueve a un lado y a otro.»', source: 'Clarice Lispector, Cerca del corazón salvaje' },
+    { text: '«lalande. es como lágrimas de ángel.»', source: 'clarice lispector, cerca del corazón salvaje' },
+    { text: '«…la brisa más ligera lo mueve a un lado y a otro.»', source: 'clarice lispector, cerca del corazón salvaje' },
   ],
   spec: ['narciso pequeño', 'lágrimas de ángel'],
   breezeLabel: 'brisa',
   breezeHint: 'mueve el cursor: eres la brisa',
   book: {
-    label: 'Perto do coração selvagem, de Clarice Lispector, edición de Rocco, con tapa roja',
+    label: 'perto do coração selvagem, de clarice lispector, edición de rocco, con tapa roja',
     author: 'clarice lispector', title: 'perto do coração selvagem',
-    quote: '«Libertad es poco. Lo que deseo aún no tiene nombre.»', quoteSource: 'Clarice Lispector',
+    quote: '«libertad es poco. lo que deseo aún no tiene nombre.»', quoteSource: 'clarice lispector',
   },
-  closeText: 'Clarice Lispector',
-  closeTitle: 'Cerca del corazón salvaje, 1943',
+  closeText: 'clarice lispector',
+  word: 'lalande',
+  closeTitle: 'cerca del corazón salvaje, 1943',
 };
 
 export const archivePage: ArchivePage = {

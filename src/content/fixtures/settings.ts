@@ -29,8 +29,8 @@ export const settings: Settings = {
     crumbLabel: 'Sección',
   },
   crumbs: {
-    '/lab/sisifo': [{ label: 'lab', href: '/lab' }, { label: 'Sísifo', href: '/lab/sisifo' }],
-    '/lab/lalande': [{ label: 'lab', href: '/lab' }, { label: 'Lalande', href: '/lab/lalande' }],
+    '/lab/sisifo': [{ label: 'lab', href: '/lab' }, { label: 'sísifo feliz', href: '/lab/sisifo' }],
+    '/lab/lalande': [{ label: 'lab', href: '/lab' }, { label: 'lalande', href: '/lab/lalande' }],
     '/lab/archivo': [
       { label: 'lab', href: '/lab' },
       { label: 'archivo.exe', href: '/lab/archivo' },
