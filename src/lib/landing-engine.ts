@@ -28,9 +28,9 @@ export type LandingConfig = {
   jugar: { side: number; head: number };
 };
 
-export const DESKTOP: LandingConfig = { W: 1440, H: 900, CS: 6, K: 1, VOID: 4600, STORY: 4400, TEXT: 1800, SECT: 1400, LAST: 900, strip: 48, hero: { cx: 146.2, cy: 91.8, s: 1.7 }, coreFrac: 0.6, run: { ax: 96, ay: 120, s: 3.2 }, zoom: { ax: 120, s: 1.9, lift: 9, drop: 44 }, threads: { start: 50, gap: 22, top: 30, travel: 330 }, travel2: 260, wall: { top: 34 }, year: { left: 118, top: 26, k: 5 }, hills: { far: 50, mid: 24 }, rockR: 14, slope: 0.3, scrubBottom: 120, glyphB: 2, repel: 90, jugar: { side: 560, head: 0 } };
+export const DESKTOP: LandingConfig = { W: 1440, H: 900, CS: 6, K: 1, VOID: 4600, STORY: 4400, TEXT: 1000, SECT: 1400, LAST: 900, strip: 48, hero: { cx: 146.2, cy: 91.8, s: 1.7 }, coreFrac: 0.6, run: { ax: 96, ay: 120, s: 3.2 }, zoom: { ax: 120, s: 1.9, lift: 9, drop: 44 }, threads: { start: 50, gap: 22, top: 30, travel: 330 }, travel2: 260, wall: { top: 34 }, year: { left: 118, top: 26, k: 5 }, hills: { far: 50, mid: 24 }, rockR: 14, slope: 0.3, scrubBottom: 120, glyphB: 2, repel: 90, jugar: { side: 560, head: 0 } };
 
-export const MOBILE: LandingConfig = { W: 390, H: 844, CS: 4, K: 2, VOID: 3600, STORY: 3600, TEXT: 1500, SECT: 1200, LAST: 700, strip: 44, hero: { cx: 49, cy: 128, s: 3.26 }, coreFrac: 0.9, run: { ax: 44, ay: 150, s: 3.6 }, zoom: { ax: 49, s: 3.1, lift: 6, drop: 70 }, threads: { start: 26, gap: 14, top: 50, travel: 170 }, travel2: 140, wall: { top: 48 }, year: { left: 14, top: 22, k: 3, drift: 0.02 }, hills: { far: 50, mid: 24 }, rockR: 10, slope: 0.3, scrubBottom: 120, glyphB: 3, repel: 64, jugar: { side: 0, head: 170 } };
+export const MOBILE: LandingConfig = { W: 390, H: 844, CS: 4, K: 2, VOID: 3600, STORY: 3600, TEXT: 900, SECT: 1200, LAST: 700, strip: 44, hero: { cx: 49, cy: 128, s: 3.26 }, coreFrac: 0.9, run: { ax: 44, ay: 150, s: 3.6 }, zoom: { ax: 49, s: 3.1, lift: 6, drop: 70 }, threads: { start: 26, gap: 14, top: 50, travel: 170 }, travel2: 140, wall: { top: 48 }, year: { left: 14, top: 22, k: 3, drift: 0.02 }, hills: { far: 50, mid: 24 }, rockR: 10, slope: 0.3, scrubBottom: 120, glyphB: 3, repel: 64, jugar: { side: 0, head: 170 } };
 
 /**
  * Fit a design configuration to the window: keep the design scale on the
@@ -314,6 +314,8 @@ export function createLanding(o: LandingOptions) {
     return { x: 0, y: top + C.jugar.head, w: W, h: Math.max(0, h - C.jugar.head) };
   }
   const glyphFont = `600 12px ${o.glyphFamily}, ui-monospace, Menlo, monospace`;
+  // the pointer is no lens: letters it passes over are nudged along its path and settle back
+  let wakeX = new Float32Array(0), wakeY = new Float32Array(0), wakePtr: { x: number; y: number } | null = null;
   function drawGlyphs(step: number, now: number, m: number, reveal: number, glitch: number, rect: { x: number; y: number; w: number; h: number }, clip: { x: number; y: number; w: number; h: number } | null) {
     const G = CS * C.glyphB, cols = Math.ceil(W / G), rows = Math.ceil(H / G), tt = reduce ? 0 : Math.floor((now - t0) / 70);
     const hh = heldHorse(), tw = Math.min(rect.w * 1.1, (rect.h * 1.1 * FW) / FH), tcx = rect.x + rect.w / 2, tcy = rect.y + rect.h / 2;
@@ -324,6 +326,9 @@ export function createLanding(o: LandingOptions) {
     if (clip) { ctx.beginPath(); ctx.rect(clip.x, clip.y, clip.w, clip.h); ctx.clip(); }
     ctx.fillStyle = color.paper; ctx.fillRect(0, 0, W, H);
     ctx.font = glyphFont; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    if (wakeX.length !== cols * rows) { wakeX = new Float32Array(cols * rows); wakeY = new Float32Array(cols * rows); }
+    const vx = ptr && wakePtr ? ptr.x - wakePtr.x : 0, vy = ptr && wakePtr ? ptr.y - wakePtr.y : 0;
+    wakePtr = ptr && !reduce ? { x: ptr.x, y: ptr.y } : null;
     for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) {
       const x = c * G + G / 2, y = r * G + G / 2;
       if (clip && (x < clip.x - G || x > clip.x + clip.w + G || y < clip.y - G || y > clip.y + clip.h + G)) continue;
@@ -333,8 +338,13 @@ export function createLanding(o: LandingOptions) {
       const lim = reveal * 1.5 - h2(c, 99) * 0.5;
       if (r / rows > lim) continue;
       const head = r / rows > lim - 0.04 && reveal < 1;
-      let dx = 0, dy = 0, g2 = glitch;
-      if (ptr && !reduce) { const ex = x - ptr.x, ey = y - ptr.y, d = Math.sqrt(ex * ex + ey * ey); if (d < RR) { const push = (RR - d) / RR; dx = (ex / (d || 1)) * push * RR * 0.5; dy = (ey / (d || 1)) * push * RR * 0.5; g2 = Math.max(g2, push * 0.8); } }
+      const wi = r * cols + c, g2 = glitch;
+      if (ptr && !reduce && (vx || vy)) {
+        const ex = x - ptr.x, ey = y - ptr.y, d2 = ex * ex + ey * ey, R2 = RR * RR * 0.36;
+        if (d2 < R2) { const push = 1 - d2 / R2; wakeX[wi] += vx * push * 0.35; wakeY[wi] += vy * push * 0.35; }
+      }
+      wakeX[wi] = Math.max(-G, Math.min(G, wakeX[wi] * 0.86)); wakeY[wi] = Math.max(-G, Math.min(G, wakeY[wi] * 0.86));
+      const dx = wakeX[wi], dy = wakeY[wi];
       const gx = x + dx, gy2 = y + dy, k = h2(c, r);
       if (k < 0.05 || head) { ctx.fillStyle = color.signal; ctx.fillRect(gx - G / 2 + 1, gy2 - G / 2 + 1, G - 2, G - 2); if (head) { ctx.fillStyle = color.white; ctx.fillText(NOISE[(c + r + tt) % NOISE.length], gx, gy2 + 1); } continue; }
       const scr = h3(c, r, tt) < g2;

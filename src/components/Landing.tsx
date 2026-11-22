@@ -211,7 +211,6 @@ export function Landing({ page, nav, links, ui, glyphFamily, piece }: Props) {
               <div ref={setIn(0)} className="sheet__inner">
                 <div ref={(el) => { dom.current.jside = el; }} className="jugar__side">
                   <h2 className="jugar__title"><span className="vh">{jugar.title}</span><span ref={(el) => { dom.current.title = el; }} aria-hidden="true">{jugar.title}</span></h2>
-                  <p className="label jugar__hint">{mobile ? jugar.hintTouch : jugar.hint}</p>
                 </div>
               </div>
             </section>
