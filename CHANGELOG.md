@@ -44,6 +44,12 @@ Owner decisions and housekeeping, to pick up later:
 - [ ] Logo and favicon: pick one of the proposals in the design canvas.
 
 ### Added
+- A note page at `/notas/[slug]` from design G ("notas: una nota"), with the crumb "03 notas / quitarle el jinete". The first note, "quitarle el jinete a un galope de 1878", has:
+  - the meta column (back to all notes, date, reading time worked out from the text, what it is about) and the title with its lead;
+  - the before and after figures (Muybridge, public domain), the text in a column with its code listing, and the links to the lab and the next note.
+
+  The card in the notes index now leads to it, and the cards go through the carcoma. `NotePage`, `NoteBlock`, `getNote` and `getNoteSlugs` carry notes as content, so the CMS can feed them later.
+- The 404 from design G, reworked with the owner (2026-11-22). The number stands whole in a dot matrix; the horse gallops in, crashes into it, and the dots fly and pile up on the floor like sand. What is left of the number gives way after the horse has passed, then the number gathers itself again and the horse comes back. Reduced motion gets one composed frame of the crash. The page has the site header, "volver al inicio" and "ir al lab".
 - Lalande, lágrimas de ángel, as a piece in the lab at `/lab/lalande` (design "Lalande v4", Historias project), with the crumb "02 el lab / Lalande". As you scroll:
   - the horse in the air comes apart and its letters spell "Lalande";
   - the word becomes a drop that falls on a small narcissus against a dithered blue sky, with two quotes from Clarice Lispector, and the pointer is the breeze;
