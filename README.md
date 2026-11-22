@@ -1,34 +1,29 @@
-# Personal Portfolio Website
+# yuangtong.dev
 
-A modern, responsive portfolio website built with React and TypeScript. Features a clean, minimalist design with interactive elements and smooth animations.
+Portfolio of Yuang Tong (唐源): creative coder and web designer in Lima.
+Version 2 is a Next.js (App Router) site drawn as an indexed canvas: a cell
+grid, ordered dithering and a four-entry palette.
 
-## 🚀 Features
+## Run
 
-- Dark/Light mode toggle
-- Multi-language support (EN/ES)
-- Interactive cursor effects
-- Smooth page transitions
-- Responsive design
-- Dynamic project showcase
-- Blog integration
+```bash
+npm install
+npm run dev
+```
 
-## 🛠️ Built With
+`npm run build` builds for production; `npm run typecheck` checks types.
+Copy `.env.example` to `.env.local` and set `NEXT_PUBLIC_SITE_URL`.
 
-- React
-- TypeScript
-- TailwindCSS
-- Framer Motion
-- React Router
-- i18n
+## Where things live
 
-## 📦 Content Source & Data API
+- `src/app/`: routes, fonts and the token layer (`tokens.css`).
+- `src/components/`: sections of the home page.
+- `src/content/`: the content contract (types, fixtures, loaders). See `AGENTS.md`.
+- `src/lib/`: canvas engines, shared media loading and canvas tokens.
+- `archive/v1/`: version 1 (Vite), kept for reference and excluded from the build.
 
-- Centralized content in `src/data/content.json` for `blogs`, `projects`, and `works`.
-- Read data via the single hook `useContent(type)`, where `type` is `'blogs' | 'projects' | 'works'`.
-- Detail views are unified with `ContentDetail` and list views use `ContentCard`.
-- `src/data/timeline.ts` remains a separate TypeScript source consumed by `useCVTimeline`.
+Rules for contributors, human or AI: `CLAUDE.md` and `AGENTS.md`.
+Changes: `CHANGELOG.md`.
 
-## 🧭 Navigation Patterns
-
-- Detail and archive pages include the reusable `DetailNav` (Back + Home).
-- `BackButton` provides accessible navigation with `aria-label="Go back"` and fallback to `/`.
+Credits: the gallop is Eadweard Muybridge's, public domain. Floating shapes:
+Acid Dither Shapes by Pixelbuddha, commercial license.

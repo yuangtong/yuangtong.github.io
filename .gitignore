@@ -28,7 +28,6 @@ node_modules/
 .pnp/
 .pnp.js
 yarn.lock
-package-lock.json
 .yarn-integrity
 
 # Build and Output
@@ -74,4 +73,7 @@ junit.xml
 
 # Project Specific
 stats.html
-.env*.local
+.env*.local.next/
+next-env.d.ts
+*.tsbuildinfo
+!.env.example

@@ -1,0 +1,49 @@
+/* Token layer. Canvas code reads the same values from src/lib/tokens.ts. */
+:root {
+  --paper: #ededeb;
+  --paper-2: #dcdcd8;
+  --ink: #141414;
+  --body: #2e2e2b;
+  --quiet: #4d4d49;
+  --signal: #0b14c9;
+  --signal-electric: #2a36ff;
+  --on-signal: #ffffff;
+  --rosado: #ff3ea5;
+  --lima: #c8ff2e;
+  --night: #000000;
+  --night-fg: #ededeb;
+  --night-quiet: #a3a39e;
+  --night-line: #3a3a38;
+  --night-soft: #b9b9b4;
+  --dot-rule: #b3b3ae;
+
+  --font-sans: var(--font-host), 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, Menlo, monospace;
+  --font-zh: var(--font-noto-tc), sans-serif;
+
+  /* type roles */
+  --t-display: clamp(56px, 14.4vw, 208px);
+  --t-h2: clamp(48px, 6.7vw, 96px);
+  --t-role: clamp(22px, 3.3vw, 48px);
+  --t-lead: clamp(24px, 2.2vw, 32px);
+  --t-card: clamp(28px, 2.5vw, 36px);
+  --t-body-lg: 19px;
+  --t-body: 16px;
+  --t-small: 15px;
+  --t-label: 12.5px;
+  --track-display: -0.05em;
+  --track-title: -0.03em;
+
+  /* spacing (4px base) */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 24px;
+  --s-6: 32px;
+  --s-7: 48px;
+  --s-8: 56px;
+  --s-9: 64px;
+  --gutter: clamp(16px, 2.2vw, 32px);
+  --control: 48px;
+}

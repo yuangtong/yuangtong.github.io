@@ -34,8 +34,9 @@ full policy is in [`docs/VERSIONING.md`](docs/VERSIONING.md).
 - The redesign (version 2) is developed on feature branches.
 - The CMS is Sanity (owner decision, 2026-11-13).
 - Version 2 is built on Next.js with the App Router (owner decision,
-  2026-11-14), replacing the Vite single-page app. The migration has not
-  started yet.
+  2026-11-14), replacing the Vite single-page app. The migration started on
+  2026-11-22 on the feature branch: the home page is built, and the version 1
+  sources sit in `archive/v1/` on that branch (excluded from the build).
 - The visual direction is still being explored: the owner is collecting
   references and several design versions will be produced and combined. Treat
   the direction below as the current baseline, not as final.
@@ -55,11 +56,13 @@ Decided with the owner. Do not drift from these without asking.
 - On the home page the cell grid fills the whole screen behind the content, and
   it carries no visitor controls. Controls (density, palette, parameters) belong
   to the pieces in the lab, where the visitor is invited to play.
-- The horse stays as the recurring figure. Its narrative is the owner's to
-  write and is still pending; do not invent story beats or final copy.
+- The horse stays as the recurring figure. Its narrative is the owner's: the
+  opening tells Muybridge's 1878 gallop as Sisyphus (twelve threads, the hill,
+  the rock that rolls back, Camus' "hay que imaginarse a Sísifo feliz").
+  Approved with home G7.3, 2026-11-22. Do not add story beats without asking.
 - The hero carries the owner's name, his Chinese name (唐源) and a role label:
-  "diseñador web y programador creativo" (English: "web designer and creative
-  coder"). Owner decision, 2026-11-21; it replaces the earlier statement
+  "creative coder y diseñador web" (home G7.3, approved 2026-11-22; before it,
+  "diseñador web y programador creativo", 2026-11-21). It replaces the earlier statement
   "¿yo?, hago lo que quiero" and the earlier rule of never saying "creative
   coder".
 - The section about FOMMO is called "studio". It only says that the owner

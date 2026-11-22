@@ -31,8 +31,38 @@ Owner decisions and housekeeping, to pick up later:
       (`@mediapipe/tasks-vision`, hand landmarker): a blob follows the
       fingertip and leaves a trail. Runs on the visitor's device, no Python
       and no server; load the model only when the camera is turned on.
-- [ ] Remove tracked leftovers: `node_modules 2/`, `package-lock 2.json`,
-      `nohup.out` and three `vite.config.ts.timestamp-*.mjs` files.
+- [ ] Remove tracked leftovers, now under `archive/v1/`: `node_modules 2/`,
+      `package-lock 2.json`, `nohup.out` and three `vite.config.ts.timestamp-*.mjs` files.
+- [ ] Mobile framing of the opening: on portrait screens the canvas is
+      cropped like `object-fit: cover`; the horse needs its own framing there.
+- [ ] Real values for the placeholders in content: contact links and email,
+      reply time, availability date, note dates and reading times.
+- [ ] Lab and notes routes (`/lab/[id]`, `/notas/[slug]`); the copied links
+      already point to `/lab/[id]?celda=`.
+- [ ] Folk Club webfont for the stitched "hablemos" (Dancing Script stands in).
+- [ ] Logo and favicon: pick one of the proposals in the design canvas.
+
+### Added
+
+- Version 2 home page on Next.js 16 (App Router), built from home G7.3 and G6:
+  the narrated opening (hero, spiral void, Muybridge's 1878 gallop told as
+  Sisyphus, frame strip), the lab with live dithered cards, cell sizes and
+  copy-link, studio, notes as dithered cards in three accents, and the closing
+  with the stitched "hablemos", a live Lima clock and contact facts. Floating
+  shapes from Pixelbuddha's Acid Dither Shapes (commercial license) cycle
+  their tones through the accent ramps. `prefers-reduced-motion` gets still
+  frames everywhere.
+- Content contract in `src/content/` (`types.ts`, fixtures and loaders) for the
+  CMS agent to connect Sanity behind.
+- Token layer in `src/app/tokens.css` and `src/lib/tokens.ts`.
+- `.env.example` with `NEXT_PUBLIC_SITE_URL`.
+
+### Changed
+
+- Version 1 (Vite) moved to `archive/v1/` on this branch; `main` keeps serving
+  it until the owner switches. Netlify now builds Next.js.
+- `CLAUDE.md`: hero role label "creative coder y diseñador web", the Sisyphus
+  narrative for the horse, and the migration status.
 
 ### Changed
 
