@@ -42,7 +42,7 @@ export function LabGrid({ experiments, ui }: { experiments: Experiment[]; ui: Se
   return (
     <div className="lab__grid">
       {experiments.map((e) => (
-        <article key={e.id} className="lab-card">
+        <article key={e.id} id={`pieza-${e.id}`} className="lab-card">
           <div className="lab-card__text">
             <h2 className="lab-card__title">{e.title}</h2>
             <span className="label">{e.meta}</span>

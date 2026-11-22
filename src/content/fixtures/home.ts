@@ -1,4 +1,4 @@
-import type { ContactPage, HomePage, LabPage, NotesPage, NotFoundPage, StudioPage } from '../types';
+import type { ArchivePage, ContactPage, HomePage, LabPage, NotesPage, NotFoundPage, StudioPage } from '../types';
 
 export const home: HomePage = {
   intro: {
@@ -46,7 +46,12 @@ export const notFound: NotFoundPage = {
 
 export const labPage: LabPage = {
   title: 'el lab',
-  lead: 'código, fotografías y música. cambia la celda de cada pieza y copia el enlace: compartes tu versión.',
+  lead: 'historias, juegos con la cámara y mi archivo de fotos. cada pieza se puede retramar y compartir.',
+  doors: [
+    { id: 'historias', title: 'historias', text: 'Sísifo con el caballo de Muybridge y Lalande con Clarice Lispector, contadas en píxeles.', cta: { label: 'ver historias', href: '/lab#pieza-medio' } },
+    { id: 'camara', title: 'cámara', text: 'tu cámara tramada en vivo. elige la celda y guarda tu versión.', cta: { label: 'abrir la cámara', href: '/lab#pieza-camara' } },
+    { id: 'archivo', title: 'archivo.exe', text: 'mis fotos de california y nevada, febrero de 2017. muévelas, ábrelas, pixélalas.', cta: { label: 'abrir archivo.exe', href: '/lab/archivo' } },
+  ],
   experiments: [
     { id: 'medio', title: 'medio tono', meta: 'código, 2026', alt: 'El galope en puntos azules de tamaño variable', visual: 'medio', defaultCell: 8, href: '/lab' },
     { id: 'camara', title: 'cámara tramada', meta: 'código, 2026', alt: 'Fotografía del galope tramada en azul y papel', visual: 'camara', defaultCell: 4, href: '/lab' },
@@ -83,3 +88,27 @@ export const contactPage: ContactPage = {
   ],
 };
 
+
+export const archivePage: ArchivePage = {
+  title: 'archivo.exe',
+  windowTitle: 'archivo.exe, C:\\fotos',
+  series: ['carretera', 'san francisco', 'chinatown', 'reno'],
+  photos: [
+    { id: 'IMG_4999', src: '/archivo/img_4999.jpg', serie: 'carretera', date: '11 feb 2017, 13:30', alt: 'autopista bajo pasos elevados de concreto, cielo azul', cell: 8, palette: 'tinta', spot: [0.94, 0.04] },
+    { id: 'IMG_5071', src: '/archivo/img_5071.jpg', serie: 'carretera', date: '11 feb 2017, 14:10', alt: 'intercambio de autopistas con el letrero a Alum Rock Ave', cell: 4, palette: 'color', spot: [0.44, 0.5] },
+    { id: 'IMG_5185', src: '/archivo/img_5185.jpg', serie: 'san francisco', date: '11 feb 2017, 14:51', alt: 'el Golden Gate detrás de un campo verde', cell: 4, palette: 'color', spot: [0.34, 0.02] },
+    { id: 'IMG_5252', src: '/archivo/img_5252.jpg', serie: 'san francisco', date: '11 feb 2017, 15:28', alt: 'skyline de San Francisco con la Transamerica y dos grúas', cell: 2, palette: 'azul', spot: [0.66, 0.1] },
+    { id: 'IMG_5253', src: '/archivo/img_5253.jpg', serie: 'san francisco', date: '11 feb 2017, 15:29', alt: 'skyline de San Francisco, más cerca', cell: 16, palette: 'acida', spot: [0.72, 0.74] },
+    { id: 'IMG_5383', src: '/archivo/img_5383.jpg', serie: 'chinatown', date: '11 feb 2017, 16:55', alt: 'calle de Chinatown con faroles rojos de año nuevo', cell: 4, palette: 'color', spot: [0.06, 0.08] },
+    { id: 'IMG_5397', src: '/archivo/img_5397.jpg', serie: 'chinatown', date: '11 feb 2017, 17:45', alt: 'plaza de Chinatown con un pabellón rojo', cell: 8, palette: 'rojo', spot: [0.16, 0.62] },
+    { id: 'IMG_5765', src: '/archivo/img_5765.jpg', serie: 'reno', date: '19 feb 2017, 19:27', alt: 'hotel casino GSR en Reno bajo un cielo de tormenta', cell: 4, palette: 'color', spot: [0.98, 0.56] },
+  ],
+  readme: 'archivo fotográfico de yuang tong.\ncalifornia y nevada, febrero de 2017.\ncanon eos rebel t6.\n\nlas copias se mueven: arrástralas.\ndoble clic abre la foto en su ventana.\nceldas de 2, 4, 8 o 16 px, u original.\ncada foto guarda su versión.',
+  ui: {
+    start: 'Inicio', startLabel: 'inicio, índice del archivo', band: 'archivo 98', tray: 'lima', tidy: 'ordenar las copias', closeAll: 'cerrar ventanas', backToLab: 'volver al lab',
+    readmeName: 'léeme.txt', readmeTitle: 'léeme.txt, bloc de notas', minimize: 'minimizar', maximize: 'maximizar', restore: 'restaurar', close: 'cerrar',
+    closeExe: 'cerrar archivo.exe y volver al lab', fill: 'ocupar toda la pantalla', unfill: 'dejar ver el portafolio', copyLink: 'Copiar enlace', copied: 'enlace copiado', objects: 'objetos',
+    photo: 'foto', photos: 'fotos', cell: 'celda', palette: 'paleta', original: 'original', openHint: 'doble clic para abrir', open: 'abrir',
+    paletteNames: { tinta: 'tinta', azul: 'azul', rojo: 'rojo', acida: 'ácida', color: 'color' },
+  },
+};

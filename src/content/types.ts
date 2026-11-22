@@ -84,6 +84,8 @@ export type Settings = {
     readNoteLabel: string;
     enterLabel: string;
   };
+  /** Crumbs for sub-levels, keyed by path. */
+  crumbs: Record<string, Link[]>;
 };
 
 /** A folded sheet at the end of the landing: a short view that leads to its section. */
@@ -100,7 +102,33 @@ export type HomePage = {
   };
 };
 
-export type LabPage = { title: string; lead: string; experiments: Experiment[] };
+/** A door in the lab: historias, cámara, archivo.exe. */
+export type LabDoor = { id: string; title: string; text: string; cta: Link };
+
+export type LabPage = { title: string; lead: string; doors: LabDoor[]; experiments: Experiment[] };
+
+export type ArchivePalette = 'tinta' | 'azul' | 'rojo' | 'acida' | 'color';
+
+/** A photo in archivo.exe. `cell` 0 is the original photo; `spot` places the print on the desk (0..1). */
+export type ArchivePhoto = {
+  id: string; src: string; serie: string; date: string; alt: string;
+  cell: 0 | 2 | 4 | 8 | 16; palette: ArchivePalette; spot: [number, number];
+};
+
+export type ArchivePage = {
+  title: string;
+  windowTitle: string;
+  series: string[];
+  photos: ArchivePhoto[];
+  readme: string;
+  ui: {
+    start: string; startLabel: string; band: string; tray: string; tidy: string; closeAll: string; backToLab: string;
+    readmeName: string; readmeTitle: string; minimize: string; maximize: string; restore: string; close: string;
+    closeExe: string; fill: string; unfill: string; copyLink: string; copied: string; objects: string;
+    photo: string; photos: string; cell: string; palette: string; original: string; openHint: string; open: string;
+    paletteNames: Record<ArchivePalette, string>;
+  };
+};
 export type NotesPage = { title: string; lead: string; items: Note[] };
 export type StudioPage = { title: string; lead: string; sub: string; cta: Link };
 export type ContactPage = { title: string; lead: string; email: Link; links: Link[] };

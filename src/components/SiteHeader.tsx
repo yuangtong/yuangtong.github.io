@@ -10,16 +10,17 @@ import { MobileMenu } from './MobileMenu';
 type Props = {
   nav: Link[]; links: Link[]; ui: Settings['ui'];
   name: string; nameZh: string; availability: string;
-  /** Sub-level crumb, for example "lab / archivo.exe". */
-  crumb?: Link[];
+  /** Crumbs for sub-levels, keyed by path, for example "lab / archivo.exe". */
+  crumbs?: Settings['crumbs'];
 };
 
 /**
  * Header for the section pages: the navigation from the design canvas, with
  * one active tab. Tabs do not pile up; a crumb appears only for a sub-level.
  */
-export function SiteHeader({ nav, links, ui, name, nameZh, availability, crumb }: Props) {
+export function SiteHeader({ nav, links, ui, name, nameZh, availability, crumbs }: Props) {
   const pathname = usePathname();
+  const crumb = crumbs?.[pathname];
   const go = useCarcoma();
   const [open, setOpen] = useState(false);
   const active = (href: string) => href !== '/#jugar' && (pathname === href || pathname.startsWith(href + '/'));

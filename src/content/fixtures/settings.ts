@@ -26,4 +26,10 @@ export const settings: Settings = {
     readNoteLabel: 'leer la nota',
     enterLabel: 'entrar',
   },
+  crumbs: {
+    '/lab/archivo': [
+      { label: 'lab', href: '/lab' },
+      { label: 'archivo.exe', href: '/lab/archivo' },
+    ],
+  },
 };
