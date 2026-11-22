@@ -13,7 +13,7 @@ export type Link = {
 /** Accent families used by notes and floating shapes. Values live in the token layer. */
 export type Accent = 'azul' | 'rosado' | 'lima';
 
-/** Opening sequence: hero, the dive into the void and the narrated gallop. */
+/** Opening sequence: hero, the dive into the void and Sisyphus. */
 export type Intro = {
   name: string;
   nameZh: string;
@@ -22,13 +22,20 @@ export type Intro = {
   ctas: Link[];
   /** Describes the animated canvas for assistive technology. */
   canvasLabel: string;
+  /** Written narration over the story. Off by default: the animation tells it. */
+  narrated: boolean;
   narration: {
     lines: [string, string, string];
     quote: string;
     quoteSource: string;
     coda: string;
   };
+  /** Letters the horse turns into. */
+  glyphText: string;
 };
+
+/** First sheet: the horse made of letters that move away from the pointer. */
+export type Jugar = { title: string; hint: string; hintTouch: string };
 
 export type ExperimentVisual = 'medio' | 'camara' | 'dona' | 'fotos';
 
@@ -57,14 +64,6 @@ export type Note = {
   accent: Accent;
 };
 
-export type ContactFact = {
-  label: string;
-  value: string;
-  /** `clock` renders the live time in Lima instead of `value`. */
-  kind?: 'text' | 'clock';
-  note?: string;
-};
-
 export type Settings = {
   siteTitle: string;
   description: string;
@@ -76,19 +75,22 @@ export type Settings = {
     copiedLabel: string;
     cellGroupLabel: string;
     frameStripLabel: string;
+    indexLabel: string;
+    framePrev: string;
+    frameNext: string;
     cameraCounter: string;
     frameCounter: string;
     readNoteLabel: string;
-    contactListLabel: string;
   };
 };
 
 export type HomePage = {
   intro: Intro;
-  lab: { title: string; lead: string; more: Link; experiments: Experiment[] };
-  studio: { title: string; body: string; cta: Link };
-  notes: { title: string; lead: string; more: Link; items: Note[] };
-  contact: { title: string; primary: Link; links: Link[]; facts: ContactFact[] };
+  jugar: Jugar;
+  lab: { title: string; lead: string; experiments: Experiment[] };
+  notes: { title: string; items: Note[] };
+  studio: { title: string; lead: string; sub: string; cta: Link };
+  contact: { title: string; lead: string; email: Link; links: Link[] };
 };
 
 export type NotFoundPage = { title: string; body: string; back: Link };

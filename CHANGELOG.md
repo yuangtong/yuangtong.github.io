@@ -33,12 +33,30 @@ Owner decisions and housekeeping, to pick up later:
       and no server; load the model only when the camera is turned on.
 - [ ] Mobile framing of the opening: on portrait screens the canvas is
       cropped like `object-fit: cover`; the horse needs its own framing there.
-- [ ] Real values for the placeholders in content: contact links and email,
-      reply time, availability date, note dates and reading times.
+- [ ] Real links for Upwork and Instagram, and note dates and reading times.
+- [ ] Where the landing ends, and whether Sisyphus moves to "historias".
+- [ ] Section flow from design G8: lab with three doors (historias, cámara,
+      archivo.exe), estudio v3, contacto v2 (dot-grid globe, Natural Earth),
+      one active tab and the "carcoma" transition.
 - [ ] Lab and notes routes (`/lab/[id]`, `/notas/[slug]`); the copied links
       already point to `/lab/[id]?celda=`.
 - [ ] Folk Club webfont for the stitched "hablemos" (Dancing Script stands in).
 - [ ] Logo and favicon: pick one of the proposals in the design canvas.
+
+### Changed
+
+- Home page moved to design G7.4 (desktop and phone): the hero gallop, the
+  spiral void, Sisyphus without written narration (it stays available in
+  content), the drop in resolution that turns the horse into letters with
+  matrix rain and the decoded title "jugar con los píxeles" (letters move away
+  from the pointer), and five sheets (jugar, lab, notas, studio, contacto) that
+  open on arrival and fold into strips that work as the index. The landing ends
+  there. One engine (`src/lib/landing-engine.ts`) with a desktop and a phone
+  configuration; the stage keeps its design size and scales to the window.
+- Notes keep the dithered cards in three accents; contact uses
+  hola@yuangtong.dev, Upwork, Instagram and GitHub.
+- Removed the floating acid shapes from the home page (the owner rejected
+  stickers over the layout) and the stitched "hablemos" closing.
 
 ### Added
 
