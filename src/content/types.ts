@@ -132,6 +132,16 @@ export type ArchivePage = {
 export type NotesPage = { title: string; lead: string; items: Note[] };
 /** Studio (G8, estudio v3): the owner directs FOMMO; FOMMO's colours eat the paper. */
 export type StudioPage = { title: string; eyebrow: string; name: string; lead: string; cta: Link; canvasLabel: string };
-export type ContactPage = { title: string; lead: string; email: Link; links: Link[] };
+/** A way to reach the owner: the label, the handle shown in mono, the link. */
+export type ContactLink = Link & { detail: string };
+
+/** Contact (G8, contacto v2). `{place}` in the strings is replaced with the visitor's place. */
+export type ContactPage = {
+  title: string; lead: string; email: Link; emailLabel: string; links: ContactLink[];
+  clocks: { mine: string; you: string; youSame: string };
+  globe: { me: string; you: string; hint: string; label: string; labelSame: string };
+  /** Place names by time zone; unknown zones fall back to the city in the zone id. */
+  places: Record<string, string>;
+};
 
 export type NotFoundPage = { title: string; body: string; back: Link };

@@ -81,13 +81,30 @@ export const studioPage: StudioPage = {
 
 export const contactPage: ContactPage = {
   title: 'hablemos',
-  lead: 'escríbeme a',
+  lead: 'trabajo desde Lima para cualquier huso horario. escríbeme por un proyecto, una colaboración o solo para jugar con píxeles.',
   email: { label: 'hola@yuangtong.dev', href: 'mailto:hola@yuangtong.dev' },
+  emailLabel: 'correo',
+  // upwork and instagram wait for their real links; '#' keeps them off the contact page
   links: [
-    { label: 'upwork', href: '#' },
-    { label: 'instagram', href: '#' },
-    { label: 'github', href: 'https://github.com/yuangtong' },
+    { label: 'upwork', href: '#', detail: '' },
+    { label: 'instagram', href: '#', detail: '' },
+    { label: 'github', href: 'https://github.com/yuangtong', detail: 'yuangtong' },
   ],
+  clocks: { mine: 'mi hora, Lima', you: 'tú, {place}', youSame: 'tú también, Lima' },
+  globe: {
+    me: 'yo, Lima', you: 'tú, {place}', hint: 'arrastra para girarlo',
+    label: 'globo terráqueo hecho de puntos que gira. un punto azul marca Lima, donde estoy, y un arco de puntos lo une con {place}, cerca de donde estás tú.',
+    labelSame: 'globo terráqueo hecho de puntos que gira. un punto azul marca Lima, donde estoy.',
+  },
+  places: {
+    'America/Lima': 'Lima', 'America/Bogota': 'Bogotá', 'America/Mexico_City': 'Ciudad de México', 'America/Santiago': 'Santiago',
+    'America/Argentina/Buenos_Aires': 'Buenos Aires', 'America/Sao_Paulo': 'São Paulo', 'America/Caracas': 'Caracas', 'America/Guayaquil': 'Ecuador',
+    'America/La_Paz': 'La Paz', 'America/New_York': 'Nueva York', 'America/Chicago': 'Chicago', 'America/Denver': 'Denver',
+    'America/Los_Angeles': 'Los Ángeles', 'America/Toronto': 'Toronto', 'America/Panama': 'Panamá', 'Europe/Madrid': 'Madrid',
+    'Europe/London': 'Londres', 'Europe/Paris': 'París', 'Europe/Berlin': 'Berlín', 'Europe/Rome': 'Roma', 'Europe/Amsterdam': 'Ámsterdam',
+    'Europe/Lisbon': 'Lisboa', 'Asia/Tokyo': 'Tokio', 'Asia/Shanghai': 'Shanghái', 'Asia/Seoul': 'Seúl', 'Asia/Kolkata': 'India',
+    'Asia/Singapore': 'Singapur', 'Asia/Dubai': 'Dubái', 'Australia/Sydney': 'Sídney',
+  },
 };
 
 
