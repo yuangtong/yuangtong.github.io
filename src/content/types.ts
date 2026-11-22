@@ -130,7 +130,8 @@ export type ArchivePage = {
   };
 };
 export type NotesPage = { title: string; lead: string; items: Note[] };
-export type StudioPage = { title: string; lead: string; sub: string; cta: Link };
+/** Studio (G8, estudio v3): the owner directs FOMMO; FOMMO's colours eat the paper. */
+export type StudioPage = { title: string; eyebrow: string; name: string; lead: string; cta: Link; canvasLabel: string };
 export type ContactPage = { title: string; lead: string; email: Link; links: Link[] };
 
 export type NotFoundPage = { title: string; body: string; back: Link };

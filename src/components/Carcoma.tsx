@@ -5,23 +5,29 @@ import { usePathname, useRouter } from 'next/navigation';
 import { CARCOMA, createCarcoma } from '@/lib/carcoma';
 import { prefersReducedMotion } from '@/lib/dither';
 
-type Go = (href: string) => void;
+/** A path to navigate to, or a change to make while the screen is covered (opening the menu). */
+type Go = (to: string | (() => void)) => void;
 const Ctx = createContext<Go>(() => {});
 
-/** Navigate between sections through the carcoma. */
+/** Navigate between sections, or swap what is on screen, through the carcoma. */
 export function useCarcoma() { return useContext(Ctx); }
 
 export function CarcomaProvider({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const pathname = usePathname();
   const ref = useRef<HTMLCanvasElement>(null);
-  const run = useRef<{ t: number; href: string; target: string; held: number } | null>(null);
+  const run = useRef<{ t: number; href: string; target: string | null; swap?: () => void; held: number } | null>(null);
   const pathRef = useRef(pathname);
   pathRef.current = pathname;
 
-  const go = useCallback<Go>((href) => {
-    const target = href.split('#')[0] || '/';
+  const go = useCallback<Go>((to) => {
     if (run.current) return;
+    if (typeof to === 'function') {
+      if (prefersReducedMotion() || !ref.current) { to(); return; }
+      start({ t: 0, href: '', target: null, swap: to, held: 0 });
+      return;
+    }
+    const href = to, target = href.split('#')[0] || '/';
     if (target === pathRef.current) {
       const hash = href.split('#')[1];
       if (hash) window.location.hash = hash;
@@ -29,7 +35,12 @@ export function CarcomaProvider({ children }: { children: React.ReactNode }) {
     }
     if (prefersReducedMotion() || !ref.current) { router.push(href); return; }
     router.prefetch(target);
-    run.current = { t: 0, href, target, held: 0 };
+    start({ t: 0, href, target, held: 0 });
+  }, [router]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const start = (r0: NonNullable<typeof run.current>) => {
+    if (!ref.current) return;
+    run.current = r0;
     const fx = createCarcoma(ref.current);
     const el = ref.current;
     el.style.display = 'block';
@@ -42,7 +53,8 @@ export function CarcomaProvider({ children }: { children: React.ReactNode }) {
       if (step === last) return;
       last = step;
       // hold the covered frame until the new section has replaced the old one
-      if (r.t === CARCOMA.swapAt) {
+      if (r.t === CARCOMA.swapAt && r.swap) { r.swap(); r.swap = undefined; }
+      if (r.t === CARCOMA.swapAt && r.target) {
         if (r.held === 0) router.push(r.href);
         r.held++;
         if (pathRef.current !== r.target && r.held < 24) { fx.draw(r.t); return; }
@@ -52,7 +64,7 @@ export function CarcomaProvider({ children }: { children: React.ReactNode }) {
       if (r.t > CARCOMA.end) { cancelAnimationFrame(raf); fx.clear(); el.style.display = 'none'; run.current = null; }
     };
     raf = requestAnimationFrame(loop);
-  }, [router]);
+  };
 
   useEffect(() => () => { run.current = null; }, []);
 

@@ -72,9 +72,11 @@ export const notesPage: NotesPage = {
 
 export const studioPage: StudioPage = {
   title: 'studio',
-  lead: 'dirijo FOMMO, un bespoke studio. el trabajo para clientes vive ahí.',
-  sub: 'marca, producto y desarrollo, hechos a medida.',
-  cta: { label: 'fommo.studio', href: 'https://fommo.studio' },
+  eyebrow: 'studio',
+  name: 'FOMMO Studio',
+  lead: 'dirijo FOMMO, un estudio en Lima donde el diseño y el desarrollo web de alta complejidad se hacen en la misma mesa.',
+  cta: { label: 'ir a la página de FOMMO', href: 'https://fommo.studio' },
+  canvasLabel: 'Formas de colores de FOMMO que se comen el papel, dejan caer letras y vuelven a empezar.',
 };
 
 export const contactPage: ContactPage = {
