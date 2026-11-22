@@ -37,8 +37,11 @@ full policy is in [`docs/VERSIONING.md`](docs/VERSIONING.md).
 - The redesign (version 2) is developed on feature branches.
 - The CMS is Sanity (owner decision, 2026-11-13).
 - Version 2 is built on Next.js with the App Router (owner decision,
-  2026-11-14), replacing the Vite single-page app. The migration started on
-  2026-11-22: the home page is built.
+  2026-11-14), replacing the Vite single-page app. Version 2 is live on `main`
+  since 2026-11-22. The canonical landing is design G7.4 (desktop and phone);
+  G7 to G7.3 are history. The section flow comes from design G8.
+- The owner's design criteria live in the `fommo-criterio` skill: read it
+  before proposing a visual direction, and wait for explicit confirmation.
 - The visual direction is still being explored: the owner is collecting
   references and several design versions will be produced and combined. Treat
   the direction below as the current baseline, not as final.
