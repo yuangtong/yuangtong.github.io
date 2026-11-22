@@ -32,6 +32,26 @@ export const DESKTOP: LandingConfig = { W: 1440, H: 900, CS: 6, K: 1, VOID: 4600
 
 export const MOBILE: LandingConfig = { W: 390, H: 844, CS: 4, K: 2, VOID: 3600, STORY: 3600, TEXT: 1500, SECT: 1200, LAST: 700, strip: 44, hero: { cx: 49, cy: 128, s: 3.26 }, coreFrac: 0.9, run: { ax: 44, ay: 150, s: 3.6 }, zoom: { ax: 49, s: 3.1, lift: 6, drop: 70 }, threads: { start: 26, gap: 14, top: 50, travel: 170 }, travel2: 140, wall: { top: 48 }, year: { left: 14, top: 22, k: 3, drift: 0.02 }, hills: { far: 50, mid: 24 }, rockR: 10, slope: 0.3, scrubBottom: 120, glyphB: 3, repel: 64, jugar: { side: 0, head: 170 } };
 
+/**
+ * Fit a design configuration to the window: keep the design scale on the
+ * tighter axis and extend the stage on the other one, so the dot grid reaches
+ * every edge. Horizontal anchors move with the width, vertical ones with the
+ * height, so each scene keeps its composition.
+ */
+export function fitConfig(base: LandingConfig, vw: number, vh: number) {
+  const s = Math.min(vw / base.W, vh / base.H);
+  const W = Math.max(base.W, Math.round(vw / s)), H = Math.max(base.H, Math.round(vh / s));
+  const kx = W / base.W, ky = H / base.H;
+  const C: LandingConfig = {
+    ...base, W, H,
+    hero: { cx: base.hero.cx * kx, cy: base.hero.cy * ky, s: base.hero.s },
+    run: { ax: base.run.ax * kx, ay: base.run.ay * ky, s: base.run.s },
+    zoom: { ...base.zoom, ax: base.zoom.ax * kx },
+    year: { ...base.year, left: base.year.left * kx },
+  };
+  return { C, s };
+}
+
 export const sectionStart = (C: LandingConfig) => C.VOID + C.STORY + C.TEXT;
 export const span = (C: LandingConfig) => sectionStart(C) + 4 * C.SECT + C.LAST;
 export const canvasSize = (C: LandingConfig) => ({ w: Math.ceil(C.W / C.CS) * C.CS * C.K, h: Math.ceil(C.H / C.CS) * C.CS * C.K });

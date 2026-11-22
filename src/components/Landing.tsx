@@ -6,7 +6,7 @@ import { prefersReducedMotion, pixelView, type PixelView } from '@/lib/dither';
 import { loadGallop, loadOriginal, loadPhoto } from '@/lib/media';
 import { CELLS, drawCard, type Media } from '@/lib/lab-cards';
 import { drawNote } from '@/lib/note-cards';
-import { canvasSize, createLanding, DESKTOP, MOBILE, span, type LandingConfig, type LandingDom } from '@/lib/landing-engine';
+import { canvasSize, createLanding, DESKTOP, fitConfig, MOBILE, span, type LandingConfig, type LandingDom } from '@/lib/landing-engine';
 import { LimaClock } from './LimaClock';
 
 type Props = { page: HomePage; nav: Link[]; ui: Settings['ui']; glyphFamily: string };
@@ -15,14 +15,15 @@ const pad = (n: number) => (n < 10 ? '0' : '') + n;
 const MOBILE_MAX = 760;
 
 /**
- * Home G7.4. The stage is drawn at a fixed design size (1440 x 900 on desktop,
- * 390 x 844 on phones) and scaled to fit the window, so every scene keeps the
- * composition it was designed with. Page scroll drives the timeline.
+ * Home G7.4. The stage keeps the design scale (1440 x 900 on desktop, 390 x 844
+ * on phones) on the tighter axis of the window and extends on the other, so the
+ * dot grid fills the screen edge to edge. Page scroll drives the timeline.
  */
 export function Landing({ page, nav, ui, glyphFamily }: Props) {
-  const [mobile, setMobile] = useState(false);
-  const C: LandingConfig = mobile ? MOBILE : DESKTOP;
-  const [scale, setScale] = useState(1);
+  const [fit, setFit] = useState<{ mobile: boolean; C: LandingConfig; s: number }>({ mobile: false, C: DESKTOP, s: 1 });
+  const { mobile, C, s: scale } = fit;
+  const fitKey = `${mobile ? 'm' : 'd'}${C.W}x${C.H}`;
+  const [menuOpen, setMenuOpen] = useState(false);
   const [selected, setSelected] = useState<number | null>(null);
   const [flight, setFlight] = useState(6);
   const [cells, setCells] = useState<Record<string, number>>(() => Object.fromEntries(page.lab.experiments.map((e) => [e.id, e.defaultCell])));
@@ -46,16 +47,16 @@ export function Landing({ page, nav, ui, glyphFamily }: Props) {
 
   // frame and scale follow the window
   useEffect(() => {
-    const fit = () => {
-      const m = window.innerWidth < MOBILE_MAX;
-      setMobile(m);
-      const cfg = m ? MOBILE : DESKTOP, s = Math.min(window.innerWidth / cfg.W, window.innerHeight / cfg.H);
-      scaleRef.current = s;
-      setScale(s);
+    let t = 0;
+    const apply = () => {
+      const m = window.innerWidth < MOBILE_MAX, f = fitConfig(m ? MOBILE : DESKTOP, window.innerWidth, window.innerHeight);
+      scaleRef.current = f.s;
+      setFit((old) => (old.mobile === m && old.C.W === f.C.W && old.C.H === f.C.H && old.s === f.s ? old : { mobile: m, C: f.C, s: f.s }));
     };
-    fit();
-    window.addEventListener('resize', fit);
-    return () => window.removeEventListener('resize', fit);
+    const onResize = () => { clearTimeout(t); t = window.setTimeout(apply, 120); };
+    apply();
+    window.addEventListener('resize', onResize);
+    return () => { clearTimeout(t); window.removeEventListener('resize', onResize); };
   }, []);
 
   useEffect(() => {
@@ -92,23 +93,24 @@ export function Landing({ page, nav, ui, glyphFamily }: Props) {
     };
     raf = requestAnimationFrame(loop);
     return () => { dead = true; cancelAnimationFrame(raf); engineRef.current = null; };
-    // the engine is rebuilt when the frame changes between desktop and phone
-  }, [mobile]); // eslint-disable-line react-hooks/exhaustive-deps
+    // the engine is rebuilt when the stage changes size or switches frame
+  }, [fitKey]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => { engineRef.current?.remeasure(); }, [scale, mobile]);
   useEffect(() => { if (!copied) return; const id = setTimeout(() => setCopied(null), 1800); return () => clearTimeout(id); }, [copied]);
 
-  const jump = (k: number) => (e: React.MouseEvent) => {
-    e.preventDefault();
+  const scrollToSection = (k: number) => {
     const wrap = wrapRef.current, eng = engineRef.current; if (!wrap) return;
     const top = wrap.getBoundingClientRect().top + window.scrollY;
     const y = k < 0 ? 0 : (eng ? eng.jumpOffset(k) : 0) * scaleRef.current;
     window.scrollTo({ top: top + y, behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
   };
-  const goTo = (href: string) => {
+  const jump = (k: number) => (e: React.MouseEvent) => { e.preventDefault(); scrollToSection(k); };
+  const sectionIndex = (href: string) => {
     const id = href.replace('#', ''), order = ['jugar', 'lab', 'notas', 'studio', 'contacto'];
-    return id === 'inicio' ? jump(-1) : order.includes(id) ? jump(order.indexOf(id)) : undefined;
+    return id === 'inicio' ? -1 : order.indexOf(id);
   };
+  const goTo = (href: string) => { const k = sectionIndex(href); return k >= -1 && (k >= 0 || href === '#inicio') ? jump(k) : undefined; };
 
   // pointer in design coordinates
   const onMove = (e: React.PointerEvent) => {
@@ -143,11 +145,11 @@ export function Landing({ page, nav, ui, glyphFamily }: Props) {
           ref={stageRef}
           className="stage"
           data-frame={mobile ? 'm' : 'd'}
-          style={{ width: C.W, height: C.H, transform: `scale(${scale})` }}
+          style={{ width: C.W, height: C.H, transform: `translate(-50%, -50%) scale(${scale})` }}
           onPointerMove={onMove}
           onPointerLeave={() => { ptr.current = null; }}
         >
-          <canvas ref={canvasRef} key={mobile ? 'm' : 'd'} className="stage__canvas" width={cv.w} height={cv.h} role="img" aria-label={intro.canvasLabel} />
+          <canvas ref={canvasRef} key={fitKey} className="stage__canvas" width={cv.w} height={cv.h} role="img" aria-label={intro.canvasLabel} />
 
           <div ref={(el) => { dom.current.hero = el; }} className="stage__hero">
             <h1 className="stage__name">
@@ -283,7 +285,7 @@ export function Landing({ page, nav, ui, glyphFamily }: Props) {
               <span aria-hidden="true" className="cursor" />
             </span>
             {mobile ? (
-              <a href="#jugar" onClick={jump(0)} className="stage__index">{ui.indexLabel}</a>
+              <button type="button" className="stage__index" aria-haspopup="dialog" aria-expanded={menuOpen} onClick={() => setMenuOpen(true)}>{ui.menuLabel}</button>
             ) : (
               <nav aria-label="Principal" className="stage__nav">
                 {nav.map((l) => <a key={l.href} href={l.href} onClick={goTo(l.href)}>{l.label}</a>)}
@@ -292,6 +294,54 @@ export function Landing({ page, nav, ui, glyphFamily }: Props) {
           </header>
         </div>
       </div>
+      {menuOpen && (
+        <MobileMenu
+          name={intro.name} nameZh={intro.nameZh} availability={intro.availability} nav={nav} links={contact.links}
+          closeLabel={ui.closeLabel} onClose={() => setMenuOpen(false)}
+          onPick={(href) => (e) => {
+            const k = sectionIndex(href);
+            if (k < 0 && href !== '#inicio') return;
+            e.preventDefault();
+            setMenuOpen(false);
+            // wait for the menu to close and the page to scroll again
+            requestAnimationFrame(() => requestAnimationFrame(() => scrollToSection(k)));
+          }}
+        />
+      )}
     </section>
+  );
+}
+
+type MenuProps = {
+  name: string; nameZh: string; availability: string; nav: Link[]; links: Link[]; closeLabel: string;
+  onClose: () => void; onPick: (href: string) => (e: React.MouseEvent) => void;
+};
+
+/** Full-screen menu for phones (design canvas, "movil, menu abierto"). */
+function MobileMenu({ name, nameZh, availability, nav, links, closeLabel, onClose, onPick }: MenuProps) {
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const prev = document.activeElement as HTMLElement | null;
+    ref.current?.querySelector<HTMLElement>('a, button')?.focus();
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
+    document.addEventListener('keydown', onKey);
+    const overflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => { document.removeEventListener('keydown', onKey); document.body.style.overflow = overflow; prev?.focus(); };
+  }, [onClose]);
+  return (
+    <div ref={ref} className="menu" role="dialog" aria-modal="true" aria-label={name}>
+      <div className="menu__head">
+        <a href="#inicio" onClick={onPick('#inicio')} className="menu__name">{name} <span lang="zh-Hant" className="menu__zh">({nameZh})</span></a>
+        <button type="button" className="menu__close" onClick={onClose}>{closeLabel}</button>
+      </div>
+      <nav aria-label="Principal" className="menu__nav">
+        {nav.map((l) => <a key={l.href} href={l.href} onClick={onPick(l.href)}>{l.label}</a>)}
+      </nav>
+      <div className="menu__foot">
+        <div className="menu__links">{links.map((l) => <a key={l.label} href={l.href}>{l.label}</a>)}</div>
+        <span className="menu__status"><span aria-hidden="true" className="stage__dot" />{availability} <LimaClock /></span>
+      </div>
+    </div>
   );
 }

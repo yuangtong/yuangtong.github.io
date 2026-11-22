@@ -53,6 +53,13 @@ Owner decisions and housekeeping, to pick up later:
   open on arrival and fold into strips that work as the index. The landing ends
   there. One engine (`src/lib/landing-engine.ts`) with a desktop and a phone
   configuration; the stage keeps its design size and scales to the window.
+- The landing fills the window edge to edge: the stage keeps the design
+  scale on the tighter axis and extends on the other, moving the scene anchors
+  with it, instead of scaling a fixed 1440 x 900 frame with paper margins.
+- Navigation from the design canvas: on desktop the status and "sobre mí, lab,
+  studio, notas, contacto"; on phones a "menú" button that opens the
+  full-screen menu (name, close, large section links, contact links and the
+  Lima clock). The sheets and strips stay as in G7.4.
 - Notes keep the dithered cards in three accents; contact uses
   hola@yuangtong.dev, Upwork, Instagram and GitHub.
 - Removed the floating acid shapes from the home page (the owner rejected

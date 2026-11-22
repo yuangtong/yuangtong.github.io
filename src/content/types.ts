@@ -75,7 +75,8 @@ export type Settings = {
     copiedLabel: string;
     cellGroupLabel: string;
     frameStripLabel: string;
-    indexLabel: string;
+    menuLabel: string;
+    closeLabel: string;
     framePrev: string;
     frameNext: string;
     cameraCounter: string;

@@ -27,8 +27,8 @@ img, canvas { display: block; }
 
 /* ---------- the landing: one stage at design size, scaled to the window ---------- */
 .landing { position: relative; }
-.landing__sticky { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; display: grid; place-items: center; background: var(--paper); }
-.stage { position: relative; flex: none; overflow: hidden; background: var(--paper); transform-origin: center center; }
+.landing__sticky { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; background: var(--paper); }
+.stage { position: absolute; left: 50%; top: 50%; overflow: hidden; background: var(--paper); transform-origin: center center; }
 .stage__canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
 
 .stage__hero { position: absolute; inset: 0; padding: 72px 32px 32px; display: flex; flex-direction: column; z-index: 2; pointer-events: none; }
@@ -58,7 +58,21 @@ img, canvas { display: block; }
 .stage__dot { width: 8px; height: 8px; border-radius: 4px; background: var(--signal); }
 .stage__nav { display: flex; align-items: center; gap: 28px; background: var(--paper); padding: 0 14px; pointer-events: auto; }
 .stage__nav a { padding: 12px 0; text-decoration: none; }
-.stage__index { display: flex; align-items: center; min-height: 44px; padding: 0 12px; background: var(--paper); text-decoration: none; pointer-events: auto; }
+.stage__index { display: flex; align-items: center; min-height: 44px; padding: 0 12px; border: 0; border-radius: 0; background: var(--paper); color: var(--ink); font: inherit; font-size: var(--t-small); cursor: pointer; pointer-events: auto; }
+
+/* ---------- phone menu (design canvas: movil, menu abierto) ---------- */
+.menu { position: fixed; inset: 0; z-index: 20; padding: 0 16px 24px; display: flex; flex-direction: column; background: var(--paper); color: var(--ink); overflow-y: auto; }
+.menu__head { display: flex; align-items: center; justify-content: space-between; height: 56px; margin: 0 -16px; padding: 0 16px; border-bottom: 1px solid var(--ink); }
+.menu__name { display: flex; align-items: center; gap: 6px; min-height: 44px; font-size: 17px; text-decoration: none; }
+.menu__zh { font-family: var(--font-zh); font-weight: 300; }
+.menu__close { display: flex; align-items: center; min-height: 44px; padding: 0 0 0 12px; border: 0; background: transparent; color: var(--ink); font: inherit; font-size: var(--t-small); cursor: pointer; }
+.menu__nav { display: flex; flex-direction: column; margin-top: var(--s-5); }
+.menu__nav a { display: flex; align-items: baseline; padding: 10px 0; border-bottom: 1px solid var(--ink); font-size: 48px; line-height: 1; font-weight: 300; letter-spacing: var(--track-display); text-decoration: none; }
+.menu__nav a:hover, .menu__nav a:focus-visible { margin: 0 -16px; padding: 10px 16px; background: var(--signal); color: var(--on-signal); }
+.menu__foot { margin-top: auto; padding-top: var(--s-6); display: flex; flex-direction: column; gap: var(--s-4); }
+.menu__links { display: flex; flex-wrap: wrap; gap: var(--s-5); font-size: var(--t-small); }
+.menu__links a { display: flex; align-items: center; min-height: 44px; text-decoration: none; }
+.menu__status { display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 12px; }
 
 /* ---------- sheets: open on arrival, fold into strips that index the page ---------- */
 .sheets { position: absolute; inset: 0; z-index: 3; visibility: hidden; pointer-events: none; }
