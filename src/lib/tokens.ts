@@ -62,3 +62,13 @@ export const archivePalettes = {
   acida: { ramp: ['#141414', '#0b14c9', '#a937e1', '#ff3d24', '#ffe600', '#ededeb'] },
   color: {},
 } as const;
+
+/** Studio (G8, estudio v3): FOMMO's colours as [base, dither] pairs, plus the paper they eat. */
+export const fommoLines = [
+  ['#e8451a', '#edaae8'],
+  ['#c4e118', '#8aadd6'],
+  ['#0d0f1e', '#8aadd6'],
+  ['#edaae8', '#e8451a'],
+  ['#c4e118', '#0d0f1e'],
+] as const;
+export const fommoSplit = ['#e8451a', '#8aadd6'] as const;

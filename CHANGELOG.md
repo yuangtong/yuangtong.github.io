@@ -44,6 +44,7 @@ Owner decisions and housekeeping, to pick up later:
 - [ ] Logo and favicon: pick one of the proposals in the design canvas.
 
 ### Added
+- Studio at `/studio` from design G8 (estudio v3): acid shapes land on the edges in FOMMO's colours and eat the paper, their front a flicker of glyphs; the colour heals through a Bayer threshold and falls as glyph rain, and "FOMMO Studio" splits its colour now and then. It leans toward the pointer. One line about the studio and "ir a la página de FOMMO"; no FOMMO typography. Reduced motion gets one composed still frame. `StudioPage` now carries `eyebrow`, `name`, `lead`, `cta` and `canvasLabel`; FOMMO's colours are tokens (`fommoLines`).
 - archivo.exe at `/lab/archivo` (design G8, Archivo-v2), with the crumb "lab / archivo.exe": our own 1998 desktop over teal, opened inside the lab. Eight photos from 2017 as prints that can be dragged and opened; each window re-screens its photo with the cell (2, 4, 8, 16, original) and the palette (tinta, azul, rojo, ácida, color), sharpening from coarse to fine. Minimize, maximize, the start menu, the taskbar with the Lima clock, a shared link that reopens the photo with its cell and palette, and a phone layout without dragging.
 - The three doors of the lab (historias, cámara, archivo.exe) above the pieces.
 - Pixel-art icons of our own for archivo.exe (`src/lib/pixel-icons.ts`) and the `w98` tokens for its bevels and desk.
