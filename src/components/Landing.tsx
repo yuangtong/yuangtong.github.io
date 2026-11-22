@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import type { HomePage, Link, Settings } from '@/content/types';
 import { prefersReducedMotion } from '@/lib/dither';
-import { loadGallop } from '@/lib/media';
+import { loadGallop, loadRider } from '@/lib/media';
 import { canvasSize, createLanding, DESKTOP, fitConfig, MOBILE, sectionStart, span, type LandingConfig, type LandingDom } from '@/lib/landing-engine';
 import { CarcomaLink, useCarcoma } from './Carcoma';
 import { LimaClock } from './LimaClock';
@@ -72,11 +72,11 @@ export function Landing({ page, nav, links, ui, glyphFamily, piece }: Props) {
     if (!canvas || !wrap) return;
     const reduce = prefersReducedMotion();
     let raf = 0, dead = false, sys = 0;
-    loadGallop().then((g) => {
+    Promise.all([loadGallop(), piece ? Promise.resolve(null) : loadRider().catch(() => null)]).then(([g, rider]) => {
       if (dead) return;
       setFlight(g.flight);
       engineRef.current = createLanding({
-        C, canvas, gallop: g, dom: () => dom.current, reduce, mode: 1, narrated, glyphFamily,
+        C, canvas, gallop: g, dom: () => dom.current, reduce, mode: 1, narrated, glyphFamily, rider,
         title: page.jugar.title, glyphText: page.intro.glyphText, labels: { camera: ui.cameraCounter, frame: ui.frameCounter },
         onFrame: (k) => pickFrame(k, false),
       });
