@@ -239,7 +239,7 @@ export function Landing({ page, nav, links, ui, glyphFamily }: Props) {
               <span aria-hidden="true" className="cursor" />
             </span>
             {mobile ? (
-              <button type="button" className="stage__index" aria-haspopup="dialog" aria-expanded={menuOpen} onClick={() => setMenuOpen(true)}>{ui.menuLabel}</button>
+              <button type="button" className="stage__index" aria-haspopup="dialog" aria-expanded={menuOpen} onClick={() => go(() => setMenuOpen(true))}>{ui.menuLabel}</button>
             ) : (
               <nav aria-label="Principal" className="stage__nav">
                 {nav.map((l) => <a key={l.href} href={l.href} onClick={(e) => navigate(l.href, e)}>{l.label}</a>)}

@@ -35,7 +35,7 @@ export function SiteHeader({ nav, links, ui, name, nameZh, availability, crumbs 
         <nav aria-label="Principal" className="site-header__nav">
           {nav.map((l) => <CarcomaLink key={l.href} href={l.href} className="tab" aria-current={active(l.href) ? 'page' : undefined}>{l.label}</CarcomaLink>)}
         </nav>
-        <button type="button" className="site-header__menu" aria-haspopup="dialog" aria-expanded={open} onClick={() => setOpen(true)}>{ui.menuLabel}</button>
+        <button type="button" className="site-header__menu" aria-haspopup="dialog" aria-expanded={open} onClick={() => go(() => setOpen(true))}>{ui.menuLabel}</button>
       </div>
       {crumb && crumb.length > 1 && (
         <nav aria-label="Miga" className="crumb">

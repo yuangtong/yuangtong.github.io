@@ -61,6 +61,7 @@ Owner decisions and housekeeping, to pick up later:
 
 ### Changed
 
+- On phones the menu opens through the carcoma: the shapes cover the screen and the menu is there when they clear (owner idea, 2026-11-22). `useCarcoma()` now takes a path or a change to make while the screen is covered.
 - Home page moved to design G7.4 (desktop and phone): the hero gallop, the
   spiral void, Sisyphus without written narration (it stays available in
   content), the drop in resolution that turns the horse into letters with
