@@ -5,6 +5,7 @@ import type { Note, Settings } from '@/content/types';
 import { pixelView, prefersReducedMotion, type PixelView } from '@/lib/dither';
 import { loadGallop, loadOriginal, type Gallop } from '@/lib/media';
 import { drawNote } from '@/lib/note-cards';
+import { CarcomaLink } from './Carcoma';
 
 /** Notes as dithered cards, one accent each. */
 export function NotesGrid({ items, ui }: { items: Note[]; ui: Settings['ui'] }) {
@@ -32,7 +33,7 @@ export function NotesGrid({ items, ui }: { items: Note[]; ui: Settings['ui'] }) 
   return (
     <div className="notes__grid">
       {items.map((n) => (
-        <a key={n.id} href={n.href} className="note-card" data-accent={n.accent}>
+        <CarcomaLink key={n.id} href={n.href} className="note-card" data-accent={n.accent}>
           <span className="note-card__media"><canvas ref={(el) => { els.current[n.id] = el; }} width={110} height={60} role="img" aria-label={n.alt} /></span>
           <span className="note-card__body">
             <span className="note-card__title">{n.title}</span>
@@ -40,7 +41,7 @@ export function NotesGrid({ items, ui }: { items: Note[]; ui: Settings['ui'] }) 
             <span className="label note-card__meta">{n.meta}</span>
             <span className="note-card__cta">{ui.readNoteLabel}</span>
           </span>
-        </a>
+        </CarcomaLink>
       ))}
     </div>
   );
