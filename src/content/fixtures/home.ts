@@ -1,4 +1,4 @@
-import type { ArchivePage, ContactPage, HomePage, LabPage, LalandePage, NotesPage, NotFoundPage, StoryPage, StudioPage } from '../types';
+import type { ArchivePage, ContactPage, HomePage, LabPage, LalandePage, NotesPage, TravesiaPage, NotFoundPage, StoryPage, StudioPage } from '../types';
 
 export const home: HomePage = {
   intro: {
@@ -48,6 +48,7 @@ export const labPage: LabPage = {
   doors: [
     { id: 'sisifo', title: 'sísifo feliz', text: 'el galope de Muybridge de 1878 contado como sísifo: doce hilos, la colina y la roca que vuelve a rodar.', cta: { label: 'ver sísifo feliz', href: '/lab/sisifo' } },
     { id: 'lalande', title: 'lalande, lágrimas de ángel', text: 'una palabra de clarice lispector cae como gota sobre un narciso pequeño. tú eres la brisa.', cta: { label: 'ver lalande', href: '/lab/lalande' } },
+    { id: 'travesia', title: 'travesía ácida', text: 'el void del inicio sin fondo. el scroll te mete en él y cada doce capas cambia el ácido.', cta: { label: 'entrar en la travesía', href: '/lab/travesia' } },
     { id: 'camara', title: 'cámara', text: 'tu cámara tramada en vivo. elige la celda y guarda tu versión.', cta: { label: 'abrir la cámara', href: '/lab#pieza-camara' } },
     { id: 'archivo', title: 'archivo.exe', text: 'mis fotos de california y nevada, febrero de 2017. muévelas, ábrelas, pixélalas.', cta: { label: 'abrir archivo.exe', href: '/lab/archivo' } },
   ],
@@ -134,6 +135,19 @@ export const lalandePage: LalandePage = {
   closeText: 'clarice lispector',
   word: 'lalande',
   closeTitle: 'cerca del corazón salvaje, 1943',
+};
+
+export const travesiaPage: TravesiaPage = {
+  title: 'travesía ácida',
+  lead: 'un void sin fondo, hecho con la misma rejilla de puntos del inicio. el scroll te mete en él y cada doce capas cambia el ácido.',
+  canvasLabel: 'un túnel de cuadrados que giran, hecho de puntos, que no termina nunca; el color cambia de azul a violeta, rojo y amarillo mientras se avanza.',
+  hint: 'baja con el scroll para entrar en el túnel; súbelo para volver. el centro sigue al cursor.',
+  hintTouch: 'desliza hacia arriba para entrar en el túnel. toca para cambiar el color.',
+  ui: {
+    controls: 'controles', cell: 'celda', color: 'color', all: 'todos los ácidos',
+    rampNames: { azul: 'azul', violeta: 'violeta', rojo: 'rojo', amarillo: 'amarillo' },
+    full: 'pantalla completa', close: 'cerrar', copyLink: 'copiar enlace', copied: 'enlace copiado', depth: 'profundidad',
+  },
 };
 
 export const archivePage: ArchivePage = {

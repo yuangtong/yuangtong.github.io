@@ -44,6 +44,13 @@ Owner decisions and housekeeping, to pick up later:
 - [ ] Logo and favicon: pick one of the proposals in the design canvas.
 
 ### Added
+- Travesía ácida as a piece in the lab at `/lab/travesia` (canvas "lab: travesía ácida"), with the crumb "02 el lab / travesía ácida" and its door in the lab. It is the landing's void with no bottom: nested squares turn in the dot grid, the zoom never ends, and every twelve layers the acid changes (azul, violeta, rojo, amarillo), dithered over three layers.
+  - Scroll moves you through it, forward and back, and it also drifts on its own. While the pointer is over it, the scroll moves the tunnel and not the page. The centre follows the cursor.
+  - On phones, swiping up goes deeper and a tap changes the colour.
+  - Controls: cell (4, 8, 16 px) and colour ("todos los ácidos" or one), "pantalla completa" with the browser's full screen and "cerrar", and "copiar enlace" with the cell, colour and depth. A shared link opens with them.
+  - Reduced motion holds a still tunnel.
+
+  `TravesiaPage` and `getTravesiaPage` carry its copy; the ramps are tokens (`travesia`).
 - Lalande, lágrimas de ángel, as a piece in the lab at `/lab/lalande` (design "Lalande v4", Historias project), with the crumb "02 el lab / Lalande". As you scroll:
   - the horse in the air comes apart and its letters spell "Lalande";
   - the word becomes a drop that falls on a small narcissus against a dithered blue sky, with two quotes from Clarice Lispector, and the pointer is the breeze;

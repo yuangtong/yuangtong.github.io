@@ -84,3 +84,15 @@ export const lalande = {
   bookRed: '#de2229', rainRed: '#ff7468', rainPink: '#ffd2cc',
   stem: '#178846', stemLight: '#86e4bb', cup: '#ffe600', cupRim: '#ff8616',
 } as const;
+
+/** Travesía ácida: one ramp per acid, [dim, mid, base, light], on the night ink. */
+export const travesia = {
+  ink: '#181c24', core: '#ededeb',
+  ramps: {
+    azul: ['#232a63', '#0b14c9', '#1847ff', '#9fb0ff'],
+    violeta: ['#3a1f52', '#7a2bb0', '#a937e1', '#e6b8ff'],
+    rojo: ['#4a1416', '#c41d23', '#ff3d24', '#ffa08f'],
+    amarillo: ['#4a4310', '#b8a200', '#ffe600', '#fff6b8'],
+  },
+} as const;
+export type TravesiaRamp = keyof typeof travesia.ramps;

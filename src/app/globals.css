@@ -405,3 +405,36 @@ img, canvas { display: block; }
 .book__shine { left: 0; top: 0; width: 320px; height: 480px; background: linear-gradient(to right, rgba(255, 255, 255, 0.18), transparent 8%, transparent 92%, rgba(0, 0, 0, 0.18)); }
 .book__inside { left: 0; top: 0; width: 320px; height: 480px; transform: rotateY(180deg) translateZ(1px); background: var(--book-back); }
 @media (max-width: 760px) { .lalande__spec { top: auto; bottom: calc(96px / var(--s)); } }
+
+/* ---------- travesía ácida (canvas "lab: travesía ácida") ---------- */
+.btn--line { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+.btn--line:hover { background: var(--ink); color: var(--paper); }
+.travesia { position: relative; overflow: hidden; background: var(--night-ink); }
+.travesia[data-full='true'] { position: fixed; inset: 0; z-index: 70; height: 100svh; }
+.travesia__cv { position: absolute; inset: 0; width: 100%; height: 100%; display: block; image-rendering: pixelated; cursor: grab; touch-action: none; }
+.travesia__read { position: absolute; right: var(--gutter); top: var(--s-5); margin: 0; padding: 6px 10px; background: var(--paper); color: var(--ink); }
+.travesia__panel { position: absolute; left: var(--gutter); bottom: var(--gutter); width: min(560px, calc(100% - 2 * var(--gutter))); padding: var(--s-5); display: flex; flex-direction: column; gap: var(--s-4); background: var(--paper); box-shadow: inset 0 0 0 1px var(--ink); }
+.travesia__head { display: flex; flex-direction: column; gap: var(--s-2); }
+.travesia__title { margin: 0; font-size: 48px; line-height: 0.95; font-weight: 300; letter-spacing: -0.04em; }
+.travesia__lead { margin: 0; font-size: var(--t-body); line-height: 1.4; color: var(--body); }
+.travesia__controls { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-4) var(--s-5); }
+.travesia__group { display: flex; align-items: center; gap: var(--s-2); }
+.travesia__seg { min-width: 44px; min-height: 40px; padding: 0 10px; border: 1px solid var(--ink); border-radius: 0; background: transparent; color: var(--ink); font-family: var(--font-mono); font-size: var(--t-label); cursor: pointer; }
+.travesia__seg[aria-pressed='true'] { background: var(--ink); color: var(--paper); }
+.travesia__swatch { width: 40px; height: 40px; padding: 0; border: 1px solid var(--ink); border-radius: 0; cursor: pointer; }
+.travesia__swatch[data-ramp='todos'] { background: conic-gradient(var(--signal) 0 25%, var(--acid-violet) 0 50%, var(--acid-red) 0 75%, var(--acid-yellow) 0); }
+.travesia__swatch[aria-pressed='true'] { box-shadow: inset 0 0 0 3px var(--paper), inset 0 0 0 4px var(--ink); }
+.travesia__seg:focus-visible, .travesia__swatch:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
+.travesia__hint { margin: 0; }
+.travesia__actions { display: flex; justify-content: flex-end; gap: var(--s-2); }
+.travesia__bar { position: absolute; left: var(--gutter); right: var(--gutter); bottom: var(--gutter); display: flex; align-items: center; gap: var(--s-2); }
+.travesia__bar > span { flex: 1; display: flex; align-items: center; min-height: var(--control); padding: 0 var(--s-3); background: var(--paper); color: var(--ink); }
+@media (max-width: 760px) {
+  .travesia__read { left: var(--gutter); right: auto; top: var(--s-4); }
+  .travesia__panel { left: 0; right: 0; bottom: 0; width: auto; padding: 20px var(--gutter) var(--s-5); box-shadow: inset 0 1px 0 var(--ink); }
+  .travesia__title { font-size: 40px; }
+  .travesia__controls { flex-direction: column; align-items: flex-start; gap: var(--s-3); }
+  .travesia__actions { display: grid; grid-template-columns: 1fr 1fr; }
+  .travesia__actions .btn { justify-content: center; }
+}
+.is-piece-full .site-header { display: none; }
