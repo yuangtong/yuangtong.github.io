@@ -56,6 +56,8 @@ Owner decisions and housekeeping, to pick up later:
   CMS agent to connect Sanity behind.
 - Token layer in `src/app/tokens.css` and `src/lib/tokens.ts`.
 - `.env.example` with `NEXT_PUBLIC_SITE_URL`.
+- `vercel.json` sets the framework to Next.js for this branch; the Vercel
+  project is still configured for Vite (output `dist`), which `main` keeps using.
 
 ### Changed
 
