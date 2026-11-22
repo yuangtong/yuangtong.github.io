@@ -51,6 +51,13 @@ Owner decisions and housekeeping, to pick up later:
   - the titles of the lab, notes and contact sheets come out of glyph noise as their sheet opens, the same decode as "jugar con los píxeles";
   - the studio sheet (canvas "hoja studio v2"): only the word FOMMO glitches, and FOMMO's colours break out of it and slowly take the blue around it, then let go and start again. "entrar" goes through the carcoma to /studio and its own animation. `createStudio` takes `paper` and `halo`; the sheet's `brand` names the word.
 - The landing opens with the rider on the horse, in the same dot grid and the horse's blue, with the photograph's tones (dark jacket and cap, light breeches). As the void starts to open he dissolves cell by cell through the ordered threshold, and only the horse goes on (owner, 2026-11-22). The rider (`public/media/galope-jinete.png`, 15 frames of 300 x 176, tones on the horse's scale) is taken out of Muybridge's original photographs (public domain) and aligned to the silhouettes; `loadRider` loads them, and the engine's `rider` option draws them. The lab piece of sísifo feliz starts without him.
+- Travesía ácida as a piece in the lab at `/lab/travesia` (canvas "lab: travesía ácida"), with the crumb "02 el lab / travesía ácida" and its door in the lab. It is the landing's void with no bottom: nested squares turn in the dot grid, the zoom never ends, and every twelve layers the acid changes (azul, violeta, rojo, amarillo), dithered over three layers.
+  - Scroll moves you through it, forward and back, and it also drifts on its own. While the pointer is over it, the scroll moves the tunnel and not the page. The centre follows the cursor.
+  - On phones, swiping up goes deeper and a tap changes the colour.
+  - Controls: cell (4, 8, 16 px) and colour ("todos los ácidos" or one), "pantalla completa" with the browser's full screen and "cerrar", and "copiar enlace" with the cell, colour and depth. A shared link opens with them.
+  - Reduced motion holds a still tunnel.
+
+  `TravesiaPage` and `getTravesiaPage` carry its copy; the ramps are tokens (`travesia`).
 - A note page at `/notas/[slug]` from design G ("notas: una nota"), with the crumb "03 notas / quitarle el jinete". The first note, "quitarle el jinete a un galope de 1878", has:
   - the meta column (back to all notes, date, reading time worked out from the text, what it is about) and the title with its lead;
   - the before and after figures (Muybridge, public domain), the text in a column with its code listing, and the links to the lab and the next note.

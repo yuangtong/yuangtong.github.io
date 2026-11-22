@@ -124,6 +124,16 @@ export type LalandePage = {
   closeText: string; closeTitle: string;
 };
 
+/** Travesía ácida: the void with no bottom, as a lab piece. */
+export type TravesiaPage = {
+  title: string; lead: string; canvasLabel: string;
+  hint: string; hintTouch: string;
+  ui: {
+    controls: string; cell: string; color: string; all: string; rampNames: Record<string, string>;
+    full: string; close: string; copyLink: string; copied: string; depth: string;
+  };
+};
+
 export type ArchivePalette = 'tinta' | 'azul' | 'rojo' | 'acida' | 'color';
 
 /** A photo in archivo.exe. `cell` 0 is the original photo; `spot` places the print on the desk (0..1). */
