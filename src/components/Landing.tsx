@@ -2,44 +2,42 @@
 
 import { useEffect, useRef, useState } from 'react';
 import type { HomePage, Link, Settings } from '@/content/types';
-import { prefersReducedMotion, pixelView, type PixelView } from '@/lib/dither';
-import { loadGallop, loadOriginal, loadPhoto } from '@/lib/media';
-import { CELLS, drawCard, type Media } from '@/lib/lab-cards';
-import { drawNote } from '@/lib/note-cards';
+import { prefersReducedMotion } from '@/lib/dither';
+import { loadGallop } from '@/lib/media';
 import { canvasSize, createLanding, DESKTOP, fitConfig, MOBILE, span, type LandingConfig, type LandingDom } from '@/lib/landing-engine';
+import { CarcomaLink, useCarcoma } from './Carcoma';
 import { LimaClock } from './LimaClock';
+import { MobileMenu } from './MobileMenu';
 
-type Props = { page: HomePage; nav: Link[]; ui: Settings['ui']; glyphFamily: string };
+type Props = { page: HomePage; nav: Link[]; links: Link[]; ui: Settings['ui']; glyphFamily: string };
 
 const pad = (n: number) => (n < 10 ? '0' : '') + n;
 const MOBILE_MAX = 760;
+const ORDER = ['jugar', 'lab', 'notas', 'studio', 'contacto'];
+/** Sheet index for "#jugar", "jugar", "#lab"...; -1 when it is not a sheet. */
+const sectionIndex = (hash: string) => ORDER.indexOf(hash.replace(/^#/, ''));
 
 /**
  * Home G7.4. The stage keeps the design scale (1440 x 900 on desktop, 390 x 844
  * on phones) on the tighter axis of the window and extends on the other, so the
  * dot grid fills the screen edge to edge. Page scroll drives the timeline.
  */
-export function Landing({ page, nav, ui, glyphFamily }: Props) {
+export function Landing({ page, nav, links, ui, glyphFamily }: Props) {
+  const go = useCarcoma();
   const [fit, setFit] = useState<{ mobile: boolean; C: LandingConfig; s: number }>({ mobile: false, C: DESKTOP, s: 1 });
   const { mobile, C, s: scale } = fit;
   const fitKey = `${mobile ? 'm' : 'd'}${C.W}x${C.H}`;
   const [menuOpen, setMenuOpen] = useState(false);
   const [selected, setSelected] = useState<number | null>(null);
   const [flight, setFlight] = useState(6);
-  const [cells, setCells] = useState<Record<string, number>>(() => Object.fromEntries(page.lab.experiments.map((e) => [e.id, e.defaultCell])));
-  const [copied, setCopied] = useState<string | null>(null);
 
   const wrapRef = useRef<HTMLElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const dom = useRef<LandingDom>({ hero: null, counter: null, strip: null, sheets: null, title: null, jside: null, sh: [], inner: [], narr: [] });
-  const cardEls = useRef<Record<string, HTMLCanvasElement | null>>({});
-  const noteEls = useRef<Record<string, HTMLCanvasElement | null>>({});
   const ptr = useRef<{ x: number; y: number } | null>(null);
   const manual = useRef(false);
   const selRef = useRef<number | null>(null);
-  const cellsRef = useRef(cells);
-  cellsRef.current = cells;
   const engineRef = useRef<ReturnType<typeof createLanding> | null>(null);
   const scaleRef = useRef(1);
 
@@ -63,23 +61,18 @@ export function Landing({ page, nav, ui, glyphFamily }: Props) {
     const canvas = canvasRef.current, wrap = wrapRef.current;
     if (!canvas || !wrap) return;
     const reduce = prefersReducedMotion();
-    const media: Media = {};
-    let orig: Float32Array[] | undefined;
-    const cardViews: Record<string, PixelView | null> = {}, noteViews: Record<string, PixelView | null> = {};
     let raf = 0, dead = false, sys = 0;
-    loadOriginal().then((o) => { media.original = o; orig = o; });
-    loadPhoto().then((p) => { media.photo = p; });
     loadGallop().then((g) => {
       if (dead) return;
-      media.gallop = g;
       setFlight(g.flight);
       engineRef.current = createLanding({
         C, canvas, gallop: g, dom: () => dom.current, reduce, mode: 1, narrated: page.intro.narrated, glyphFamily,
         title: page.jugar.title, glyphText: page.intro.glyphText, labels: { camera: ui.cameraCounter, frame: ui.frameCounter },
         onFrame: (k) => pickFrame(k, false),
-        onLab: (step) => { for (const e of page.lab.experiments) { const el = cardEls.current[e.id]; if (!el) continue; const v = cardViews[e.id] ?? (cardViews[e.id] = pixelView(el)); if (v) drawCard(v, e.visual, cellsRef.current[e.id], step, media); } },
-        onNotes: (step) => { for (const n of page.notes.items) { const el = noteEls.current[n.id]; if (!el) continue; const v = noteViews[n.id] ?? (noteViews[n.id] = pixelView(el)); if (v) drawNote(v, n, step, media.gallop, orig); } },
       });
+      // arriving with a hash (for example "/#jugar" from a section) lands on that sheet
+      const k = sectionIndex(window.location.hash);
+      if (k >= 0) requestAnimationFrame(() => scrollToSection(k, true));
     });
     const loop = (now: number) => {
       if (dead) return;
@@ -97,20 +90,20 @@ export function Landing({ page, nav, ui, glyphFamily }: Props) {
   }, [fitKey]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => { engineRef.current?.remeasure(); }, [scale, mobile]);
-  useEffect(() => { if (!copied) return; const id = setTimeout(() => setCopied(null), 1800); return () => clearTimeout(id); }, [copied]);
 
-  const scrollToSection = (k: number) => {
+  const scrollToSection = (k: number, instant = false) => {
     const wrap = wrapRef.current, eng = engineRef.current; if (!wrap) return;
     const top = wrap.getBoundingClientRect().top + window.scrollY;
     const y = k < 0 ? 0 : (eng ? eng.jumpOffset(k) : 0) * scaleRef.current;
-    window.scrollTo({ top: top + y, behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
+    window.scrollTo({ top: top + y, behavior: instant || prefersReducedMotion() ? 'auto' : 'smooth' });
   };
   const jump = (k: number) => (e: React.MouseEvent) => { e.preventDefault(); scrollToSection(k); };
-  const sectionIndex = (href: string) => {
-    const id = href.replace('#', ''), order = ['jugar', 'lab', 'notas', 'studio', 'contacto'];
-    return id === 'inicio' ? -1 : order.indexOf(id);
+  // "/#jugar" scrolls inside the landing; any other route goes through the carcoma
+  const navigate = (href: string, e: React.MouseEvent) => {
+    const k = sectionIndex(href.replace(/^\//, ''));
+    if (href === '/' || k >= 0) { e.preventDefault(); scrollToSection(href === '/' ? -1 : k); return; }
+    if (href.startsWith('/')) { e.preventDefault(); go(href); }
   };
-  const goTo = (href: string) => { const k = sectionIndex(href); return k >= -1 && (k >= 0 || href === '#inicio') ? jump(k) : undefined; };
 
   // pointer in design coordinates
   const onMove = (e: React.PointerEvent) => {
@@ -119,17 +112,13 @@ export function Landing({ page, nav, ui, glyphFamily }: Props) {
     ptr.current = { x: ((e.clientX - r.left) / r.width) * C.W, y: ((e.clientY - r.top) / r.height) * C.H };
     manual.current = false;
   };
-  const copy = (id: string) => {
-    const url = `${location.origin}/lab/${id}?celda=${cells[id]}`;
-    try { navigator.clipboard?.writeText(url).catch(() => {}); } catch {}
-    setCopied(id);
-  };
 
-  const { intro, jugar, lab, notes, studio, contact } = page;
+  const { intro, jugar, sheets } = page;
+  const { lab, notes, studio, contact } = sheets;
   const shown = selected ?? flight;
   const cv = canvasSize(C);
-  const navLabel = (id: string, fallback: string) => nav.find((l) => l.href === '#' + id)?.label ?? fallback;
-  const sectionHeads = [jugar.title, lab.title, notes.title, studio.title, navLabel('contacto', contact.title)];
+  const navLabel = (href: string, fallback: string) => nav.find((l) => l.href === href)?.label ?? fallback;
+  const sectionHeads = [jugar.title, lab.title, notes.title, studio.title, navLabel('/contacto', contact.title)];
   const setSh = (i: number) => (el: HTMLElement | null) => { dom.current.sh[i] = el; };
   const setIn = (i: number) => (el: HTMLElement | null) => { dom.current.inner[i] = el; };
   const head = (i: number) => (
@@ -159,7 +148,7 @@ export function Landing({ page, nav, ui, glyphFamily }: Props) {
             <p className="stage__role">{intro.role}</p>
             <div className="stage__ctas">
               {intro.ctas.map((c, i) => (
-                <a key={c.href} href={c.href} onClick={i === 0 ? jump(1) : undefined} className={i === 0 ? 'btn btn--ink' : 'btn btn--signal'}>
+                <a key={c.href} href={c.href} onClick={(e) => navigate(c.href, e)} className={i === 0 ? 'btn btn--ink' : 'btn btn--signal'}>
                   {c.label} <span aria-hidden="true">-&gt;</span>
                 </a>
               ))}
@@ -208,61 +197,28 @@ export function Landing({ page, nav, ui, glyphFamily }: Props) {
 
             <section ref={setSh(1)} id="lab" aria-label={lab.title} className="sheet">
               {head(1)}
-              <div ref={setIn(1)} className="sheet__inner sheet__pad">
-                <div className="sheet__headline">
-                  <h2 className="h2">{lab.title}</h2>
-                  <p className="lead">{lab.lead}</p>
-                </div>
-                <div className="lab__grid">
-                  {lab.experiments.map((e) => (
-                    <article key={e.id} className="lab-card">
-                      <div className="lab-card__text">
-                        <h3 className="lab-card__title">{e.title}</h3>
-                        <span className="label">{e.meta}</span>
-                        <span aria-hidden="true" className="dot-rule" />
-                        <div className="lab-card__controls">
-                          <div role="group" aria-label={`${ui.cellGroupLabel} ${e.title}`} className="seg">
-                            {CELLS.map((n) => <button key={n} type="button" aria-pressed={cells[e.id] === n} onClick={() => setCells((c) => ({ ...c, [e.id]: n }))}>{n}px</button>)}
-                          </div>
-                          <a href={e.href} onClick={jump(1)} className="btn btn--ink btn--sm">{ui.openLabel}</a>
-                        </div>
-                      </div>
-                      <div className="lab-card__visual">
-                        <canvas ref={(el) => { cardEls.current[e.id] = el; }} width={mobile ? 358 : 344} height={mobile ? 220 : 338} role="img" aria-label={e.alt} />
-                        <button type="button" className="chip" onClick={() => copy(e.id)}>{copied === e.id ? ui.copiedLabel : ui.copyLinkLabel}</button>
-                      </div>
-                    </article>
-                  ))}
-                </div>
+              <div ref={setIn(1)} className="sheet__inner sheet__fill">
+                <h2 className="sheet__title">{lab.title}</h2>
+                <p className="sheet__line">{lab.line}</p>
+                <CarcomaLink href={lab.href} className="btn btn--ink sheet__enter">{ui.enterLabel} <span aria-hidden="true">-&gt;</span></CarcomaLink>
               </div>
             </section>
 
             <section ref={setSh(2)} id="notas" aria-label={notes.title} className="sheet">
               {head(2)}
-              <div ref={setIn(2)} className="sheet__inner sheet__pad">
-                <h2 className="h2">{notes.title}</h2>
-                <div className="notes__grid">
-                  {notes.items.map((n) => (
-                    <a key={n.id} href={n.href} onClick={jump(2)} className="note-card" data-accent={n.accent}>
-                      <span className="note-card__media"><canvas ref={(el) => { noteEls.current[n.id] = el; }} width={110} height={60} role="img" aria-label={n.alt} /></span>
-                      <span className="note-card__body">
-                        <span className="note-card__title">{n.title}</span>
-                        <span className="note-card__excerpt">{n.excerpt}</span>
-                        <span className="label note-card__meta">{n.meta}</span>
-                        <span className="note-card__cta">{ui.readNoteLabel}</span>
-                      </span>
-                    </a>
-                  ))}
-                </div>
+              <div ref={setIn(2)} className="sheet__inner sheet__fill">
+                <h2 className="sheet__title">{notes.title}</h2>
+                <p className="sheet__line">{notes.line}</p>
+                <CarcomaLink href={notes.href} className="btn btn--ink sheet__enter">{ui.enterLabel} <span aria-hidden="true">-&gt;</span></CarcomaLink>
               </div>
             </section>
 
             <section ref={setSh(3)} id="studio" aria-label={studio.title} className="sheet sheet--studio">
               {head(3)}
               <div ref={setIn(3)} className="sheet__inner sheet__fill">
-                <p className="studio__lead">{studio.lead}</p>
+                <p className="studio__lead">{studio.line}</p>
                 <p className="studio__sub">{studio.sub}</p>
-                <a href={studio.cta.href} className="btn btn--paper-signal">{studio.cta.label} <span aria-hidden="true">-&gt;</span></a>
+                <CarcomaLink href={studio.href} className="btn btn--paper-signal sheet__enter">{ui.enterLabel} <span aria-hidden="true">-&gt;</span></CarcomaLink>
               </div>
             </section>
 
@@ -270,10 +226,8 @@ export function Landing({ page, nav, ui, glyphFamily }: Props) {
               {head(4)}
               <div ref={setIn(4)} className="sheet__inner sheet__fill">
                 <h2 className="contact__title">{contact.title}</h2>
-                <p className="contact__lead">{contact.lead} <a href={contact.email.href}>{contact.email.label}</a></p>
-                <div className="contact__links">
-                  {contact.links.map((l) => <a key={l.label} href={l.href}>{l.label}</a>)}
-                </div>
+                <p className="contact__lead">{contact.line} <a href={contact.email.href}>{contact.email.label}</a></p>
+                <CarcomaLink href={contact.href} className="btn btn--paper sheet__enter">{ui.enterLabel} <span aria-hidden="true">-&gt;</span></CarcomaLink>
               </div>
             </section>
           </div>
@@ -288,7 +242,7 @@ export function Landing({ page, nav, ui, glyphFamily }: Props) {
               <button type="button" className="stage__index" aria-haspopup="dialog" aria-expanded={menuOpen} onClick={() => setMenuOpen(true)}>{ui.menuLabel}</button>
             ) : (
               <nav aria-label="Principal" className="stage__nav">
-                {nav.map((l) => <a key={l.href} href={l.href} onClick={goTo(l.href)}>{l.label}</a>)}
+                {nav.map((l) => <a key={l.href} href={l.href} onClick={(e) => navigate(l.href, e)}>{l.label}</a>)}
               </nav>
             )}
           </header>
@@ -296,15 +250,14 @@ export function Landing({ page, nav, ui, glyphFamily }: Props) {
       </div>
       {menuOpen && (
         <MobileMenu
-          name={intro.name} nameZh={intro.nameZh} availability={intro.availability} nav={nav} links={contact.links}
-          closeLabel={ui.closeLabel} onClose={() => setMenuOpen(false)}
-          onPick={(href) => (e) => {
-            const k = sectionIndex(href);
-            if (k < 0 && href !== '#inicio') return;
+          name={intro.name} nameZh={intro.nameZh} availability={intro.availability} nav={nav} links={links} closeLabel={ui.closeLabel}
+          onClose={() => setMenuOpen(false)}
+          onSelect={(href, e) => {
             e.preventDefault();
             setMenuOpen(false);
+            const k = sectionIndex(href.replace(/^\//, ''));
             // wait for the menu to close and the page to scroll again
-            requestAnimationFrame(() => requestAnimationFrame(() => scrollToSection(k)));
+            requestAnimationFrame(() => requestAnimationFrame(() => { if (href === '/' || k >= 0) scrollToSection(href === '/' ? -1 : k); else go(href); }));
           }}
         />
       )}
@@ -312,36 +265,3 @@ export function Landing({ page, nav, ui, glyphFamily }: Props) {
   );
 }
 
-type MenuProps = {
-  name: string; nameZh: string; availability: string; nav: Link[]; links: Link[]; closeLabel: string;
-  onClose: () => void; onPick: (href: string) => (e: React.MouseEvent) => void;
-};
-
-/** Full-screen menu for phones (design canvas, "movil, menu abierto"). */
-function MobileMenu({ name, nameZh, availability, nav, links, closeLabel, onClose, onPick }: MenuProps) {
-  const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const prev = document.activeElement as HTMLElement | null;
-    ref.current?.querySelector<HTMLElement>('a, button')?.focus();
-    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
-    document.addEventListener('keydown', onKey);
-    const overflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-    return () => { document.removeEventListener('keydown', onKey); document.body.style.overflow = overflow; prev?.focus(); };
-  }, [onClose]);
-  return (
-    <div ref={ref} className="menu" role="dialog" aria-modal="true" aria-label={name}>
-      <div className="menu__head">
-        <a href="#inicio" onClick={onPick('#inicio')} className="menu__name">{name} <span lang="zh-Hant" className="menu__zh">({nameZh})</span></a>
-        <button type="button" className="menu__close" onClick={onClose}>{closeLabel}</button>
-      </div>
-      <nav aria-label="Principal" className="menu__nav">
-        {nav.map((l) => <a key={l.href} href={l.href} onClick={onPick(l.href)}>{l.label}</a>)}
-      </nav>
-      <div className="menu__foot">
-        <div className="menu__links">{links.map((l) => <a key={l.label} href={l.href}>{l.label}</a>)}</div>
-        <span className="menu__status"><span aria-hidden="true" className="stage__dot" />{availability} <LimaClock /></span>
-      </div>
-    </div>
-  );
-}

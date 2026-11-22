@@ -82,16 +82,27 @@ export type Settings = {
     cameraCounter: string;
     frameCounter: string;
     readNoteLabel: string;
+    enterLabel: string;
   };
 };
+
+/** A folded sheet at the end of the landing: a short view that leads to its section. */
+export type SheetPreview = { title: string; line: string; href: string };
 
 export type HomePage = {
   intro: Intro;
   jugar: Jugar;
-  lab: { title: string; lead: string; experiments: Experiment[] };
-  notes: { title: string; items: Note[] };
-  studio: { title: string; lead: string; sub: string; cta: Link };
-  contact: { title: string; lead: string; email: Link; links: Link[] };
+  sheets: {
+    lab: SheetPreview;
+    notes: SheetPreview;
+    studio: SheetPreview & { sub: string };
+    contact: SheetPreview & { email: Link };
+  };
 };
+
+export type LabPage = { title: string; lead: string; experiments: Experiment[] };
+export type NotesPage = { title: string; lead: string; items: Note[] };
+export type StudioPage = { title: string; lead: string; sub: string; cta: Link };
+export type ContactPage = { title: string; lead: string; email: Link; links: Link[] };
 
 export type NotFoundPage = { title: string; body: string; back: Link };
