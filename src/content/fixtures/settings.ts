@@ -4,11 +4,11 @@ export const settings: Settings = {
   siteTitle: 'yuang tong (唐源), creative coder y diseñador web',
   description: 'yuang tong, creative coder y diseñador web en lima. dirige FOMMO. el lab reúne código, fotografía y música.',
   nav: [
-    { label: 'sobre mí', href: '#jugar' },
-    { label: 'lab', href: '#lab' },
-    { label: 'studio', href: '#studio' },
-    { label: 'notas', href: '#notas' },
-    { label: 'contacto', href: '#contacto' },
+    { label: 'sobre mí', href: '/#jugar' },
+    { label: 'lab', href: '/lab' },
+    { label: 'studio', href: '/studio' },
+    { label: 'notas', href: '/notas' },
+    { label: 'contacto', href: '/contacto' },
   ],
   footer: { left: 'yuang tong, lima', right: 'galope: eadweard muybridge, 1887, dominio público' },
   ui: {
@@ -24,5 +24,6 @@ export const settings: Settings = {
     cameraCounter: 'cámara',
     frameCounter: 'cuadro',
     readNoteLabel: 'leer la nota',
+    enterLabel: 'entrar',
   },
 };

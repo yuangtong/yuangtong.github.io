@@ -72,9 +72,9 @@ export type LandingOptions = {
   title: string; glyphText: string; labels: { camera: string; frame: string };
   /** The pointer chose a frame in the air. */
   onFrame: (k: number) => void;
-  /** Called while the lab sheet is in view, once per gallop step. */
-  onLab: (step: number) => void;
-  onNotes: (step: number) => void;
+  /** Called while the lab or notes sheet is in view, once per gallop step. */
+  onLab?: (step: number) => void;
+  onNotes?: (step: number) => void;
 };
 
 const clamp = (v: number) => (v < 0 ? 0 : v > 1 ? 1 : v);
@@ -438,8 +438,8 @@ export function createLanding(o: LandingOptions) {
         overlays(d, pv, q, t5);
         drawn = step; drawnY = sys; lastDraw = now;
       }
-      if (sheetsOn && x > 0.8 && x < 2.05 && step !== lastSide) o.onLab(step);
-      if (sheetsOn && x > 1.8 && x < 3.05 && step !== lastSide) o.onNotes(step);
+      if (sheetsOn && x > 0.8 && x < 2.05 && step !== lastSide) o.onLab?.(step);
+      if (sheetsOn && x > 1.8 && x < 3.05 && step !== lastSide) o.onNotes?.(step);
       lastSide = step;
     },
     jumpOffset(k: number) { return SEC0 + k * SECT + (k === 0 ? 0 : SECT * 0.12); },

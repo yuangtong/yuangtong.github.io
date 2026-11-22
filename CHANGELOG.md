@@ -43,6 +43,19 @@ Owner decisions and housekeeping, to pick up later:
 - [ ] Folk Club webfont for the stitched "hablemos" (Dancing Script stands in).
 - [ ] Logo and favicon: pick one of the proposals in the design canvas.
 
+### Added
+
+- Section flow from design G8 (part 1): the sections are their own pages
+  (`/lab`, `/notas`, `/studio`, `/contacto`) under one header with the canvas
+  navigation and one active tab, and a crumb only for a sub-level. Moving
+  between sections goes through the "carcoma": six shapes from Acid Dither
+  Shapes grow at 12 fps in difference mode, an ordered Bayer screen covers the
+  page, the section changes underneath and the carcoma retreats. Reduced motion
+  navigates without it.
+- Option A for the end of the landing: the sheets still open and fold into the
+  index strips, but each one shows a short view with "entrar", which goes to
+  the full section. "jugar con los píxeles" stays complete in the landing.
+
 ### Changed
 
 - Home page moved to design G7.4 (desktop and phone): the hero gallop, the
