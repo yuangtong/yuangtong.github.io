@@ -2,15 +2,44 @@
 
 import { useEffect, useRef } from 'react';
 import { BAYER, prefersReducedMotion } from '@/lib/dither';
-import { color, introPalette } from '@/lib/tokens';
+import { cursorTones } from '@/lib/tokens';
 
 const CS = 6, R = 30, LIFE = 360;
-const TONES = [color.signal, introPalette.cardMid, color.echo];
+type Tone = readonly [string, string, string];
+
+/** The colour under a viewport point, from the canvas there or the first painted background. */
+function colourAt(x: number, y: number, self: HTMLCanvasElement): [number[], Element | null] {
+  const stack = document.elementsFromPoint(x, y).filter((el) => el !== self);
+  for (const el of stack) {
+    if (el instanceof HTMLCanvasElement && el.width) {
+      const r = el.getBoundingClientRect();
+      const px = Math.floor(((x - r.left) / r.width) * el.width), py = Math.floor(((y - r.top) / r.height) * el.height);
+      try {
+        const d = el.getContext('2d', { willReadFrequently: true })?.getImageData(px, py, 1, 1).data;
+        if (d && d[3] > 0) return [Array.from(d), el];
+      } catch { /* tainted or webgl: fall through to the backgrounds */ }
+      continue;
+    }
+    const bg = getComputedStyle(el).backgroundColor, m = bg.match(/[\d.]+/g);
+    if (m && (m.length < 4 || +m[3] > 0.5)) return [m.slice(0, 3).map(Number), el];
+  }
+  return [[237, 237, 235], stack[0] ?? null];
+}
+
+/** Paper takes the accent, a light colour takes ink, a dark colour takes paper. */
+function toneFor(rgb: number[], el: Element | null): Tone {
+  const set = el?.closest('[data-cursor-tone="fommo"]') ? cursorTones.fommo : cursorTones.site;
+  const L = (0.3 * rgb[0] + 0.59 * rgb[1] + 0.11 * rgb[2]) / 255, sat = Math.max(...rgb) - Math.min(...rgb);
+  if (L > 0.82 && sat < 30) return set.paper;
+  return L > 0.55 ? set.light : set.dark;
+}
 
 /**
  * The dithered cursor (canvas "cursor tramado"): a small disc of 6 px cells,
- * ordered so its edge breaks up, with a short trail that cools from signal
- * blue to the pale echo. No lens and no bubble; the system cursor stays.
+ * ordered so its edge breaks up, with a short trail that cools. It reads the
+ * colour under it (canvas studio, 2026-11-23) so it never melts into what it
+ * crosses: signal blue over paper, ink over light colours, paper over dark
+ * ones, and FOMMO's colours inside the studio. No lens; the system cursor stays.
  * It is on wherever `html[data-cursor]` is set: the section pages, and the
  * landing once the story has ended. Off for touch and reduced motion.
  */
@@ -21,7 +50,7 @@ export function DitherCursor() {
     if (!cv || prefersReducedMotion() || !window.matchMedia('(pointer: fine)').matches) return;
     const ctx = cv.getContext('2d')!;
     const pts: { x: number; y: number; t: number }[] = [];
-    let raf = 0, ring: { x: number; y: number; t: number } | null = null, drawn = false;
+    let raf = 0, ring: { x: number; y: number; t: number } | null = null, drawn = false, tone: Tone = cursorTones.site.paper, read = 0;
     const on = () => document.documentElement.hasAttribute('data-cursor');
     const move = (e: PointerEvent) => { if (e.pointerType === 'mouse' && on()) pts.push({ x: e.clientX, y: e.clientY, t: performance.now() }); };
     const down = (e: PointerEvent) => { if (e.pointerType === 'mouse' && on()) ring = { x: e.clientX, y: e.clientY, t: performance.now() }; };
@@ -43,6 +72,8 @@ export function DitherCursor() {
       if (ring && now - ring.t > 500) ring = null;
       if (!pts.length && !ring) { if (drawn) { ctx.clearRect(0, 0, cv.width, cv.height); drawn = false; } return; }
       ctx.clearRect(0, 0, cv.width, cv.height); drawn = true;
+      const head = pts[pts.length - 1];
+      if (head && now - read > 90) { read = now; const [rgb, el] = colourAt(head.x, head.y, cv); tone = toneFor(rgb, el); }
       let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
       for (const p of pts) { x0 = Math.min(x0, p.x); y0 = Math.min(y0, p.y); x1 = Math.max(x1, p.x); y1 = Math.max(y1, p.y); }
       if (ring) { x0 = Math.min(x0, ring.x - 100); y0 = Math.min(y0, ring.y - 100); x1 = Math.max(x1, ring.x + 100); y1 = Math.max(y1, ring.y + 100); }
@@ -50,7 +81,7 @@ export function DitherCursor() {
       for (let r = r0; r <= r1; r++) for (let c = c0; c <= c1; c++) {
         const h = heat(c * CS + 3, r * CS + 3, now);
         if (h <= 0 || h * 1.15 < (BAYER[(r & 3) * 4 + (c & 3)] + 0.5) / 16) continue;
-        ctx.fillStyle = TONES[h > 0.6 ? 0 : h > 0.3 ? 1 : 2];
+        ctx.fillStyle = tone[h > 0.6 ? 0 : h > 0.3 ? 1 : 2];
         ctx.fillRect(c * CS + 1, r * CS + 1, CS - 2, CS - 2);
       }
     };

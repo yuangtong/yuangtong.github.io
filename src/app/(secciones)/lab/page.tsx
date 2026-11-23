@@ -15,11 +15,11 @@ export default async function LabPage() {
       </div>
       <ul className="doors">
         {page.doors.map((d, i) => (
-          <li key={d.id} className="door">
-            <span className="label door__n">{String(i + 1).padStart(2, '0')}</span>
+          <li key={d.id} className={d.soon ? 'door door--soon' : 'door'}>
+            <span className="label door__n">{String(i + 1).padStart(2, '0')}{d.soon && <span className="door__soon">{page.soon.label}</span>}</span>
             <h2 className="door__title">{d.title}</h2>
             <p className="door__text">{d.text}</p>
-            <CarcomaLink href={d.cta.href} className="btn btn--ink btn--sm door__cta">{d.cta.label} <span aria-hidden="true">→</span></CarcomaLink>
+            <CarcomaLink href={d.cta.href} className={d.soon ? 'btn btn--line btn--sm door__cta' : 'btn btn--ink btn--sm door__cta'}>{d.cta.label} <span aria-hidden="true">→</span></CarcomaLink>
           </li>
         ))}
       </ul>

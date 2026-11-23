@@ -249,6 +249,16 @@ img, canvas { display: block; }
 .door__text { margin: 0; font-size: var(--t-small); line-height: 1.4; color: var(--body); max-width: 34ch; }
 .door__cta { margin-top: auto; align-self: flex-start; text-decoration: none; }
 @media (max-width: 860px) { .doors { grid-template-columns: 1fr; } }
+/* a planned piece (docs/LAB.md): dashed, on paper-2, with its "próximamente" chip */
+.door--soon { border-style: dashed; background: var(--paper-2); }
+.door__n { display: flex; align-items: center; justify-content: space-between; gap: var(--s-2); }
+.door__soon { padding: 2px var(--s-2); background: var(--ink); color: var(--paper); }
+/* the page of a planned piece */
+.soon { display: flex; flex-direction: column; gap: var(--s-5); max-width: 760px; }
+.soon__chip { align-self: flex-start; padding: var(--s-1) var(--s-2); background: var(--ink); color: var(--paper); }
+.soon__list { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--ink); }
+.soon__list li { padding: var(--s-3) 0; border-bottom: 1px solid var(--ink); font-size: var(--t-body); }
+.soon__back { align-self: flex-start; text-decoration: none; }
 
 /* ---------- archivo.exe (G8, Archivo-v2): our own 1998 desktop ---------- */
 .section--archivo { position: relative; padding: 0; min-height: 560px; }
@@ -346,13 +356,29 @@ img, canvas { display: block; }
 .sv3__layer { position: relative; height: 100%; min-height: inherit; padding: clamp(24px, 4vw, 56px) var(--gutter); display: flex; flex-direction: column; justify-content: space-between; gap: var(--s-6); pointer-events: none; }
 .sv3__eyebrow { margin: 0; align-self: flex-start; font-family: var(--font-mono); font-size: var(--t-label); background: var(--paper); padding: var(--s-1) var(--s-2); }
 .sv3__block { display: flex; flex-direction: column; gap: 28px; }
-.sv3__name { margin: 0; font-size: clamp(72px, 14vw, 220px); line-height: 0.85; font-weight: 300; letter-spacing: var(--track-display); color: var(--on-signal); mix-blend-mode: difference; padding-bottom: 0.08em; }
+.sv3__name { margin: 0; font-size: clamp(64px, 12vw, 176px); line-height: 0.85; font-weight: 300; letter-spacing: var(--track-display); color: var(--on-signal); mix-blend-mode: difference; padding-bottom: 0.08em; }
 .sv3__row { display: flex; flex-wrap: wrap; gap: var(--s-5); align-items: flex-end; justify-content: space-between; }
 .sv3__lead { margin: 0; max-width: 520px; font-size: 20px; line-height: 1.35; background: var(--paper); padding: var(--s-3) 14px; pointer-events: auto; }
 .sv3__cta { display: inline-flex; align-items: center; gap: var(--s-2); min-height: var(--control); padding: 0 20px; background: var(--ink); color: var(--paper); text-decoration: none; font-size: var(--t-body); pointer-events: auto; }
 .sv3__cta:hover { background: var(--signal); color: var(--on-signal); }
 .sv3__cta:focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; }
 @media (max-width: 760px) { .sv3__lead { font-size: var(--t-body-lg); } }
+/* the window onto fommo.studio, beside the title */
+.fwin { position: absolute; z-index: 2; top: clamp(24px, 4vw, 56px); right: var(--gutter); width: min(520px, 40vw); margin: 0; display: flex; flex-direction: column; gap: 10px; }
+@media (min-width: 901px) { .sv3__name { max-width: calc(100% - min(520px, 40vw) - var(--gutter)); } }
+.fwin__frame { display: block; border: 1px solid var(--ink); background: var(--fommo-night); box-shadow: 8px 8px 0 var(--ink); color: inherit; text-decoration: none; }
+.fwin__frame:focus-visible { outline: 2px solid var(--signal); outline-offset: 4px; }
+.fwin__bar { height: 30px; padding: 0 12px; display: flex; align-items: center; justify-content: space-between; background: var(--ink); color: var(--paper); font-family: var(--font-mono); font-size: var(--t-label); }
+.fwin__state { display: inline-flex; align-items: center; gap: 8px; }
+.fwin__dot { width: 8px; height: 8px; background: var(--fommo-off); }
+.fwin__dot[data-on='true'] { background: var(--fommo-on); }
+.fwin__cv { display: block; width: 100%; height: auto; aspect-ratio: 8 / 5; cursor: pointer; font-family: var(--font-mono); }
+.fwin__cap { align-self: flex-start; padding: var(--s-1) var(--s-2); background: var(--paper); font-family: var(--font-mono); font-size: var(--t-label); text-transform: uppercase; }
+@media (max-width: 900px) {
+  .section--studio { display: flex; flex-direction: column; }
+  .fwin { position: relative; top: auto; right: auto; width: auto; margin: var(--s-5) var(--gutter) 0; order: -1; flex: none; }
+  .sv3__layer { flex: none; height: auto; min-height: 0; gap: var(--s-5); }
+}
 
 /* ---------- contact (G8, contacto v2): two clocks and a dot-grid globe ---------- */
 .section--contact .mono { font-family: var(--font-mono); font-size: var(--t-label); }

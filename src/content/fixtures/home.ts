@@ -79,9 +79,19 @@ export const labPage: LabPage = {
     { id: 'sisifo', title: 'sísifo feliz', text: 'el galope de Muybridge de 1878 contado como sísifo: doce hilos, la colina y la roca que vuelve a rodar.', cta: { label: 'ver sísifo feliz', href: '/lab/sisifo' } },
     { id: 'lalande', title: 'lalande, lágrimas de ángel', text: 'una palabra de clarice lispector cae como gota sobre un narciso pequeño. tú eres la brisa.', cta: { label: 'ver lalande', href: '/lab/lalande' } },
     { id: 'travesia', title: 'travesía ácida', text: 'el void del inicio sin fondo. el scroll te mete en él y cada doce capas cambia el ácido.', cta: { label: 'entrar en la travesía', href: '/lab/travesia' } },
-    { id: 'camara', title: 'cámara', text: 'tu cámara tramada en vivo. elige la celda y guarda tu versión.', cta: { label: 'abrir la cámara', href: '/lab#pieza-camara' } },
     { id: 'archivo', title: 'archivo.exe', text: 'mis fotos de california y nevada, febrero de 2017. muévelas, ábrelas, pixélalas.', cta: { label: 'abrir archivo.exe', href: '/lab/archivo' } },
+    { id: 'menta-lola', soon: true, title: 'menta&lola', text: 'mis gatas, menta y lola, para tramar una imagen con unos treinta y dos algoritmos y sus perillas.', cta: { label: 'ver qué será', href: '/lab/menta-lola' },
+      points: ['tres imágenes: menta, lola y el caballo.', 'difusión de error, bayer, medio tono, patrones, bordes, ruido, crt y ascii, entre otros.', 'la carcoma que se come la imagen por dentro y la vuelve ascii.', 'escala, umbral, contraste, gamma, brillo y paleta; antes y después; copiar enlace.'] },
+    { id: 'camara', soon: true, title: 'cámara', text: 'tu cámara y tu mano: juntas el pulgar y el índice y la punta del dedo deja una estela de glifos.', cta: { label: 'ver qué será', href: '/lab/camara' },
+      points: ['sigue tu mano con mediapipe, en tu navegador.', 'pellizca para dibujar, abre la mano para soltar; la estela se apaga sola.', 'tu imagen no sale de tu dispositivo.', 'sin cámara, dibujas con el cursor o con el dedo.'] },
+    { id: 'dona', soon: true, title: 'dona de teselas', text: 'una dona y otros sólidos en 3d hechos de teselas y glifos. los giras y cambias la imagen de la que están hechos.', cta: { label: 'ver qué será', href: '/lab/dona' },
+      points: ['arrastra para girarla.', 'teselas: molinete, damero, contorno, puntos, tick, macizo y glifos.', 'imagen, sólido, celda, paleta y velocidad.'] },
+    { id: 'acidos', soon: true, title: 'píxeles ácidos', text: 'los píxeles ácidos que nacen en la carcoma, sueltos: caen, se comen el papel y se curan en lluvia de glifos.', cta: { label: 'ver qué será', href: '/lab/acidos' },
+      points: ['los guías con el cursor o con el dedo.', 'paleta, celda y cuánta hambre tienen.'] },
+    { id: 'efimero', soon: true, title: 'ambiente efímero', text: 'código en vivo: música con strudel y visuales con hydra, que existen mientras suenan.', cta: { label: 'ver qué será', href: '/lab/efimero' },
+      points: ['música escrita en vivo con strudel.', 'visuales en vivo con hydra.', 'quizá también mis sets.'] },
   ],
+  soon: { label: 'próximamente', back: { label: 'volver al lab', href: '/lab' } },
   experiments: [
     { id: 'medio', title: 'medio tono', meta: 'código, 2026', alt: 'El galope en puntos azules de tamaño variable', visual: 'medio', defaultCell: 8, href: '/lab' },
     { id: 'camara', title: 'cámara tramada', meta: 'código, 2026', alt: 'Fotografía del galope tramada en azul y papel', visual: 'camara', defaultCell: 4, href: '/lab' },
@@ -107,6 +117,15 @@ export const studioPage: StudioPage = {
   lead: 'dirijo FOMMO, un estudio en Lima donde el diseño y el desarrollo web de alta complejidad se hacen en la misma mesa.',
   cta: { label: 'ir a la página de FOMMO', href: 'https://fommo.studio' },
   canvasLabel: 'Formas de colores de FOMMO que se comen el papel, dejan caer letras y vuelven a empezar.',
+  preview: {
+    src: '/media/fommo-studio.jpg',
+    alt: 'Vista previa de fommo.studio: en reposo es una trama de glifos con los colores del estudio; al pasar el cursor o tocarla, la carcoma deja ver la página real.',
+    host: 'fommo.studio',
+    caption: 'FOMMO, brand & product studio',
+    live: 'en vivo',
+    screened: 'en trama',
+    href: 'https://fommo.studio',
+  },
 };
 
 export const contactPage: ContactPage = {

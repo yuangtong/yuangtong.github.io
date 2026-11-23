@@ -110,9 +110,14 @@ export type HomePage = {
 };
 
 /** A door in the lab: historias, cámara, archivo.exe. */
-export type LabDoor = { id: string; title: string; text: string; cta: Link };
+/**
+ * A door of the lab. `soon` marks a piece that is planned but not built yet
+ * (docs/LAB.md): its door says so and leads to a page that describes it.
+ * `points` are the lines that page lists.
+ */
+export type LabDoor = { id: string; title: string; text: string; cta: Link; soon?: boolean; points?: string[] };
 
-export type LabPage = { title: string; lead: string; doors: LabDoor[]; experiments: Experiment[] };
+export type LabPage = { title: string; lead: string; doors: LabDoor[]; experiments: Experiment[]; soon: { label: string; back: Link } };
 
 /** A story in the lab, told with the landing's engine and its narration on. */
 export type StoryPage = { title: string; label: string; hint: string; replay: string };
@@ -177,7 +182,13 @@ export type NotePage = {
 
 export type NotesPage = { title: string; lead: string; items: Note[] };
 /** Studio (G8, estudio v3): the owner directs FOMMO; FOMMO's colours eat the paper. */
-export type StudioPage = { title: string; eyebrow: string; name: string; lead: string; cta: Link; canvasLabel: string };
+/**
+ * `preview`: the window onto the studio's site (canvas "studio: glitch FOMMO +
+ * ventana"). At rest the screenshot is screened as glyphs; hover or a tap lets
+ * the carcoma reveal it. `live` and `screened` are the two states in the bar.
+ */
+export type StudioPreview = { src: string; alt: string; host: string; caption: string; live: string; screened: string; href: string };
+export type StudioPage = { title: string; eyebrow: string; name: string; lead: string; cta: Link; canvasLabel: string; preview: StudioPreview };
 /** A way to reach the owner: the label, the handle shown in mono, the link. */
 export type ContactLink = Link & { detail: string };
 

@@ -44,6 +44,12 @@ Owner decisions and housekeeping, to pick up later:
 - [ ] Logo and favicon: pick one of the proposals in the design canvas.
 
 ### Added
+- The studio page has a window onto fommo.studio (canvas "studio: glitch FOMMO + ventana", approved 2026-11-23): at rest the site's screenshot (`public/media/fommo-studio.jpg`) is screened as ASCII in FOMMO's colours on the studio's night; hover, focus or a first tap starts the carcoma from the pointer and the real page shows through, and leaving lets the glyphs eat it back. A second tap or a click opens fommo.studio. Beside the title on desktop, above it on phones; the title is a little smaller (176 px at most) and breaks into two lines beside the window. `StudioPage.preview` carries its copy; `fommoWindow` and `--fommo-*` are tokens.
+- The dithered cursor reads the colour under it (same canvas): signal blue over paper, ink over light colours and paper over dark ones, so it no longer melts into the red of the void; inside `data-cursor-tone="fommo"` (the studio page) it uses FOMMO's red, night and lime. The tones are tokens (`cursorTones`).
+- Planned lab pieces have their doors and pages, marked "próximamente" (docs/LAB.md): menta&lola, cámara, dona de teselas, píxeles ácidos and ambiente efímero (live coding with Strudel and Hydra; the name is still open). Each page at `/lab/[pieza]` says what the piece will do. `LabDoor.soon` and `points`, `LabPage.soon`. The old "cámara" door, which pointed into the grid, is replaced by the planned piece.
+
+### Changed
+- The site title is "yuang tong | creative coder", and section pages read "studio | yuang tong".
 - Home G7.5 (canvas, approved 2026-11-22):
   - the gallop leaves sparks: each stride the hooves and the back throw blue sparks onto the dot grid that drift behind the horse, twinkle and cool back into the grey (hero only, not with reduced motion);
   - the role line sits lower so the name's descenders no longer touch it, and on phones (唐源) is larger and in weight 400 beside "tong";
