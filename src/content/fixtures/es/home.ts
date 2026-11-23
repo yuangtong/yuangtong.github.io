@@ -4,7 +4,7 @@ export const home: HomePage = {
   intro: {
     name: 'yuang tong',
     nameZh: '唐源',
-    role: 'creative coder y diseñador web',
+    role: ['diseñador web', 'creative coder'],
     availability: 'disponible, lima',
     ctas: [
       { label: 'ver el lab', href: '/lab' },

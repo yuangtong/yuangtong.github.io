@@ -49,7 +49,7 @@ Owner decisions and housekeeping, to pick up later:
   - Routes live under `src/app/[lang]` and are prerendered for both languages. `src/proxy.ts` rewrites a path without a locale to the English route and redirects `/en/...` to the root, so each page has one address. Pages carry `hreflang` alternates and their OpenGraph locale.
   - Content comes per locale: `src/content/fixtures/en` (written for this change) and `src/content/fixtures/es`. Every loader takes the locale (`getLabPage(locale)`); fixtures keep canonical paths and `localize` adds `/es` to every internal `href` and crumb. `src/content/locale.ts` has `localePath` and `splitPath`.
   - The language selector (canvas "nav: idiomas", `LangSwitch`) sits after the navigation on the landing and the section pages, and inside the phone menu. English and Spanish link to the same page in the other language; Portuguese, Chinese (simplified) and Japanese are listed as "learning" and marked "soon" until their DeepL translations exist.
-  - The tagline is "web designer & creative coder"; on phones the ampersand is large and blue on its own line (G7.5 mobile). In Spanish it stays "creative coder y diseñador web".
+  - The tagline is "web designer & creative coder"; on phones the ampersand is large and blue on its own line (G7.5 mobile). 
   - The 404 carries both languages and shows the one in the path, so the pages around it stay static.
   - Piece names stay as the owner named them (sísifo feliz, lalande, travesía ácida, menta&lola, dona de teselas...).
 
@@ -103,6 +103,7 @@ Owner decisions and housekeeping, to pick up later:
   the full section. "jugar con los píxeles" stays complete in the landing.
 
 ### Changed
+- The tagline is two words joined by an ampersand in every language (owner, 2026-11-23): `intro.role` holds only the two words (`['web designer', 'creative coder']`, `['diseñador web', 'creative coder']`) and the component sets the "&", which is never translated. On phones both languages show the same large blue ampersand. Before, Spanish read "creative coder y diseñador web".
 - Section paths are in English in both languages: `/notes` and `/contact` (before `/notas` and `/contacto`, which redirect permanently, also under `/es`). The note images moved to `/media/notas/`. Reading time in a note comes from `settings.ui.readingTime`; the phone menu's navigation label from `ui.navLabel`.
 - Lalande on phones scrolls like the landing: the story is longer to scroll (at least 60 % of its desktop track), a fling makes it catch up at a capped pace instead of skipping scenes, and the browser bar showing or hiding no longer rebuilds the scene mid-scroll. The replay button waits until the story has actually reached its end. On desktop a fast wheel or trackpad fling also catches up at a capped pace, and short laptop screens keep at least 85 % of the track.
 - The site title is "yuang tong | creative coder", and section pages read "studio | yuang tong".

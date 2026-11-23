@@ -30,12 +30,10 @@ const ALIAS: Record<string, string> = { notas: 'notes', contacto: 'contact' };
 /** Sheet index for "#jugar", "jugar", "#lab"...; -1 when it is not a sheet. */
 const sectionIndex = (hash: string) => { const h = hash.replace(/^#/, ''); return ORDER.indexOf(ALIAS[h] ?? h); };
 
-/** "web designer & creative coder": the ampersand is its own span, so phones can set it large and blue (G7.5 mobile). */
-const roleWithAmp = (role: string) => {
-  const i = role.indexOf(' & ');
-  if (i < 0) return role;
-  return <><span className="stage__role-a">{role.slice(0, i)}</span> <span className="stage__amp">&amp;</span> <span className="stage__role-b">{role.slice(i + 3)}</span></>;
-};
+/** The tagline: two words from content and a fixed ampersand, large and blue on its own line on phones (G7.5 mobile). */
+const tagline = ([a, b]: [string, string]) => (
+  <><span className="stage__role-a">{a}</span> <span className="stage__amp">&amp;</span> <span className="stage__role-b">{b}</span></>
+);
 
 /**
  * Home G7.4. The stage keeps the design scale (1440 x 900 on desktop, 390 x 844
@@ -200,7 +198,7 @@ export function Landing({ page, nav, links, ui, languages, glyphFamily, piece }:
               {mobile ? <>{intro.name.split(' ')[0]}<br />{intro.name.split(' ').slice(1).join(' ')}</> : intro.name}
               <span lang="zh-Hant" className="stage__zh">({intro.nameZh})</span>
             </h1>
-            <p className="stage__role">{roleWithAmp(intro.role)}</p>
+            <p className="stage__role">{tagline(intro.role)}</p>
             <div className="stage__ctas">
               {intro.ctas.map((c, i) => (
                 <a key={c.href} href={c.href} onClick={(e) => navigate(c.href, e)} className={i === 0 ? 'btn btn--ink' : 'btn btn--signal'}>
