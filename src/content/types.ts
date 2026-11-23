@@ -66,7 +66,17 @@ export type Note = {
   accent: Accent;
 };
 
+/** A language of the site. `learning` languages are the ones the owner is learning: machine translated, marked as such. */
+export type Language = { code: string; name: string; learning?: boolean; ready?: boolean };
+
 export type Settings = {
+  /** The locale this content is written in, and the OpenGraph locale for it. */
+  locale: string; ogLocale: string;
+  /** The language selector (canvas "nav: idiomas"). */
+  languages: {
+    label: string; spoken: string; learning: string; learningNote: string; soon: string; promise: string;
+    list: Language[];
+  };
   siteTitle: string;
   description: string;
   nav: Link[];
@@ -84,6 +94,8 @@ export type Settings = {
     cameraCounter: string;
     frameCounter: string;
     readNoteLabel: string;
+    /** After the minutes in a note, "min read". */
+    readingTime: string;
     enterLabel: string;
     navLabel: string;
     crumbLabel: string;

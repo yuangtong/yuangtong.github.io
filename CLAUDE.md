@@ -36,6 +36,11 @@ full policy is in [`docs/VERSIONING.md`](docs/VERSIONING.md).
   inside it. Do not delete those branches.
 - The redesign (version 2) is developed on feature branches.
 - The CMS is Sanity (owner decision, 2026-11-13).
+- The site is in English at `/` and in Spanish at `/es` (owner, 2026-11-22).
+  Routes live under `src/app/[lang]`; every content loader takes the locale,
+  and content keeps canonical paths (`/lab`) that the loaders localize.
+  Portuguese, Chinese (simplified) and Japanese will be machine translated
+  with DeepL and marked as "learning".
 - Version 2 is built on Next.js with the App Router (owner decision,
   2026-11-14), replacing the Vite single-page app. Version 2 is live on `main`
   since 2026-11-22. The canonical landing is design G7.4 (desktop and phone);
@@ -66,7 +71,8 @@ Decided with the owner. Do not drift from these without asking.
   the rock that rolls back, Camus' "hay que imaginarse a Sísifo feliz").
   Approved with home G7.3, 2026-11-22. Do not add story beats without asking.
 - The hero carries the owner's name, his Chinese name (唐源) and a role label:
-  "creative coder y diseñador web" (home G7.3, approved 2026-11-22; before it,
+  "creative coder y diseñador web" in Spanish and "web designer & creative coder"
+  in English (home G7.3 and G7.5, approved 2026-11-22; before it,
   "diseñador web y programador creativo", 2026-11-21). It replaces the earlier statement
   "¿yo?, hago lo que quiero" and the earlier rule of never saying "creative
   coder".

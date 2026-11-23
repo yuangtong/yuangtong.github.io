@@ -14,24 +14,35 @@ const chapters = (c: LandingConfig) => {
 import { CarcomaLink, useCarcoma } from './Carcoma';
 import { LimaClock } from './LimaClock';
 import { MobileMenu } from './MobileMenu';
+import { LangSwitch } from './LangSwitch';
+import { localePath, splitPath } from '@/content/locale';
 import { StudioSheetFx } from './StudioSheetFx';
 
 /** As a lab piece the story plays on its own page: narrated, with no hero, header or sheets. */
 type Piece = { label: string; hint: string; replay: string };
-type Props = { page: HomePage; nav: Link[]; links: Link[]; ui: Settings['ui']; glyphFamily: string; piece?: Piece };
+type Props = { page: HomePage; nav: Link[]; links: Link[]; ui: Settings['ui']; languages: Settings['languages']; glyphFamily: string; piece?: Piece };
 
 const pad = (n: number) => (n < 10 ? '0' : '') + n;
 const MOBILE_MAX = 760;
-const ORDER = ['jugar', 'lab', 'notas', 'studio', 'contacto'];
+const ORDER = ['jugar', 'lab', 'notes', 'studio', 'contact'];
+// hashes from before the English paths still land on their sheet
+const ALIAS: Record<string, string> = { notas: 'notes', contacto: 'contact' };
 /** Sheet index for "#jugar", "jugar", "#lab"...; -1 when it is not a sheet. */
-const sectionIndex = (hash: string) => ORDER.indexOf(hash.replace(/^#/, ''));
+const sectionIndex = (hash: string) => { const h = hash.replace(/^#/, ''); return ORDER.indexOf(ALIAS[h] ?? h); };
+
+/** "web designer & creative coder": the ampersand is its own span, so phones can set it large and blue (G7.5 mobile). */
+const roleWithAmp = (role: string) => {
+  const i = role.indexOf(' & ');
+  if (i < 0) return role;
+  return <><span className="stage__role-a">{role.slice(0, i)}</span> <span className="stage__amp">&amp;</span> <span className="stage__role-b">{role.slice(i + 3)}</span></>;
+};
 
 /**
  * Home G7.4. The stage keeps the design scale (1440 x 900 on desktop, 390 x 844
  * on phones) on the tighter axis of the window and extends on the other, so the
  * dot grid fills the screen edge to edge. Page scroll drives the timeline.
  */
-export function Landing({ page, nav, links, ui, glyphFamily, piece }: Props) {
+export function Landing({ page, nav, links, ui, languages, glyphFamily, piece }: Props) {
   const go = useCarcoma();
   const narrated = !!piece || page.intro.narrated;
   // the piece ends when the horse has turned into letters, before the sheets
@@ -142,8 +153,8 @@ export function Landing({ page, nav, links, ui, glyphFamily, piece }: Props) {
   const jump = (k: number) => (e: React.MouseEvent) => { e.preventDefault(); scrollToSection(k); };
   // "/#jugar" scrolls inside the landing; any other route goes through the carcoma
   const navigate = (href: string, e: React.MouseEvent) => {
-    const k = sectionIndex(href.replace(/^\//, ''));
-    if (href === '/' || k >= 0) { e.preventDefault(); scrollToSection(href === '/' ? -1 : k); return; }
+    const { path } = splitPath(href), k = sectionIndex(path.replace(/^\//, ''));
+    if (path === '/' || k >= 0) { e.preventDefault(); scrollToSection(path === '/' ? -1 : k); return; }
     if (href.startsWith('/')) { e.preventDefault(); go(href); }
   };
 
@@ -160,7 +171,7 @@ export function Landing({ page, nav, links, ui, glyphFamily, piece }: Props) {
   const shown = selected ?? flight;
   const cv = canvasSize(C);
   const navLabel = (href: string, fallback: string) => nav.find((l) => l.href === href)?.label ?? fallback;
-  const sectionHeads = [jugar.title, lab.title, notes.title, studio.title, navLabel('/contacto', contact.title)];
+  const sectionHeads = [jugar.title, lab.title, notes.title, studio.title, navLabel(contact.href, contact.title)];
   const setSh = (i: number) => (el: HTMLElement | null) => { dom.current.sh[i] = el; };
   const setIn = (i: number) => (el: HTMLElement | null) => { dom.current.inner[i] = el; };
   const head = (i: number) => (
@@ -189,7 +200,7 @@ export function Landing({ page, nav, links, ui, glyphFamily, piece }: Props) {
               {mobile ? <>{intro.name.split(' ')[0]}<br />{intro.name.split(' ').slice(1).join(' ')}</> : intro.name}
               <span lang="zh-Hant" className="stage__zh">({intro.nameZh})</span>
             </h1>
-            <p className="stage__role">{intro.role}</p>
+            <p className="stage__role">{roleWithAmp(intro.role)}</p>
             <div className="stage__ctas">
               {intro.ctas.map((c, i) => (
                 <a key={c.href} href={c.href} onClick={(e) => navigate(c.href, e)} className={i === 0 ? 'btn btn--ink' : 'btn btn--signal'}>
@@ -296,19 +307,20 @@ export function Landing({ page, nav, links, ui, glyphFamily, piece }: Props) {
                 {nav.map((l) => <a key={l.href} href={l.href} onClick={(e) => navigate(l.href, e)}>{l.label}</a>)}
               </nav>
             )}
+            {!mobile && <LangSwitch languages={languages} className="stage__lang" />}
           </header>}
         </div>
       </div>
       {menuOpen && (
         <MobileMenu
-          name={intro.name} nameZh={intro.nameZh} availability={intro.availability} nav={nav} links={links} closeLabel={ui.closeLabel}
+          name={intro.name} nameZh={intro.nameZh} availability={intro.availability} nav={nav} links={links} closeLabel={ui.closeLabel} navLabel={ui.navLabel} languages={languages} home={localePath(splitPath(lab.href).locale, '/')}
           onClose={() => setMenuOpen(false)}
           onSelect={(href, e) => {
             e.preventDefault();
             setMenuOpen(false);
-            const k = sectionIndex(href.replace(/^\//, ''));
+            const { path } = splitPath(href), k = sectionIndex(path.replace(/^\//, ''));
             // wait for the menu to close and the page to scroll again
-            requestAnimationFrame(() => requestAnimationFrame(() => { if (href === '/' || k >= 0) scrollToSection(href === '/' ? -1 : k); else go(href); }));
+            requestAnimationFrame(() => requestAnimationFrame(() => { if (path === '/' || k >= 0) scrollToSection(path === '/' ? -1 : k); else go(href); }));
           }}
         />
       )}
