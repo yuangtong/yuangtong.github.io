@@ -38,9 +38,15 @@ export const MOBILE: LandingConfig = { W: 390, H: 844, CS: 4, K: 2, VOID: 2700, 
  * every edge. Horizontal anchors move with the width, vertical ones with the
  * height, so each scene keeps its composition.
  */
-export function fitConfig(base: LandingConfig, vw: number, vh: number) {
-  const s = Math.min(vw / base.W, vh / base.H);
-  const W = Math.max(base.W, Math.round(vw / s)), H = Math.max(base.H, Math.round(vh / s));
+/** The shortest phone stage, in design pixels, before the landing scales down to fit. */
+const PHONE_MIN_H = 720;
+
+export function fitConfig(base: LandingConfig, vw: number, vh: number, byWidth = false) {
+  // phones fit the width, as every other page does, and the design's height
+  // follows the screen; elsewhere the tighter axis decides and the other extends
+  // (down to PHONE_MIN_H design pixels; a shorter screen scales the stage down)
+  const s = byWidth ? Math.min(vw / base.W, vh / PHONE_MIN_H) : Math.min(vw / base.W, vh / base.H);
+  const W = Math.max(base.W, Math.round(vw / s)), H = byWidth ? Math.round(vh / s) : Math.max(base.H, Math.round(vh / s));
   const kx = W / base.W, ky = H / base.H;
   const C: LandingConfig = {
     ...base, W, H,
