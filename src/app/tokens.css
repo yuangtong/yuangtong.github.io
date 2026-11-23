@@ -84,4 +84,31 @@
   --s-9: 64px;
   --gutter: clamp(16px, 2.2vw, 32px);
   --control: 48px;
+  /* the phone menu: its header, the name and the large section links */
+  --menu-head: 56px;
+  --t-menu-name: 17px;
+  --t-menu-nav: 48px;
 }
+
+/*
+ * Phones: one density for the whole site, the landing's (owner, 2026-11-23).
+ * The landing's stage is drawn at PHONE_K = 0.88 of its design scale
+ * (src/lib/landing-engine.ts); the section pages' type and bars follow the
+ * same proportion, so moving between pages does not jump.
+ */
+@media (max-width: 760px) {
+  :root {
+    --t-body-lg: 17px;
+    --t-body: 14px;
+    --t-small: 13px;
+    --t-label: 11px;
+    --t-lead: 21px;
+    --t-card: 25px;
+    --t-h2-phone: 56px;
+    --bar: 42px;
+    --menu-head: 49px;
+    --t-menu-name: 15px;
+    --t-menu-nav: 42px;
+  }
+}
+
