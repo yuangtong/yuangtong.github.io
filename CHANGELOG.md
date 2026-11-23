@@ -94,6 +94,7 @@ Owner decisions and housekeeping, to pick up later:
   the full section. "jugar con los píxeles" stays complete in the landing.
 
 ### Changed
+- Lalande on phones scrolls like the landing: the story is longer to scroll (at least 60 % of its desktop track), a fling makes it catch up at a capped pace instead of skipping scenes, and the browser bar showing or hiding no longer rebuilds the scene mid-scroll. The replay button waits until the story has actually reached its end.
 - The site title is "yuang tong | creative coder", and section pages read "studio | yuang tong".
 
 - The landing on phones (owner, 2026-11-23):

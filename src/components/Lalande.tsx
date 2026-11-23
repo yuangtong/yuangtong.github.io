@@ -7,6 +7,15 @@ import { loadGallop, type Gallop } from '@/lib/media';
 import { createLalande, FRAME, type LalandeDom } from '@/lib/lalande-engine';
 
 const TRACK = 6900; // design pixels of scroll, as in the prototype (7800 - 900)
+const PHONE = 760;
+// on phones the scene is scaled far down, so the track would be short and a
+// fling would cross the whole story; it keeps at least this share of its length
+const PHONE_SCALE = 0.6;
+// and the story catches up at most this much progress per frame (as the landing)
+const PHONE_CAP = 0.0065;
+
+/** Pixels of scroll for the whole story: the design track at the scene's scale, longer on phones. */
+const trackPx = (f: { w: number; s: number }) => TRACK * (f.w < PHONE ? Math.max(f.s, PHONE_SCALE) : f.s);
 
 /**
  * Lalande, historia 02, as a piece in the lab. The 1440 x 900 scene keeps its
@@ -26,14 +35,19 @@ export function Lalande({ page, coverSrc }: { page: LalandePage; coverSrc: strin
 
   // the scene follows the window, under the section header
   useEffect(() => {
-    let t = 0;
-    const apply = () => {
+    let t = 0, lastW = 0, lastH = 0;
+    const apply = (force = false) => {
       const top = (document.querySelector('.site-header') as HTMLElement | null)?.offsetHeight ?? 0;
-      const w = window.innerWidth, h = window.innerHeight - top, s = Math.min(w / FRAME.W, h / FRAME.H);
-      setFit((o) => (o.top === top && o.w === w && o.h === h ? o : { ...o, top, w, h, s, W: w / s, H: h / s }));
+      const w = window.innerWidth, h = window.innerHeight;
+      // phones: the browser bar showing or hiding is not a new layout; refitting
+      // then rebuilt the scene in the middle of a scroll
+      if (!force && w === lastW && w < PHONE && Math.abs(h - lastH) < 160) return;
+      lastW = w; lastH = h;
+      const vh = h - top, s = Math.min(w / FRAME.W, vh / FRAME.H);
+      setFit((o) => (o.top === top && o.w === w && o.h === vh ? o : { ...o, top, w, h: vh, s, W: w / s, H: vh / s }));
     };
     const onResize = () => { clearTimeout(t); t = window.setTimeout(apply, 120); };
-    apply();
+    apply(true);
     window.addEventListener('resize', onResize);
     return () => { clearTimeout(t); window.removeEventListener('resize', onResize); };
   }, []);
@@ -51,13 +65,15 @@ export function Lalande({ page, coverSrc }: { page: LalandePage; coverSrc: strin
     canvas.style.width = `${eng.size.W * fit.s}px`; canvas.style.height = `${eng.size.H * fit.s}px`;
     setFit((o) => (o.OX === eng.size.OX && o.OY === eng.size.OY ? o : { ...o, OX: eng.size.OX, OY: eng.size.OY }));
     let raf = 0, ps = 0, last = 0;
+    const phone = fit.w < PHONE, cap = phone && !reduce ? PHONE_CAP : Infinity;
     const loop = (now: number) => {
       raf = requestAnimationFrame(loop);
-      const r = wrap.getBoundingClientRect(), track = TRACK * fit.s;
+      const r = wrap.getBoundingClientRect(), track = trackPx(fit);
       const target = Math.min(1, Math.max(0, (fit.top - r.top) / track));
-      ps += (target - ps) * (reduce ? 1 : 0.14);
+      const step = (target - ps) * (reduce ? 1 : 0.14);
+      ps += Math.max(-cap, Math.min(cap, step));
       if (Math.abs(target - ps) < 0.0002) ps = target;
-      const end = target > 0.995;
+      const end = ps > 0.995;
       if (end !== endedRef.current) { endedRef.current = end; setEnded(end); }
       if (now - last < 30) return;
       last = now;
@@ -65,7 +81,7 @@ export function Lalande({ page, coverSrc }: { page: LalandePage; coverSrc: strin
     };
     raf = requestAnimationFrame(loop);
     return () => cancelAnimationFrame(raf);
-  }, [gallop, fit.W, fit.H, fit.top]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [gallop, fit.W, fit.H, fit.top, fit.w]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const onMove = (e: React.PointerEvent) => {
     const r = e.currentTarget.getBoundingClientRect();
@@ -75,7 +91,7 @@ export function Lalande({ page, coverSrc }: { page: LalandePage; coverSrc: strin
   const replay = () => { const w = wrapRef.current; if (w) window.scrollTo({ top: w.getBoundingClientRect().top + window.scrollY - fit.top, behavior: prefersReducedMotion() ? 'auto' : 'smooth' }); };
 
   return (
-    <section ref={wrapRef} className="lalande" aria-label={page.title} style={{ height: `calc(100svh - ${fit.top}px + ${TRACK * fit.s}px)` }}>
+    <section ref={wrapRef} className="lalande" aria-label={page.title} style={{ height: `calc(100svh - ${fit.top}px + ${trackPx(fit)}px)` }}>
       <div className="lalande__sticky" style={{ top: fit.top, height: `calc(100svh - ${fit.top}px)` }} onPointerMove={onMove} onPointerLeave={() => { ptr.current = null; }}>
         <canvas ref={canvasRef} className="lalande__canvas" role="img" aria-label={page.canvasLabel} />
         <div className="lalande__layer" style={{ width: fit.W, height: fit.H, transform: `scale(${fit.s})`, ['--s' as string]: fit.s }}>
