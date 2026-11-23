@@ -44,6 +44,7 @@ Owner decisions and housekeeping, to pick up later:
 - [ ] Logo and favicon: pick one of the proposals in the design canvas.
 
 ### Added
+- Favicon "yt" (canvas "favicon v3", approved 2026-11-23): the initials in Host Grotesk, outlined from the site's own font so they do not depend on it, with the y's arm running into the t's bar, ink on a paper tile with soft corners. `public/favicon.svg`, `favicon.ico` (16, 32, 48), `apple-touch-icon.png` (paper on signal blue, full bleed for iOS to round) and `icon-512.png`.
 - The site speaks English first (owner, 2026-11-22): English at `/`, Spanish at `/es`.
   - Routes live under `src/app/[lang]` and are prerendered for both languages. `src/proxy.ts` rewrites a path without a locale to the English route and redirects `/en/...` to the root, so each page has one address. Pages carry `hreflang` alternates and their OpenGraph locale.
   - Content comes per locale: `src/content/fixtures/en` (written for this change) and `src/content/fixtures/es`. Every loader takes the locale (`getLabPage(locale)`); fixtures keep canonical paths and `localize` adds `/es` to every internal `href` and crumb. `src/content/locale.ts` has `localePath` and `splitPath`.
