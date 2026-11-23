@@ -50,7 +50,7 @@ The live camera as an instrument. Uses MediaPipe in the browser
   glyphs, the same family as the dithered cursor: cells that scramble, glow
   in signal blue and cool back into the paper.
 - Opening the hand lifts the pen; the trail fades on its own.
-- The camera image itself can sit underneath, screened by one of mentilola's
+- The camera image itself can sit underneath, screened by one of menta&lola's
   algorithms of menta&lola (the old "cámara tramada" idea), with the effect strongest inside
   the moving blobs.
 - Everything runs on the visitor's device: no frames leave the browser, no
