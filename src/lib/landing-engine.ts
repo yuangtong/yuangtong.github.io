@@ -38,9 +38,17 @@ export const MOBILE: LandingConfig = { W: 390, H: 844, CS: 4, K: 2, VOID: 2700, 
  * every edge. Horizontal anchors move with the width, vertical ones with the
  * height, so each scene keeps its composition.
  */
-export function fitConfig(base: LandingConfig, vw: number, vh: number) {
-  const s = Math.min(vw / base.W, vh / base.H);
-  const W = Math.max(base.W, Math.round(vw / s)), H = Math.max(base.H, Math.round(vh / s));
+/** The shortest phone stage, in design pixels, before the landing scales down to fit. */
+const PHONE_MIN_H = 720;
+/** Phones draw the stage at this share of the width fit: the landing's airier density, shared with every page (tokens.css). */
+const PHONE_K = 0.88;
+
+export function fitConfig(base: LandingConfig, vw: number, vh: number, byWidth = false) {
+  // phones fit the width, as every other page does, and the design's height
+  // follows the screen; elsewhere the tighter axis decides and the other extends
+  // (down to PHONE_MIN_H design pixels; a shorter screen scales the stage down)
+  const s = byWidth ? Math.min((vw / base.W) * PHONE_K, vh / PHONE_MIN_H) : Math.min(vw / base.W, vh / base.H);
+  const W = Math.max(base.W, Math.round(vw / s)), H = byWidth ? Math.round(vh / s) : Math.max(base.H, Math.round(vh / s));
   const kx = W / base.W, ky = H / base.H;
   const C: LandingConfig = {
     ...base, W, H,
@@ -71,6 +79,8 @@ export type LandingInput = {
 export type LandingOptions = {
   C: LandingConfig; canvas: HTMLCanvasElement; gallop: Gallop; dom: () => LandingDom;
   reduce: boolean; mode: 0 | 1 | 2; narrated: boolean; glyphFamily: string;
+  /** The hero's letters fall on their own (hero-fall): the hero is not faded, only hidden once the void has swallowed it. */
+  heroFall?: boolean;
   /** The rider in the hero; he lets go of the horse as the void opens. */
   rider?: Uint8Array[] | null;
   title: string; glyphText: string; labels: { camera: string; frame: string };
@@ -432,7 +442,7 @@ export function createLanding(o: LandingOptions) {
         const avail = geo.hs[i] - C.strip, over = Math.max(0, contentH[i] - (H - 5 * C.strip));
         const u = i === geo.k ? geo.u : i < geo.k ? 1 : 0;
         inner.style.transform = `translateY(${(-over * clamp((u - 0.12) / 0.66)).toFixed(1)}px)`;
-        inner.style.visibility = avail < 4 ? 'hidden' : 'visible';
+        inner.style.visibility = avail < 4 ? 'hidden' : 'inherit'; // inherit, so hiding the sheets hides it too (a jump to the start skips the slide-out)
       }
     }
     if (d.jside) d.jside.style.transform = enter < 1 ? `translateX(${(-(1 - ease(enter)) * 110).toFixed(1)}%)` : '';
@@ -448,7 +458,8 @@ export function createLanding(o: LandingOptions) {
 
   function overlays(d: LandingDom, pv: number, q: number, t5: number) {
     const textOut = ease(clamp((pv - 0.03) / 0.14));
-    if (d.hero) { d.hero.style.opacity = (1 - textOut).toFixed(3); d.hero.style.transform = `translateY(${(-textOut * 64).toFixed(1)}px)`; d.hero.style.visibility = textOut > 0.99 ? 'hidden' : 'visible'; }
+    if (d.hero && o.heroFall) { d.hero.style.visibility = pv > 0.5 ? 'hidden' : 'visible'; }
+    else if (d.hero) { d.hero.style.opacity = (1 - textOut).toFixed(3); d.hero.style.transform = `translateY(${(-textOut * 64).toFixed(1)}px)`; d.hero.style.visibility = textOut > 0.99 ? 'hidden' : 'visible'; }
     const inStory = q > 0.01 && t5 < 0.12;
     if (d.counter) {
       d.counter.style.opacity = inStory ? '1' : '0';
@@ -505,7 +516,7 @@ export function createLanding(o: LandingOptions) {
         drawn = step; drawnY = sys; lastDraw = now;
       }
       if (sheetsOn && x > 0.8 && x < 2.05 && step !== lastSide) o.onLab?.(step);
-      if (sheetsOn && x > 1.8 && x < 3.05 && step !== lastSide) o.onNotes?.(step);
+      if (sheetsOn && x > 2.8 && x < 4.05 && step !== lastSide) o.onNotes?.(step); // notes is the fourth sheet since the navigation's order
       lastSide = step;
     },
     jumpOffset(k: number) { return SEC0 + k * SECT + (k === 0 ? 0 : SECT * 0.12); },

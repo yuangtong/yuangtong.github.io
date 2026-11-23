@@ -41,6 +41,11 @@ full policy is in [`docs/VERSIONING.md`](docs/VERSIONING.md).
   and content keeps canonical paths (`/lab`) that the loaders localize.
   Portuguese, Chinese (simplified) and Japanese will be machine translated
   with DeepL and marked as "learning".
+- Every change applies to every language (owner, 2026-11-23). Layout, motion
+  and structure live in components and are shared; content per language says
+  the same thing. A change to one language's copy is made in all of them in
+  the same commit, and a new visual detail never depends on how one
+  language's text is written (see the tagline's fixed ampersand).
 - Version 2 is built on Next.js with the App Router (owner decision,
   2026-11-14), replacing the Vite single-page app. Version 2 is live on `main`
   since 2026-11-22. The canonical landing is design G7.4 (desktop and phone);

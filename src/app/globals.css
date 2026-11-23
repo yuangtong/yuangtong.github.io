@@ -62,17 +62,17 @@ img, canvas { display: block; }
 
 /* ---------- phone menu (design canvas: movil, menu abierto) ---------- */
 .menu { position: fixed; inset: 0; z-index: 20; padding: 0 16px 24px; display: flex; flex-direction: column; background: var(--paper); color: var(--ink); overflow-y: auto; }
-.menu__head { display: flex; align-items: center; justify-content: space-between; height: 56px; margin: 0 -16px; padding: 0 16px; border-bottom: 1px solid var(--ink); }
-.menu__name { display: flex; align-items: center; gap: 6px; min-height: 44px; font-size: 17px; text-decoration: none; }
+.menu__head { display: flex; align-items: center; justify-content: space-between; height: var(--menu-head); margin: 0 -16px; padding: 0 16px; border-bottom: 1px solid var(--ink); }
+.menu__name { display: flex; align-items: center; gap: 6px; min-height: 44px; font-size: var(--t-menu-name); text-decoration: none; }
 .menu__zh { font-family: var(--font-zh); font-weight: 300; }
 .menu__close { display: flex; align-items: center; min-height: 44px; padding: 0 0 0 12px; border: 0; background: transparent; color: var(--ink); font: inherit; font-size: var(--t-small); cursor: pointer; }
 .menu__nav { display: flex; flex-direction: column; margin-top: var(--s-5); }
-.menu__nav a { display: flex; align-items: baseline; padding: 10px 0; border-bottom: 1px solid var(--ink); font-size: 48px; line-height: 1; font-weight: 300; letter-spacing: var(--track-display); text-decoration: none; }
+.menu__nav a { display: flex; align-items: baseline; padding: 10px 0; border-bottom: 1px solid var(--ink); font-size: var(--t-menu-nav); line-height: 1; font-weight: 300; letter-spacing: var(--track-display); text-decoration: none; }
 .menu__nav a:hover, .menu__nav a:focus-visible { margin: 0 -16px; padding: 10px 16px; background: var(--signal); color: var(--on-signal); }
 .menu__foot { margin-top: auto; padding-top: var(--s-6); display: flex; flex-direction: column; gap: var(--s-4); }
 .menu__links { display: flex; flex-wrap: wrap; gap: var(--s-5); font-size: var(--t-small); }
 .menu__links a { display: flex; align-items: center; min-height: 44px; text-decoration: none; }
-.menu__status { display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 12px; }
+.menu__status { display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: var(--t-label); }
 
 /* ---------- sheets: open on arrival, fold into strips that index the page ---------- */
 .sheets { position: absolute; inset: 0; z-index: 3; visibility: hidden; pointer-events: none; }
@@ -220,7 +220,10 @@ img, canvas { display: block; }
   .site-header__menu { display: flex; }
   .section { padding: var(--s-6) var(--gutter) var(--s-7); }
   .section__head { flex-direction: column; align-items: flex-start; gap: var(--s-3); }
-  .section .h2 { font-size: 64px; }
+  .section .h2 { font-size: var(--t-h2-phone); }
+  .site-header__bar, .site-header__strip { height: var(--bar); }
+  .site-header__status { height: 24px; }
+  .site-header__menu { height: 32px; }
   .section .lab-card { height: auto; grid-template-columns: minmax(0, 1fr); }
   .section .lab-card__visual { order: -1; border-left: 0; border-bottom: 1px solid var(--ink); aspect-ratio: 344 / 338; }
   .section .lab-card__controls { flex-wrap: wrap; }
@@ -566,5 +569,11 @@ img, canvas { display: block; }
 .menu__lang .lang__head, .menu__lang .lang__promise { padding-left: 0; padding-right: 0; }
 
 /* the tagline's ampersand: inline on desktop, large and blue on its own line on phones (G7.5) */
-.stage[data-frame='m'] .stage__role { display: flex; flex-direction: column; align-items: flex-start; }
+.stage[data-frame='m'] .stage__role, .stage[data-frame='m'] .stage__role > [aria-hidden] { display: flex; flex-direction: column; align-items: flex-start; }
 .stage[data-frame='m'] .stage__amp { font-size: 2.9em; line-height: 0.9; letter-spacing: 0; color: var(--signal); margin: 2px 0 0 -2px; }
+
+/* the hero comes apart on the first scroll (hero-fall): every letter can move on its own */
+.stage__hero [data-fall], .stage__hint[data-fall] { will-change: transform; }
+.stage__hero span[data-fall] { display: inline-block; }
+.stage__hero.is-falling .stage__ctas { pointer-events: none; }
+.stage__hero.is-falling .stage__role, .stage__hero.is-falling .stage__name { background: transparent; }
