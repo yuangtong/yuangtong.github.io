@@ -13,9 +13,13 @@ const PHONE = 760;
 const PHONE_SCALE = 0.6;
 // and the story catches up at most this much progress per frame (as the landing)
 const PHONE_CAP = 0.0065;
+// desktop: a trackpad fling or a fast wheel also catches up at a capped pace,
+// and short laptop screens keep most of the track
+const DESK_CAP = 0.009;
+const DESK_SCALE = 0.85;
 
 /** Pixels of scroll for the whole story: the design track at the scene's scale, longer on phones. */
-const trackPx = (f: { w: number; s: number }) => TRACK * (f.w < PHONE ? Math.max(f.s, PHONE_SCALE) : f.s);
+const trackPx = (f: { w: number; s: number }) => TRACK * Math.max(f.s, f.w < PHONE ? PHONE_SCALE : DESK_SCALE);
 
 /**
  * Lalande, historia 02, as a piece in the lab. The 1440 x 900 scene keeps its
@@ -65,7 +69,7 @@ export function Lalande({ page, coverSrc }: { page: LalandePage; coverSrc: strin
     canvas.style.width = `${eng.size.W * fit.s}px`; canvas.style.height = `${eng.size.H * fit.s}px`;
     setFit((o) => (o.OX === eng.size.OX && o.OY === eng.size.OY ? o : { ...o, OX: eng.size.OX, OY: eng.size.OY }));
     let raf = 0, ps = 0, last = 0;
-    const phone = fit.w < PHONE, cap = phone && !reduce ? PHONE_CAP : Infinity;
+    const phone = fit.w < PHONE, cap = reduce ? Infinity : phone ? PHONE_CAP : DESK_CAP;
     const loop = (now: number) => {
       raf = requestAnimationFrame(loop);
       const r = wrap.getBoundingClientRect(), track = trackPx(fit);
