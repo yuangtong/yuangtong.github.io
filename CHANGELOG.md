@@ -44,7 +44,7 @@ Owner decisions and housekeeping, to pick up later:
 - [ ] Logo and favicon: pick one of the proposals in the design canvas.
 
 ### Added
-- `docs/LAB.md`: the plan of the lab agreed with the owner (2026-11-23): the index in two groups with live previews on hover; mentilola (Menta and Lola) as one dither lab with about 32 algorithms; cámara, where a pinched hand draws a trail of glyphs through MediaPipe in the browser; dona de teselas, píxeles ácidos with the carcoma, and sólidos de glifos.
+- `docs/LAB.md`: the plan of the lab agreed with the owner (2026-11-23): the index in two groups with live previews on hover; menta&lola as one dither lab with about 32 algorithms (the carcoma eating the horse into ASCII among them); cámara, where a pinched hand draws a trail of glyphs through MediaPipe in the browser; dona de teselas, to play with images in 3D (it absorbs sólidos de glifos); and píxeles ácidos, the carcoma's acid shapes as a toy.
 - Home G7.5 (canvas, approved 2026-11-22):
   - the gallop leaves sparks: each stride the hooves and the back throw blue sparks onto the dot grid that drift behind the horse, twinkle and cool back into the grey (hero only, not with reduced motion);
   - the role line sits lower so the name's descenders no longer touch it, and on phones (唐源) is larger and in weight 400 beside "tong";
