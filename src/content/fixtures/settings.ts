@@ -10,7 +10,7 @@ export const settings: Settings = {
     { label: 'notas', href: '/notas' },
     { label: 'contacto', href: '/contacto' },
   ],
-  footer: { left: 'yuang tong, lima', right: 'galope: eadweard muybridge, 1887, dominio público' },
+  footer: { left: 'yuang tong, lima', right: 'galope: eadweard muybridge, 1878, dominio público' },
   ui: {
     openLabel: 'abrir',
     copyLinkLabel: 'copiar enlace',

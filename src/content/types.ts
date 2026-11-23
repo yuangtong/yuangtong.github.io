@@ -32,6 +32,8 @@ export type Intro = {
   };
   /** Letters the horse turns into. */
   glyphText: string;
+  /** A quiet hint at the start of the landing, until the visitor scrolls. */
+  scrollHint: string; scrollHintTouch: string;
 };
 
 /** First sheet: the horse made of letters; the pointer nudges them as it passes. */

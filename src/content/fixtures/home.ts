@@ -24,6 +24,8 @@ export const home: HomePage = {
       coda: 'programar es repetir el loop hasta encontrar el cuadro en el que vuelas.',
     },
     glyphText: 'yuangtong creative coder diseñador web lima ',
+    scrollHint: 'baja para ver la historia',
+    scrollHintTouch: 'desliza para ver la historia',
   },
   jugar: {
     title: 'jugar con los píxeles',

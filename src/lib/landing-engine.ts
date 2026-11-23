@@ -30,7 +30,7 @@ export type LandingConfig = {
 
 export const DESKTOP: LandingConfig = { W: 1440, H: 900, CS: 6, K: 1, VOID: 4600, STORY: 4400, TEXT: 1000, SECT: 1400, LAST: 900, strip: 48, hero: { cx: 146.2, cy: 91.8, s: 1.7 }, coreFrac: 0.6, run: { ax: 96, ay: 120, s: 3.2 }, zoom: { ax: 120, s: 1.9, lift: 9, drop: 44 }, threads: { start: 50, gap: 22, top: 30, travel: 330 }, travel2: 260, wall: { top: 34 }, year: { left: 118, top: 26, k: 5 }, hills: { far: 50, mid: 24 }, rockR: 14, slope: 0.3, scrubBottom: 120, glyphB: 2, repel: 90, jugar: { side: 560, head: 0 } };
 
-export const MOBILE: LandingConfig = { W: 390, H: 844, CS: 4, K: 2, VOID: 3600, STORY: 3600, TEXT: 900, SECT: 1200, LAST: 700, strip: 44, hero: { cx: 49, cy: 128, s: 3.26 }, coreFrac: 0.9, run: { ax: 44, ay: 150, s: 3.6 }, zoom: { ax: 49, s: 3.1, lift: 6, drop: 70 }, threads: { start: 26, gap: 14, top: 50, travel: 170 }, travel2: 140, wall: { top: 48 }, year: { left: 14, top: 22, k: 3, drift: 0.02 }, hills: { far: 50, mid: 24 }, rockR: 10, slope: 0.3, scrubBottom: 120, glyphB: 3, repel: 64, jugar: { side: 0, head: 170 } };
+export const MOBILE: LandingConfig = { W: 390, H: 844, CS: 4, K: 2, VOID: 2700, STORY: 2900, TEXT: 900, SECT: 1200, LAST: 700, strip: 44, hero: { cx: 49, cy: 128, s: 3.26 }, coreFrac: 0.9, run: { ax: 44, ay: 150, s: 3.6 }, zoom: { ax: 49, s: 3.1, lift: 6, drop: 70 }, threads: { start: 26, gap: 14, top: 50, travel: 170 }, travel2: 140, wall: { top: 48 }, year: { left: 14, top: 22, k: 3, drift: 0.02 }, hills: { far: 50, mid: 24 }, rockR: 10, slope: 0.3, scrubBottom: 120, glyphB: 3, repel: 64, jugar: { side: 0, head: 170 } };
 
 /**
  * Fit a design configuration to the window: keep the design scale on the

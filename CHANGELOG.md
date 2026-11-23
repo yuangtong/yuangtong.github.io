@@ -91,6 +91,13 @@ Owner decisions and housekeeping, to pick up later:
 
 ### Changed
 
+- The landing on phones (owner, 2026-11-23):
+  - a quiet scroll hint at the start ("desliza para ver la historia ↓", "baja para ver la historia ↓" on desktop) that appears after a moment and goes away with the first scroll (`Intro.scrollHint`, `scrollHintTouch`);
+  - the scroll settles on chapters (hero, the void, three scenes of the story, the letters, each sheet) with the browser's proximity snap, so a fast swipe lands on a whole scene;
+  - the story catches up with a fling at a capped pace instead of skipping scenes;
+  - the stage is only rebuilt when the width changes, not when the address bar hides or shows, and it fits the small viewport;
+  - a shorter track on phones: the void takes 2700 design pixels (was 3600) and the story 2900 (was 3600).
+- The gallop credit reads 1878, as on Wikipedia (owner, 2026-11-23).
 - The link preview shows the current design and speaks English (owner, 2026-11-23): a new thumbnail (`public/social-preview-g75.jpg`, 2400 x 1260) with the name, (唐源), "web designer & creative coder", yuangtong.dev and the horse with its rider in blue dots, and the Open Graph and X title, description and alt text in English, as content (`Settings.share`). The old thumbnail of version 1 is removed; the new file name makes the platforms fetch it again.
 - The step from the end of the story into "jugar con los píxeles" is shorter: the text phase goes from 1800 to 1000 design pixels of scroll on desktop and from 1500 to 900 on phones (owner, 2026-11-22).
 - The pointer over the letter horse is no longer a lens: letters it passes over are nudged along its path and settle back. The hint "mueve el cursor: las letras se apartan" is gone, and `Jugar` keeps only its title.

@@ -480,3 +480,13 @@ img, canvas { display: block; }
   .nota__link { flex-direction: column; gap: var(--s-1); }
   .nota__link-title { text-align: left; }
 }
+
+/* ---------- phones: a quiet scroll hint and chapters the scroll settles on ---------- */
+.stage__hint { position: absolute; left: 32px; bottom: 40px; z-index: 3; margin: 0; padding: 4px 8px; background: var(--paper); color: var(--quiet); font-family: var(--font-mono); font-size: var(--t-label); pointer-events: none; opacity: 0; transition: opacity 0.3s ease; }
+.stage__hint[data-on='true'] { opacity: 1; transition: opacity 0.6s ease 1.2s; }
+.stage__hint span { display: inline-block; animation: hint-nudge 1.6s ease-in-out infinite; }
+@keyframes hint-nudge { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(3px); } }
+.stage[data-frame='m'] .stage__hint { left: 16px; bottom: 132px; }
+.landing__chapter { position: absolute; left: 0; width: 1px; height: 1px; scroll-snap-align: start; pointer-events: none; }
+@media (max-width: 760px) { html.snap-landing { scroll-snap-type: y proximity; } }
+@media (prefers-reduced-motion: reduce) { .stage__hint span { animation: none; } }
