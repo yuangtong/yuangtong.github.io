@@ -220,7 +220,10 @@ img, canvas { display: block; }
   .site-header__menu { display: flex; }
   .section { padding: var(--s-6) var(--gutter) var(--s-7); }
   .section__head { flex-direction: column; align-items: flex-start; gap: var(--s-3); }
-  .section .h2 { font-size: 64px; }
+  .section .h2 { font-size: var(--t-h2-phone); }
+  .site-header__bar, .site-header__strip { height: var(--bar); }
+  .site-header__status { height: 24px; }
+  .site-header__menu { height: 32px; }
   .section .lab-card { height: auto; grid-template-columns: minmax(0, 1fr); }
   .section .lab-card__visual { order: -1; border-left: 0; border-bottom: 1px solid var(--ink); aspect-ratio: 344 / 338; }
   .section .lab-card__controls { flex-wrap: wrap; }
