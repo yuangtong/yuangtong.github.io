@@ -5,6 +5,12 @@ import type { HomePage, Link, Settings } from '@/content/types';
 import { prefersReducedMotion } from '@/lib/dither';
 import { loadGallop, loadRider } from '@/lib/media';
 import { canvasSize, createLanding, DESKTOP, fitConfig, MOBILE, sectionStart, span, type LandingConfig, type LandingDom } from '@/lib/landing-engine';
+
+/** Chapters a phone's scroll settles on: hero, the void, three scenes of the story, the letters, each sheet. */
+const chapters = (c: LandingConfig) => {
+  const s0 = sectionStart(c);
+  return [0, c.VOID, c.VOID + c.STORY * 0.25, c.VOID + c.STORY * 0.55, c.VOID + c.STORY * 0.78, c.VOID + c.STORY, s0, ...[1, 2, 3, 4].map((k) => s0 + k * c.SECT + c.SECT * 0.12)];
+};
 import { CarcomaLink, useCarcoma } from './Carcoma';
 import { LimaClock } from './LimaClock';
 import { MobileMenu } from './MobileMenu';
@@ -50,21 +56,29 @@ export function Landing({ page, nav, links, ui, glyphFamily, piece }: Props) {
   const engineRef = useRef<ReturnType<typeof createLanding> | null>(null);
   const scaleRef = useRef(1);
   const brandRef = useRef<HTMLSpanElement>(null);
+  const hintRef = useRef(true);
+  const [hint, setHint] = useState(true);
 
   const pickFrame = (k: number, byHand: boolean) => { manual.current = byHand; selRef.current = k; setSelected(k); };
 
   // frame and scale follow the window
   useEffect(() => {
-    let t = 0;
-    const apply = () => {
+    let t = 0, lastW = 0, lastH = 0;
+    const apply = (force = false) => {
+      // phones: the address bar hiding or showing changes only the height; keep the stage as it is
+      const w = window.innerWidth, h = window.innerHeight;
+      if (!force && w === lastW && w < MOBILE_MAX && Math.abs(h - lastH) < 160) return;
+      lastW = w; lastH = h;
       const head = piece ? (document.querySelector('.site-header') as HTMLElement | null)?.offsetHeight ?? 0 : 0;
       setTop(head);
-      const m = window.innerWidth < MOBILE_MAX, f = fitConfig(m ? MOBILE : DESKTOP, window.innerWidth, window.innerHeight - head);
+      const sticky = wrapRef.current?.querySelector('.landing__sticky') as HTMLElement | null;
+      const vh = (w < MOBILE_MAX && sticky?.clientHeight) || h;
+      const m = w < MOBILE_MAX, f = fitConfig(m ? MOBILE : DESKTOP, w, vh - head);
       scaleRef.current = f.s;
       setFit((old) => (old.mobile === m && old.C.W === f.C.W && old.C.H === f.C.H && old.s === f.s ? old : { mobile: m, C: f.C, s: f.s }));
     };
-    const onResize = () => { clearTimeout(t); t = window.setTimeout(apply, 120); };
-    apply();
+    const onResize = () => { clearTimeout(t); t = window.setTimeout(() => apply(), 120); };
+    apply(true);
     window.addEventListener('resize', onResize);
     return () => { clearTimeout(t); window.removeEventListener('resize', onResize); };
   }, []);
@@ -96,7 +110,10 @@ export function Landing({ page, nav, links, ui, glyphFamily, piece }: Props) {
         const ph = target < 40 ? 'start' : target >= end(C) - 2 ? 'end' : 'mid';
         if (ph !== phaseRef.current) { phaseRef.current = ph; setPhase(ph); }
       }
-      sys += (target - sys) * (reduce ? 1 : 0.16);
+      // a fling on a phone does not skip scenes: the story catches up at a capped pace
+      const stepTo = (target - sys) * (reduce ? 1 : 0.16), cap = mobile && !reduce ? 46 : Infinity;
+      sys += Math.max(-cap, Math.min(cap, stepTo));
+      if (!piece) { const idle = sys < 8; if (idle !== hintRef.current) { hintRef.current = idle; setHint(idle); } }
       if (Math.abs(target - sys) < 0.5) sys = target;
       eng.frame({ sys, now, ptr: ptr.current, manual: manual.current, selected: selRef.current });
       // the dithered cursor wakes up once the story is over
@@ -108,6 +125,13 @@ export function Landing({ page, nav, links, ui, glyphFamily, piece }: Props) {
   }, [fitKey, top]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => { engineRef.current?.remeasure(); }, [scale, mobile]);
+
+  // phones: the scroll settles near each chapter instead of stopping mid-transition
+  useEffect(() => {
+    if (piece || !mobile) return;
+    document.documentElement.classList.add('snap-landing');
+    return () => document.documentElement.classList.remove('snap-landing');
+  }, [mobile, piece]);
 
   const scrollToSection = (k: number, instant = false) => {
     const wrap = wrapRef.current, eng = engineRef.current; if (!wrap) return;
@@ -147,6 +171,7 @@ export function Landing({ page, nav, links, ui, glyphFamily, piece }: Props) {
 
   return (
     <section id={piece ? undefined : 'inicio'} ref={wrapRef} className={piece ? 'landing landing--piece' : 'landing'} aria-label={piece?.label} style={{ height: `calc(100svh - ${top}px + ${end(C) * scale}px)` }}>
+      {mobile && !piece && chapters(C).map((y) => <span key={y} aria-hidden="true" className="landing__chapter" style={{ top: y * scale }} />)}
       <div className="landing__sticky" style={piece ? { top, height: `calc(100svh - ${top}px)` } : undefined}>
         <div
           ref={stageRef}
@@ -157,6 +182,7 @@ export function Landing({ page, nav, links, ui, glyphFamily, piece }: Props) {
           onPointerLeave={() => { ptr.current = null; }}
         >
           <canvas ref={canvasRef} key={fitKey} className="stage__canvas" width={cv.w} height={cv.h} role="img" aria-label={intro.canvasLabel} />
+          {!piece && <p className="stage__hint" data-on={hint} aria-hidden={!hint}>{mobile ? page.intro.scrollHintTouch : page.intro.scrollHint} <span aria-hidden="true">↓</span></p>}
 
           {!piece && <div ref={(el) => { dom.current.hero = el; }} className="stage__hero">
             <h1 className="stage__name">

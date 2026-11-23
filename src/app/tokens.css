@@ -5,6 +5,10 @@
   --ink: #141414;
   --body: #2e2e2b;
   --quiet: #4d4d49;
+  /* studio window onto fommo.studio: the night, the live and screened marks */
+  --fommo-night: #0d0f1e;
+  --fommo-on: #c4e118;
+  --fommo-off: #e8451a;
   --signal: #0b14c9;
   --signal-electric: #2a36ff;
   --on-signal: #ffffff;

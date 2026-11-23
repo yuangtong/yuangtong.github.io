@@ -4,8 +4,9 @@ import { useEffect, useRef } from 'react';
 import type { StudioPage } from '@/content/types';
 import { prefersReducedMotion } from '@/lib/dither';
 import { createStudio } from '@/lib/studio-engine';
+import { StudioWindow } from './StudioWindow';
 
-/** Studio (design G8, estudio v3): FOMMO's colours eat the paper behind the text. */
+/** Studio (design G8, estudio v3, with the window onto fommo.studio): FOMMO's colours eat the paper behind the text. */
 export function Studio({ page }: { page: StudioPage }) {
   const cvRef = useRef<HTMLCanvasElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
@@ -28,11 +29,12 @@ export function Studio({ page }: { page: StudioPage }) {
 
   return (
     <main
-      className="section section--studio" aria-label={page.title}
+      className="section section--studio" aria-label={page.title} data-cursor-tone="fommo"
       onPointerMove={(ev) => { const r = ev.currentTarget.getBoundingClientRect(); engine.current?.pointer(ev.clientX - r.left, ev.clientY - r.top); }}
       onPointerLeave={() => engine.current?.pointer(null)}
     >
       <canvas ref={cvRef} className="sv3__cv" role="img" aria-label={page.canvasLabel} />
+      <StudioWindow preview={page.preview} />
       <div className="sv3__layer">
         <p className="sv3__eyebrow">{page.eyebrow}</p>
         <div className="sv3__block">

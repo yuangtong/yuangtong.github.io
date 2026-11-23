@@ -73,6 +73,20 @@ export const fommoLines = [
 ] as const;
 export const fommoSplit = ['#e8451a', '#8aadd6'] as const;
 
+/** Studio window: the night it sits on, and the colours its glyphs are quantized to. */
+export const fommoWindow = { night: '#0d0f1e', bar: '#141414', barText: '#ededeb', on: '#c4e118', off: '#e8451a', light: '#ededeb', palette: [[232, 69, 26], [196, 225, 24], [237, 170, 232], [138, 173, 214], [237, 237, 235]] } as const;
+
+/**
+ * The dithered cursor reads the colour under it and picks one of three trails
+ * [hot, warm, cool]: over paper it takes the section's accent; over a light
+ * colour it goes ink; over a dark colour it goes paper. A region marked
+ * `data-cursor-tone="fommo"` uses FOMMO's colours instead of the site's.
+ */
+export const cursorTones = {
+  site: { paper: ['#0b14c9', '#5d66e6', '#9aa0ea'], light: ['#141414', '#141414', '#4d4d49'], dark: ['#ededeb', '#ededeb', '#9aa0ea'] },
+  fommo: { paper: ['#e8451a', '#e8451a', '#8aadd6'], light: ['#0d0f1e', '#0d0f1e', '#141414'], dark: ['#ededeb', '#ededeb', '#c4e118'] },
+} as const;
+
 /** Contact globe (G8, contacto v2): sea dots, land dots, the arc and the marks. */
 export const globe = { sea: '#d4d4ce', land: '#141414', arc: '#1847ff', arcHead: '#0b14c9', me: '#0b14c9', you: '#141414', label: '#ffffff' } as const;
 

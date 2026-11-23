@@ -44,6 +44,10 @@ Owner decisions and housekeeping, to pick up later:
 - [ ] Logo and favicon: pick one of the proposals in the design canvas.
 
 ### Added
+- The studio page has a window onto fommo.studio (canvas "studio: glitch FOMMO + ventana", approved 2026-11-23): at rest the site's screenshot (`public/media/fommo-studio.jpg`) is screened as ASCII in FOMMO's colours on the studio's night; hover, focus or a first tap starts the carcoma from the pointer and the real page shows through, and leaving lets the glyphs eat it back. A second tap or a click opens fommo.studio. Beside the title on desktop, above it on phones; the title is a little smaller (176 px at most) and breaks into two lines beside the window. `StudioPage.preview` carries its copy; `fommoWindow` and `--fommo-*` are tokens.
+- The dithered cursor reads the colour under it (same canvas): signal blue over paper, ink over light colours and paper over dark ones, so it no longer melts into the red of the void; inside `data-cursor-tone="fommo"` (the studio page) it uses FOMMO's red, night and lime. The tones are tokens (`cursorTones`).
+- Planned lab pieces have their doors and pages, marked "próximamente" (docs/LAB.md): menta&lola, cámara, dona de teselas, píxeles ácidos and ambiente efímero (live coding with Strudel and Hydra; the name is still open). Each page at `/lab/[pieza]` says what the piece will do. `LabDoor.soon` and `points`, `LabPage.soon`. The old "cámara" door, which pointed into the grid, is replaced by the planned piece.
+- `docs/LAB.md`: the plan of the lab agreed with the owner (2026-11-23): the index in two groups with live previews on hover; menta&lola as one dither lab with about 32 algorithms (the carcoma eating the horse into ASCII among them); cámara, where a pinched hand draws a trail of glyphs through MediaPipe in the browser; dona de teselas, to play with images in 3D (it absorbs sólidos de glifos); and píxeles ácidos, the carcoma's acid shapes as a toy.
 - Home G7.5 (canvas, approved 2026-11-22):
   - the gallop leaves sparks: each stride the hooves and the back throw blue sparks onto the dot grid that drift behind the horse, twinkle and cool back into the grey (hero only, not with reduced motion);
   - the role line sits lower so the name's descenders no longer touch it, and on phones (唐源) is larger and in weight 400 beside "tong";
@@ -90,7 +94,15 @@ Owner decisions and housekeeping, to pick up later:
   the full section. "jugar con los píxeles" stays complete in the landing.
 
 ### Changed
+- The site title is "yuang tong | creative coder", and section pages read "studio | yuang tong".
 
+- The landing on phones (owner, 2026-11-23):
+  - a quiet scroll hint at the start ("desliza para ver la historia ↓", "baja para ver la historia ↓" on desktop) that appears after a moment and goes away with the first scroll (`Intro.scrollHint`, `scrollHintTouch`);
+  - the scroll settles on chapters (hero, the void, three scenes of the story, the letters, each sheet) with the browser's proximity snap, so a fast swipe lands on a whole scene;
+  - the story catches up with a fling at a capped pace instead of skipping scenes;
+  - the stage is only rebuilt when the width changes, not when the address bar hides or shows, and it fits the small viewport;
+  - a shorter track on phones: the void takes 2700 design pixels (was 3600) and the story 2900 (was 3600).
+- The gallop credit reads 1878, as on Wikipedia (owner, 2026-11-23).
 - The link preview shows the current design and speaks English (owner, 2026-11-23): a new thumbnail (`public/social-preview-g75.jpg`, 2400 x 1260) with the name, (唐源), "web designer & creative coder", yuangtong.dev and the horse with its rider in blue dots, and the Open Graph and X title, description and alt text in English, as content (`Settings.share`). The old thumbnail of version 1 is removed; the new file name makes the platforms fetch it again.
 - The step from the end of the story into "jugar con los píxeles" is shorter: the text phase goes from 1800 to 1000 design pixels of scroll on desktop and from 1500 to 900 on phones (owner, 2026-11-22).
 - The pointer over the letter horse is no longer a lens: letters it passes over are nudged along its path and settle back. The hint "mueve el cursor: las letras se apartan" is gone, and `Jugar` keeps only its title.

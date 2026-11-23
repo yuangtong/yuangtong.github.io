@@ -1,7 +1,7 @@
 import type { Settings } from '../types';
 
 export const settings: Settings = {
-  siteTitle: 'yuang tong (唐源), creative coder y diseñador web',
+  siteTitle: 'yuang tong | creative coder',
   description: 'yuang tong, creative coder y diseñador web en lima. dirige FOMMO. el lab reúne código, fotografía y música.',
   nav: [
     { label: 'sobre mí', href: '/#jugar' },
@@ -10,7 +10,7 @@ export const settings: Settings = {
     { label: 'notas', href: '/notas' },
     { label: 'contacto', href: '/contacto' },
   ],
-  footer: { left: 'yuang tong, lima', right: 'galope: eadweard muybridge, 1887, dominio público' },
+  footer: { left: 'yuang tong, lima', right: 'galope: eadweard muybridge, 1878, dominio público' },
   ui: {
     openLabel: 'abrir',
     copyLinkLabel: 'copiar enlace',
@@ -40,6 +40,11 @@ export const settings: Settings = {
     '/lab/sisifo': [{ label: 'lab', href: '/lab' }, { label: 'sísifo feliz', href: '/lab/sisifo' }],
     '/lab/lalande': [{ label: 'lab', href: '/lab' }, { label: 'lalande', href: '/lab/lalande' }],
     '/lab/travesia': [{ label: 'lab', href: '/lab' }, { label: 'travesía ácida', href: '/lab/travesia' }],
+    '/lab/menta-lola': [{ label: 'lab', href: '/lab' }, { label: 'menta&lola', href: '/lab/menta-lola' }],
+    '/lab/camara': [{ label: 'lab', href: '/lab' }, { label: 'cámara', href: '/lab/camara' }],
+    '/lab/dona': [{ label: 'lab', href: '/lab' }, { label: 'dona de teselas', href: '/lab/dona' }],
+    '/lab/acidos': [{ label: 'lab', href: '/lab' }, { label: 'píxeles ácidos', href: '/lab/acidos' }],
+    '/lab/efimero': [{ label: 'lab', href: '/lab' }, { label: 'ambiente efímero', href: '/lab/efimero' }],
     '/notas/jinete': [{ label: 'notas', href: '/notas' }, { label: 'quitarle el jinete', href: '/notas/jinete' }],
     '/lab/archivo': [
       { label: 'lab', href: '/lab' },
