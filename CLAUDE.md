@@ -71,9 +71,10 @@ Decided with the owner. Do not drift from these without asking.
   the rock that rolls back, Camus' "hay que imaginarse a Sísifo feliz").
   Approved with home G7.3, 2026-11-22. Do not add story beats without asking.
 - The hero carries the owner's name, his Chinese name (唐源) and a role label:
-  "web designer & creative coder" in English and "diseñador web & creative
-  coder" in Spanish, the same shape in both so phones show the same large
-  ampersand (owner, 2026-11-23; before it, "creative coder y diseñador web",
+  two words joined by a fixed ampersand in every language, "(word) & (word)":
+  "web designer & creative coder", "diseñador web & creative coder". Content
+  holds only the two words; the "&" lives in the component and is never
+  translated (owner, 2026-11-23; before it, "creative coder y diseñador web",
   home G7.3, 2026-11-22; before that,
   "diseñador web y programador creativo", 2026-11-21). It replaces the earlier statement
   "¿yo?, hago lo que quiero" and the earlier rule of never saying "creative

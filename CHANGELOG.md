@@ -103,7 +103,7 @@ Owner decisions and housekeeping, to pick up later:
   the full section. "jugar con los píxeles" stays complete in the landing.
 
 ### Changed
-- The Spanish tagline is "diseñador web & creative coder", the same shape as the English one, so on phones both show the large blue ampersand (owner, 2026-11-23; before, "creative coder y diseñador web").
+- The tagline is two words joined by an ampersand in every language (owner, 2026-11-23): `intro.role` holds only the two words (`['web designer', 'creative coder']`, `['diseñador web', 'creative coder']`) and the component sets the "&", which is never translated. On phones both languages show the same large blue ampersand. Before, Spanish read "creative coder y diseñador web".
 - Section paths are in English in both languages: `/notes` and `/contact` (before `/notas` and `/contacto`, which redirect permanently, also under `/es`). The note images moved to `/media/notas/`. Reading time in a note comes from `settings.ui.readingTime`; the phone menu's navigation label from `ui.navLabel`.
 - Lalande on phones scrolls like the landing: the story is longer to scroll (at least 60 % of its desktop track), a fling makes it catch up at a capped pace instead of skipping scenes, and the browser bar showing or hiding no longer rebuilds the scene mid-scroll. The replay button waits until the story has actually reached its end. On desktop a fast wheel or trackpad fling also catches up at a capped pace, and short laptop screens keep at least 85 % of the track.
 - The site title is "yuang tong | creative coder", and section pages read "studio | yuang tong".

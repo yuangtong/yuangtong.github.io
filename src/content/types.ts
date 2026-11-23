@@ -17,7 +17,12 @@ export type Accent = 'azul' | 'rosado' | 'lima';
 export type Intro = {
   name: string;
   nameZh: string;
-  role: string;
+  /**
+   * The tagline, as two words joined by an ampersand that the component sets
+   * and never translates: "web designer & creative coder". Only the words
+   * change per language.
+   */
+  role: [string, string];
   availability: string;
   ctas: Link[];
   /** Describes the animated canvas for assistive technology. */
