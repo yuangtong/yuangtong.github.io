@@ -88,7 +88,7 @@ export function Landing({ page, nav, links, ui, languages, glyphFamily, piece }:
       setTop(head);
       const sticky = wrapRef.current?.querySelector('.landing__sticky') as HTMLElement | null;
       const vh = (w < MOBILE_MAX && sticky?.clientHeight) || h;
-      const m = w < MOBILE_MAX, f = fitConfig(m ? MOBILE : DESKTOP, w, vh - head);
+      const m = w < MOBILE_MAX, f = fitConfig(m ? MOBILE : DESKTOP, w, vh - head, m);
       scaleRef.current = f.s;
       setFit((old) => (old.mobile === m && old.C.W === f.C.W && old.C.H === f.C.H && old.s === f.s ? old : { mobile: m, C: f.C, s: f.s }));
     };

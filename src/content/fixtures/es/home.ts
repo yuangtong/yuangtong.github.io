@@ -31,7 +31,7 @@ export const home: HomePage = {
     title: 'jugar con los píxeles',
   },
   sheets: {
-    lab: { title: 'el lab', line: 'historias, juegos con la cámara y mi archivo de fotos.', href: '/lab' },
+    lab: { title: 'el lab', line: 'historias, juguetes hechos de píxeles y mi archivo de fotos.', href: '/lab' },
     notes: { title: 'notas', line: 'cómo está hecha cada pieza, escrito mientras la construyo.', href: '/notes' },
     studio: { title: 'studio', line: 'dirijo FOMMO, un bespoke studio. el trabajo para clientes vive ahí.', sub: 'marca, producto y desarrollo, hechos a medida.', brand: 'FOMMO', href: '/studio' },
     contact: { title: 'hablemos', line: 'escríbeme a', email: { label: 'hola@yuangtong.dev', href: 'mailto:hola@yuangtong.dev' }, href: '/contact' },
@@ -74,7 +74,7 @@ export const notFound: NotFoundPage = {
 
 export const labPage: LabPage = {
   title: 'el lab',
-  lead: 'historias, juegos con la cámara y mi archivo de fotos. cada pieza se puede retramar y compartir.',
+  lead: 'historias, juguetes hechos de píxeles y mi archivo de fotos. cada pieza se puede retramar y compartir.',
   doors: [
     { id: 'sisifo', title: 'sísifo feliz', text: 'el galope de Muybridge de 1878 contado como sísifo: doce hilos, la colina y la roca que vuelve a rodar.', cta: { label: 'ver sísifo feliz', href: '/lab/sisifo' } },
     { id: 'lalande', title: 'lalande, lágrimas de ángel', text: 'una palabra de clarice lispector cae como gota sobre un narciso pequeño. tú eres la brisa.', cta: { label: 'ver lalande', href: '/lab/lalande' } },
