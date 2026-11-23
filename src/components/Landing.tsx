@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import type { HomePage, Link, Settings } from '@/content/types';
 import { prefersReducedMotion } from '@/lib/dither';
 import { loadGallop, loadRider } from '@/lib/media';
+import { createHeroFall } from '@/lib/hero-fall';
 import { canvasSize, createLanding, DESKTOP, fitConfig, MOBILE, sectionStart, span, type LandingConfig, type LandingDom } from '@/lib/landing-engine';
 
 /** Chapters a phone's scroll settles on: hero, the void, three scenes of the story, the letters, each sheet. */
@@ -30,9 +31,12 @@ const ALIAS: Record<string, string> = { notas: 'notes', contacto: 'contact' };
 /** Sheet index for "#jugar", "jugar", "#lab"...; -1 when it is not a sheet. */
 const sectionIndex = (hash: string) => { const h = hash.replace(/^#/, ''); return ORDER.indexOf(ALIAS[h] ?? h); };
 
+/** Each letter in its own span, so the hero can come apart letter by letter (hero-fall). Spaces stay plain. */
+const letters = (text: string) => [...text].map((ch, i) => (ch === ' ' ? ' ' : <span key={i} data-fall="">{ch}</span>));
+
 /** The tagline: two words from content and a fixed ampersand, large and blue on its own line on phones (G7.5 mobile). */
 const tagline = ([a, b]: [string, string]) => (
-  <><span className="stage__role-a">{a}</span> <span className="stage__amp">&amp;</span> <span className="stage__role-b">{b}</span></>
+  <><span className="stage__role-a">{letters(a)}</span> <span className="stage__amp" data-fall="">&amp;</span> <span className="stage__role-b">{letters(b)}</span></>
 );
 
 /**
@@ -66,6 +70,8 @@ export function Landing({ page, nav, links, ui, languages, glyphFamily, piece }:
   const scaleRef = useRef(1);
   const brandRef = useRef<HTMLSpanElement>(null);
   const hintRef = useRef(true);
+  const hintRef2 = useRef<HTMLParagraphElement>(null);
+  const fallRef = useRef<ReturnType<typeof createHeroFall> | null>(null);
   const [hint, setHint] = useState(true);
 
   const pickFrame = (k: number, byHand: boolean) => { manual.current = byHand; selRef.current = k; setSelected(k); };
@@ -101,10 +107,12 @@ export function Landing({ page, nav, links, ui, languages, glyphFamily, piece }:
       if (dead) return;
       setFlight(g.flight);
       engineRef.current = createLanding({
-        C, canvas, gallop: g, dom: () => dom.current, reduce, mode: 1, narrated, glyphFamily, rider,
+        C, canvas, gallop: g, dom: () => dom.current, reduce, mode: 1, narrated, glyphFamily, rider, heroFall: !piece && !reduce,
         title: page.jugar.title, glyphText: page.intro.glyphText, labels: { camera: ui.cameraCounter, frame: ui.frameCounter },
         onFrame: (k) => pickFrame(k, false),
       });
+      // the hero comes apart on the first scroll (canvas "hero: secuencia completa"); still with reduced motion
+      if (!piece && !reduce && stageRef.current && dom.current.hero) fallRef.current = createHeroFall(stageRef.current, dom.current.hero, hintRef2.current ? [hintRef2.current] : [], { W: C.W, H: C.H });
       // arriving with a hash (for example "/#jugar" from a section) lands on that sheet
       const k = sectionIndex(window.location.hash);
       if (k >= 0) requestAnimationFrame(() => scrollToSection(k, true));
@@ -125,11 +133,12 @@ export function Landing({ page, nav, links, ui, languages, glyphFamily, piece }:
       if (!piece) { const idle = sys < 8; if (idle !== hintRef.current) { hintRef.current = idle; setHint(idle); } }
       if (Math.abs(target - sys) < 0.5) sys = target;
       eng.frame({ sys, now, ptr: ptr.current, manual: manual.current, selected: selRef.current });
+      fallRef.current?.update(sys / C.VOID, now);
       // the dithered cursor wakes up once the story is over
       if (!piece) { const cur = sys >= C.VOID + C.STORY + C.TEXT * 0.3; if (cur !== cursorOn) { cursorOn = cur; document.documentElement.toggleAttribute('data-cursor', cur); } }
     };
     raf = requestAnimationFrame(loop);
-    return () => { dead = true; cancelAnimationFrame(raf); engineRef.current = null; if (!piece) document.documentElement.removeAttribute('data-cursor'); };
+    return () => { dead = true; cancelAnimationFrame(raf); engineRef.current = null; fallRef.current?.reset(); fallRef.current = null; if (!piece) document.documentElement.removeAttribute('data-cursor'); };
     // the engine is rebuilt when the stage changes size or switches frame
   }, [fitKey, top]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -191,17 +200,20 @@ export function Landing({ page, nav, links, ui, languages, glyphFamily, piece }:
           onPointerLeave={() => { ptr.current = null; }}
         >
           <canvas ref={canvasRef} key={fitKey} className="stage__canvas" width={cv.w} height={cv.h} role="img" aria-label={intro.canvasLabel} />
-          {!piece && <p className="stage__hint" data-on={hint} aria-hidden={!hint}>{mobile ? page.intro.scrollHintTouch : page.intro.scrollHint} <span aria-hidden="true">↓</span></p>}
+          {!piece && <p ref={hintRef2} className="stage__hint" data-fall="block" data-on={hint} aria-hidden={!hint}>{mobile ? page.intro.scrollHintTouch : page.intro.scrollHint} <span aria-hidden="true">↓</span></p>}
 
           {!piece && <div ref={(el) => { dom.current.hero = el; }} className="stage__hero">
             <h1 className="stage__name">
-              {mobile ? <>{intro.name.split(' ')[0]}<br />{intro.name.split(' ').slice(1).join(' ')}</> : intro.name}
-              <span lang="zh-Hant" className="stage__zh">({intro.nameZh})</span>
+              <span className="vh">{intro.name} ({intro.nameZh})</span>
+              <span aria-hidden="true">
+                {mobile ? <>{letters(intro.name.split(' ')[0])}<br />{letters(intro.name.split(' ').slice(1).join(' '))}</> : letters(intro.name)}
+                <span lang="zh-Hant" className="stage__zh">{letters(`(${intro.nameZh})`)}</span>
+              </span>
             </h1>
-            <p className="stage__role">{tagline(intro.role)}</p>
+            <p className="stage__role"><span className="vh">{intro.role[0]} &amp; {intro.role[1]}</span><span aria-hidden="true">{tagline(intro.role)}</span></p>
             <div className="stage__ctas">
               {intro.ctas.map((c, i) => (
-                <a key={c.href} href={c.href} onClick={(e) => navigate(c.href, e)} className={i === 0 ? 'btn btn--ink' : 'btn btn--signal'}>
+                <a key={c.href} href={c.href} data-fall="block" onClick={(e) => navigate(c.href, e)} className={i === 0 ? 'btn btn--ink' : 'btn btn--signal'}>
                   {c.label} <span aria-hidden="true">-&gt;</span>
                 </a>
               ))}

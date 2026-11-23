@@ -549,3 +549,9 @@ img, canvas { display: block; }
 /* the tagline's ampersand: inline on desktop, large and blue on its own line on phones (G7.5) */
 .stage[data-frame='m'] .stage__role { display: flex; flex-direction: column; align-items: flex-start; }
 .stage[data-frame='m'] .stage__amp { font-size: 2.9em; line-height: 0.9; letter-spacing: 0; color: var(--signal); margin: 2px 0 0 -2px; }
+
+/* the hero comes apart on the first scroll (hero-fall): every letter can move on its own */
+.stage__hero [data-fall], .stage__hint[data-fall] { will-change: transform; }
+.stage__hero span[data-fall] { display: inline-block; }
+.stage__hero.is-falling .stage__ctas { pointer-events: none; }
+.stage__hero.is-falling .stage__role, .stage__hero.is-falling .stage__name { background: transparent; }
