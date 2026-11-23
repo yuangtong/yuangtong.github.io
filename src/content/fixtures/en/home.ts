@@ -26,6 +26,9 @@ export const home: HomePage = {
     glyphText: 'yuangtong web designer creative coder lima ',
     scrollHint: 'scroll down for the story',
     scrollHintTouch: 'swipe up for the story',
+    restartHint: 'keep swiping up to start the story again',
+    restartGo: 'the story starts again',
+    progressLabel: 'where you are',
   },
   jugar: {
     title: 'play with the pixels',

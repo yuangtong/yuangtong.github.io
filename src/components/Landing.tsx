@@ -7,11 +7,12 @@ import { loadGallop, loadRider } from '@/lib/media';
 import { createHeroFall } from '@/lib/hero-fall';
 import { canvasSize, createLanding, DESKTOP, fitConfig, MOBILE, sectionStart, span, type LandingConfig, type LandingDom } from '@/lib/landing-engine';
 
-/** Chapters a phone's scroll settles on: hero, the void, three scenes of the story, the letters, each sheet. */
-const chapters = (c: LandingConfig) => {
-  const s0 = sectionStart(c);
-  return [0, c.VOID, c.VOID + c.STORY * 0.25, c.VOID + c.STORY * 0.55, c.VOID + c.STORY * 0.78, c.VOID + c.STORY, s0, ...[1, 2, 3, 4].map((k) => s0 + k * c.SECT + c.SECT * 0.12)];
-};
+/** Chapters a phone's scroll settles near in the story (1): hero, the void, three scenes, the letters. */
+const chapters = (c: LandingConfig) => [0, c.VOID, c.VOID + c.STORY * 0.25, c.VOID + c.STORY * 0.55, c.VOID + c.STORY * 0.78, c.VOID + c.STORY];
+/** Where each sheet (2 to 6: about, lab, studio, notes, contact) rests open; on phones one swipe moves exactly one. */
+const sheetStops = (c: LandingConfig) => { const s0 = sectionStart(c); return [s0, ...[1, 2, 3, 4].map((k) => s0 + k * c.SECT + c.SECT * 0.12)]; };
+/** How far, in screen pixels, you pull up from the first sheet before the story starts again. */
+const PULL = 220;
 import { CarcomaLink, useCarcoma } from './Carcoma';
 import { LimaClock } from './LimaClock';
 import { MobileMenu } from './MobileMenu';
@@ -25,7 +26,8 @@ type Props = { page: HomePage; nav: Link[]; links: Link[]; ui: Settings['ui']; l
 
 const pad = (n: number) => (n < 10 ? '0' : '') + n;
 const MOBILE_MAX = 760;
-const ORDER = ['jugar', 'lab', 'notes', 'studio', 'contact'];
+// the navigation's order (owner, 2026-11-23): about, lab, studio, notes, contact
+const ORDER = ['jugar', 'lab', 'studio', 'notes', 'contact'];
 // hashes from before the English paths still land on their sheet
 const ALIAS: Record<string, string> = { notas: 'notes', contacto: 'contact' };
 /** Sheet index for "#jugar", "jugar", "#lab"...; -1 when it is not a sheet. */
@@ -73,6 +75,9 @@ export function Landing({ page, nav, links, ui, languages, glyphFamily, piece }:
   const hintRef2 = useRef<HTMLParagraphElement>(null);
   const fallRef = useRef<ReturnType<typeof createHeroFall> | null>(null);
   const [hint, setHint] = useState(true);
+  // phones, from the first sheet on: which sheet is open (-1 in the story), and the pull back to the start
+  const [sheetUi, setSheetUi] = useState<{ idx: number; pull: number; going: boolean }>({ idx: -1, pull: 0, going: false });
+  const sheetRef = useRef({ armed: false, going: false, last: -1, settle: 0, jump: false, ui: '' });
 
   const pickFrame = (k: number, byHand: boolean) => { manual.current = byHand; selRef.current = k; setSelected(k); };
 
@@ -117,12 +122,38 @@ export function Landing({ page, nav, links, ui, languages, glyphFamily, piece }:
       const k = sectionIndex(window.location.hash);
       if (k >= 0) requestAnimationFrame(() => scrollToSection(k, true));
     });
+    // Phones (canvas "móvil: un deslizamiento, una hoja"): 1 is the start, the hero and
+    // the story, scrolled freely. From 2 (about) on, one swipe moves one sheet (the
+    // sheet stops snap with stop: always) and a bar says where you are. Going up from
+    // 2 would rewind the whole story by scroll, so a ring fills instead; full, the
+    // carcoma takes you to the start and the story begins again. Let go early and
+    // you settle back on 2.
+    const sheetsOnPhone = (target: number, sc: number) => {
+      const st = sheetRef.current, s0 = sectionStart(C), past = (target - s0) * sc, html = document.documentElement;
+      if (past >= -2) st.armed = true;
+      if (target < 4) st.armed = false;
+      const pulling = st.armed && past < -2 && !st.going;
+      const pull = pulling ? Math.min(1, -past / PULL) : 0;
+      html.classList.toggle('snap-sheets', past > -window.innerHeight * 0.3 && !pulling && !st.going);
+      if (pull >= 1 && !st.going) {
+        st.going = true; st.armed = false;
+        go(() => { st.jump = true; scrollToSection(-1, true); window.setTimeout(() => { st.going = false; }, 600); });
+      }
+      if (pulling && pull < 1 && target !== st.last) { window.clearTimeout(st.settle); st.settle = window.setTimeout(() => scrollToSection(0), 420); }
+      if (!pulling) window.clearTimeout(st.settle);
+      st.last = target;
+      const idx = past < -2 ? -1 : Math.max(0, Math.min(4, Math.round((target - s0) / C.SECT)));
+      const key = `${idx}|${Math.round(pull * 40)}|${st.going}`;
+      if (key !== st.ui) { st.ui = key; setSheetUi({ idx, pull: Math.round(pull * 40) / 40, going: st.going }); }
+    };
     const loop = (now: number) => {
       if (dead) return;
       raf = requestAnimationFrame(loop);
       const eng = engineRef.current; if (!eng) return;
       const s = scaleRef.current, rect = wrap.getBoundingClientRect();
       const target = Math.min(end(C), Math.max(0, (top - rect.top) / s));
+      if (sheetRef.current.jump) { sheetRef.current.jump = false; sys = target; }
+      if (mobile && !piece) sheetsOnPhone(target, s);
       if (piece) {
         const ph = target < 40 ? 'start' : target >= end(C) - 2 ? 'end' : 'mid';
         if (ph !== phaseRef.current) { phaseRef.current = ph; setPhase(ph); }
@@ -138,7 +169,7 @@ export function Landing({ page, nav, links, ui, languages, glyphFamily, piece }:
       if (!piece) { const cur = sys >= C.VOID + C.STORY + C.TEXT * 0.3; if (cur !== cursorOn) { cursorOn = cur; document.documentElement.toggleAttribute('data-cursor', cur); } }
     };
     raf = requestAnimationFrame(loop);
-    return () => { dead = true; cancelAnimationFrame(raf); engineRef.current = null; fallRef.current?.reset(); fallRef.current = null; if (!piece) document.documentElement.removeAttribute('data-cursor'); };
+    return () => { dead = true; cancelAnimationFrame(raf); window.clearTimeout(sheetRef.current.settle); document.documentElement.classList.remove('snap-sheets'); engineRef.current = null; fallRef.current?.reset(); fallRef.current = null; if (!piece) document.documentElement.removeAttribute('data-cursor'); };
     // the engine is rebuilt when the stage changes size or switches frame
   }, [fitKey, top]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -178,7 +209,7 @@ export function Landing({ page, nav, links, ui, languages, glyphFamily, piece }:
   const shown = selected ?? flight;
   const cv = canvasSize(C);
   const navLabel = (href: string, fallback: string) => nav.find((l) => l.href === href)?.label ?? fallback;
-  const sectionHeads = [jugar.title, lab.title, notes.title, studio.title, navLabel(contact.href, contact.title)];
+  const sectionHeads = [jugar.title, lab.title, studio.title, notes.title, navLabel(contact.href, contact.title)];
   const setSh = (i: number) => (el: HTMLElement | null) => { dom.current.sh[i] = el; };
   const setIn = (i: number) => (el: HTMLElement | null) => { dom.current.inner[i] = el; };
   const head = (i: number) => (
@@ -190,6 +221,7 @@ export function Landing({ page, nav, links, ui, languages, glyphFamily, piece }:
   return (
     <section id={piece ? undefined : 'inicio'} ref={wrapRef} className={piece ? 'landing landing--piece' : 'landing'} aria-label={piece?.label} style={{ height: `calc(100svh - ${top}px + ${end(C) * scale}px)` }}>
       {mobile && !piece && chapters(C).map((y) => <span key={y} aria-hidden="true" className="landing__chapter" style={{ top: y * scale }} />)}
+      {mobile && !piece && sheetStops(C).map((y) => <span key={y} aria-hidden="true" className="landing__chapter landing__chapter--sheet" style={{ top: y * scale }} />)}
       <div className="landing__sticky" style={piece ? { top, height: `calc(100svh - ${top}px)` } : undefined}>
         <div
           ref={stageRef}
@@ -200,6 +232,20 @@ export function Landing({ page, nav, links, ui, languages, glyphFamily, piece }:
           onPointerLeave={() => { ptr.current = null; }}
         >
           <canvas ref={canvasRef} key={fitKey} className="stage__canvas" width={cv.w} height={cv.h} role="img" aria-label={intro.canvasLabel} />
+          {mobile && !piece && (
+            <>
+              <div className="stage__progress" data-on={sheetUi.idx >= 0} aria-hidden="true">
+                {[0, 1, 2, 3, 4].map((i) => <span key={i} className="stage__seg" data-fill={i <= sheetUi.idx} data-studio={i === 2} />)}
+              </div>
+              <p className="stage__where" data-on={sheetUi.idx >= 0} role="status" aria-label={intro.progressLabel}>
+                {sheetUi.idx >= 0 && <><span aria-hidden="true">{pad(sheetUi.idx + 1)}/05</span><span className="vh">{sectionHeads[sheetUi.idx]}</span></>}
+              </p>
+              <div className="stage__pull" data-on={sheetUi.pull > 0.04 || sheetUi.going} aria-hidden="true">
+                <svg width="56" height="56" viewBox="0 0 56 56"><circle className="stage__pull-track" cx="28" cy="28" r="24" /><circle className="stage__pull-fill" cx="28" cy="28" r="24" strokeDasharray="150.8" strokeDashoffset={(150.8 * (1 - (sheetUi.going ? 1 : sheetUi.pull))).toFixed(1)} transform="rotate(-90 28 28)" /><text x="28" y="33" textAnchor="middle">↑</text></svg>
+                <span>{sheetUi.going || sheetUi.pull >= 1 ? intro.restartGo : intro.restartHint}</span>
+              </div>
+            </>
+          )}
           {!piece && <p ref={hintRef2} className="stage__hint" data-fall="block" data-on={hint} aria-hidden={!hint}>{mobile ? page.intro.scrollHintTouch : page.intro.scrollHint} <span aria-hidden="true">↓</span></p>}
 
           {!piece && <div ref={(el) => { dom.current.hero = el; }} className="stage__hero">
@@ -275,18 +321,9 @@ export function Landing({ page, nav, links, ui, languages, glyphFamily, piece }:
               </div>
             </section>
 
-            <section ref={setSh(2)} id="notas" aria-label={notes.title} className="sheet">
+            <section ref={setSh(2)} id="studio" aria-label={studio.title} className="sheet sheet--studio">
               {head(2)}
               <div ref={setIn(2)} className="sheet__inner sheet__fill">
-                <h2 className="sheet__title" aria-label={notes.title}><span ref={(el) => { dom.current.heads![2] = el; }} data-text={notes.title} aria-hidden="true">{notes.title}</span></h2>
-                <p className="sheet__line">{notes.line}</p>
-                <CarcomaLink href={notes.href} className="btn btn--ink sheet__enter">{ui.enterLabel} <span aria-hidden="true">-&gt;</span></CarcomaLink>
-              </div>
-            </section>
-
-            <section ref={setSh(3)} id="studio" aria-label={studio.title} className="sheet sheet--studio">
-              {head(3)}
-              <div ref={setIn(3)} className="sheet__inner sheet__fill">
                 <StudioSheetFx word={brandRef} />
                 <p className="studio__lead">{studio.line.split(studio.brand)[0]}<span ref={brandRef} className="studio__brand">{studio.brand}</span>{studio.line.split(studio.brand).slice(1).join(studio.brand)}</p>
                 <p className="studio__sub">{studio.sub}</p>
@@ -294,7 +331,16 @@ export function Landing({ page, nav, links, ui, languages, glyphFamily, piece }:
               </div>
             </section>
 
-            <section ref={setSh(4)} id="contacto" aria-label={contact.title} className="sheet sheet--contact">
+            <section ref={setSh(3)} id="notes" aria-label={notes.title} className="sheet">
+              {head(3)}
+              <div ref={setIn(3)} className="sheet__inner sheet__fill">
+                <h2 className="sheet__title" aria-label={notes.title}><span ref={(el) => { dom.current.heads![3] = el; }} data-text={notes.title} aria-hidden="true">{notes.title}</span></h2>
+                <p className="sheet__line">{notes.line}</p>
+                <CarcomaLink href={notes.href} className="btn btn--ink sheet__enter">{ui.enterLabel} <span aria-hidden="true">-&gt;</span></CarcomaLink>
+              </div>
+            </section>
+
+            <section ref={setSh(4)} id="contact" aria-label={contact.title} className="sheet sheet--contact">
               {head(4)}
               <div ref={setIn(4)} className="sheet__inner sheet__fill">
                 <h2 className="contact__title" aria-label={contact.title}><span ref={(el) => { dom.current.heads![4] = el; }} data-text={contact.title} aria-hidden="true">{contact.title}</span></h2>

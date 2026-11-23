@@ -442,7 +442,7 @@ export function createLanding(o: LandingOptions) {
         const avail = geo.hs[i] - C.strip, over = Math.max(0, contentH[i] - (H - 5 * C.strip));
         const u = i === geo.k ? geo.u : i < geo.k ? 1 : 0;
         inner.style.transform = `translateY(${(-over * clamp((u - 0.12) / 0.66)).toFixed(1)}px)`;
-        inner.style.visibility = avail < 4 ? 'hidden' : 'visible';
+        inner.style.visibility = avail < 4 ? 'hidden' : 'inherit'; // inherit, so hiding the sheets hides it too (a jump to the start skips the slide-out)
       }
     }
     if (d.jside) d.jside.style.transform = enter < 1 ? `translateX(${(-(1 - ease(enter)) * 110).toFixed(1)}%)` : '';
@@ -466,7 +466,7 @@ export function createLanding(o: LandingOptions) {
       setText(d.counter, q < 0.25 ? `${o.labels.camera} ${pad(story.cams)}/12` : `${o.labels.frame} ${pad(story.frame + 1)}/15`);
       d.counter.dataset.alert = q >= 0.55 && q < 0.7 ? 'true' : 'false';
     }
-    if (d.strip) { const on = story.s4 > 0.15 && t5 < 0.05; d.strip.style.opacity = on ? '1' : '0'; d.strip.style.pointerEvents = on ? 'auto' : 'none'; d.strip.style.visibility = on ? 'visible' : 'hidden'; }
+    if (d.strip) { /* from q, not the last drawn story: a jump to the start must hide it */ const on = clamp((q - 0.7) / 0.3) > 0.15 && t5 < 0.05; d.strip.style.opacity = on ? '1' : '0'; d.strip.style.pointerEvents = on ? 'auto' : 'none'; d.strip.style.visibility = on ? 'visible' : 'hidden'; }
     if (o.narrated) {
       const bands: [number, number][] = [[0.03, 0.22], [0.3, 0.52], [0.56, 0.68], [0.8, 1.2]];
       d.narr.forEach((el, i) => { if (!el) return; const op = bell(q, bands[i][0], bands[i][1]) * (1 - clamp(t5 / 0.1)); el.style.opacity = op.toFixed(3); el.style.transform = `translateY(${((1 - op) * 18).toFixed(1)}px)`; });
@@ -516,7 +516,7 @@ export function createLanding(o: LandingOptions) {
         drawn = step; drawnY = sys; lastDraw = now;
       }
       if (sheetsOn && x > 0.8 && x < 2.05 && step !== lastSide) o.onLab?.(step);
-      if (sheetsOn && x > 1.8 && x < 3.05 && step !== lastSide) o.onNotes?.(step);
+      if (sheetsOn && x > 2.8 && x < 4.05 && step !== lastSide) o.onNotes?.(step); // notes is the fourth sheet since the navigation's order
       lastSide = step;
     },
     jumpOffset(k: number) { return SEC0 + k * SECT + (k === 0 ? 0 : SECT * 0.12); },

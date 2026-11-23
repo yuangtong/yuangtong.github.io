@@ -39,6 +39,8 @@ export type Intro = {
   glyphText: string;
   /** A quiet hint at the start of the landing, until the visitor scrolls. */
   scrollHint: string; scrollHintTouch: string;
+  /** Phones, on the first sheet going up: the ring that takes you back to the start, and its label once full. Where-you-are bar label. */
+  restartHint: string; restartGo: string; progressLabel: string;
 };
 
 /** First sheet: the horse made of letters; the pointer nudges them as it passes. */

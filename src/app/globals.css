@@ -517,7 +517,29 @@ img, canvas { display: block; }
 @keyframes hint-nudge { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(3px); } }
 .stage[data-frame='m'] .stage__hint { left: 16px; bottom: 132px; }
 .landing__chapter { position: absolute; left: 0; width: 1px; height: 1px; scroll-snap-align: start; pointer-events: none; }
-@media (max-width: 760px) { html.snap-landing { scroll-snap-type: y proximity; } }
+@media (max-width: 760px) {
+  html.snap-landing { scroll-snap-type: y proximity; }
+  /* from the first sheet on: one swipe, one sheet; the story's chapters step aside */
+  html.snap-landing.snap-sheets { scroll-snap-type: y mandatory; }
+  html.snap-sheets .landing__chapter:not(.landing__chapter--sheet) { scroll-snap-align: none; }
+  html:not(.snap-sheets) .landing__chapter--sheet { scroll-snap-align: none; }
+  .landing__chapter--sheet { scroll-snap-stop: always; }
+}
+/* phones: where you are among the sheets, and the ring that takes you back to the start */
+.stage__progress { position: absolute; left: 16px; right: 72px; top: 50px; z-index: 5; display: flex; gap: 3px; opacity: 0; transition: opacity 0.3s ease; pointer-events: none; }
+.stage__progress[data-on='true'], .stage__where[data-on='true'] { opacity: 1; }
+.stage__seg { flex: 1; height: 3px; background: var(--paper-2); position: relative; overflow: hidden; }
+.stage__seg::after { content: ''; position: absolute; inset: 0; background: var(--signal); transform-origin: left; transform: scaleX(0); transition: transform 0.35s ease; }
+.stage__seg[data-studio='true']::after { background: var(--fommo-off); }
+.stage__seg[data-fill='true']::after { transform: scaleX(1); }
+.stage__where { position: absolute; right: 16px; top: 44px; z-index: 5; margin: 0; padding: 1px 5px; background: var(--ink); color: var(--paper); font-family: var(--font-mono); font-size: var(--t-label); opacity: 0; transition: opacity 0.3s ease; pointer-events: none; }
+.stage__where:empty { display: none; }
+.stage__pull { position: absolute; left: 50%; top: 120px; z-index: 6; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 10px; opacity: 0; transition: opacity 0.2s ease; pointer-events: none; }
+.stage__pull[data-on='true'] { opacity: 1; }
+.stage__pull span { padding: 4px 8px; background: var(--ink); color: var(--paper); font-family: var(--font-mono); font-size: var(--t-label); white-space: nowrap; }
+.stage__pull-track { fill: var(--paper); stroke: var(--paper-2); stroke-width: 4; }
+.stage__pull-fill { fill: none; stroke: var(--signal); stroke-width: 4; transition: stroke-dashoffset 0.1s linear; }
+.stage__pull text { font-family: var(--font-mono); font-size: 15px; fill: var(--ink); }
 @media (prefers-reduced-motion: reduce) { .stage__hint span { animation: none; } }
 
 /* ---------- language selector (canvas "nav: idiomas") ---------- */
@@ -547,7 +569,7 @@ img, canvas { display: block; }
 .menu__lang .lang__head, .menu__lang .lang__promise { padding-left: 0; padding-right: 0; }
 
 /* the tagline's ampersand: inline on desktop, large and blue on its own line on phones (G7.5) */
-.stage[data-frame='m'] .stage__role { display: flex; flex-direction: column; align-items: flex-start; }
+.stage[data-frame='m'] .stage__role, .stage[data-frame='m'] .stage__role > [aria-hidden] { display: flex; flex-direction: column; align-items: flex-start; }
 .stage[data-frame='m'] .stage__amp { font-size: 2.9em; line-height: 0.9; letter-spacing: 0; color: var(--signal); margin: 2px 0 0 -2px; }
 
 /* the hero comes apart on the first scroll (hero-fall): every letter can move on its own */
