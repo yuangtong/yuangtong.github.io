@@ -455,7 +455,7 @@ export function createLanding(o: LandingOptions) {
       setText(d.counter, q < 0.25 ? `${o.labels.camera} ${pad(story.cams)}/12` : `${o.labels.frame} ${pad(story.frame + 1)}/15`);
       d.counter.dataset.alert = q >= 0.55 && q < 0.7 ? 'true' : 'false';
     }
-    if (d.strip) { const on = story.s4 > 0.15 && t5 < 0.05; d.strip.style.opacity = on ? '1' : '0'; d.strip.style.pointerEvents = on ? 'auto' : 'none'; d.strip.style.visibility = on ? 'visible' : 'hidden'; }
+    if (d.strip) { /* from q, not the last drawn story: a jump to the start must hide it */ const on = clamp((q - 0.7) / 0.3) > 0.15 && t5 < 0.05; d.strip.style.opacity = on ? '1' : '0'; d.strip.style.pointerEvents = on ? 'auto' : 'none'; d.strip.style.visibility = on ? 'visible' : 'hidden'; }
     if (o.narrated) {
       const bands: [number, number][] = [[0.03, 0.22], [0.3, 0.52], [0.56, 0.68], [0.8, 1.2]];
       d.narr.forEach((el, i) => { if (!el) return; const op = bell(q, bands[i][0], bands[i][1]) * (1 - clamp(t5 / 0.1)); el.style.opacity = op.toFixed(3); el.style.transform = `translateY(${((1 - op) * 18).toFixed(1)}px)`; });

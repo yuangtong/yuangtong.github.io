@@ -26,6 +26,9 @@ export const home: HomePage = {
     glyphText: 'yuangtong creative coder diseñador web lima ',
     scrollHint: 'baja para ver la historia',
     scrollHintTouch: 'desliza para ver la historia',
+    restartHint: 'sigue deslizando para empezar la historia de nuevo',
+    restartGo: 'la historia empieza de nuevo',
+    progressLabel: 'dónde estás',
   },
   jugar: {
     title: 'jugar con los píxeles',
