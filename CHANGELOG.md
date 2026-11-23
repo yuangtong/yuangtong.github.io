@@ -44,6 +44,15 @@ Owner decisions and housekeeping, to pick up later:
 - [ ] Logo and favicon: pick one of the proposals in the design canvas.
 
 ### Added
+- Favicon "yt" (canvas "favicon v3", approved 2026-11-23): the initials in Host Grotesk, outlined from the site's own font so they do not depend on it, with the y's arm running into the t's bar, ink on a paper tile with soft corners. `public/favicon.svg`, `favicon.ico` (16, 32, 48), `apple-touch-icon.png` (paper on signal blue, full bleed for iOS to round) and `icon-512.png`.
+- The site speaks English first (owner, 2026-11-22): English at `/`, Spanish at `/es`.
+  - Routes live under `src/app/[lang]` and are prerendered for both languages. `src/proxy.ts` rewrites a path without a locale to the English route and redirects `/en/...` to the root, so each page has one address. Pages carry `hreflang` alternates and their OpenGraph locale.
+  - Content comes per locale: `src/content/fixtures/en` (written for this change) and `src/content/fixtures/es`. Every loader takes the locale (`getLabPage(locale)`); fixtures keep canonical paths and `localize` adds `/es` to every internal `href` and crumb. `src/content/locale.ts` has `localePath` and `splitPath`.
+  - The language selector (canvas "nav: idiomas", `LangSwitch`) sits after the navigation on the landing and the section pages, and inside the phone menu. English and Spanish link to the same page in the other language; Portuguese, Chinese (simplified) and Japanese are listed as "learning" and marked "soon" until their DeepL translations exist.
+  - The tagline is "web designer & creative coder"; on phones the ampersand is large and blue on its own line (G7.5 mobile). In Spanish it stays "creative coder y diseñador web".
+  - The 404 carries both languages and shows the one in the path, so the pages around it stay static.
+  - Piece names stay as the owner named them (sísifo feliz, lalande, travesía ácida, menta&lola, dona de teselas...).
+
 - The studio page has a window onto fommo.studio (canvas "studio: glitch FOMMO + ventana", approved 2026-11-23): at rest the site's screenshot (`public/media/fommo-studio.jpg`) is screened as ASCII in FOMMO's colours on the studio's night; hover, focus or a first tap starts the carcoma from the pointer and the real page shows through, and leaving lets the glyphs eat it back. A second tap or a click opens fommo.studio. Beside the title on desktop, above it on phones; the title is a little smaller (176 px at most) and breaks into two lines beside the window. `StudioPage.preview` carries its copy; `fommoWindow` and `--fommo-*` are tokens.
 - The dithered cursor reads the colour under it (same canvas): signal blue over paper, ink over light colours and paper over dark ones, so it no longer melts into the red of the void; inside `data-cursor-tone="fommo"` (the studio page) it uses FOMMO's red, night and lime. The tones are tokens (`cursorTones`).
 - Planned lab pieces have their doors and pages, marked "próximamente" (docs/LAB.md): menta&lola, cámara, dona de teselas, píxeles ácidos and ambiente efímero (live coding with Strudel and Hydra; the name is still open). Each page at `/lab/[pieza]` says what the piece will do. `LabDoor.soon` and `points`, `LabPage.soon`. The old "cámara" door, which pointed into the grid, is replaced by the planned piece.
@@ -94,6 +103,7 @@ Owner decisions and housekeeping, to pick up later:
   the full section. "jugar con los píxeles" stays complete in the landing.
 
 ### Changed
+- Section paths are in English in both languages: `/notes` and `/contact` (before `/notas` and `/contacto`, which redirect permanently, also under `/es`). The note images moved to `/media/notas/`. Reading time in a note comes from `settings.ui.readingTime`; the phone menu's navigation label from `ui.navLabel`.
 - Lalande on phones scrolls like the landing: the story is longer to scroll (at least 60 % of its desktop track), a fling makes it catch up at a capped pace instead of skipping scenes, and the browser bar showing or hiding no longer rebuilds the scene mid-scroll. The replay button waits until the story has actually reached its end. On desktop a fast wheel or trackpad fling also catches up at a capped pace, and short laptop screens keep at least 85 % of the track.
 - The site title is "yuang tong | creative coder", and section pages read "studio | yuang tong".
 
