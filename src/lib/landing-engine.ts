@@ -71,6 +71,8 @@ export type LandingInput = {
 export type LandingOptions = {
   C: LandingConfig; canvas: HTMLCanvasElement; gallop: Gallop; dom: () => LandingDom;
   reduce: boolean; mode: 0 | 1 | 2; narrated: boolean; glyphFamily: string;
+  /** The hero's letters fall on their own (hero-fall): the hero is not faded, only hidden once the void has swallowed it. */
+  heroFall?: boolean;
   /** The rider in the hero; he lets go of the horse as the void opens. */
   rider?: Uint8Array[] | null;
   title: string; glyphText: string; labels: { camera: string; frame: string };
@@ -448,7 +450,8 @@ export function createLanding(o: LandingOptions) {
 
   function overlays(d: LandingDom, pv: number, q: number, t5: number) {
     const textOut = ease(clamp((pv - 0.03) / 0.14));
-    if (d.hero) { d.hero.style.opacity = (1 - textOut).toFixed(3); d.hero.style.transform = `translateY(${(-textOut * 64).toFixed(1)}px)`; d.hero.style.visibility = textOut > 0.99 ? 'hidden' : 'visible'; }
+    if (d.hero && o.heroFall) { d.hero.style.visibility = pv > 0.5 ? 'hidden' : 'visible'; }
+    else if (d.hero) { d.hero.style.opacity = (1 - textOut).toFixed(3); d.hero.style.transform = `translateY(${(-textOut * 64).toFixed(1)}px)`; d.hero.style.visibility = textOut > 0.99 ? 'hidden' : 'visible'; }
     const inStory = q > 0.01 && t5 < 0.12;
     if (d.counter) {
       d.counter.style.opacity = inStory ? '1' : '0';
