@@ -10,7 +10,8 @@ import './globals.css';
 export async function generateMetadata(): Promise<Metadata> {
   const s = await getSettings();
   const site = process.env.NEXT_PUBLIC_SITE_URL;
-  return { metadataBase: site ? new URL(site) : undefined, title: { default: s.siteTitle, template: `%s, ${s.siteTitle.split(',')[0]}` }, description: s.description, openGraph: { title: s.siteTitle, description: s.description, images: ['/social-preview.jpg'] } };
+  return { metadataBase: site ? new URL(site) : undefined, title: { default: s.siteTitle, template: `%s, ${s.siteTitle.split(',')[0]}` }, description: s.description, openGraph: { type: 'website', locale: 'en_US', siteName: 'yuang tong', url: '/', title: s.share.title, description: s.share.description, images: [{ url: s.share.image, width: s.share.width, height: s.share.height, alt: s.share.alt }] },
+    twitter: { card: 'summary_large_image', title: s.share.title, description: s.share.description, images: [{ url: s.share.image, alt: s.share.alt }] } };
 }
 
 export const viewport: Viewport = { themeColor: color.paper };

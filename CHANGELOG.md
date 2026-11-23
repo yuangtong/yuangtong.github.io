@@ -91,6 +91,7 @@ Owner decisions and housekeeping, to pick up later:
 
 ### Changed
 
+- The link preview shows the current design and speaks English (owner, 2026-11-23): a new thumbnail (`public/social-preview-g75.jpg`, 2400 x 1260) with the name, (唐源), "web designer & creative coder", yuangtong.dev and the horse with its rider in blue dots, and the Open Graph and X title, description and alt text in English, as content (`Settings.share`). The old thumbnail of version 1 is removed; the new file name makes the platforms fetch it again.
 - The step from the end of the story into "jugar con los píxeles" is shorter: the text phase goes from 1800 to 1000 design pixels of scroll on desktop and from 1500 to 900 on phones (owner, 2026-11-22).
 - The pointer over the letter horse is no longer a lens: letters it passes over are nudged along its path and settle back. The hint "mueve el cursor: las letras se apartan" is gone, and `Jugar` keeps only its title.
 - The stories are named in lower case: "sísifo feliz" and "lalande, lágrimas de ángel", with their quotes, sources, close and crumbs in lower case too (owner, 2026-11-22). The word the horse spells in lalande is content (`word`).

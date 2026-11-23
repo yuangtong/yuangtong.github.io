@@ -88,6 +88,8 @@ export type Settings = {
   };
   /** Crumbs for sub-levels, keyed by path. */
   crumbs: Record<string, Link[]>;
+  /** The link preview (Open Graph and X): in English, for an international audience. */
+  share: { title: string; description: string; image: string; alt: string; width: number; height: number };
 };
 
 /** A folded sheet at the end of the landing: a short view that leads to its section. */

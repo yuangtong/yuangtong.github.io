@@ -28,6 +28,14 @@ export const settings: Settings = {
     navLabel: 'Principal',
     crumbLabel: 'Sección',
   },
+  share: {
+    title: 'yuang tong (唐源), web designer & creative coder',
+    description: 'yuang tong, web designer and creative coder in lima. he directs FOMMO. the lab gathers code, photography and music.',
+    image: '/social-preview-g75.jpg',
+    alt: "yuang tong (唐源), web designer & creative coder: Muybridge's horse and rider in blue dots on a grey dot grid.",
+    width: 2400,
+    height: 1260,
+  },
   crumbs: {
     '/lab/sisifo': [{ label: 'lab', href: '/lab' }, { label: 'sísifo feliz', href: '/lab/sisifo' }],
     '/lab/lalande': [{ label: 'lab', href: '/lab' }, { label: 'lalande', href: '/lab/lalande' }],
