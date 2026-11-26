@@ -66,6 +66,8 @@ Owner decisions and housekeeping, to pick up later:
   and download the grid as a PNG.
 - Lab: **sketchbook** door and page, marked coming soon (the pages are being
   chosen).
+- Lab: the **píxeles ácidos** door is gone; bitsplash is that piece (owner,
+  2026-11-26). The idea stays in the tracker.
 - Shared data for the collections in `src/content/collections.ts`; new token
   groups `corkGrid`, `boletos` and `bitsplash` in `src/lib/tokens.ts`, and
   `--cork-dot`, `--ticket-shadow`, `--pin-shadow`, `--card-lift`,

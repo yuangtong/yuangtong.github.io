@@ -17,7 +17,7 @@ never on the home page.
 - historias: sísifo feliz; lalande, lágrimas de ángel.
 - exploraciones: travesía ácida, archivo.exe, boletos de lima (with the game
   pasaje), metro cards, bitsplash, sketchbook (coming soon), menta&lola,
-  cámara, dona de teselas, píxeles ácidos, ambiente efímero.
+  cámara, dona de teselas, ambiente efímero.
 - Collections (2026-11-26): the owner's scans live in `public/lab/` and their
   data in `src/content/collections.ts`, the same in every language; only the
   words around them are translated.
@@ -79,7 +79,11 @@ piece, not two.
 - Controls: image, solid, tile set, cell size, palette, speed.
 - An ASCII-art version is pending: the owner is looking for the reference.
 
-### píxeles ácidos
+### píxeles ácidos (set aside, 2026-11-26)
+
+Out of the lab: bitsplash is this piece. Kept as an idea (acid pixels that
+eat the paper) in the Notion tracker.
+
 
 The acid pixels that are born in the carcoma, as a toy of their own: the
 acid shapes land, eat the paper and heal into glyph rain, and the visitor
