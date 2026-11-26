@@ -27,6 +27,7 @@ export const home: HomePage = {
     scrollHint: 'scroll down for the story',
     scrollHintTouch: 'swipe up for the story',
     restartHint: 'keep swiping up to start the story again',
+    keepScrolling: 'keep scrolling',
     restartGo: 'the story starts again',
     progressLabel: 'where you are',
   },

@@ -27,6 +27,7 @@ export const home: HomePage = {
     scrollHint: 'baja para ver la historia',
     scrollHintTouch: 'desliza para ver la historia',
     restartHint: 'sigue deslizando para empezar la historia de nuevo',
+    keepScrolling: 'sigue bajando',
     restartGo: 'la historia empieza de nuevo',
     progressLabel: 'dónde estás',
   },

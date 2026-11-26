@@ -73,6 +73,10 @@ export function Landing({ page, nav, links, ui, languages, glyphFamily, piece }:
   const brandRef = useRef<HTMLSpanElement>(null);
   const hintRef = useRef(true);
   const hintRef2 = useRef<HTMLParagraphElement>(null);
+  const statusRef = useRef<HTMLSpanElement>(null);
+  // "keep scrolling": on whenever the visitor stops between the first scroll and the first sheet
+  const [keep, setKeep] = useState(false);
+  const keepRef = useRef({ on: false, lastTarget: -1, lastMove: 0 });
   const fallRef = useRef<ReturnType<typeof createHeroFall> | null>(null);
   const [hint, setHint] = useState(true);
   // phones, from the first sheet on: which sheet is open (-1 in the story), and the pull back to the start
@@ -117,7 +121,7 @@ export function Landing({ page, nav, links, ui, languages, glyphFamily, piece }:
         onFrame: (k) => pickFrame(k, false),
       });
       // the hero comes apart on the first scroll (canvas "hero: secuencia completa"); still with reduced motion
-      if (!piece && !reduce && stageRef.current && dom.current.hero) fallRef.current = createHeroFall(stageRef.current, dom.current.hero, hintRef2.current ? [hintRef2.current] : [], { W: C.W, H: C.H });
+      if (!piece && !reduce && stageRef.current && dom.current.hero) fallRef.current = createHeroFall(stageRef.current, dom.current.hero, [hintRef2.current, statusRef.current].filter((el): el is HTMLParagraphElement | HTMLSpanElement => !!el), { W: C.W, H: C.H });
       // arriving with a hash (for example "/#jugar" from a section) lands on that sheet
       const k = sectionIndex(window.location.hash);
       if (k >= 0) requestAnimationFrame(() => scrollToSection(k, true));
@@ -162,6 +166,13 @@ export function Landing({ page, nav, links, ui, languages, glyphFamily, piece }:
       const stepTo = (target - sys) * (reduce ? 1 : 0.16), cap = mobile && !reduce ? 46 : Infinity;
       sys += Math.max(-cap, Math.min(cap, stepTo));
       if (!piece) { const idle = sys < 8; if (idle !== hintRef.current) { hintRef.current = idle; setHint(idle); } }
+      if (!piece) {
+        // still for a moment, somewhere between the first scroll and the first sheet: ask to keep going
+        const k = keepRef.current;
+        if (Math.abs(target - k.lastTarget) > 0.5) { k.lastTarget = target; k.lastMove = now; }
+        const on = sys > 30 && sys < sectionStart(C) - 10 && now - k.lastMove > 1200;
+        if (on !== k.on) { k.on = on; setKeep(on); }
+      }
       if (Math.abs(target - sys) < 0.5) sys = target;
       eng.frame({ sys, now, ptr: ptr.current, manual: manual.current, selected: selRef.current });
       fallRef.current?.update(sys / C.VOID, now);
@@ -246,6 +257,7 @@ export function Landing({ page, nav, links, ui, languages, glyphFamily, piece }:
               </div>
             </>
           )}
+          {!piece && <p className="stage__keep" data-on={keep} aria-hidden={!keep}>{page.intro.keepScrolling} <span aria-hidden="true">↓</span></p>}
           {!piece && <p ref={hintRef2} className="stage__hint" data-fall="block" data-on={hint} aria-hidden={!hint}>{mobile ? page.intro.scrollHintTouch : page.intro.scrollHint} <span aria-hidden="true">↓</span></p>}
 
           {!piece && <div ref={(el) => { dom.current.hero = el; }} className="stage__hero">
@@ -351,7 +363,7 @@ export function Landing({ page, nav, links, ui, languages, glyphFamily, piece }:
           </div>}
 
           {!piece && <header className="stage__header">
-            <span className="stage__status">
+            <span ref={statusRef} className="stage__status" data-fall="block">
               <span aria-hidden="true" className="stage__dot" />
               {intro.availability} <LimaClock />
               <span aria-hidden="true" className="cursor" />
