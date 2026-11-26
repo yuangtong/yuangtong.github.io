@@ -15,8 +15,12 @@ never on the home page.
 - On hover a door slides aside and shows a live preview of its piece. On
   touch screens the preview is a still frame; there is no hover.
 - historias: sísifo feliz; lalande, lágrimas de ángel.
-- exploraciones: travesía ácida, archivo.exe, menta&lola, cámara, dona de
-  teselas, píxeles ácidos, ambiente efímero.
+- exploraciones: travesía ácida, archivo.exe, boletos de lima (with the game
+  pasaje), metro cards, bitsplash, sketchbook (coming soon), menta&lola,
+  cámara, dona de teselas, píxeles ácidos, ambiente efímero.
+- Collections (2026-11-26): the owner's scans live in `public/lab/` and their
+  data in `src/content/collections.ts`, the same in every language; only the
+  words around them are translated.
 - Pieces that are not built yet have their door and their own page at
   `/lab/[pieza]`, marked "próximamente": the page says what the piece will do.
   A piece drops the mark when it ships.
@@ -87,6 +91,12 @@ hungry they are can be changed.
 Live coding: music with Strudel and visuals with Hydra, pieces that exist
 while they play. It may also hold the owner's DJ sets, or the sets may get a
 section of their own; under discussion.
+
+### boletos de lima, pasaje, metro cards, bitsplash (shipped 2026-11-26)
+
+See the changelog. Still open: a phone layout for the board (today it is the
+desktop board scaled down), sound for pasaje, the lab index redesign (one
+grid of doors that expand on hover with a live preview).
 
 ## Shared rules
 

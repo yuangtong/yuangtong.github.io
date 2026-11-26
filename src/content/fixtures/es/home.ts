@@ -1,4 +1,4 @@
-import type { ArchivePage, ContactPage, HomePage, LabPage, LalandePage, NotePage, NotesPage, NotFoundPage, StoryPage, StudioPage, TravesiaPage } from '../../types';
+import type { ArchivePage, BitsplashPage, BoletosPage, ContactPage, MetroCardsPage, HomePage, LabPage, LalandePage, NotePage, NotesPage, NotFoundPage, StoryPage, StudioPage, TravesiaPage } from '../../types';
 
 export const home: HomePage = {
   intro: {
@@ -83,6 +83,9 @@ export const labPage: LabPage = {
     { id: 'lalande', title: 'lalande, lágrimas de ángel', text: 'una palabra de clarice lispector cae como gota sobre un narciso pequeño. tú eres la brisa.', cta: { label: 'ver lalande', href: '/lab/lalande' } },
     { id: 'travesia', title: 'travesía ácida', text: 'el void del inicio sin fondo. el scroll te mete en él y cada doce capas cambia el ácido.', cta: { label: 'entrar en la travesía', href: '/lab/travesia' } },
     { id: 'archivo', title: 'archivo.exe', text: 'mis fotos de california y nevada, febrero de 2017. muévelas, ábrelas, pixélalas.', cta: { label: 'abrir archivo.exe', href: '/lab/archivo' } },
+    { id: 'boletos', title: 'boletos de lima', text: 'los boletos de bus que guardé en lima, clavados en la malla. ordénalos, ábrelos o juega pasaje con ellos.', cta: { label: 'ver los boletos', href: '/lab/boletos' } },
+    { id: 'metro-cards', title: 'metro cards', text: 'las tarjetas de transporte que guardé, una por ciudad, sobre el globo de puntos. dales la vuelta.', cta: { label: 'ver las tarjetas', href: '/lab/metro-cards' } },
+    { id: 'bitsplash', title: 'bitsplash', text: 'haz clic y cae una salpicadura ácida de 8 bits sobre la malla gris. haz un desastre y guárdalo como imagen.', cta: { label: 'salpicar', href: '/lab/bitsplash' } },
     { id: 'menta-lola', soon: true, title: 'menta&lola', text: 'mis gatas, menta y lola, para tramar una imagen con unos treinta y dos algoritmos y sus perillas.', cta: { label: 'ver qué será', href: '/lab/menta-lola' },
       points: ['tres imágenes: menta, lola y el caballo.', 'difusión de error, bayer, medio tono, patrones, bordes, ruido, crt y ascii, entre otros.', 'la carcoma que se come la imagen por dentro y la vuelve ascii.', 'escala, umbral, contraste, gamma, brillo y paleta; antes y después; copiar enlace.'] },
     { id: 'camara', soon: true, title: 'cámara', text: 'tu cámara y tu mano: juntas el pulgar y el índice y la punta del dedo deja una estela de glifos.', cta: { label: 'ver qué será', href: '/lab/camara' },
@@ -91,6 +94,8 @@ export const labPage: LabPage = {
       points: ['arrastra para girarla.', 'teselas: molinete, damero, contorno, puntos, tick, macizo y glifos.', 'imagen, sólido, celda, paleta y velocidad.'] },
     { id: 'acidos', soon: true, title: 'píxeles ácidos', text: 'los píxeles ácidos que nacen en la carcoma, sueltos: caen, se comen el papel y se curan en lluvia de glifos.', cta: { label: 'ver qué será', href: '/lab/acidos' },
       points: ['los guías con el cursor o con el dedo.', 'paleta, celda y cuánta hambre tienen.'] },
+    { id: 'sketchbook', soon: true, title: 'sketchbook', text: 'mi sketchbook, escaneado página por página, como un libro que hojeas en 3d.', cta: { label: 'ver qué será', href: '/lab/sketchbook' },
+      points: ['las páginas abiertas como acordeón; arrastra para pasarlas.', 'dibujos, collage y lo que pego en él.', 'las páginas se están eligiendo.'] },
     { id: 'efimero', soon: true, title: 'ambiente efímero', text: 'código en vivo: música con strudel y visuales con hydra, que existen mientras suenan.', cta: { label: 'ver qué será', href: '/lab/efimero' },
       points: ['música escrita en vivo con strudel.', 'visuales en vivo con hydra.', 'quizá también mis sets.'] },
   ],
@@ -224,4 +229,38 @@ export const archivePage: ArchivePage = {
     photo: 'foto', photos: 'fotos', cell: 'celda', palette: 'paleta', original: 'original', openHint: 'doble clic para abrir', open: 'abrir',
     paletteNames: { tinta: 'tinta', azul: 'azul', rojo: 'rojo', acida: 'ácida', color: 'color' },
   },
+};
+
+export const boletosPage: BoletosPage = {
+  title: 'boletos de lima',
+  lead: 'los boletos de bus que guardé en lima: 72 de papel y un recibo electrónico. el transporte de lima es informal y se sufre, y aun así estos boletos son nuestros. arrástralos, ordénalos, ábrelos.',
+  boardLabel: 'boletos de bus de lima clavados con chinchetas de colores en la malla de puntos gris',
+  sort: { label: 'ordenar', loose: 'sueltos', colour: 'por color', company: 'por empresa', price: 'por precio' },
+  hint: { loose: 'haz clic en un boleto para verlo; arrástralo y se clava en la malla', sorted: 'ordenados; haz clic en uno para verlo, arrastra uno para soltarlo' },
+  colours: { amarillo: 'amarillo', naranja: 'naranja', rojo: 'rojo', rosado: 'rosado', morado: 'morado', azul: 'azul', celeste: 'celeste', verde: 'verde', 'marrón': 'marrón', gris: 'gris', negro: 'negro', blanco: 'blanco' },
+  lightbox: { label: 'boleto', of: 'de', price: 'precio', fare: 'tarifa', colour: 'color', noPrice: 'sin precio impreso', notPrinted: 'no impresa', prev: 'boleto anterior', next: 'boleto siguiente', close: 'cerrar' },
+  play: { title: 'pasaje', text: 'cada boleto es plata. ¿quieres jugar?', cta: 'jugar' },
+  game: {
+    title: 'pasaje', lead: 'cada boleto es plata. haz clic antes de que se vayan y cobra el pasaje.',
+    canvasLabel: 'boletos de bus de lima aparecen en la malla de puntos gris y se van; haz clic para cobrar su pasaje antes de que se vayan.',
+    back: 'volver a los boletos', time: 'tiempo', collected: 'cobrado', tickets: 'boletos', start: 'empezar', restart: 'reiniciar', again: 'otra vez',
+    ready: 'presiona empezar y haz clic en los boletos cuando aparezcan', playing: 'mientras más caro el boleto, más rápido se va',
+    result: '{money} con {n} boletos', best: 'tu mejor marca.', bestWas: 'tu mejor marca: {money}',
+  },
+};
+
+export const metroCardsPage: MetroCardsPage = {
+  title: 'metro cards',
+  lead: 'las tarjetas de transporte que guardé, una por ciudad. haz clic en una tarjeta para darle la vuelta.',
+  countries: { pe: 'perú', cl: 'chile', ar: 'argentina', co: 'colombia' },
+  front: 'anverso', back: 'reverso', turn: 'clic para voltear', variants: 'variantes', count: '{cities} ciudades, {cards} tarjetas',
+  cardLabel: 'tarjeta {system}, {city}, mostrando su {side}. presiona para darle la vuelta.',
+  globeLabel: 'un globo de puntos con {city}, {country} marcada en azul al centro. las otras ciudades con tarjeta: {others}.',
+};
+
+export const bitsplashPage: BitsplashPage = {
+  title: 'bitsplash',
+  lead: 'haz clic donde quieras: cae una salpicadura ácida de 8 bits sobre la malla.',
+  canvasLabel: 'una malla de puntos gris. cada clic lanza una salpicadura ácida de 8 bits donde cae, en colores ácidos tramados, con unas gotas alrededor.',
+  hint: 'haz clic donde quieras', clean: 'limpiar', download: 'descargar', one: 'salpicadura', many: 'salpicaduras',
 };

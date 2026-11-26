@@ -1,4 +1,4 @@
-import type { ArchivePage, ContactPage, HomePage, LabPage, LalandePage, NotePage, NotesPage, NotFoundPage, StoryPage, StudioPage, TravesiaPage } from '../../types';
+import type { ArchivePage, BitsplashPage, BoletosPage, ContactPage, MetroCardsPage, HomePage, LabPage, LalandePage, NotePage, NotesPage, NotFoundPage, StoryPage, StudioPage, TravesiaPage } from '../../types';
 
 export const home: HomePage = {
   intro: {
@@ -83,6 +83,9 @@ export const labPage: LabPage = {
     { id: 'lalande', title: 'lalande, lágrimas de ángel', text: "a word by clarice lispector falls like a drop onto a small narcissus. you are the breeze.", cta: { label: 'see lalande', href: '/lab/lalande' } },
     { id: 'travesia', title: 'travesía ácida', text: 'the void from the opening, with no bottom. scrolling takes you in and every twelve layers the acid changes.', cta: { label: 'enter the travesía', href: '/lab/travesia' } },
     { id: 'archivo', title: 'archivo.exe', text: 'my photos of california and nevada, february 2017. move them, open them, pixelate them.', cta: { label: 'open archivo.exe', href: '/lab/archivo' } },
+    { id: 'boletos', title: 'boletos de lima', text: "the bus tickets i kept in lima, pinned to the grid. sort them, open them, or play pasaje with them.", cta: { label: 'see the tickets', href: '/lab/boletos' } },
+    { id: 'metro-cards', title: 'metro cards', text: 'the transport cards i kept, one city each, on the dot-grid globe. turn them over.', cta: { label: 'see the cards', href: '/lab/metro-cards' } },
+    { id: 'bitsplash', title: 'bitsplash', text: 'click and an 8-bit acid splash lands on the grey grid. make a mess and keep it as an image.', cta: { label: 'make a splash', href: '/lab/bitsplash' } },
     { id: 'menta-lola', soon: true, title: 'menta&lola', text: 'my cats, menta and lola, to screen an image with some thirty-two algorithms and their knobs.', cta: { label: 'see what it will be', href: '/lab/menta-lola' },
       points: ['three images: menta, lola and the horse.', 'error diffusion, bayer, halftone, patterns, edges, noise, crt and ascii, among others.', 'the carcoma that eats the image from inside and turns it into ascii.', 'scale, threshold, contrast, gamma, brightness and palette; before and after; copy link.'] },
     { id: 'camara', soon: true, title: 'cámara', text: 'your camera and your hand: pinch thumb and index together and your fingertip leaves a trail of glyphs.', cta: { label: 'see what it will be', href: '/lab/camara' },
@@ -91,6 +94,8 @@ export const labPage: LabPage = {
       points: ['drag to turn it.', 'tiles: molinete, damero, contorno, puntos, tick, macizo and glyphs.', 'image, solid, cell, palette and speed.'] },
     { id: 'acidos', soon: true, title: 'píxeles ácidos', text: 'the acid pixels born in the carcoma, set loose: they land, eat the paper and heal into a rain of glyphs.', cta: { label: 'see what it will be', href: '/lab/acidos' },
       points: ['you steer them with the cursor or a finger.', 'palette, cell and how hungry they are.'] },
+    { id: 'sketchbook', soon: true, title: 'sketchbook', text: 'my sketchbook, scanned page by page, as a book you leaf through in 3d.', cta: { label: 'see what it will be', href: '/lab/sketchbook' },
+      points: ['the pages fanned like an accordion; drag to turn them.', 'drawings, collage and what i paste in it.', 'the pages are being chosen.'] },
     { id: 'efimero', soon: true, title: 'ambiente efímero', text: 'live code: music with strudel and visuals with hydra, which exist while they play.', cta: { label: 'see what it will be', href: '/lab/efimero' },
       points: ['music written live with strudel.', 'live visuals with hydra.', 'maybe my sets too.'] },
   ],
@@ -224,4 +229,38 @@ export const archivePage: ArchivePage = {
     photo: 'photo', photos: 'photos', cell: 'cell', palette: 'palette', original: 'original', openHint: 'double click to open', open: 'open',
     paletteNames: { tinta: 'ink', azul: 'blue', rojo: 'red', acida: 'acid', color: 'colour' },
   },
+};
+
+export const boletosPage: BoletosPage = {
+  title: 'boletos de lima',
+  lead: "the bus tickets i kept in lima: 72 on paper and one electronic receipt. lima's transport is informal and hard, and still these tickets are ours. drag them, sort them, open them.",
+  boardLabel: 'bus tickets from lima pinned to the grey dot grid with coloured push pins',
+  sort: { label: 'sort', loose: 'loose', colour: 'by colour', company: 'by company', price: 'by price' },
+  hint: { loose: 'click a ticket to see it; drag it and it pins to the grid', sorted: 'sorted; click one to see it, drag one to set it loose' },
+  colours: { amarillo: 'yellow', naranja: 'orange', rojo: 'red', rosado: 'pink', morado: 'purple', azul: 'blue', celeste: 'light blue', verde: 'green', 'marrón': 'brown', gris: 'grey', negro: 'black', blanco: 'white' },
+  lightbox: { label: 'ticket', of: 'of', price: 'price', fare: 'fare', colour: 'colour', noPrice: 'no price printed', notPrinted: 'not printed', prev: 'previous ticket', next: 'next ticket', close: 'close' },
+  play: { title: 'pasaje', text: 'every ticket is money. want to play?', cta: 'play' },
+  game: {
+    title: 'pasaje', lead: 'every ticket is money. click them before they go and collect the fare.',
+    canvasLabel: 'bus tickets from lima pop up on the grey dot grid and vanish; click them to collect their fare before they go.',
+    back: 'back to the tickets', time: 'time', collected: 'collected', tickets: 'tickets', start: 'start', restart: 'restart', again: 'play again',
+    ready: 'press start, then click the tickets as they appear', playing: 'the dearer the ticket, the faster it goes',
+    result: '{money} from {n} tickets', best: 'your best.', bestWas: 'your best: {money}',
+  },
+};
+
+export const metroCardsPage: MetroCardsPage = {
+  title: 'metro cards',
+  lead: 'the transport cards i kept, one city each. click a card to turn it over.',
+  countries: { pe: 'peru', cl: 'chile', ar: 'argentina', co: 'colombia' },
+  front: 'front', back: 'back', turn: 'click to turn', variants: 'variants', count: '{cities} cities, {cards} cards',
+  cardLabel: '{system} card, {city}, showing its {side}. press to turn it over.',
+  globeLabel: 'a dot-grid globe with {city}, {country} marked in blue in the middle. the other cities with cards: {others}.',
+};
+
+export const bitsplashPage: BitsplashPage = {
+  title: 'bitsplash',
+  lead: 'click anywhere: an 8-bit acid splash lands on the grid.',
+  canvasLabel: 'a grey dot grid. every click throws an 8-bit acid splash where it lands, in dithered acid colours, with a few drops around it.',
+  hint: 'click anywhere', clean: 'clean', download: 'download', one: 'splash', many: 'splashes',
 };

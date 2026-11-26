@@ -44,6 +44,32 @@ Owner decisions and housekeeping, to pick up later:
 - [ ] Logo and favicon: pick one of the proposals in the design canvas.
 
 ### Added
+
+- Lab: **boletos de lima** (`/lab/boletos`). The owner's 73 Lima bus tickets
+  (72 on paper, one electronic receipt), cut out from the scans, on the grey
+  dot grid with drawn push pins. Drag one and it pins where it drops; sort by
+  colour, company or price into columns held by big clips (flat or binder),
+  with labels that fit their column; click (or Enter) opens a lightbox with
+  the ticket and what it says, with previous, next and Escape. From the page,
+  one panel invites to play **pasaje**: tickets pop up and go, a click
+  collects the fare, dearer tickets stay less, 30 seconds, best score kept in
+  the visitor's browser. Only paper tickets play; nothing subtracts. Canvas
+  "lab: boletos v2" and "lab: pasaje", approved 2026-11-26.
+- Lab: **metro cards** (`/lab/metro-cards`), named the same in every
+  language. The owner's transport cards, one per city (Lima with two
+  variants, Santiago, Buenos Aires, Medellín): the card tilts with the
+  pointer under a glare and turns over on click or Enter; the contact globe,
+  as `src/lib/city-globe.ts`, turns the chosen city to the middle and marks
+  it in blue, with no route (owner, 2026-11-26). Numbers shown in full.
+- Lab: **bitsplash** (`/lab/bitsplash`). Clicks throw 8-bit acid splashes on
+  the grey grid (the acid shapes, a glyph front, two dithered acids); clean,
+  and download the grid as a PNG.
+- Lab: **sketchbook** door and page, marked coming soon (the pages are being
+  chosen).
+- Shared data for the collections in `src/content/collections.ts`; new token
+  groups `corkGrid`, `boletos` and `bitsplash` in `src/lib/tokens.ts`, and
+  `--cork-dot`, `--ticket-shadow`, `--pin-shadow`, `--card-lift`,
+  `--card-glare` and `--veil` in `tokens.css`.
 - The hero comes apart on the first scroll (canvas "hero: secuencia completa", approved 2026-11-23). Every letter of the name, (唐源) and the tagline pulls in toward the middle of the name, then falls with gravity, spins, bounces and piles on the floor; the buttons and the scroll hint drop out of view. As the void opens it swallows the pile, turning it in toward its centre. Back at the top, GSAP springs every piece home. `src/lib/hero-fall.ts` moves the real DOM nodes in the stage's design pixels, so the text stays real text (each letter is its own span; the full name and tagline are read once by screen readers) and it runs the same in every language. Reduced motion keeps the old fade. New dependency: `gsap`.
 - Favicon "yt" (canvas "favicon v3", approved 2026-11-23): the initials in Host Grotesk, outlined from the site's own font so they do not depend on it, with the y's arm running into the t's bar, ink on a paper tile with soft corners. `public/favicon.svg`, `favicon.ico` (16, 32, 48), `apple-touch-icon.png` (paper on signal blue, full bleed for iOS to round) and `icon-512.png`.
 - The site speaks English first (owner, 2026-11-22): English at `/`, Spanish at `/es`.

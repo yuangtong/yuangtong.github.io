@@ -152,6 +152,32 @@ export type LalandePage = {
   closeText: string; closeTitle: string;
 };
 
+/** Boletos de Lima (lab): the owner's bus tickets on a corkboard, and pasaje, the game that comes with them. */
+export type BoletosPage = {
+  title: string; lead: string; boardLabel: string;
+  sort: { label: string; loose: string; colour: string; company: string; price: string };
+  hint: { loose: string; sorted: string };
+  /** Colour keys from the catalogue, named in this language. */
+  colours: Record<string, string>;
+  lightbox: { label: string; of: string; price: string; fare: string; colour: string; noPrice: string; notPrinted: string; prev: string; next: string; close: string };
+  play: { title: string; text: string; cta: string };
+  game: {
+    title: string; lead: string; canvasLabel: string; back: string;
+    time: string; collected: string; tickets: string; start: string; restart: string; again: string;
+    ready: string; playing: string; result: string; best: string; bestWas: string;
+  };
+};
+
+/** Metro cards (lab): one transport card per city, and the contact globe marking the city. */
+export type MetroCardsPage = {
+  title: string; lead: string; countries: Record<string, string>;
+  front: string; back: string; turn: string; variants: string; count: string;
+  cardLabel: string; globeLabel: string;
+};
+
+/** bitsplash (lab): acid splashes on the grey grid; the visitor keeps what they made. */
+export type BitsplashPage = { title: string; lead: string; canvasLabel: string; hint: string; clean: string; download: string; one: string; many: string };
+
 /** Travesía ácida: the void with no bottom, as a lab piece. */
 export type TravesiaPage = {
   title: string; lead: string; canvasLabel: string;

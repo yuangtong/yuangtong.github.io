@@ -110,3 +110,24 @@ export const travesia = {
   },
 } as const;
 export type TravesiaRamp = keyof typeof travesia.ramps;
+
+/** The grey dot grid the lab collections lie on (the landing's grid, quiet). */
+export const corkGrid = { paper: '#ededeb', dot: '#d1d1cc', step: 8 } as const;
+
+/**
+ * Boletos de Lima: push pins in the colours of the owner's references (pastels
+ * and a few deep ones), the big clips that hold a sorted column, and the money
+ * tags of pasaje (2026-11-26).
+ */
+export const boletos = {
+  pins: ['#d9b48f', '#cdb4e6', '#a8dfb6', '#8fcde3', '#2f5e3a', '#ecd65a', '#5a2e22', '#e9c3b3', '#9fdfcd', '#d9531e', '#e2261f', '#b7d2ef', '#f3e39a', '#4b1f52', '#f0a9bf', '#f2b98a'],
+  needle: '#8a8a85', pivot: '#8a8a85', wire: '#9a9a95', wireLight: '#c9c9c4', light: '#ffffff', ink: '#141414',
+  clips: [['board', '#a9c2e6'], ['binder', '#141414'], ['board', '#efb9c3'], ['board', '#8a7a4a']],
+  shadow: 'rgba(20,20,20,.22)', money: '#0b14c9', moneyText: '#ffffff',
+} as const;
+
+/** bitsplash: pairs of acids a splash settles into, and the glyph ink of its front. */
+export const bitsplash = {
+  pairs: [['#e8451a', '#edaae8'], ['#c4e118', '#8aadd6'], ['#0b14c9', '#a937e1'], ['#ffe600', '#ff3d24'], ['#a937e1', '#edaae8'], ['#ff3d24', '#0d0f1e']],
+  ink: '#141414',
+} as const;
