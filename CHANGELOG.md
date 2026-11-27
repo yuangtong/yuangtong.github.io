@@ -116,6 +116,13 @@ Owner decisions and housekeeping, to pick up later:
   their card, body (paragraphs, code, figures from Sanity's CDN) and links,
   and a status (published, coming soon, hidden); note pages are rendered on
   first visit when published after a deploy. The seed copies all of it.
+- A built lab piece marked "coming soon" shows its coming soon page on
+  previews too, not only on yuangtong.dev.
+- Lab: boletos de lima and metro cards say what they will be, in the owner's
+  words (2026-11-27), in English and Spanish.
+- `npm run sanity:update` and the label `sanity-update` apply only the edits
+  listed in `scripts/sanity-updates.json` to Sanity (published and draft),
+  leaving the owner's other edits as they are.
 - Cookie notice (owner, 2026-11-27), in every language, drawn like the
   availability card (paper, 1px ink rule, hard ink shadow) at the lower left.
   The site sets no cookies and loads no analytics, so it informs and asks

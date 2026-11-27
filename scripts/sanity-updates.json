@@ -1,0 +1,18 @@
+[
+  {
+    "id": "labPiece-boletos",
+    "why": "coming soon text, owner 2026-11-27",
+    "set": {
+      "text.en": "a space dedicated to preserving the design of the tickets of lima's public transport.",
+      "text.es": "espacio dedicado a conservar el diseño de los boletos del transporte público de lima."
+    }
+  },
+  {
+    "id": "labPiece-metro-cards",
+    "why": "coming soon text, owner 2026-11-27",
+    "set": {
+      "text.en": "a space that archives the design of the metro cards of the main cities that run this kind of public transport.",
+      "text.es": "espacio que archiva el diseño de las tarjetas de metro de las principales ciudades que tienen este tipo de transporte público."
+    }
+  }
+]

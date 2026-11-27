@@ -9,10 +9,12 @@
     "build": "next build",
     "start": "next start",
     "typecheck": "tsc --noEmit",
-    "sanity:seed": "node scripts/sanity-seed.mjs"
+    "sanity:seed": "node scripts/sanity-seed.mjs",
+    "sanity:update": "node scripts/sanity-update.mjs"
   },
   "dependencies": {
     "@mediapipe/tasks-vision": "1.2.3",
+    "@sanity/client": "^7.28.0",
     "@sanity/icons": "^5.4.0",
     "gsap": "^3.15.1",
     "next": "^16.4.6",

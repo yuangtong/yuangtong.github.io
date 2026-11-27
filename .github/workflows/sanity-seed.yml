@@ -1,6 +1,9 @@
-# Copies the content that lives in the code into Sanity (scripts/sanity-seed.mjs).
-# Runs only on demand: from the Actions tab once this file is on main, or by
-# adding the label "sanity-seed" to a pull request from this repository.
+# Writes to Sanity on demand, from the Actions tab once this file is on main or
+# by adding a label to a pull request from this repository:
+#  - "sanity-seed": copies the content that lives in the code into Sanity,
+#    overwriting those documents (scripts/sanity-seed.mjs);
+#  - "sanity-update": applies only the edits in scripts/sanity-updates.json,
+#    leaving everything else as the owner left it (scripts/sanity-update.mjs).
 # Needs the repository secret SANITY_AUTH_TOKEN (a Sanity token with Editor
 # rights) and the variable NEXT_PUBLIC_SANITY_PROJECT_ID.
 name: Sanity seed
@@ -12,7 +15,7 @@ on:
 
 jobs:
   seed:
-    if: github.event_name == 'workflow_dispatch' || github.event.label.name == 'sanity-seed'
+    if: github.event_name == 'workflow_dispatch' || github.event.label.name == 'sanity-seed' || github.event.label.name == 'sanity-update'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -21,7 +24,7 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - run: npm run sanity:seed
+      - run: npm run ${{ github.event.label.name == 'sanity-update' && 'sanity:update' || 'sanity:seed' }}
         env:
           SANITY_AUTH_TOKEN: ${{ secrets.SANITY_AUTH_TOKEN }}
           NEXT_PUBLIC_SANITY_PROJECT_ID: ${{ vars.NEXT_PUBLIC_SANITY_PROJECT_ID }}

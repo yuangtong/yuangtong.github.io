@@ -40,15 +40,17 @@ export async function getLabPage(locale: Locale): Promise<LabPage> {
     const o = cms.pieces.get(d.id);
     if (!o) return [d];
     if (o.hidden) return [];
-    // a piece whose page is not built yet is always coming soon; a built piece
-    // marked coming soon behaves as held: open on previews, coming soon on yuangtong.dev
+    // a piece whose page is not built yet is always coming soon. A built piece
+    // is held when it is "previews only" (open on previews, coming soon on
+    // yuangtong.dev) or "coming soon" (coming soon everywhere: soon and held).
     const planned = d.soon === true;
     const held = !planned && (o.held === true || o.soon === true);
+    const soon = planned || o.soon === true;
     return [{
       ...d,
       group: o.group ?? d.group, title: o.title ?? d.title, text: o.text ?? d.text, points: o.points ?? d.points,
       cta: { ...d.cta, label: o.ctaLabel ?? d.cta.label },
-      soon: planned || undefined, held: held || undefined,
+      soon: soon || undefined, held: held || undefined,
     }];
   });
   // pieces left out of the order keep their place after the ordered ones

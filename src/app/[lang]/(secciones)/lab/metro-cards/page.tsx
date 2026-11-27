@@ -11,8 +11,11 @@ export async function generateMetadata({ params }: LangParams): Promise<Metadata
 export default async function MetroCardsPiece({ params }: LangParams) {
   const locale = await routeLocale(params);
   // held back from the live site for now: there it shows as coming soon (owner, 2026-11-27)
-  // held on yuangtong.dev until the owner shows it (the lab piece's status, in the CMS); hidden pieces have no page there
-  if (isProduction) { const lab = await getLabPage(locale); const door = lab.doors.find((d) => d.id === 'metro-cards'); if (!door) notFound(); if (door.held) return <SoonPiece page={lab} door={door} />; }
+  // the lab piece's status, in the CMS: "coming soon" shows the coming soon page everywhere,
+  // "previews only" on yuangtong.dev; a hidden piece has no page on yuangtong.dev
+  const lab = await getLabPage(locale); const door = lab.doors.find((d) => d.id === 'metro-cards');
+  if (isProduction && !door) notFound();
+  if (door?.held && (isProduction || door.soon)) return <SoonPiece page={lab} door={door} />;
   return (
     <main className="section section--piece">
       <MetroCards page={await getMetroCardsPage(locale)} />
