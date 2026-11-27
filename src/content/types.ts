@@ -178,12 +178,19 @@ export type MetroCardsPage = {
   cardLabel: string; globeLabel: string;
 };
 
-/** cámara (lab): the camera as an instrument; a pinch writes with the index fingertip. */
+/** cámara (lab): a webcam toy; a pinch paints an effect over your image, and you take the photo. */
 export type CamaraPage = {
-  title: string; lead: string; privacy: string; start: string; loading: string; cursor: string; stop: string;
-  denied: string; noCamera: string; sourceHand: string; sourceCursor: string; penUp: string; penDown: string;
-  canvasHand: string; canvasCursor: string;
-  under: { label: string; off: string; dots: string; glyphs: string }; trail: { label: string; short: string; long: string };
+  title: string; lead: string;
+  gate: { title: string; text: string; camera: string; cursor: string };
+  loading: string; stop: string; cursor: string; camera: string; denied: string; noCamera: string;
+  sourceHand: string; sourceCursor: string; penUp: string; penDown: string;
+  canvasMirror: string; canvasHand: string; canvasCursor: string;
+  view: { label: string; mirror: string; hand: string };
+  hands: { label: string; one: string; two: string };
+  effect: { label: string; pixels: string; dither: string; glyphs: string; trail: string };
+  colour: { label: string; names: Record<string, string> };
+  clear: string; photo: string; saved: string;
+  how: string[];
 };
 
 /** bitsplash (lab): acid splashes on the grey grid; the visitor keeps what they made. */

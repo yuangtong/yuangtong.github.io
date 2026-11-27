@@ -134,3 +134,7 @@ export const bitsplash = {
 
 /** archivo.exe's desktop in the lab index preview: the same value as --w98-teal. */
 export const labDesk = '#0e7c7b';
+
+/** cámara: the inks a visitor can paint with, from the site's palette and its acids (2026-11-27). */
+export const camaraInks = { signal: '#0b14c9', ink: '#141414', naranja: '#e8451a', rosado: '#ff3ea5', lima: '#c8ff2e', violeta: '#a937e1' } as const;
+export type CamaraInk = keyof typeof camaraInks;

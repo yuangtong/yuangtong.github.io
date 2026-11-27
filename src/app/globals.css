@@ -708,3 +708,14 @@ img, canvas { display: block; }
 .camara__seg[aria-pressed='true'] { background: var(--ink); color: var(--paper); }
 .camara__seg:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
 @media (max-width: 760px) { .camara__state { top: var(--s-3); } .camara__title { font-size: 36px; } }
+/* cámara as a webcam toy (owner, 2026-11-27): the camera gate, the inks, how it works, the countdown */
+.camara__gate { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: min(520px, calc(100% - 2 * var(--gutter))); box-sizing: border-box; padding: var(--s-6); display: flex; flex-direction: column; gap: var(--s-4); background: var(--paper); box-shadow: inset 0 0 0 1px var(--ink); }
+.camara__gate-title { margin: 0; font-size: clamp(32px, 3vw, 44px); line-height: 0.95; font-weight: 300; letter-spacing: var(--track-title); text-wrap: balance; }
+.camara__gate-text { margin: 0; line-height: 1.45; color: var(--body); }
+.camara__ink { width: 28px; height: 28px; padding: 0; border: 0; border-radius: 0; cursor: pointer; box-shadow: inset 0 0 0 1px var(--ink); }
+.camara__ink[aria-pressed='true'] { box-shadow: inset 0 0 0 3px var(--paper), inset 0 0 0 4px var(--ink); }
+.camara__ink:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
+.camara__how { position: absolute; right: var(--gutter); bottom: var(--gutter); margin: 0; padding: var(--s-3) var(--s-4); list-style: none; display: flex; flex-direction: column; gap: 6px; max-width: 360px; background: var(--paper); box-shadow: inset 0 0 0 1px var(--ink); font-size: var(--t-small); line-height: 1.35; }
+.camara__how li { display: flex; gap: var(--s-2); }
+.camara__count { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); margin: 0; font-size: clamp(120px, 18vw, 240px); line-height: 1; font-weight: 300; color: var(--paper); text-shadow: 0 0 0 var(--ink), 4px 4px 0 var(--ink); pointer-events: none; }
+@media (max-width: 900px) { .camara__how { display: none; } }
