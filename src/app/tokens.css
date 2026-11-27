@@ -9,6 +9,8 @@
   --fommo-night: #0d0f1e;
   --fommo-on: #c4e118;
   --fommo-off: #e8451a;
+  /* the header's availability outside working hours (owner, 2026-11-27) */
+  --unavailable: #e8451a;
   --signal: #0b14c9;
   --signal-electric: #2a36ff;
   --on-signal: #ffffff;

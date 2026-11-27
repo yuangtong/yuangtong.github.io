@@ -87,6 +87,18 @@ Owner decisions and housekeeping, to pick up later:
     numbers it 01.
   - The greeting carries the owner's Chinese name: "hola. i'm yuang tong
     (唐源), …".
+- Availability (canvas "disponibilidad: horario laboral", approved
+  2026-11-27): the header's line follows the owner's working hours in Lima,
+  monday to friday, 9:00 to 17:00 straight through.
+  - Inside them it reads available with a blue dot; outside, unavailable with
+    an orange one (`--unavailable`).
+  - Hovering it on a computer, or tapping it on a phone, opens "working
+    hours": the schedule, my time in Lima, and the visitor's time and place
+    from the browser's time zone (no location asked).
+  - It closes with a line on when I answer ("feel free to write to me by
+    email"), with the email link.
+  - Same on the landing, the sections' header and the phone menu. The
+    schedule is data (`Intro.hours`), ready for the CMS.
 - The site's cursor on a computer (owner, 2026-11-27; after Originkit's
   "Character Cursor"): the system pointer is hidden from the moment the site
   opens, and a blue cell edged in paper follows the mouse. Moving it lights

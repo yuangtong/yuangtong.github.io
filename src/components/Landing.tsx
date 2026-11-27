@@ -14,7 +14,7 @@ const sheetStops = (c: LandingConfig) => { const s0 = sectionStart(c); return [s
 /** How far, in screen pixels, you pull up from the first sheet before the story starts again. */
 const PULL = 220;
 import { CarcomaLink, useCarcoma } from './Carcoma';
-import { LimaClock } from './LimaClock';
+import { Availability } from './Availability';
 import { MobileMenu } from './MobileMenu';
 import { LangSwitch } from './LangSwitch';
 import { localePath, splitPath } from '@/content/locale';
@@ -386,11 +386,7 @@ export function Landing({ page, nav, links, ui, languages, glyphFamily, piece }:
           </div>}
 
           {!piece && <header className="stage__header">
-            <span ref={statusRef} className="stage__status" data-fall="block">
-              <span aria-hidden="true" className="stage__dot" />
-              {intro.availability} <LimaClock />
-              <span aria-hidden="true" className="cursor" />
-            </span>
+            <Availability ref={statusRef} hours={intro.hours} className="stage__status" data-fall="block" />
             {mobile ? (
               <button type="button" className="stage__index" aria-haspopup="dialog" aria-expanded={menuOpen} onClick={() => go(() => setMenuOpen(true))}>{ui.menuLabel}</button>
             ) : (
@@ -404,7 +400,7 @@ export function Landing({ page, nav, links, ui, languages, glyphFamily, piece }:
       </div>
       {menuOpen && (
         <MobileMenu
-          name={intro.name} nameZh={intro.nameZh} availability={intro.availability} nav={nav} links={links} closeLabel={ui.closeLabel} navLabel={ui.navLabel} languages={languages} home={localePath(splitPath(lab.href).locale, '/')}
+          name={intro.name} nameZh={intro.nameZh} hours={intro.hours} nav={nav} links={links} closeLabel={ui.closeLabel} navLabel={ui.navLabel} languages={languages} home={localePath(splitPath(lab.href).locale, '/')}
           onClose={() => setMenuOpen(false)}
           onSelect={(href, e) => {
             e.preventDefault();

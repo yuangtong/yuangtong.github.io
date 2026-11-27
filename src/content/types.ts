@@ -23,7 +23,8 @@ export type Intro = {
    * change per language.
    */
   role: [string, string];
-  availability: string;
+  /** The header's availability, from the owner's working hours. */
+  hours: WorkingHours;
   ctas: Link[];
   /** Describes the animated canvas for assistive technology. */
   canvasLabel: string;
@@ -76,6 +77,19 @@ export type Note = {
   accent: Accent;
   /** Not published yet: the card shows what it is about, switched off, and its page does not exist. */
   soon?: boolean;
+};
+
+/**
+ * The owner's working hours (owner, 2026-11-27): the header says available in
+ * blue inside them and unavailable in orange outside, in Lima's time. The
+ * schedule is data, so it can come from the CMS later. `days`: 0 is Sunday.
+ * In the messages, {day} and {time} are Lima's next opening and {yours} that
+ * moment in the visitor's time; {time} alone in `workingLate` is the visitor's.
+ */
+export type WorkingHours = {
+  zone: string; city: string; days: number[]; start: number; end: number;
+  on: string; off: string; title: string; schedule: string; mine: string; yours: string;
+  working: string; workingLate: string; away: string; email: Link;
 };
 
 /** A language of the site. `learning` languages are the ones the owner is learning: machine translated, marked as such. */

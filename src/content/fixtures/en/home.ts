@@ -5,7 +5,20 @@ export const home: HomePage = {
     name: 'yuang tong',
     nameZh: '唐源',
     role: ['web designer', 'creative coder'],
-    availability: 'available, lima',
+    // mon–fri 9 to 5 in lima, straight through (owner, 2026-11-27); data, so the CMS can set it later
+    hours: {
+      zone: 'America/Lima', city: 'lima', days: [1, 2, 3, 4, 5], start: 9, end: 17,
+      on: 'available',
+      off: 'unavailable',
+      title: 'working hours',
+      schedule: 'mon–fri, 9:00–17:00, lima',
+      mine: 'my time',
+      yours: 'your time',
+      working: 'i am working now: write and i will answer today.',
+      workingLate: 'i am working now, though it is {time} where you are. feel free to write to me by email.',
+      away: 'i am off now. back {day} {time} in lima, {yours} your time. feel free to write to me by email and i will answer then.',
+      email: { label: 'hola@yuangtong.dev', href: 'mailto:hola@yuangtong.dev' },
+    },
     ctas: [
       { label: 'see the lab', href: '/lab' },
       { label: 'fommo.studio', href: 'https://fommo.studio' },

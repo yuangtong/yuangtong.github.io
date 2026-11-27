@@ -19,7 +19,7 @@ export default async function SectionsLayout({ children, params }: { children: R
   ].map((s, i) => ({ ...s, n: pad(i + 1) }));
   return (
     <div className="section-shell">
-      <SiteHeader nav={settings.nav} links={contact.links} ui={settings.ui} languages={settings.languages} name={home.intro.name} nameZh={home.intro.nameZh} availability={home.intro.availability} crumbs={settings.crumbs} strips={strips} />
+      <SiteHeader nav={settings.nav} links={contact.links} ui={settings.ui} languages={settings.languages} name={home.intro.name} nameZh={home.intro.nameZh} hours={home.intro.hours} crumbs={settings.crumbs} strips={strips} />
       {children}
     </div>
   );

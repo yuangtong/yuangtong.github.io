@@ -5,7 +5,20 @@ export const home: HomePage = {
     name: 'yuang tong',
     nameZh: '唐源',
     role: ['diseñador web', 'creative coder'],
-    availability: 'disponible, lima',
+    // mon–fri 9 to 5 in lima, straight through (owner, 2026-11-27); data, so the CMS can set it later
+    hours: {
+      zone: 'America/Lima', city: 'lima', days: [1, 2, 3, 4, 5], start: 9, end: 17,
+      on: 'disponible',
+      off: 'no disponible',
+      title: 'horario laboral',
+      schedule: 'lun–vie, 9:00–17:00, lima',
+      mine: 'mi hora',
+      yours: 'tu hora',
+      working: 'estoy trabajando: escríbeme y te respondo hoy.',
+      workingLate: 'estoy trabajando, aunque donde estás son las {time}. siéntete libre de escribirme por correo.',
+      away: 'ahora no estoy trabajando. vuelvo el {day} a las {time} en lima, {yours} en tu hora. siéntete libre de escribirme por correo y te respondo entonces.',
+      email: { label: 'hola@yuangtong.dev', href: 'mailto:hola@yuangtong.dev' },
+    },
     ctas: [
       { label: 'ver el lab', href: '/lab' },
       { label: 'fommo.studio', href: 'https://fommo.studio' },

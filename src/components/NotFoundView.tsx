@@ -14,7 +14,7 @@ export function NotFoundView({ copy }: { copy: Record<Locale, NotFoundCopy> }) {
   const { page: p, settings, intro, links } = copy[locale];
   return (
     <div className="section-shell">
-      <SiteHeader nav={settings.nav} links={links} ui={settings.ui} languages={settings.languages} name={intro.name} nameZh={intro.nameZh} availability={intro.availability} strips={[]} />
+      <SiteHeader nav={settings.nav} links={links} ui={settings.ui} languages={settings.languages} name={intro.name} nameZh={intro.nameZh} hours={intro.hours} strips={[]} />
       <main className="notfound" lang={locale}>
         <div className="notfound__stage"><NotFoundCrash label={p.canvasLabel} /></div>
         <section className="notfound__text">

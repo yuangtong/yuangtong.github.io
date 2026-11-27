@@ -2,16 +2,16 @@
 
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
-import type { Link, Settings } from '@/content/types';
+import type { Link, Settings, WorkingHours } from '@/content/types';
 import { CarcomaLink, useCarcoma } from './Carcoma';
-import { LimaClock } from './LimaClock';
+import { Availability } from './Availability';
 import { MobileMenu } from './MobileMenu';
 import { LangSwitch } from './LangSwitch';
 import { localePath, splitPath } from '@/content/locale';
 
 type Props = {
   nav: Link[]; links: Link[]; ui: Settings['ui']; languages: Settings['languages'];
-  name: string; nameZh: string; availability: string;
+  name: string; nameZh: string; hours: WorkingHours;
   /** Crumbs for sub-levels, keyed by path, for example "lab / archivo.exe". */
   crumbs?: Settings['crumbs'];
   /** The folded strip of each section, numbered as on the landing ("02 el lab"). */
@@ -23,7 +23,7 @@ type Props = {
  * and the navigation sit on the rule, and below it the section's folded strip,
  * numbered as on the landing, with the crumb for a sub-level.
  */
-export function SiteHeader({ nav, links, ui, languages, name, nameZh, availability, crumbs, strips }: Props) {
+export function SiteHeader({ nav, links, ui, languages, name, nameZh, hours, crumbs, strips }: Props) {
   const pathname = usePathname();
   const home = localePath(splitPath(pathname).locale, '/');
   const crumb = crumbs?.[pathname];
@@ -36,11 +36,7 @@ export function SiteHeader({ nav, links, ui, languages, name, nameZh, availabili
   return (
     <header className="site-header">
       <div className="site-header__bar">
-        <CarcomaLink href={home} className="site-header__status">
-          <span aria-hidden="true" className="dot" />
-          {availability} <LimaClock />
-          <span aria-hidden="true" className="cursor" />
-        </CarcomaLink>
+        <Availability hours={hours} className="site-header__status" />
         <nav aria-label={ui.navLabel} className="site-header__nav">
           {nav.map((l) => <CarcomaLink key={l.href} href={l.href} className="site-header__link" aria-current={active(l.href) ? 'page' : undefined}>{l.label}</CarcomaLink>)}
         </nav>
@@ -58,7 +54,7 @@ export function SiteHeader({ nav, links, ui, languages, name, nameZh, availabili
       )}
       {open && (
         <MobileMenu
-          name={name} nameZh={nameZh} availability={availability} nav={nav} links={links} closeLabel={ui.closeLabel} navLabel={ui.navLabel} languages={languages} home={home}
+          name={name} nameZh={nameZh} hours={hours} nav={nav} links={links} closeLabel={ui.closeLabel} navLabel={ui.navLabel} languages={languages} home={home}
           current={nav.find((l) => active(l.href))?.href}
           onClose={() => setOpen(false)}
           onSelect={(href, e) => { e.preventDefault(); setOpen(false); requestAnimationFrame(() => go(href)); }}
