@@ -38,7 +38,7 @@ export function NotesGrid({ items, ui, soon }: { items: Note[]; ui: Settings['ui
             <span className="note-card__media"><canvas ref={(el) => { els.current[n.id] = el; }} width={110} height={60} role="img" aria-label={n.alt} /></span>
             <span className="note-card__body">
               <span className="note-card__title">{n.title}</span>
-              <span className="note-card__excerpt">{n.excerpt}</span>
+              {n.excerpt && <span className="note-card__excerpt">{n.excerpt}</span>}
               {n.soon ? <span className="label note-card__meta"><span className="note-card__soon">{soon}</span></span> : <span className="label note-card__meta">{n.meta}</span>}
               {!n.soon && <span className="note-card__cta">{ui.readNoteLabel}</span>}
             </span>

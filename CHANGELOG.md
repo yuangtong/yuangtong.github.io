@@ -297,6 +297,12 @@ Owner decisions and housekeeping, to pick up later:
 - Contact: Instagram, @yuang_tong, in both languages.
 - Navigation: "home" ("inicio") comes first and takes you to the start of
   the landing; it is marked as current only on the landing itself.
+- lalande's close names the book like a work's label: its title, large
+  ("near to the wild heart", "cerca del corazón salvaje"), then "clarice
+  lispector, 1943" in mono. The cross-stitch is gone (owner, 2026-11-27).
+- Notes: one note for now, "manifesto" ("manifiesto"), coming soon; the
+  earlier drafts leave the list, and only a listed, published note has a
+  page.
 - lalande: the horse is written with Clarice Lispector's passage on Lalande
   (the owner's Spanish text, and an English translation), read line by line
   across it, instead of repeating "lalande" (`LalandePage.horseText`).

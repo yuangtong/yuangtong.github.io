@@ -421,7 +421,10 @@ img, canvas { display: block; }
 .lalande__quote blockquote { margin: 0; font-size: max(56px, calc(26px / var(--s))); line-height: 1.04; font-weight: 300; letter-spacing: -0.035em; }
 .lalande__quote figcaption, .lalande__spec { font-family: var(--font-mono); font-size: max(12.5px, calc(11px / var(--s))); }
 .lalande__spec { position: absolute; right: 32px; top: 104px; z-index: 2; display: flex; flex-direction: column; align-items: flex-end; gap: 2px; line-height: 1.5; color: var(--on-signal); opacity: 0; }
-.lalande__close { position: absolute; z-index: 2; margin: 0; font-size: 40px; line-height: 1.1; font-weight: 300; font-style: italic; letter-spacing: -0.02em; color: var(--book-spine); clip-path: inset(0 100% 0 0); }
+/* the close names the book, like a work's label: title, then author and year (owner, 2026-11-27) */
+.lalande__close { position: absolute; z-index: 2; margin: 0; display: flex; flex-direction: column; gap: var(--s-3); max-width: 640px; color: var(--book-spine); clip-path: inset(0 100% 0 0); }
+.lalande__work { margin: 0; font-size: 64px; line-height: 0.98; font-weight: 300; letter-spacing: var(--track-title); }
+.lalande__by { margin: 0; font-family: var(--font-mono); font-size: 14px; }
 .lalande__cue { position: absolute; left: 50%; bottom: var(--s-6); z-index: 3; transform: translateX(-50%); background: var(--paper); padding: 6px 10px; color: var(--ink); }
 .lalande__replay { position: absolute; left: 50%; bottom: var(--s-6); z-index: 3; transform: translateX(-50%); }
 

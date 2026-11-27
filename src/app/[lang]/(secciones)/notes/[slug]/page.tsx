@@ -10,8 +10,8 @@ type Params = { params: Promise<{ lang: string; slug: string }> };
 
 export async function generateStaticParams() {
   const slugs = new Set<string>();
-  // a note that is not published yet has no page (owner, 2026-11-27)
-  for (const l of locales) { const off = new Set((await getNotesPage(l)).items.filter((n) => n.soon).map((n) => n.id)); for (const s of await getNoteSlugs(l)) if (!off.has(s)) slugs.add(s); }
+  // only a note listed and published has a page (owner, 2026-11-27)
+  for (const l of locales) { const on = new Set((await getNotesPage(l)).items.filter((n) => !n.soon).map((n) => n.id)); for (const s of await getNoteSlugs(l)) if (on.has(s)) slugs.add(s); }
   return [...slugs].map((slug) => ({ slug }));
 }
 export const dynamicParams = false;
@@ -29,7 +29,7 @@ export default async function NotePiece({ params }: Params) {
   const locale = await routeLocale(params);
   const [note, settings] = await Promise.all([getNote(locale, (await params).slug), getSettings(locale)]);
   const slug = (await params).slug;
-  if (!note || (await getNotesPage(locale)).items.some((n) => n.id === slug && n.soon)) notFound();
+  if (!note || !(await getNotesPage(locale)).items.some((n) => n.id === slug && !n.soon)) notFound();
   // consecutive text blocks share one column; figures break it
   const groups: (NoteBlock | NoteBlock[])[] = [];
   for (const b of note.blocks) {
