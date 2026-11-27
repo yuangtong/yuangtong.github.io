@@ -1,11 +1,24 @@
-import type { ArchivePage, BitsplashPage, SketchbookPage, BoletosPage, CamaraPage, ContactPage, MetroCardsPage, HomePage, LabPage, LalandePage, NotePage, NotesPage, NotFoundPage, StoryPage, StudioPage, TravesiaPage } from '../../types';
+import type { AboutPage, ArchivePage, BitsplashPage, SketchbookPage, BoletosPage, CamaraPage, ContactPage, MetroCardsPage, HomePage, LabPage, LalandePage, NotePage, NotesPage, NotFoundPage, StoryPage, StudioPage, TravesiaPage } from '../../types';
 
 export const home: HomePage = {
   intro: {
     name: 'yuang tong',
     nameZh: '唐源',
     role: ['web designer', 'creative coder'],
-    availability: 'available, lima',
+    // mon–fri 9 to 5 in lima, straight through (owner, 2026-11-27); data, so the CMS can set it later
+    hours: {
+      zone: 'America/Lima', city: 'lima', days: [1, 2, 3, 4, 5], start: 9, end: 17,
+      on: 'available',
+      off: 'unavailable',
+      title: 'working hours',
+      schedule: 'mon–fri, 9:00–17:00, lima',
+      mine: 'my time',
+      yours: 'your time',
+      working: 'i am working now: write and i will answer today.',
+      workingLate: 'i am working now, though it is {time} where you are. feel free to write to me by email.',
+      away: 'i am off now. back {day} {time} in lima, {yours} your time. feel free to write to me by email and i will answer then.',
+      email: { label: 'hola@yuangtong.dev', href: 'mailto:hola@yuangtong.dev' },
+    },
     ctas: [
       { label: 'see the lab', href: '/lab' },
       { label: 'fommo.studio', href: 'https://fommo.studio' },
@@ -99,7 +112,7 @@ export const labPage: LabPage = {
   ],
   groups: { story: 'story', play: 'to play', archive: 'archive' },
   previewLabel: '{title}, live',
-  soon: { label: 'coming soon', back: { label: 'back to the lab', href: '/lab' } },
+  soon: { label: 'coming soon', back: { label: 'back to the lab', href: '/lab' }, cta: 'see what it will be' },
   experiments: [
     { id: 'medio', title: 'medio tono', meta: 'code, 2026', alt: 'The gallop in blue dots of varying size', visual: 'medio', defaultCell: 8, href: '/lab' },
     { id: 'camara', title: 'cámara tramada', meta: 'code, 2026', alt: 'A photograph of the gallop screened in blue and paper', visual: 'camara', defaultCell: 4, href: '/lab' },
@@ -258,6 +271,20 @@ export const metroCardsPage: MetroCardsPage = {
   front: 'front', back: 'back', turn: 'click to turn', variants: 'variants', count: '{cities} cities, {cards} cards',
   cardLabel: '{system} card, {city}, showing its {side}. press to turn it over.',
   globeLabel: 'a dot-grid globe with {city}, {country} marked in blue in the middle. the other cities with cards: {others}.',
+};
+
+export const aboutPage: AboutPage = {
+  title: 'about me',
+  paras: [
+    "hola. i'm yuang tong (唐源), a web designer in lima.",
+    'born in 2001, raised in lima. from a very young age i found a passion for digital art.',
+    'as i grew up, i studied information technology engineering, and that background still shapes how i work.',
+    "i find real joy in everything around digital art: taking photos, shooting and editing video, making digital collage. lately i've been getting into creative coding, live coding music with strudel and practicing djing. i also love reading and writing.",
+    'professionally, i work in digital product design, end to end. i run fommo, a bespoke studio in lima. client work lives there.',
+  ],
+  closing: "that's me, more or less. let's talk: ",
+  email: { label: 'hola@yuangtong.dev', href: 'mailto:hola@yuangtong.dev' },
+  portraitAlt: 'portrait of yuang tong in black and white. a poem by césar vallejo eats it cell by cell, turning it into letters, ink and blue blocks, then it starts again.',
 };
 
 export const sketchbookPage: SketchbookPage = {

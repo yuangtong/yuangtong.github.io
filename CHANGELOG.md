@@ -67,11 +67,47 @@ Owner decisions and housekeeping, to pick up later:
   cities in ink, `globe.other`). LinkedIn joins the links (yuangtong).
 - boletos de lima and metro cards are held back from production (`held` on
   their doors, `src/lib/release.ts`, Vercel's `VERCEL_ENV`): on previews they
-  stay; on the live site their doors are gone and their pages 404. Boletos
-  needs a vertical phone layout, to design first.
+  stay; on the live site they show as coming soon, door and page (the
+  shared `SoonPiece`), with the "see what it will be" link (`LabPage.soon.cta`).
+  Boletos needs a vertical phone layout, to design first.
 
 ### Added
-- Hero v2 (canvas "hero v2: todo cae menos el navbar", approved 2026-11-24): on the first scroll everything but the navigation comes loose. The availability line falls with the letters, the buttons and the scroll hint, and the blocks now land on the floor (without pushing the letters) so the void swallows them with the pile, instead of dropping out of view. Only the navigation and the phone's menu button stay still.
+-- **About** (`/about`), canvas "about v3" (approved 2026-11-27):
+  - The owner's portrait sticks on the left. On the right, the title decodes
+    on arrival, the greeting types itself, and the next paragraphs are typed
+    by the scroll, one after another. Seven scrambled letters run ahead of a
+    blue caret, and the last paragraph ends on the email.
+  - Content in English and Spanish (`AboutPage`).
+  - The portrait is eaten by César Vallejo's "los heraldos negros" (public
+    domain) on its own clock, style "retrato F": acid shapes seed it, the
+    carcoma spreads into letters, ink and blue, holds, and starts again.
+  - The text is real DOM text over an invisible copy, so nothing jumps.
+    Reduced motion shows all of it, with the portrait already eaten.
+  - The navigation's "about" now opens this page, and the sections' header
+    numbers it 01.
+  - The greeting carries the owner's Chinese name: "hola. i'm yuang tong
+    (唐源), …".
+- Availability (canvas "disponibilidad: horario laboral", approved
+  2026-11-27): the header's line follows the owner's working hours in Lima,
+  monday to friday, 9:00 to 17:00 straight through.
+  - Inside them it reads available with a blue dot; outside, unavailable with
+    an orange one (`--unavailable`).
+  - Hovering it on a computer, or tapping it on a phone, opens "working
+    hours": the schedule, my time in Lima, and the visitor's time and place
+    from the browser's time zone (no location asked).
+  - It closes with a line on when I answer ("feel free to write to me by
+    email"), with the email link.
+  - Same on the landing, the sections' header and the phone menu. The
+    schedule is data (`Intro.hours`), ready for the CMS.
+- The site's cursor on a computer (owner, 2026-11-27; after Originkit's
+  "Character Cursor"): the system pointer is hidden from the moment the site
+  opens, and a blue cell edged in paper follows the mouse. Moving it lights
+  a small trail of blue cells with scrambled characters, the owner's name
+  among them. Touch screens and reduced motion keep the system pointer. It
+  replaces the dithered cursor (`DitherCursor`, `CursorOn` and
+  `cursorTones` are gone).
+
+ Hero v2 (canvas "hero v2: todo cae menos el navbar", approved 2026-11-24): on the first scroll everything but the navigation comes loose. The availability line falls with the letters, the buttons and the scroll hint, and the blocks now land on the floor (without pushing the letters) so the void swallows them with the pile, instead of dropping out of view. Only the navigation and the phone's menu button stay still.
 - "Keep scrolling" / "sigue bajando" (owner, 2026-11-24): whenever the visitor stops for more than a moment between the first scroll and the first sheet (about), a small line at the bottom of the stage blinks and bounces until they scroll again; it never shows on the sheets. Desktop and phones, every language (`intro.keepScrolling`). Reduced motion keeps it still.
 - Lab: **sketchbook** (`/lab/sketchbook`) leaves "coming soon" with its first two
   scanned pages, menta then lola (`public/lab/sketchbook/`, `SKETCHBOOK` in

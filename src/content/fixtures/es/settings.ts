@@ -14,7 +14,7 @@ export const settings: Settings = {
   description: 'yuang tong, diseñador web y creative coder en lima. dirige FOMMO. el lab reúne código, fotografía y música.',
   nav: [
     { label: 'inicio', href: '/' },
-    { label: 'sobre mí', href: '/#jugar' },
+    { label: 'sobre mí', href: '/about' },
     { label: 'lab', href: '/lab' },
     { label: 'studio', href: '/studio' },
     { label: 'notas', href: '/notes' },

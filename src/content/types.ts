@@ -23,7 +23,8 @@ export type Intro = {
    * change per language.
    */
   role: [string, string];
-  availability: string;
+  /** The header's availability, from the owner's working hours. */
+  hours: WorkingHours;
   ctas: Link[];
   /** Describes the animated canvas for assistive technology. */
   canvasLabel: string;
@@ -76,6 +77,19 @@ export type Note = {
   accent: Accent;
   /** Not published yet: the card shows what it is about, switched off, and its page does not exist. */
   soon?: boolean;
+};
+
+/**
+ * The owner's working hours (owner, 2026-11-27): the header says available in
+ * blue inside them and unavailable in orange outside, in Lima's time. The
+ * schedule is data, so it can come from the CMS later. `days`: 0 is Sunday.
+ * In the messages, {day} and {time} are Lima's next opening and {yours} that
+ * moment in the visitor's time; {time} alone in `workingLate` is the visitor's.
+ */
+export type WorkingHours = {
+  zone: string; city: string; days: number[]; start: number; end: number;
+  on: string; off: string; title: string; schedule: string; mine: string; yours: string;
+  working: string; workingLate: string; away: string; email: Link;
 };
 
 /** A language of the site. `learning` languages are the ones the owner is learning: machine translated, marked as such. */
@@ -145,7 +159,7 @@ export type LabPreview = 'gallop' | 'drop' | 'tunnel' | 'desk' | 'tickets' | 'ca
 /** `held`: built and on the previews, but kept out of production until the owner presents it. */
 export type LabDoor = { id: string; title: string; text: string; cta: Link; group: 'story' | 'play' | 'archive'; preview: LabPreview; soon?: boolean; held?: boolean; points?: string[] };
 
-export type LabPage = { title: string; lead: string; doors: LabDoor[]; groups: Record<LabDoor['group'], string>; previewLabel: string; experiments: Experiment[]; soon: { label: string; back: Link } };
+export type LabPage = { title: string; lead: string; doors: LabDoor[]; groups: Record<LabDoor['group'], string>; previewLabel: string; experiments: Experiment[]; soon: { label: string; back: Link; cta: string } };
 
 /** A story in the lab, told with the landing's engine and its narration on. */
 export type StoryPage = { title: string; label: string; hint: string; replay: string };
@@ -208,6 +222,12 @@ export type CamaraPage = {
 
 /** sketchbook (lab): the scanned pages as a book you leaf through. `alts` follows SKETCHBOOK's ids. */
 export type SketchbookPage = { title: string; lead: string; cover: string; coverBy: string; back: string; prev: string; next: string; bookLabel: string; alts: Record<string, string> };
+
+/**
+ * About (canvas "about v3", 2026-11-27). The paragraphs are typed by the scroll;
+ * the last one ends on the email, a mailto link.
+ */
+export type AboutPage = { title: string; paras: string[]; closing: string; email: Link; portraitAlt: string };
 
 /** bitsplash (lab): acid splashes on the grey grid; the visitor keeps what they made. */
 export type BitsplashPage = { title: string; lead: string; canvasLabel: string; hint: string; clean: string; download: string; one: string; many: string };

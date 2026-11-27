@@ -1,19 +1,19 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import type { Link, Settings } from '@/content/types';
+import type { Link, Settings, WorkingHours } from '@/content/types';
 import { LangSwitch } from './LangSwitch';
-import { LimaClock } from './LimaClock';
+import { Availability } from './Availability';
 
 type Props = {
-  name: string; nameZh: string; availability: string; nav: Link[]; links: Link[]; closeLabel: string; navLabel: string; languages: Settings['languages']; home?: string; current?: string;
+  name: string; nameZh: string; hours: WorkingHours; nav: Link[]; links: Link[]; closeLabel: string; navLabel: string; languages: Settings['languages']; home?: string; current?: string;
   onClose: () => void;
   /** Called when a section is chosen; the parent closes the menu and navigates. */
   onSelect: (href: string, e: React.MouseEvent) => void;
 };
 
 /** Full-screen menu for phones (design canvas, "movil, menu abierto"). */
-export function MobileMenu({ name, nameZh, availability, nav, links, closeLabel, navLabel, languages, home = '/', current, onClose, onSelect }: Props) {
+export function MobileMenu({ name, nameZh, hours, nav, links, closeLabel, navLabel, languages, home = '/', current, onClose, onSelect }: Props) {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const prev = document.activeElement as HTMLElement | null;
@@ -36,7 +36,7 @@ export function MobileMenu({ name, nameZh, availability, nav, links, closeLabel,
       <LangSwitch languages={languages} inline className="menu__lang" />
       <div className="menu__foot">
         <div className="menu__links">{links.map((l) => <a key={l.label} href={l.href}>{l.label}</a>)}</div>
-        <span className="menu__status"><span aria-hidden="true" className="dot" />{availability} <LimaClock /></span>
+        <Availability hours={hours} className="menu__status" />
       </div>
     </div>
   );

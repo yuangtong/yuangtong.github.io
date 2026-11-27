@@ -14,7 +14,7 @@ const sheetStops = (c: LandingConfig) => { const s0 = sectionStart(c); return [s
 /** How far, in screen pixels, you pull up from the first sheet before the story starts again. */
 const PULL = 220;
 import { CarcomaLink, useCarcoma } from './Carcoma';
-import { LimaClock } from './LimaClock';
+import { Availability } from './Availability';
 import { MobileMenu } from './MobileMenu';
 import { LangSwitch } from './LangSwitch';
 import { localePath, splitPath } from '@/content/locale';
@@ -111,7 +111,7 @@ export function Landing({ page, nav, links, ui, languages, glyphFamily, piece }:
     const canvas = canvasRef.current, wrap = wrapRef.current;
     if (!canvas || !wrap) return;
     const reduce = prefersReducedMotion();
-    let raf = 0, dead = false, sys = 0, cursorOn = false, statusBack = false;
+    let raf = 0, dead = false, sys = 0, statusBack = false;
     Promise.all([loadGallop(), piece ? Promise.resolve(null) : loadRider().catch(() => null)]).then(([g, rider]) => {
       if (dead) return;
       setFlight(g.flight);
@@ -193,11 +193,9 @@ export function Landing({ page, nav, links, ui, languages, glyphFamily, piece }:
         if (st && over && !statusBack) { statusBack = true; fallRef.current?.release(st); st.classList.add('is-back'); }
         else if (st && statusBack && sys < C.VOID * 0.012) { statusBack = false; st.classList.remove('is-back'); }
       }
-      // the dithered cursor wakes up once the story is over
-      if (!piece) { const cur = sys >= C.VOID + C.STORY + C.TEXT * 0.3; if (cur !== cursorOn) { cursorOn = cur; document.documentElement.toggleAttribute('data-cursor', cur); } }
     };
     raf = requestAnimationFrame(loop);
-    return () => { dead = true; cancelAnimationFrame(raf); window.clearTimeout(sheetRef.current.settle); document.documentElement.classList.remove('snap-sheets'); engineRef.current = null; fallRef.current?.reset(); fallRef.current = null; if (!piece) document.documentElement.removeAttribute('data-cursor'); };
+    return () => { dead = true; cancelAnimationFrame(raf); window.clearTimeout(sheetRef.current.settle); document.documentElement.classList.remove('snap-sheets'); engineRef.current = null; fallRef.current?.reset(); fallRef.current = null; };
     // the engine is rebuilt when the stage changes size or switches frame
   }, [fitKey, top]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -388,11 +386,7 @@ export function Landing({ page, nav, links, ui, languages, glyphFamily, piece }:
           </div>}
 
           {!piece && <header className="stage__header">
-            <span ref={statusRef} className="stage__status" data-fall="block">
-              <span aria-hidden="true" className="stage__dot" />
-              {intro.availability} <LimaClock />
-              <span aria-hidden="true" className="cursor" />
-            </span>
+            <Availability ref={statusRef} hours={intro.hours} className="stage__status" data-fall="block" />
             {mobile ? (
               <button type="button" className="stage__index" aria-haspopup="dialog" aria-expanded={menuOpen} onClick={() => go(() => setMenuOpen(true))}>{ui.menuLabel}</button>
             ) : (
@@ -406,7 +400,7 @@ export function Landing({ page, nav, links, ui, languages, glyphFamily, piece }:
       </div>
       {menuOpen && (
         <MobileMenu
-          name={intro.name} nameZh={intro.nameZh} availability={intro.availability} nav={nav} links={links} closeLabel={ui.closeLabel} navLabel={ui.navLabel} languages={languages} home={localePath(splitPath(lab.href).locale, '/')}
+          name={intro.name} nameZh={intro.nameZh} hours={intro.hours} nav={nav} links={links} closeLabel={ui.closeLabel} navLabel={ui.navLabel} languages={languages} home={localePath(splitPath(lab.href).locale, '/')}
           onClose={() => setMenuOpen(false)}
           onSelect={(href, e) => {
             e.preventDefault();
