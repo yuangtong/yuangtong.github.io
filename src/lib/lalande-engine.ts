@@ -4,7 +4,8 @@
  * spell "Lalande"; the word becomes a drop that falls on a small narcissus
  * against a dithered blue sky; the pointer is the breeze; the narcissus spins
  * and implodes into red, and Clarice Lispector's book is born from that point,
- * turns, opens on the quote, and the close is embroidered in cross-stitch.
+ * turns, opens on the quote, and the close names the book: its title, then
+ * the author and the year (owner, 2026-11-27; it was embroidered before).
  *
  * The scene is drawn in a 1440 x 900 frame centred in a grid that fills the
  * stage; sky and rain cover the whole grid.
@@ -37,7 +38,7 @@ export type LalandeOptions = {
   canvas: HTMLCanvasElement; gallop: Gallop; dom: () => LalandeDom; reduce: boolean;
   /** Grid size in design pixels (at least the frame). */
   W: number; H: number;
-  fonts: { word: string; mono: string }; word: string; closeText: string; breezeLabel: string;
+  fonts: { word: string; mono: string }; word: string; breezeLabel: string;
   /** The text the horse is written with, read line by line across it. */
   horseText: string;
 };
@@ -73,8 +74,7 @@ export function createLalande(o: LalandeOptions) {
   }
 
   // the word and the embroidered close: built once the fonts are in
-  let wordCells: { x: number; y: number; h: number }[] = [], stitches: { x: number; y: number }[] = [];
-  const LINE = { size: 100, k: 8, x: OX + 690, y: OY + 260, a: 0.865, b: 0.925 };
+  let wordCells: { x: number; y: number; h: number }[] = [];
   const buildText = () => {
     const oc = document.createElement('canvas'); oc.width = W; oc.height = H;
     const x = oc.getContext('2d', { willReadFrequently: true })!;
@@ -84,15 +84,8 @@ export function createLalande(o: LalandeOptions) {
     wordCells = [];
     for (let r = 0; r < ROWS; r++) for (let c = 0; c < COLS; c++) { const px = c * G + G / 2, py = r * G + G / 2; if (d[(py * W + px) * 4 + 3] > 110) wordCells.push({ x: px, y: py, h: h2(c + 3, r + 5) }); }
     wordCells.sort((a, b) => a.x - b.x || a.y - b.y);
-    const cw = 760, ch = Math.ceil(LINE.size * 1.6), sc = document.createElement('canvas'); sc.width = cw; sc.height = ch;
-    const sx = sc.getContext('2d', { willReadFrequently: true })!;
-    sx.fillStyle = '#000'; sx.textBaseline = 'middle'; sx.font = `500 ${LINE.size}px ${o.fonts.word}`; sx.fillText(o.closeText, 0, ch / 2);   // the site's typeface, so the stitched name reads (owner, 2026-11-27)
-    const dd = sx.getImageData(0, 0, cw, ch).data, list: { x: number; y: number }[] = [];
-    for (let yy = 0; yy < ch; yy += LINE.k) for (let xx = 0; xx < cw; xx += LINE.k) { const cx = Math.min(cw - 1, xx + (LINE.k >> 1)), cy = Math.min(ch - 1, yy + (LINE.k >> 1)); if (dd[(cy * cw + cx) * 4 + 3] > 100) list.push({ x: LINE.x + xx, y: LINE.y - ch / 2 + yy }); }
-    list.sort((a, b) => a.x - b.x || a.y - b.y);
-    stitches = list;
   };
-  const fl = document.fonts?.load ? Promise.all([document.fonts.load(`300 330px ${o.fonts.word}`), document.fonts.load(`500 56px ${o.fonts.word}`), document.fonts.load(MONO)]) : Promise.resolve();
+  const fl = document.fonts?.load ? Promise.all([document.fonts.load(`300 330px ${o.fonts.word}`), document.fonts.load(MONO)]) : Promise.resolve();
   fl.then(buildText, buildText);
 
   // the narcissus in 3D: points projected to the grid
@@ -277,28 +270,13 @@ export function createLalande(o: LalandeOptions) {
       }
     }
 
-    // 4. the close, embroidered in cross-stitch
-    if (p > 0.86 && stitches.length) {
-      const cnt = Math.floor(stitches.length * clamp((p - LINE.a) / (LINE.b - LINE.a)));
-      if (cnt > 0) {
-        const kk = LINE.k, m = kk * 0.2;
-        ctx.lineCap = 'round'; ctx.lineWidth = Math.max(1.3, kk * 0.24);
-        ctx.strokeStyle = P.red[0]; ctx.beginPath();
-        for (i = 0; i < cnt; i++) { const s0 = stitches[i]; ctx.moveTo(s0.x + m, s0.y + kk - m); ctx.lineTo(s0.x + kk - m, s0.y + m); }
-        ctx.stroke();
-        ctx.strokeStyle = P.bookRed; ctx.beginPath();
-        for (i = 0; i < cnt; i++) { const s1 = stitches[i]; ctx.moveTo(s1.x + m, s1.y + m); ctx.lineTo(s1.x + kk - m, s1.y + kk - m); }
-        ctx.stroke();
-      }
-    }
-
     // the DOM texts
     const op = (el: HTMLElement | null, v: number) => { if (!el) return; el.style.opacity = v.toFixed(3); el.style.transform = `translateY(${((1 - v) * 16).toFixed(1)}px)`; };
     op(d.n1, bell(p, 0.27, 0.41));
     op(d.n2, bell(p, 0.44, 0.57));
     if (d.spec) d.spec.style.opacity = bell(p, 0.25, 0.6).toFixed(3);
     if (d.cue) d.cue.style.opacity = (1 - clamp(p / 0.02)).toFixed(3);
-    if (d.title) { const w = ease(clamp((p - 0.905) / 0.03)); d.title.style.clipPath = `inset(-10% ${((1 - w) * 100).toFixed(1)}% -10% 0)`; }
+    if (d.title) { const w = ease(clamp((p - 0.87) / 0.05)); d.title.style.clipPath = `inset(-10% ${((1 - w) * 100).toFixed(1)}% -10% 0)`; }
   }
 
   return { draw, size: { W, H, OX, OY } };

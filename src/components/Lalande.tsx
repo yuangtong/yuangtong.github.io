@@ -64,7 +64,7 @@ export function Lalande({ page, coverSrc }: { page: LalandePage; coverSrc: strin
     const eng = createLalande({
       canvas, gallop, dom: () => dom.current, reduce, W: fit.W, H: fit.H,
       fonts: { word: css.getPropertyValue('--lalande-word') || css.fontFamily, mono: css.fontFamily },
-      word: page.word, closeText: page.closeText, breezeLabel: page.breezeLabel, horseText: page.horseText,
+      word: page.word, breezeLabel: page.breezeLabel, horseText: page.horseText,
     });
     canvas.style.width = `${eng.size.W * fit.s}px`; canvas.style.height = `${eng.size.H * fit.s}px`;
     setFit((o) => (o.OX === eng.size.OX && o.OY === eng.size.OY ? o : { ...o, OX: eng.size.OX, OY: eng.size.OY }));
@@ -129,8 +129,10 @@ export function Lalande({ page, coverSrc }: { page: LalandePage; coverSrc: strin
             <span ref={set('breeze')}>{page.breezeLabel} 0.00</span>
             <span>{page.breezeHint}</span>
           </div>
-          <p ref={set('title')} className="lalande__close" style={{ left: fit.OX + 680, top: fit.OY + 360 }}>{page.closeTitle}</p>
-          <span className="vh">{page.closeText}</span>
+          <div ref={set('title')} className="lalande__close" style={{ left: fit.OX + 680, top: fit.OY + 250 }}>
+            <p className="lalande__work">{page.closeTitle}</p>
+            <p className="lalande__by">{page.closeText}</p>
+          </div>
         </div>
         <span ref={set('cue')} className="label lalande__cue">{page.hint} <span aria-hidden="true">↓</span></span>
         {ended && <button type="button" className="btn btn--ink lalande__replay" onClick={replay}>{page.replay} <span aria-hidden="true">↑</span></button>}

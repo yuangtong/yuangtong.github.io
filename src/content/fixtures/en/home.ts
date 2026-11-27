@@ -109,10 +109,9 @@ export const notesPage: NotesPage = {
   title: 'notes',
   lead: 'how each piece is made, written while I build it. every note carries its screened image.',
   soon: 'coming soon',
+  // one note for now, not published yet (owner, 2026-11-27)
   items: [
-    { id: 'jinete', soon: true, title: 'taking the rider off an 1878 gallop', excerpt: "Muybridge's photographs come with a rider on top. I erased him with code so the horse could run free.", meta: 'november 2026, 2 min read', href: '/notes/jinete', alt: 'The original photograph of the gallop, screened in blue', visual: 'foto', accent: 'azul' },
-    { id: 'ecos', soon: true, title: 'echoes: drawing time behind a figure', excerpt: 'how the opening draws the earlier frames of the gallop behind the horse.', meta: '[date], [min] read', href: '/notes', alt: 'The horse with its echoes, screened in pink', visual: 'ecos', accent: 'rosado' },
-    { id: 'dona', soon: true, title: 'a 3d donut with four tiles', excerpt: 'a three-dimensional donut shaded with only four eight-by-eight tiles.', meta: '[date], [min] read', href: '/notes', alt: 'A spinning donut, screened in lime on ink', visual: 'dona', accent: 'lima' },
+    { id: 'manifiesto', soon: true, title: 'manifesto', excerpt: '', meta: '', href: '/notes', alt: 'The gallop screened in blue', visual: 'foto', accent: 'azul' },
   ],
 };
 
@@ -187,10 +186,10 @@ export const lalandePage: LalandePage = {
     author: 'clarice lispector', title: 'perto do coração selvagem',
     quote: '“freedom is not enough. what I desire has no name yet.”', quoteSource: 'clarice lispector',
   },
-  closeText: 'clarice lispector',
+  closeText: 'clarice lispector, 1943',
   word: 'lalande',
   horseText: "It is like angel's tears. Do you know what angel's tears are? A kind of small narcissus; the lightest breeze moves it to one side and the other. Lalande is also the sea at dawn, when no eye has yet seen the beach, when the sun has not been born. Whenever I say: Lalande, you must feel the cool, salty vibration of the sea, you must walk along the still dark beach, slowly, naked. At once you will feel Lalande.",
-  closeTitle: 'near to the wild heart, 1943',
+  closeTitle: 'near to the wild heart',
 };
 
 export const travesiaPage: TravesiaPage = {

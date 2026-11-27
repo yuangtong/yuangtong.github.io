@@ -156,6 +156,7 @@ export type LalandePage = {
   word: string;
   /** The text the horse is written with (Clarice Lispector, Near to the Wild Heart). */
   horseText: string;
+  /** The close: the book's title, then its author and year. */
   closeText: string; closeTitle: string;
 };
 
