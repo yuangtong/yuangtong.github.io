@@ -47,7 +47,7 @@ to screen it.
 - Before and after, and "copiar enlace" with every parameter in the URL.
 - The first sketch the owner liked is the reference for the sliders.
 
-### cámara
+### cámara (shipped 2026-11-26, PR on top of the collections PR)
 
 The live camera as an instrument. Uses MediaPipe in the browser
 (`@mediapipe/tasks-vision`, hand landmarker).

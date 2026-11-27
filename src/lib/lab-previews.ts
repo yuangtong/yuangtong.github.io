@@ -77,6 +77,14 @@ export function drawPreview(cv: HTMLCanvasElement, kind: LabPreview, step: numbe
         c.fillRect(cx + x, cy + y, 8, 8);
       }
     }
+  } else if (kind === 'trail') {
+    // a fingertip writes a loop that glows and cools, like the piece
+    grid(c, w, h);
+    for (let k = 0; k < 40; k++) {
+      const a = (step - k) * 0.18, x = w / 2 + Math.sin(a) * Math.min(160, w * 0.3), y = h / 2 + Math.sin(a * 2) * 50, age = k / 40;
+      c.fillStyle = age < 0.45 ? color.signal : color.echo; if (age > 0.85) continue;
+      c.fillRect(Math.round(x / 8) * 8, Math.round(y / 8) * 8, 8, 8);
+    }
   } else {
     grid(c, w, h, color.dotOff);
   }

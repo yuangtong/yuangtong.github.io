@@ -1,4 +1,4 @@
-import type { ArchivePage, BitsplashPage, BoletosPage, ContactPage, MetroCardsPage, HomePage, LabPage, LalandePage, NotePage, NotesPage, NotFoundPage, StoryPage, StudioPage, TravesiaPage } from '../../types';
+import type { ArchivePage, BitsplashPage, BoletosPage, CamaraPage, ContactPage, MetroCardsPage, HomePage, LabPage, LalandePage, NotePage, NotesPage, NotFoundPage, StoryPage, StudioPage, TravesiaPage } from '../../types';
 
 export const home: HomePage = {
   intro: {
@@ -90,8 +90,7 @@ export const labPage: LabPage = {
       points: ['las páginas abiertas como acordeón; arrastra para pasarlas.', 'dibujos, collage y lo que pego en él.', 'las páginas se están eligiendo.'] },
     { id: 'menta-lola', group: 'play', preview: 'still', soon: true, title: 'menta&lola', text: 'mis gatas, menta y lola, para tramar una imagen con unos treinta y dos algoritmos y sus perillas.', cta: { label: 'ver qué será', href: '/lab/menta-lola' },
       points: ['tres imágenes: menta, lola y el caballo.', 'difusión de error, bayer, medio tono, patrones, bordes, ruido, crt y ascii, entre otros.', 'la carcoma que se come la imagen por dentro y la vuelve ascii.', 'escala, umbral, contraste, gamma, brillo y paleta; antes y después; copiar enlace.'] },
-    { id: 'camara', group: 'play', preview: 'still', soon: true, title: 'cámara', text: 'tu cámara y tu mano: juntas el pulgar y el índice y la punta del dedo deja una estela de glifos.', cta: { label: 'ver qué será', href: '/lab/camara' },
-      points: ['sigue tu mano con mediapipe, en tu navegador.', 'pellizca para dibujar, abre la mano para soltar; la estela se apaga sola.', 'tu imagen no sale de tu dispositivo.', 'sin cámara, dibujas con el cursor o con el dedo.'] },
+    { id: 'camara', group: 'play', preview: 'trail', title: 'cámara', text: 'tu cámara y tu mano: junta pulgar e índice y la punta de tu dedo deja un rastro de glifos.', cta: { label: 'dibujar con la mano', href: '/lab/camara' } },
     { id: 'dona', group: 'play', preview: 'still', soon: true, title: 'dona de teselas', text: 'una dona y otros sólidos en 3d hechos de teselas y glifos. los giras y cambias la imagen de la que están hechos.', cta: { label: 'ver qué será', href: '/lab/dona' },
       points: ['arrastra para girarla.', 'teselas: molinete, damero, contorno, puntos, tick, macizo y glifos.', 'imagen, sólido, celda, paleta y velocidad.'] },
     { id: 'efimero', group: 'play', preview: 'still', soon: true, title: 'ambiente efímero', text: 'código en vivo: música con strudel y visuales con hydra, que existen mientras suenan.', cta: { label: 'ver qué será', href: '/lab/efimero' },
@@ -263,4 +262,16 @@ export const bitsplashPage: BitsplashPage = {
   lead: 'haz clic donde quieras: cae una salpicadura ácida de 8 bits sobre la malla.',
   canvasLabel: 'una malla de puntos gris. cada clic lanza una salpicadura ácida de 8 bits donde cae, en colores ácidos tramados, con unas gotas alrededor.',
   hint: 'haz clic donde quieras', clean: 'limpiar', download: 'descargar', one: 'salpicadura', many: 'salpicaduras',
+};
+
+export const camaraPage: CamaraPage = {
+  title: 'cámara',
+  lead: 'junta el pulgar y el índice y la punta de tu dedo escribe. abre la mano para levantar el lápiz.',
+  privacy: 'la cámara se queda en tu dispositivo: tu mano se lee en tu navegador y ninguna imagen sale de él.',
+  start: 'encender la cámara', loading: 'encendiendo la cámara…', cursor: 'dibujar con el cursor', stop: 'apagar la cámara',
+  denied: 'no se permitió la cámara. puedes dibujar con el cursor: presiona y arrastra.', noCamera: 'aquí no hay cámara. puedes dibujar con el cursor: presiona y arrastra.',
+  sourceHand: 'mano, 21 puntos', sourceCursor: 'cursor: presiona y arrastra', penUp: 'lápiz arriba', penDown: 'lápiz abajo',
+  canvasHand: 'una malla de puntos gris con tu mano tramada en puntos de tinta y sus 21 puntos; cuando juntas los dedos, la punta escribe un rastro de glifos que brilla en azul y se apaga en el papel.',
+  canvasCursor: 'una malla de puntos gris; presiona y arrastra para escribir un rastro de glifos que brilla en azul y se apaga en el papel.',
+  under: { label: 'debajo', off: 'nada', dots: 'puntos', glyphs: 'glifos' }, trail: { label: 'rastro', short: 'corto', long: 'largo' },
 };

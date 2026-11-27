@@ -686,3 +686,25 @@ img, canvas { display: block; }
   .lab-door__cap { display: none; }
 }
 @media (hover: none) and (min-width: 761px) { .lab-doors__row { flex-direction: row; } }
+
+/* cámara (canvas "lab: cámara", 2026-11-26): the camera as an instrument */
+.camara { position: relative; overflow: hidden; background: var(--paper); }
+.camara__cv { position: absolute; inset: 0; width: 100%; height: 100%; display: block; cursor: crosshair; touch-action: none; font-family: var(--font-mono); }
+.camara__video { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+.camara__state { position: absolute; right: var(--gutter); top: var(--s-5); display: flex; gap: 2px; padding: 3px; background: var(--paper-2); }
+.camara__state .label { margin: 0; padding: 6px 10px; background: var(--paper); color: var(--ink); }
+.camara__state .label[data-on='true'] { background: var(--signal); color: var(--on-signal); }
+.camara__panel { position: absolute; left: var(--gutter); bottom: var(--gutter); width: min(480px, calc(100% - 2 * var(--gutter))); box-sizing: border-box; padding: var(--s-5); display: flex; flex-direction: column; gap: var(--s-4); background: var(--paper); box-shadow: inset 0 0 0 1px var(--ink); }
+.camara__head { display: flex; flex-direction: column; gap: var(--s-2); }
+.camara__title { margin: 0; font-size: 48px; line-height: 0.95; font-weight: 300; letter-spacing: -0.04em; }
+.camara__lead { margin: 0; line-height: 1.4; color: var(--body); }
+.camara__privacy { margin: 0; padding: 10px 12px; background: var(--paper-2); color: var(--ink); line-height: 1.45; }
+.camara__actions { display: flex; flex-wrap: wrap; gap: var(--s-2); }
+.camara__actions .btn[disabled] { opacity: 0.6; cursor: progress; }
+.camara__note { margin: 0; color: var(--ink); }
+.camara__controls { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-3) var(--s-5); }
+.camara__group { display: flex; align-items: center; gap: var(--s-2); }
+.camara__seg { min-width: 44px; min-height: 36px; padding: 0 10px; border: 1px solid var(--ink); border-radius: 0; background: transparent; color: var(--ink); font-family: var(--font-mono); font-size: 12px; cursor: pointer; }
+.camara__seg[aria-pressed='true'] { background: var(--ink); color: var(--paper); }
+.camara__seg:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
+@media (max-width: 760px) { .camara__state { top: var(--s-3); } .camara__title { font-size: 36px; } }

@@ -135,7 +135,7 @@ export type HomePage = {
  * `points` are the lines that page lists.
  */
 /** How a door's live preview hints at its piece (lab index v2). */
-export type LabPreview = 'gallop' | 'drop' | 'tunnel' | 'desk' | 'tickets' | 'card' | 'splash' | 'still';
+export type LabPreview = 'gallop' | 'drop' | 'tunnel' | 'desk' | 'tickets' | 'card' | 'splash' | 'trail' | 'still';
 /** A lab door: `group` sorts the pieces into stories, toys and the owner's archive. */
 export type LabDoor = { id: string; title: string; text: string; cta: Link; group: 'story' | 'play' | 'archive'; preview: LabPreview; soon?: boolean; points?: string[] };
 
@@ -176,6 +176,14 @@ export type MetroCardsPage = {
   title: string; lead: string; countries: Record<string, string>;
   front: string; back: string; turn: string; variants: string; count: string;
   cardLabel: string; globeLabel: string;
+};
+
+/** cámara (lab): the camera as an instrument; a pinch writes with the index fingertip. */
+export type CamaraPage = {
+  title: string; lead: string; privacy: string; start: string; loading: string; cursor: string; stop: string;
+  denied: string; noCamera: string; sourceHand: string; sourceCursor: string; penUp: string; penDown: string;
+  canvasHand: string; canvasCursor: string;
+  under: { label: string; off: string; dots: string; glyphs: string }; trail: { label: string; short: string; long: string };
 };
 
 /** bitsplash (lab): acid splashes on the grey grid; the visitor keeps what they made. */

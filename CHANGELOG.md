@@ -45,6 +45,20 @@ Owner decisions and housekeeping, to pick up later:
 
 ### Added
 
+- Lab: **cámara** (`/lab/camara`), designed in the canvas ("lab: cámara",
+  2026-11-26). MediaPipe's hand landmarker (`@mediapipe/tasks-vision` 1.2.3,
+  VIDEO mode, one hand, GPU with a CPU fallback) reads the hand in the
+  visitor's browser; a pinch (landmarks 4 and 8, measured against the size of
+  the hand, with slack so the pen does not flicker) puts the pen down and the
+  index tip leaves a trail of glyphs that scramble, glow in signal blue and
+  cool into the paper. Under it, the hand screened from its 21 points (dots
+  or glyphs), never from the camera image; trail short or long. MediaPipe
+  and its model load only when the camera is turned on, and from this site:
+  the model is in `public/lab/camara/`, the wasm is copied from the package
+  at build (`scripts/copy-mediapipe.mjs`). Without a camera, or if it is
+  refused, the cursor draws. Drawing runs at 12 fps and pauses while the tab
+  is hidden. The door drops its coming-soon mark.
+
 - Lab: **boletos de lima** (`/lab/boletos`). The owner's 73 Lima bus tickets
   (72 on paper, one electronic receipt), cut out from the scans, on the grey
   dot grid with drawn push pins. Drag one and it pins where it drops; sort by

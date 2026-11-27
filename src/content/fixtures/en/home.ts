@@ -1,4 +1,4 @@
-import type { ArchivePage, BitsplashPage, BoletosPage, ContactPage, MetroCardsPage, HomePage, LabPage, LalandePage, NotePage, NotesPage, NotFoundPage, StoryPage, StudioPage, TravesiaPage } from '../../types';
+import type { ArchivePage, BitsplashPage, BoletosPage, CamaraPage, ContactPage, MetroCardsPage, HomePage, LabPage, LalandePage, NotePage, NotesPage, NotFoundPage, StoryPage, StudioPage, TravesiaPage } from '../../types';
 
 export const home: HomePage = {
   intro: {
@@ -90,8 +90,7 @@ export const labPage: LabPage = {
       points: ['the pages fanned like an accordion; drag to turn them.', 'drawings, collage and what i paste in it.', 'the pages are being chosen.'] },
     { id: 'menta-lola', group: 'play', preview: 'still', soon: true, title: 'menta&lola', text: 'my cats, menta and lola, to screen an image with some thirty-two algorithms and their knobs.', cta: { label: 'see what it will be', href: '/lab/menta-lola' },
       points: ['three images: menta, lola and the horse.', 'error diffusion, bayer, halftone, patterns, edges, noise, crt and ascii, among others.', 'the carcoma that eats the image from inside and turns it into ascii.', 'scale, threshold, contrast, gamma, brightness and palette; before and after; copy link.'] },
-    { id: 'camara', group: 'play', preview: 'still', soon: true, title: 'cámara', text: 'your camera and your hand: pinch thumb and index together and your fingertip leaves a trail of glyphs.', cta: { label: 'see what it will be', href: '/lab/camara' },
-      points: ['it follows your hand with mediapipe, in your browser.', 'pinch to draw, open your hand to let go; the trail fades on its own.', 'your image never leaves your device.', 'without a camera, you draw with the cursor or a finger.'] },
+    { id: 'camara', group: 'play', preview: 'trail', title: 'cámara', text: 'your camera and your hand: pinch thumb and index together and your fingertip leaves a trail of glyphs.', cta: { label: 'draw with your hand', href: '/lab/camara' } },
     { id: 'dona', group: 'play', preview: 'still', soon: true, title: 'dona de teselas', text: 'a donut and other 3d solids made of tiles and glyphs. you turn them and change the image they are made of.', cta: { label: 'see what it will be', href: '/lab/dona' },
       points: ['drag to turn it.', 'tiles: molinete, damero, contorno, puntos, tick, macizo and glyphs.', 'image, solid, cell, palette and speed.'] },
     { id: 'efimero', group: 'play', preview: 'still', soon: true, title: 'ambiente efímero', text: 'live code: music with strudel and visuals with hydra, which exist while they play.', cta: { label: 'see what it will be', href: '/lab/efimero' },
@@ -263,4 +262,16 @@ export const bitsplashPage: BitsplashPage = {
   lead: 'click anywhere: an 8-bit acid splash lands on the grid.',
   canvasLabel: 'a grey dot grid. every click throws an 8-bit acid splash where it lands, in dithered acid colours, with a few drops around it.',
   hint: 'click anywhere', clean: 'clean', download: 'download', one: 'splash', many: 'splashes',
+};
+
+export const camaraPage: CamaraPage = {
+  title: 'cámara',
+  lead: 'pinch your thumb and index together and your fingertip writes. open your hand to lift the pen.',
+  privacy: 'the camera stays on your device: your hand is read in your browser and no image leaves it.',
+  start: 'turn the camera on', loading: 'starting the camera…', cursor: 'draw with the cursor', stop: 'turn the camera off',
+  denied: 'the camera was not allowed. you can draw with the cursor: press and drag.', noCamera: 'no camera here. you can draw with the cursor: press and drag.',
+  sourceHand: 'hand, 21 points', sourceCursor: 'cursor: press and drag', penUp: 'pen up', penDown: 'pen down',
+  canvasHand: 'a grey dot grid with your hand screened in ink dots and its 21 tracked points; when you pinch, your fingertip writes a trail of glyphs that glow blue and fade into the paper.',
+  canvasCursor: 'a grey dot grid; press and drag to write a trail of glyphs that glow blue and fade into the paper.',
+  under: { label: 'under', off: 'off', dots: 'dots', glyphs: 'glyphs' }, trail: { label: 'trail', short: 'short', long: 'long' },
 };
