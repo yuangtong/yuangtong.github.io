@@ -107,6 +107,12 @@ export type Settings = {
   description: string;
   nav: Link[];
   footer: { left: string; right: string };
+  /**
+   * The cookie notice (owner, 2026-11-27), drawn like the availability card.
+   * Honest by design: the site sets no cookies and loads no analytics, so it
+   * informs and asks nothing. `rows` say what is kept, and where.
+   */
+  cookies: { label: string; title: string; state: string; body: string; rows: { k: string; v: string }[]; ok: string };
   ui: {
     openLabel: string;
     copyLinkLabel: string;

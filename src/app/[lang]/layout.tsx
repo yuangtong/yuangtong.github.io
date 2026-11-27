@@ -3,6 +3,7 @@ import { color } from '@/lib/tokens';
 import { getSettings, locales, localePath } from '@/content';
 import { CarcomaProvider } from '@/components/Carcoma';
 import { AsciiCursor } from '@/components/AsciiCursor';
+import { CookieNotice } from '@/components/CookieNotice';
 import { geistMono, host, notoTc, script } from '../fonts';
 import { routeLocale, type LangParams } from '@/app/[lang]/locale';
 import '../tokens.css';
@@ -31,9 +32,10 @@ export const viewport: Viewport = { themeColor: color.paper };
 
 export default async function RootLayout({ children, params }: { children: React.ReactNode } & LangParams) {
   const locale = await routeLocale(params);
+  const s = await getSettings(locale);
   return (
     <html lang={locale} className={[host.variable, geistMono.variable, notoTc.variable, script.variable].join(' ')}>
-      <body><CarcomaProvider>{children}<AsciiCursor /></CarcomaProvider></body>
+      <body><CarcomaProvider>{children}<CookieNotice text={s.cookies} /><AsciiCursor /></CarcomaProvider></body>
     </html>
   );
 }

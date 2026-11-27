@@ -105,6 +105,12 @@ Owner decisions and housekeeping, to pick up later:
   Sanity write token in the `SANITY_AUTH_TOKEN` secret.
 - Sanity schemas follow Sanity's agent best practices: icons from
   `@sanity/icons` subpaths, `defineArrayMember`, queries in `defineQuery`.
+- Cookie notice (owner, 2026-11-27), in every language, drawn like the
+  availability card (paper, 1px ink rule, hard ink shadow) at the lower left.
+  The site sets no cookies and loads no analytics, so it informs and asks
+  nothing: it says what is kept on the device (that the notice was closed, and
+  the best fare in boletos de lima, both in local storage) and closes with one
+  button. Content in `Settings.cookies`; no new dependency.
 
 - **About** (`/about`), canvas "about v3" (approved 2026-11-27):
   - The owner's portrait sticks on the left. On the right, the title decodes
