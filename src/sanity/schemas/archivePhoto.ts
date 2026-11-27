@@ -1,6 +1,6 @@
 import { ImageIcon } from '@sanity/icons/Image';
 import { defineField, defineType } from 'sanity';
-import { localizedString } from '../localized';
+import { localized } from '../localized';
 
 /** A photo in archivo.exe (ArchivePhoto in src/content/types.ts). */
 export const archivePhoto = defineType({
@@ -11,9 +11,9 @@ export const archivePhoto = defineType({
   fields: [
     defineField({ name: 'image', title: 'Photo', type: 'image', options: { hotspot: true }, validation: (r) => r.required() }),
     defineField({ name: 'photoId', title: 'File name', description: 'Shown as the file name on the desk, e.g. IMG_4999.', type: 'string', validation: (r) => r.required() }),
-    localizedString('serie', 'Series', 'The folder it lives in, e.g. carretera / highway. Photos with the same series share a folder.'),
+    localized('serie', 'Series', { description: 'The folder it lives in, e.g. carretera / highway. Photos with the same series share a folder.' }),
     defineField({ name: 'date', title: 'Date', description: 'As it should read, e.g. 11 feb 2017, 13:30.', type: 'string' }),
-    localizedString('alt', 'Description', 'What the photo shows, for people who cannot see it.'),
+    localized('alt', 'Description', { description: 'What the photo shows, for people who cannot see it.' }),
     defineField({
       name: 'cell', title: 'Cell size', description: 'Pixel size of the print on the desk; 0 is the original photo.', type: 'number',
       options: { list: [0, 2, 4, 8, 16], layout: 'radio', direction: 'horizontal' }, initialValue: 4, validation: (r) => r.required(),

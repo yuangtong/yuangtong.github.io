@@ -1,16 +1,17 @@
 import type { AboutPage, ArchivePage, BitsplashPage, SketchbookPage, BoletosPage, CamaraPage, ContactPage, MetroCardsPage, HomePage, LabPage, NotesPage, NotFoundPage, LalandePage, NotePage, Settings, StoryPage, StudioPage, TravesiaPage } from './types';
-import { localize, type Locale } from './locale';
+import { defaultLocale, localize, type Locale } from './locale';
 import * as en from './fixtures/en/home';
 import * as es from './fixtures/es/home';
 import { settings as enSettings } from './fixtures/en/settings';
 import { settings as esSettings } from './fixtures/es/settings';
-import { fetchArchivePhotos, fetchLabOrder } from '@/sanity/queries';
+import { fetchArchivePhotos, fetchLab, fetchNotes } from '@/sanity/queries';
 
 export { locales, defaultLocale, isLocale, localePath, splitPath, type Locale } from './locale';
 
 /*
  * Loaders. Pages read content only through these functions, for a locale.
- * Content that lives in Sanity (the lab's order, archivo.exe's photos) is
+ * Content that lives in Sanity (the lab's pieces and order, archivo.exe's
+ * photos, the notes) is
  * read from it and laid over the local content; when Sanity is not set up or
  * has nothing yet, the local content is used as it is. `localize` puts
  * internal links in the locale's paths.
@@ -33,16 +34,39 @@ export async function getNotFoundPage(locale: Locale): Promise<NotFoundPage> {
 
 export async function getLabPage(locale: Locale): Promise<LabPage> {
   const page = get(locale, (p) => p.labPage);
-  const order = await fetchLabOrder();
-  if (!order) return page;
+  const cms = await fetchLab(locale);
+  if (!cms) return page;
+  const doors = page.doors.flatMap((d) => {
+    const o = cms.pieces.get(d.id);
+    if (!o) return [d];
+    if (o.hidden) return [];
+    // a piece whose page is not built yet is always coming soon; a built piece
+    // marked coming soon behaves as held: open on previews, coming soon on yuangtong.dev
+    const planned = d.soon === true;
+    const held = !planned && (o.held === true || o.soon === true);
+    return [{
+      ...d,
+      group: o.group ?? d.group, title: o.title ?? d.title, text: o.text ?? d.text, points: o.points ?? d.points,
+      cta: { ...d.cta, label: o.ctaLabel ?? d.cta.label },
+      soon: planned || undefined, held: held || undefined,
+    }];
+  });
   // pieces left out of the order keep their place after the ordered ones
-  const rank = (id: string) => { const i = order.indexOf(id); return i < 0 ? order.length : i; };
-  const doors = page.doors.map((d, i) => ({ d, i })).sort((a, b) => rank(a.d.id) - rank(b.d.id) || a.i - b.i).map(({ d }) => d);
-  return { ...page, doors };
+  const rank = (id: string) => { const i = cms.order.indexOf(id); return i < 0 ? cms.order.length : i; };
+  const sorted = doors.map((d, i) => ({ d, i })).sort((a, b) => rank(a.d.id) - rank(b.d.id) || a.i - b.i).map(({ d }) => d);
+  return { ...page, doors: sorted };
 }
 
+/** The notes from the CMS in a language, or null to use the local ones. */
+const cmsNotes = async (locale: Locale) => {
+  const back = pages[locale].notes[0]?.backLabel ?? pages[defaultLocale].notes[0]?.backLabel ?? '';
+  return fetchNotes(locale, back);
+};
+
 export async function getNotesPage(locale: Locale): Promise<NotesPage> {
-  return get(locale, (p) => p.notesPage);
+  const page = get(locale, (p) => p.notesPage);
+  const cms = await cmsNotes(locale);
+  return cms ? { ...page, items: localize(cms.items, locale) } : page;
 }
 
 export async function getStudioPage(locale: Locale): Promise<StudioPage> {
@@ -72,11 +96,14 @@ export async function getTravesiaPage(locale: Locale): Promise<TravesiaPage> {
 }
 
 export async function getNote(locale: Locale, slug: string): Promise<NotePage | null> {
+  const cms = await cmsNotes(locale);
+  if (cms) return localize(cms.pages.find((n) => n.slug === slug) ?? null, locale);
   return get(locale, (p) => p.notes.find((n) => n.slug === slug) ?? null);
 }
 
 export async function getNoteSlugs(locale: Locale): Promise<string[]> {
-  return pages[locale].notes.map((n) => n.slug);
+  const cms = await cmsNotes(locale);
+  return cms ? cms.pages.map((n) => n.slug) : pages[locale].notes.map((n) => n.slug);
 }
 
 export async function getBoletosPage(locale: Locale): Promise<BoletosPage> {

@@ -8,6 +8,8 @@ const moved = [
 
 const config: NextConfig = {
   reactStrictMode: true,
+  // images in notes come from Sanity's CDN
+  images: { remotePatterns: [{ protocol: 'https', hostname: 'cdn.sanity.io', pathname: '/images/**' }] },
   async redirects() {
     return moved.map(([source, destination]) => ({ source, destination, permanent: true }));
   },

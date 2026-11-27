@@ -105,6 +105,17 @@ Owner decisions and housekeeping, to pick up later:
   Sanity write token in the `SANITY_AUTH_TOKEN` secret.
 - Sanity schemas follow Sanity's agent best practices: icons from
   `@sanity/icons` subpaths, `defineArrayMember`, queries in `defineQuery`.
+- The lab's pieces and the notes move to Sanity (owner, 2026-11-27). "Lab:
+  pieces" holds each door's title, text, button, group, the lines of its
+  coming soon page and a status (shown, previews only, coming soon, hidden);
+  "Lab: order" is now a list of those pieces to drag. A piece whose page is
+  not built is always coming soon; a built piece marked coming soon behaves
+  as held. boletos de lima and metro cards follow their status on
+  yuangtong.dev instead of always showing coming soon, and a hidden piece has
+  no page there. Notes are one document per language sharing a slug, with
+  their card, body (paragraphs, code, figures from Sanity's CDN) and links,
+  and a status (published, coming soon, hidden); note pages are rendered on
+  first visit when published after a deploy. The seed copies all of it.
 - Cookie notice (owner, 2026-11-27), in every language, drawn like the
   availability card (paper, 1px ink rule, hard ink shadow) at the lower left.
   The site sets no cookies and loads no analytics, so it informs and asks

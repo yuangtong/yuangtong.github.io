@@ -1,6 +1,7 @@
 /**
  * Copies the content that now lives in the code into Sanity, once: the lab's
- * order and archivo.exe's photos (with their image files from /public).
+ * pieces and order, archivo.exe's photos and the notes (with their image
+ * files from /public).
  * Two ways to run it:
  *  - in the cloud: the "Sanity seed" GitHub Action (.github/workflows/sanity-seed.yml),
  *    with a write token in the SANITY_AUTH_TOKEN secret;
@@ -39,8 +40,50 @@ const en = await import(pathToFileURL(join(root, 'src/content/fixtures/en/home.t
 const es = await import(pathToFileURL(join(root, 'src/content/fixtures/es/home.ts')).href);
 
 const docs = [];
+const asset = (src) => {
+  const file = join(root, 'public', src);
+  return existsSync(file) ? { _type: 'image', _sanityAsset: `image@${pathToFileURL(file).href}` } : null;
+};
+const both = (en, es) => ({ en, es });
 
-docs.push({ _id: 'labIndex', _type: 'labIndex', order: en.labPage.doors.map((d) => d.id) });
+// the lab: one document per piece, and the order (owner, 2026-11-27)
+const ORDER = ['sisifo', 'lalande', 'travesia', 'bitsplash', 'archivo', 'sketchbook', 'boletos', 'metro-cards', 'camara', 'dona', 'efimero'];
+const doors = [...en.labPage.doors].sort((a, b) => (ORDER.indexOf(a.id) + 1 || 99) - (ORDER.indexOf(b.id) + 1 || 99));
+for (const d of doors) {
+  const e = es.labPage.doors.find((x) => x.id === d.id) ?? d;
+  docs.push({
+    _id: `labPiece-${d.id}`, _type: 'labPiece', pieceId: d.id,
+    status: d.soon ? 'soon' : d.held ? 'held' : 'live', group: d.group,
+    title: both(d.title, e.title), text: both(d.text, e.text), cta: both(d.cta.label, e.cta.label),
+    ...(d.points ? { points: both(d.points, e.points ?? d.points) } : {}),
+  });
+}
+docs.push({ _id: 'labIndex', _type: 'labIndex', pieces: doors.map((d) => ({ _key: d.id, _type: 'reference', _ref: `labPiece-${d.id}` })) });
+
+// notes: the listed cards and the written pages, one document per language
+for (const [lang, mod] of [['en', en], ['es', es]]) {
+  const slugs = [...new Set([...mod.notesPage.items.map((n) => n.id), ...mod.notes.map((n) => n.slug)])];
+  slugs.forEach((slug, i) => {
+    const card = mod.notesPage.items.find((n) => n.id === slug);
+    const page = mod.notes.find((n) => n.slug === slug);
+    docs.push({
+      _id: `note-${slug}-${lang}`, _type: 'note', language: lang, slug: { _type: 'slug', current: slug },
+      title: page?.title ?? card?.title ?? slug, order: (i + 1) * 10,
+      // listed and with a page: published; listed only: coming soon; written but not listed: hidden
+      status: card ? (card.soon || !page ? 'soon' : 'live') : 'hidden',
+      excerpt: card?.excerpt ?? '', meta: card?.meta ?? '', cardAlt: card?.alt ?? '', visual: card?.visual ?? 'foto', accent: card?.accent ?? 'azul',
+      lead: page?.lead ?? '', date: page?.date ?? '', about: page?.about ?? '', credit: page?.credit ?? '',
+      blocks: (page?.blocks ?? []).flatMap((b, k) => {
+        const _key = `b${k}`;
+        if (b.type === 'p') return [{ _key, _type: 'paragraph', text: b.text }];
+        if (b.type === 'code') return [{ _key, _type: 'code', text: b.text }];
+        const image = asset(b.src);
+        return image ? [{ _key, _type: 'figure', image, alt: b.alt, caption: b.caption, paper: Boolean(b.paper) }] : [];
+      }),
+      links: (page?.links ?? []).map((l, k) => ({ _key: `l${k}`, ...l })),
+    });
+  });
+}
 
 en.archivePage.photos.forEach((p, i) => {
   const esp = es.archivePage.photos.find((x) => x.id === p.id) ?? p;
