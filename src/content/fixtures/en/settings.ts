@@ -21,6 +21,17 @@ export const settings: Settings = {
     { label: 'contact', href: '/contact' },
   ],
   footer: { left: 'yuang tong, lima', right: 'gallop: eadweard muybridge, 1878, public domain' },
+  cookies: {
+    label: 'about cookies',
+    title: 'cookies',
+    state: 'none',
+    body: 'this site sets no cookies and follows no one: no analytics, no ads, nothing sent to third parties.',
+    rows: [
+      { k: 'analytics', v: 'none' },
+      { k: 'on your device', v: 'that you closed this, and your best fare in boletos de lima' },
+    ],
+    ok: 'understood',
+  },
   ui: {
     openLabel: 'open',
     copyLinkLabel: 'copy link',

@@ -21,6 +21,17 @@ export const settings: Settings = {
     { label: 'contacto', href: '/contact' },
   ],
   footer: { left: 'yuang tong, lima', right: 'galope: eadweard muybridge, 1878, dominio público' },
+  cookies: {
+    label: 'sobre las cookies',
+    title: 'cookies',
+    state: 'ninguna',
+    body: 'este sitio no usa cookies ni sigue a nadie: sin analítica, sin anuncios, nada se envía a terceros.',
+    rows: [
+      { k: 'analítica', v: 'ninguna' },
+      { k: 'en tu dispositivo', v: 'que cerraste este aviso, y tu mejor pasaje en boletos de lima' },
+    ],
+    ok: 'entendido',
+  },
   ui: {
     openLabel: 'abrir',
     copyLinkLabel: 'copiar enlace',
