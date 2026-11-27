@@ -85,6 +85,16 @@ Owner decisions and housekeeping, to pick up later:
 
 ### Added
 
+- The site picks the language on the first visit (owner, 2026-11-27): an
+  English page reads the browser's preferred languages and moves to the first
+  one the site speaks (`es-PE` goes to `/es`), English when none matches. A
+  language chosen in the selector is kept on the device (local storage key
+  `lang`, not a cookie) and wins from then on. It reads the browser language,
+  not the country. Runs in the page head before the first paint; crawlers and
+  automated browsers are skipped and the server still answers every address
+  as it is, so each language keeps its own URL. The cookie notice's device row
+  says so in both languages (`src/lib/lang-detect.ts`).
+
 - Cookie notice (owner, 2026-11-27), in every language, drawn like the
   availability card (paper, 1px ink rule, hard ink shadow) at the lower left.
   The site sets no cookies and loads no analytics, so it informs and asks
