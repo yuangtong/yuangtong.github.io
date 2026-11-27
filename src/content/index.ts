@@ -4,13 +4,16 @@ import * as en from './fixtures/en/home';
 import * as es from './fixtures/es/home';
 import { settings as enSettings } from './fixtures/en/settings';
 import { settings as esSettings } from './fixtures/es/settings';
+import { fetchArchivePhotos, fetchLabOrder } from '@/sanity/queries';
 
 export { locales, defaultLocale, isLocale, localePath, splitPath, type Locale } from './locale';
 
 /*
  * Loaders. Pages read content only through these functions, for a locale.
- * The CMS agent replaces their bodies with Sanity queries that return the
- * same shapes; `localize` puts internal links in the locale's paths.
+ * Content that lives in Sanity (the lab's order, archivo.exe's photos) is
+ * read from it and laid over the local content; when Sanity is not set up or
+ * has nothing yet, the local content is used as it is. `localize` puts
+ * internal links in the locale's paths.
  */
 const pages = { en, es } as const;
 const settingsBy = { en: enSettings, es: esSettings } as const;
@@ -29,7 +32,13 @@ export async function getNotFoundPage(locale: Locale): Promise<NotFoundPage> {
 }
 
 export async function getLabPage(locale: Locale): Promise<LabPage> {
-  return get(locale, (p) => p.labPage);
+  const page = get(locale, (p) => p.labPage);
+  const order = await fetchLabOrder();
+  if (!order) return page;
+  // pieces left out of the order keep their place after the ordered ones
+  const rank = (id: string) => { const i = order.indexOf(id); return i < 0 ? order.length : i; };
+  const doors = page.doors.map((d, i) => ({ d, i })).sort((a, b) => rank(a.d.id) - rank(b.d.id) || a.i - b.i).map(({ d }) => d);
+  return { ...page, doors };
 }
 
 export async function getNotesPage(locale: Locale): Promise<NotesPage> {
@@ -45,7 +54,9 @@ export async function getContactPage(locale: Locale): Promise<ContactPage> {
 }
 
 export async function getArchivePage(locale: Locale): Promise<ArchivePage> {
-  return get(locale, (p) => p.archivePage);
+  const page = get(locale, (p) => p.archivePage);
+  const cms = await fetchArchivePhotos(locale);
+  return cms ? { ...page, ...cms } : page;
 }
 
 export async function getSisyphusPage(locale: Locale): Promise<StoryPage> {

@@ -84,7 +84,20 @@ Owner decisions and housekeeping, to pick up later:
   Boletos needs a vertical phone layout, to design first.
 
 ### Added
--- **About** (`/about`), canvas "about v3" (approved 2026-11-27):
+
+- Sanity connected (CMS). The editing panel is served at `/admin` (Sanity
+  Studio, embedded with `next-sanity`), outside the locale routing and not
+  indexed. Two content types to start: "Lab: order", which sets the order of
+  the lab's doors, and "archivo.exe: photos", the photos of the archive with
+  their series, date, description in each language, cell, palette and place
+  on the desk. The loaders lay this content over the local content and fall
+  back to it when Sanity is not configured, unreachable or empty; pages ask
+  Sanity again every 60 seconds. New variables `NEXT_PUBLIC_SANITY_PROJECT_ID`,
+  `NEXT_PUBLIC_SANITY_DATASET` and `NEXT_PUBLIC_SANITY_API_VERSION` in
+  `.env.example`. archivo.exe loads photos from another origin with CORS so
+  its canvas can read them.
+
+- **About** (`/about`), canvas "about v3" (approved 2026-11-27):
   - The owner's portrait sticks on the left. On the right, the title decodes
     on arrival, the greeting types itself, and the next paragraphs are typed
     by the scroll, one after another. Seven scrambled letters run ahead of a
