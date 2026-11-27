@@ -711,3 +711,68 @@ img, canvas { display: block; }
   .lab-door__cta::after { content: ''; position: absolute; inset: 0; }
 }
 @media (hover: none) and (min-width: 761px) { .lab-doors__row { flex-direction: row; } }
+
+/* cámara (canvas "lab: cámara v2", 2026-11-27): the controls in a column on
+   the left, the camera large on the right, the photo under it; full screen
+   gives the camera the page and folds the controls into a card */
+.camara { --side: 360px; --shot: 72px; position: relative; overflow: hidden; height: calc(100svh - var(--camara-top, 0px)); background: var(--paper); }
+.camara__stage { position: absolute; inset: 0; overflow: hidden; background: var(--paper-2); transition: inset 0.7s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.7s ease; }
+.camara[data-on='true']:not([data-full='true']) .camara__stage { inset: var(--s-5) var(--gutter) var(--shot) calc(var(--gutter) + var(--side) + var(--s-5)); box-shadow: inset 0 0 0 1px var(--ink); }
+.camara__cv { position: absolute; inset: 0; width: 100%; height: 100%; display: block; cursor: default; touch-action: none; font-family: var(--font-mono); }
+.camara__cv[data-draw='true'] { cursor: crosshair; }
+.camara__video { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+.camara__state { position: absolute; right: var(--s-3); top: var(--s-3); display: flex; gap: 2px; padding: 3px; background: var(--paper-2); }
+.camara__state .label { margin: 0; padding: 6px 10px; background: var(--paper); color: var(--ink); }
+.camara__state .label[data-on='true'] { background: var(--signal); color: var(--on-signal); }
+.camara__count { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); margin: 0; font-size: clamp(120px, 18vw, 240px); line-height: 1; font-weight: 300; color: var(--paper); text-shadow: 0 0 0 var(--ink), 4px 4px 0 var(--ink); pointer-events: none; }
+
+.camara__gate { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: min(520px, calc(100% - 2 * var(--gutter))); box-sizing: border-box; padding: var(--s-6); display: flex; flex-direction: column; gap: var(--s-4); background: var(--paper); box-shadow: inset 0 0 0 1px var(--ink); transition: opacity 0.5s ease, transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.camara__gate[data-hidden='true'] { opacity: 0; transform: translate(-50%, -50%) scale(0.92); pointer-events: none; }
+.camara__gate-title { margin: 0; font-size: clamp(32px, 3vw, 44px); line-height: 0.95; font-weight: 300; letter-spacing: var(--track-title); text-wrap: balance; }
+.camara__gate-text { margin: 0; line-height: 1.45; color: var(--body); }
+
+.camara__side { position: absolute; left: var(--gutter); top: var(--s-5); bottom: var(--s-5); width: var(--side); box-sizing: border-box; padding: var(--s-5); display: flex; flex-direction: column; gap: var(--s-4); overflow-y: auto; background: var(--paper); box-shadow: inset 0 0 0 1px var(--ink); opacity: 0; transform: translateX(calc(-100% - 2 * var(--gutter))); transition: transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1), opacity 0.5s ease, top 0.7s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.camara[data-on='true'] .camara__side { opacity: 1; transform: none; }
+.camara[data-full='true'] .camara__side { top: max(var(--s-5), calc(100% - 520px)); }
+.camara[data-full='true'] .camara__lead, .camara[data-full='true'] .camara__how { display: none; }
+.camara__head { display: flex; flex-direction: column; gap: var(--s-2); }
+.camara__title { margin: 0; font-size: 40px; line-height: 0.95; font-weight: 300; letter-spacing: -0.04em; }
+.camara__lead { margin: 0; font-size: var(--t-small); line-height: 1.4; color: var(--body); }
+.camara__note { margin: 0; color: var(--ink); }
+.camara__group { display: flex; flex-direction: column; gap: var(--s-2); }
+.camara__group > .label { margin: 0; }
+.camara__at { color: var(--ink); }
+.camara__row { display: flex; align-items: center; gap: 6px; }
+.camara__row--wrap { flex-wrap: wrap; }
+.camara__gap { width: 6px; flex: none; }
+.camara__strip { flex: 1; min-width: 0; display: flex; gap: 6px; overflow: hidden; }
+.camara__seg { flex: none; min-width: 40px; min-height: 36px; padding: 0 8px; border: 1px solid var(--ink); border-radius: 0; background: transparent; color: var(--ink); font-family: var(--font-mono); font-size: 12px; white-space: nowrap; cursor: pointer; }
+.camara__seg[aria-pressed='true'] { background: var(--ink); color: var(--paper); }
+.camara__arrow { flex: none; width: 36px; min-height: 36px; padding: 0; border: 0; border-radius: 0; background: var(--paper-2); color: var(--ink); font-family: var(--font-mono); font-size: 13px; cursor: pointer; }
+.camara__arrow:hover { background: var(--ink); color: var(--paper); }
+.camara__seg:focus-visible, .camara__arrow:focus-visible, .camara__ink:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
+.camara__ink { flex: none; width: 28px; height: 28px; padding: 0; border: 0; border-radius: 0; cursor: pointer; box-shadow: inset 0 0 0 1px var(--ink); }
+.camara__ink[aria-pressed='true'] { box-shadow: inset 0 0 0 3px var(--paper), inset 0 0 0 4px var(--ink); }
+.camara__ink--multi { background: conic-gradient(var(--signal) 0 17%, var(--acid-red) 0 34%, var(--acid-yellow) 0 50%, var(--lima) 0 67%, var(--rosado) 0 84%, var(--acid-violet) 0); }
+.camara__how { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 6px; font-size: var(--t-small); line-height: 1.35; color: var(--body); }
+.camara__how li { display: flex; gap: var(--s-2); }
+.camara__actions { display: flex; flex-wrap: wrap; gap: var(--s-2); }
+.camara__actions--end { margin-top: auto; }
+.camara__actions .btn[disabled] { opacity: 0.6; cursor: progress; }
+.camara__shot { position: absolute; left: calc(var(--gutter) + var(--side) + var(--s-5) + (100% - 2 * var(--gutter) - var(--side) - var(--s-5)) / 2); bottom: calc((var(--shot) - 44px) / 2); min-width: 220px; justify-content: center; transform: translateX(-50%); opacity: 0; transition: left 0.7s cubic-bezier(0.2, 0.7, 0.2, 1), bottom 0.7s cubic-bezier(0.2, 0.7, 0.2, 1), opacity 0.5s ease; }
+.camara[data-on='true'] .camara__shot { opacity: 1; }
+.camara[data-full='true'] .camara__shot { left: 50%; bottom: var(--s-6); }
+@media (prefers-reduced-motion: reduce) { .camara__stage, .camara__side, .camara__gate, .camara__shot { transition: none; } }
+
+/* phones: the camera on top, the photo under it, the controls below */
+@media (max-width: 760px) {
+  .camara { height: auto; min-height: calc(100svh - var(--camara-top, 0px)); display: flex; flex-direction: column; gap: var(--s-3); padding: var(--s-3) var(--gutter) var(--s-6); box-sizing: border-box; }
+  .camara__stage, .camara[data-on='true']:not([data-full='true']) .camara__stage { position: relative; inset: auto; height: min(56svh, 520px); flex: none; box-shadow: inset 0 0 0 1px var(--ink); }
+  .camara[data-on='false'] .camara__stage { height: calc(100svh - var(--camara-top, 0px) - var(--s-3) * 2); }
+  .camara__shot, .camara[data-full='true'] .camara__shot { position: static; order: 1; transform: none; width: 100%; min-height: 48px; }
+  .camara__side, .camara[data-full='true'] .camara__side { position: static; order: 2; width: auto; padding: 0; box-shadow: none; overflow: visible; transform: none; }
+  .camara[data-on='false'] .camara__side, .camara[data-on='false'] .camara__shot { display: none; }
+  .camara__head, .camara__full { display: none; }
+  .camara__how { display: none; }
+  .camara__gate { top: calc(var(--s-3) + 45%); }
+}

@@ -42,6 +42,11 @@ Owner decisions and housekeeping, to pick up later:
       already point to `/lab/[id]?celda=`.
 - [ ] Folk Club webfont for the stitched "hablemos" (Dancing Script stands in).
 - [ ] Logo and favicon: pick one of the proposals in the design canvas.
+- [ ] cámara, ascii: the owner finds it too light (2026-11-27); to discuss.
+      Options: a denser ramp, bold characters, a dithered ground behind the
+      characters, or less exposure so the lights also carry characters.
+- [ ] cámara, genkō: choose among writing, density and current (canvas
+      "lab: genkō") before it returns to the effects.
 
 ### Added
 
@@ -52,42 +57,61 @@ Owner decisions and housekeeping, to pick up later:
   local type declaration) turns them: drag a corner, click, the arrows or
   the keyboard; one page at a time on phones; the book fits the screen. Its
   door gets a preview: the spread, with the right page turning.
-
-### Changed
-
-- Owner's notes on phones and navigation (2026-11-27):
-  - From the landing, on a computer and on a phone, the navigation opens each
-    section's page (`/lab`, `/studio`...); only "/" and hashes scroll inside
-    the landing.
-  - Phones: an open sheet's content is as tall as the room it has, so the
-    "enter" button sits above the strips of the next sheets instead of under
-    them; a strong fling is held at the next sheet, never skipping one.
-  - Lab index on touch screens: no previews (they are made for a computer);
-    one tap on a door opens its piece.
-  - travesía ácida's preview is the piece itself, small: the same engine,
-    dot grid and acids.
-- menta&lola is removed from the lab (door and page): cámara does what it
-  promised. Kept in `docs/LAB.md` as the record of the idea.
-- Lab previews (owner, 2026-11-27): the tickets carry the piece's own push
-  pins; each half turn of the metro card brings the next city's card; the
-  sketchbook starts closed, its cover opens once onto menta and lola and it
-  stays open. A preview starts when its door opens.
-- Notes: the screened image keeps its own proportion (it was stretched). No
-  note is published yet, so every card is switched off ("coming soon"): it
-  says what the note is about and opens nothing, and the note pages are gone
-  (`Note.soon`).
-- Contact: Instagram, @yuang_tong, in both languages.
-- Navigation: "home" ("inicio") comes first and takes you to the start of
-  the landing; it is marked as current only on the landing itself.
-- lalande's close names the book like a work's label: its title, large
-  ("near to the wild heart", "cerca del corazón salvaje"), then "clarice
-  lispector, 1943" in mono. The cross-stitch is gone (owner, 2026-11-27).
-- Notes: one note for now, "manifesto" ("manifiesto"), coming soon; the
-  earlier drafts leave the list, and only a listed, published note has a
-  page.
-- lalande: the horse is written with Clarice Lispector's passage on Lalande
-  (the owner's Spanish text, and an English translation), read line by line
-  across it, instead of repeating "lalande" (`LalandePage.horseText`).
+- Lab: **cámara** (`/lab/camara`), a webcam toy (canvas "lab: cámara",
+  2026-11-26; owner's notes 2026-11-27). The page opens on a gate that asks
+  for the camera and says nothing is saved on the site (or draw with the
+  cursor instead). With the camera on, the visitor sees themselves mirrored;
+  MediaPipe's hand landmarker (`@mediapipe/tasks-vision` 1.2.3, VIDEO mode,
+  one or two hands, GPU with a CPU fallback) reads the hands in the browser.
+  A pinch (landmarks 4 and 8, against the size of the hand, with slack)
+  paints the chosen effect over the image where the index tip goes: pixels,
+  dither, glyphs, or the trail that glows and cools; in an ink from the
+  site's palette (`camaraInks`). Every stroke keeps its effect and ink. The
+  pointer paints too. "take the photo" counts 3, 2, 1 and downloads a clean
+  PNG (no hand points). Brush small, medium or large; pixel fine, medium or
+  coarse on 5 px cells; a multicolour ink posterizes the image, or dithers it
+  into a small retro palette (`camaraRetro`), like an old game's textures;
+  every stroke keeps its brush and pixel size too. The view can also show
+  only the hand, screened from
+  its 21 points; without a camera the cursor draws. How it works is listed
+  on the page. MediaPipe and its model load only when the camera is turned
+  on, from this site (model in `public/lab/camara/`, wasm copied from the
+  package at build by `scripts/copy-mediapipe.mjs`). Drawing pauses while
+  the tab is hidden. The door drops its coming-soon mark.
+- cámara, second round (owner's notes 2026-11-27): cells of 2 px instead of
+  5, so the effects read the face; "pixel" sets each effect's grain. An
+  automatic exposure, measured every frame inside what is painted, stretches
+  lights and shadows so every effect keeps drawing the image as it changes.
+  New effects: halftone (process screens in cyan, magenta, yellow and black
+  printed with multiply in multicolour, `camaraProcess`; one ink otherwise),
+  ascii (replaces glyphs, finer), cross-stitch, and kana: with the pen down
+  the visitor draws an outline that closes on release and fills with
+  Japanese text line by line (Miyazawa Kenji, public domain), darker where
+  the image is dark; kana also works with only the hand and the cursor. On
+  phones the camera turns on without hand tracking: the gate says the full
+  experience is on a computer, a tap covers the whole image with the effect
+  and a drag paints part of it. Control rows wrap on narrow screens.
+- cámara v2 (canvas "lab: cámara v2", approved 2026-11-27): once the camera
+  is on, the gate fades and the controls slide in as a column on the left;
+  the camera takes the rest, with "take the photo" under it. "full screen"
+  gives the camera the whole page and folds the controls into a card. Two
+  modes: draw, the default on a computer (a stroke that closes a loop fills
+  what it circles; a new stroke paints over the last) and web toy (the whole
+  image takes the effect, live), the only mode on phones, where the camera
+  sits on top, the photo under it and the controls below. Effects sit in one
+  row moved with arrows. Only the hand, and the cursor, keep their strokes in
+  ink. kana is taken out while the owner decides on genkō (canvas "lab:
+  genkō"); the tap that covered the image on phones gives way to the web toy.
+- cámara, owner's notes 2026-11-27: the hands are tracked only while drawing;
+  the web toy runs without tracking. A tracking switch, and the space bar,
+  pause the hands so a finished figure stays put (the pointer still draws).
+  Changing mode clears the image and turns tracking back on. Pixels are
+  bigger (6, 12 or 20 px) so they read as pixels. The trail effect is gone:
+  without the image (only the hand, the cursor) strokes stay in their ink.
+  The lab door's text names the effects.
+- cámara: the "see" (you / only the hand) and "hands" (one / two) options are
+  gone; the piece is a camera, not a whiteboard, so it always shows you and
+  MediaPipe always looks for both hands (owner, 2026-11-27).
 
 - Lab: **boletos de lima** (`/lab/boletos`). The owner's 73 Lima bus tickets
   (72 on paper, one electronic receipt), cut out from the scans, on the grey
@@ -247,6 +271,39 @@ Owner decisions and housekeeping, to pick up later:
 
 ### Changed
 
+- Owner's notes on phones and navigation (2026-11-27):
+  - From the landing, on a computer and on a phone, the navigation opens each
+    section's page (`/lab`, `/studio`...); only "/" and hashes scroll inside
+    the landing.
+  - Phones: an open sheet's content is as tall as the room it has, so the
+    "enter" button sits above the strips of the next sheets instead of under
+    them; a strong fling is held at the next sheet, never skipping one.
+  - Lab index on touch screens: no previews (they are made for a computer);
+    one tap on a door opens its piece.
+  - travesía ácida's preview is the piece itself, small: the same engine,
+    dot grid and acids.
+- menta&lola is removed from the lab (door and page): cámara does what it
+  promised. Kept in `docs/LAB.md` as the record of the idea.
+- Lab previews (owner, 2026-11-27): the tickets carry the piece's own push
+  pins; each half turn of the metro card brings the next city's card; the
+  sketchbook starts closed, its cover opens once onto menta and lola and it
+  stays open. A preview starts when its door opens.
+- Notes: the screened image keeps its own proportion (it was stretched). No
+  note is published yet, so every card is switched off ("coming soon"): it
+  says what the note is about and opens nothing, and the note pages are gone
+  (`Note.soon`).
+- Contact: Instagram, @yuang_tong, in both languages.
+- Navigation: "home" ("inicio") comes first and takes you to the start of
+  the landing; it is marked as current only on the landing itself.
+- lalande's close names the book like a work's label: its title, large
+  ("near to the wild heart", "cerca del corazón salvaje"), then "clarice
+  lispector, 1943" in mono. The cross-stitch is gone (owner, 2026-11-27).
+- Notes: one note for now, "manifesto" ("manifiesto"), coming soon; the
+  earlier drafts leave the list, and only a listed, published note has a
+  page.
+- lalande: the horse is written with Clarice Lispector's passage on Lalande
+  (the owner's Spanish text, and an English translation), read line by line
+  across it, instead of repeating "lalande" (`LalandePage.horseText`).
 - Version 1 (Vite) is kept in the branches `version-1` and `version-2025` on `db6054a` and
   removed from version 2, leftovers included (`node_modules 2/`, `nohup.out`,
   `vite.config.ts.timestamp-*.mjs`).

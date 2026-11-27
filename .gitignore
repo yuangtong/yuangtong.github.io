@@ -77,3 +77,6 @@ stats.html
 next-env.d.ts
 *.tsbuildinfo
 !.env.example
+
+# MediaPipe wasm, copied from node_modules at build (scripts/copy-mediapipe.mjs)
+public/lab/camara/wasm/

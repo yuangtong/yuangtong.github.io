@@ -57,7 +57,7 @@ to screen it.
 - Before and after, and "copiar enlace" with every parameter in the URL.
 - The first sketch the owner liked is the reference for the sliders.
 
-### cámara
+### cámara (shipped 2026-11-26, PR on top of the collections PR)
 
 The live camera as an instrument. Uses MediaPipe in the browser
 (`@mediapipe/tasks-vision`, hand landmarker).
@@ -75,6 +75,20 @@ The live camera as an instrument. Uses MediaPipe in the browser
   plain sentence about why the camera is asked for.
 - Without a camera, or if it is refused, the pointer or a finger on the
   screen draws the same trail.
+- Effects (2026-11-27): pixels, dither, halftone, ascii, cross-stitch and the
+  trail, on 2 px cells, with an automatic exposure per frame inside the
+  painted area.
+- Layout (v2, 2026-11-27): controls in a left column, the camera large on the
+  right, the photo under it; full screen folds the controls into a card.
+- Modes: draw (default on a computer; a closed loop fills in) and web toy (the
+  whole image takes the effect). Phones get only the web toy, without hand
+  tracking: camera on top, photo, controls below.
+- Always the camera image (no "only the hand" view) and always both hands.
+- Tracking runs only in draw mode; the space bar or the tracking switch pauses
+  it. Changing mode clears the image. No trail effect: without the image,
+  strokes stay in ink.
+- genkō, the Japanese-text effect, is paused while the owner chooses among the
+  three ways in the canvas (writing, density, current).
 - Reduced motion: the trail is drawn without the scramble and fades without
   movement.
 
