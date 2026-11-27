@@ -156,9 +156,8 @@ export const contactPage: ContactPage = {
   lead: 'I work from Lima for any time zone. write to me about a project, a collaboration or just to play with pixels.',
   email: { label: 'hola@yuangtong.dev', href: 'mailto:hola@yuangtong.dev' },
   emailLabel: 'email',
-  // upwork waits for its real link; '#' keeps it off the contact page
   links: [
-    { label: 'upwork', href: '#', detail: '' },
+    { label: 'upwork', href: 'https://www.upwork.com/freelancers/~01f641e45cff785eed', detail: 'profile' },
     { label: 'instagram', href: 'https://www.instagram.com/yuang_tong/', detail: '@yuang_tong' },
     { label: 'github', href: 'https://github.com/yuangtong', detail: 'yuangtong' },
     { label: 'linkedin', href: 'https://www.linkedin.com/in/yuangtong', detail: 'yuangtong' },

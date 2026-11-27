@@ -156,9 +156,8 @@ export const contactPage: ContactPage = {
   lead: 'trabajo desde Lima para cualquier huso horario. escríbeme por un proyecto, una colaboración o solo para jugar con píxeles.',
   email: { label: 'hola@yuangtong.dev', href: 'mailto:hola@yuangtong.dev' },
   emailLabel: 'correo',
-  // upwork waits for its real link; '#' keeps it off the contact page
   links: [
-    { label: 'upwork', href: '#', detail: '' },
+    { label: 'upwork', href: 'https://www.upwork.com/freelancers/~01f641e45cff785eed', detail: 'perfil' },
     { label: 'instagram', href: 'https://www.instagram.com/yuang_tong/', detail: '@yuang_tong' },
     { label: 'github', href: 'https://github.com/yuangtong', detail: 'yuangtong' },
     { label: 'linkedin', href: 'https://www.linkedin.com/in/yuangtong', detail: 'yuangtong' },

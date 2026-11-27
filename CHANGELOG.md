@@ -85,6 +85,7 @@ Owner decisions and housekeeping, to pick up later:
 
 ### Added
 
+- Contact: the Upwork profile link is live, on the contact page and in the menu, in every language.
 - Sanity connected (CMS). The editing panel is served at `/admin` (Sanity
   Studio, embedded with `next-sanity`), outside the locale routing and not
   indexed. Two content types to start: "Lab: order", which sets the order of
