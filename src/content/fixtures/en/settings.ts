@@ -28,7 +28,7 @@ export const settings: Settings = {
     body: 'this site sets no cookies and follows no one: no analytics, no ads, nothing sent to third parties.',
     rows: [
       { k: 'analytics', v: 'none' },
-      { k: 'on your device', v: 'that you closed this, and your best fare in boletos de lima' },
+      { k: 'on your device', v: 'only that you closed this notice' },
     ],
     ok: 'understood',
   },
