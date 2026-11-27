@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from 'react';
 import type { CamaraPage } from '@/content/types';
-import { prefersReducedMotion } from '@/lib/dither';
 import { camaraInks, camaraProcess, camaraRetro, color, corkGrid, type CamaraInk } from '@/lib/tokens';
 
 const CELL = 2;   // fine cells: 2 px, so the effects read the face (owner, 2026-11-27)
@@ -10,9 +9,10 @@ const HC = 5;     // the screened hand keeps its own, coarser unit
 const BAY = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5];
 const RAMP = ' .:-=+*#%@';
 const BONES = [[0, 1], [1, 2], [2, 3], [3, 4], [0, 5], [5, 6], [6, 7], [7, 8], [5, 9], [9, 10], [10, 11], [11, 12], [9, 13], [13, 14], [14, 15], [15, 16], [13, 17], [17, 18], [18, 19], [19, 20], [0, 17]];
-const TRAIL = 3200;
-type Effect = 'pixels' | 'dither' | 'halftone' | 'ascii' | 'stitch' | 'trail';
-const FX: Effect[] = ['pixels', 'dither', 'halftone', 'ascii', 'stitch', 'trail'];
+type Effect = 'pixels' | 'dither' | 'halftone' | 'ascii' | 'stitch';
+const FX: Effect[] = ['pixels', 'dither', 'halftone', 'ascii', 'stitch'];
+/** A stroke made without the image (only the hand, the cursor): plain ink, it stays. */
+const INKED = 255;
 const WINDOW = 3;                                   // effects shown at once; the arrows move the row
 const INKS = Object.keys(camaraInks) as CamaraInk[];
 type Ink = CamaraInk | 'multi';
@@ -22,13 +22,14 @@ type Brush = keyof typeof BRUSH;
 const DETAILS = ['fine', 'medium', 'coarse'] as const;
 type Detail = (typeof DETAILS)[number];
 /** Each effect's grain per detail, in px (pixels and dither: in cells). */
-const SIZE: Record<Effect, number[]> = { pixels: [1, 2, 4], dither: [1, 2, 4], halftone: [5, 8, 12], ascii: [6, 8, 12], stitch: [6, 8, 12], trail: [1, 1, 1] };
+// pixels are bigger than the rest, so they read as pixels and not as the image (owner, 2026-11-27)
+const SIZE: Record<Effect, number[]> = { pixels: [3, 6, 10], dither: [1, 2, 4], halftone: [5, 8, 12], ascii: [6, 8, 12], stitch: [6, 8, 12] };
 /** A stroke that comes back this close to where it started, after this long, closes a loop (px). */
 const LOOP = { near: 44, length: 160 };
 const rgb = (hex: string) => [parseInt(hex.slice(1, 3), 16), parseInt(hex.slice(3, 5), 16), parseInt(hex.slice(5, 7), 16)];
 const RETRO = camaraRetro.map(rgb);
 const INK_RGB = INKS.map((k) => rgb(camaraInks[k]));
-const PAPER = rgb(corkGrid.paper), INK0 = rgb(color.ink);
+const PAPER = rgb(corkGrid.paper);
 /** The nearest colour of the retro palette, as an index. */
 function nearest(r: number, g: number, b: number) {
   let best = 0, bd = 1e9;
@@ -50,10 +51,11 @@ type HL = { detectForVideo: (v: HTMLVideoElement, t: number) => { landmarks: { x
  * card. Two modes. Draw, the default on a computer: MediaPipe's hand
  * landmarker reads one or two hands in the browser, a pinch (landmarks 4 and
  * 8) puts the pen down and the index tip paints the chosen effect (pixels,
- * dither, halftone, ascii, cross-stitch or the glowing trail); a stroke that
- * closes a loop fills what it circles, and a new stroke paints over the last.
+ * dither, halftone, ascii or cross-stitch); a stroke that closes a loop fills
+ * what it circles, and a new stroke paints over the last. The space bar, or
+ * the tracking switch, pauses the hands so a finished figure stays put.
  * Web toy, the only mode on phones: the whole image takes the effect, live,
- * with no tracking. Effects read every frame with an automatic exposure,
+ * with no tracking. Changing mode clears the image. Effects read every frame with an automatic exposure,
  * measured inside what is painted. Only the hand, and the cursor without a
  * camera, keep their strokes in ink. Nothing is sent or kept: frames stay in
  * the browser.
@@ -65,6 +67,7 @@ export function Camara({ page }: { page: CamaraPage }) {
   const [source, setSource] = useState<Source>('idle');
   const [touch, setTouch] = useState(false);
   const [mode, setMode] = useState<Mode>('draw');
+  const [track, setTrack] = useState(true);
   const [full, setFull] = useState(false);
   const [mirror, setMirror] = useState(true);
   const [two, setTwo] = useState(false);
@@ -95,7 +98,7 @@ export function Camara({ page }: { page: CamaraPage }) {
   useEffect(() => {
     const root = rootRef.current, cv = cvRef.current, video = videoRef.current; if (!root || !cv || !video) return;
     setTop(root.getBoundingClientRect().top + window.scrollY);
-    const reduce = prefersReducedMotion(), ctx = cv.getContext('2d')!;
+    const ctx = cv.getContext('2d')!;
     const sc = document.createElement('canvas'), sx = sc.getContext('2d', { willReadFrequently: true })!;
     const oc = document.createElement('canvas'), ox = oc.getContext('2d')!;
     const mono = getComputedStyle(cv).fontFamily;
@@ -116,13 +119,13 @@ export function Camara({ page }: { page: CamaraPage }) {
     };
     const now0 = (S: typeof st.current) => {
       const img = S.source === 'camera' || (S.source === 'hand' && S.mirror);
-      return { f: FX.indexOf(img ? S.effect : 'trail'), k: S.ink === 'multi' ? MULTI : INKS.indexOf(S.ink), d: DETAILS.indexOf(S.detail), trail: !img || S.effect === 'trail' };
+      return { f: img ? FX.indexOf(S.effect) : INKED, k: S.ink === 'multi' ? MULTI : INKS.indexOf(S.ink), d: DETAILS.indexOf(S.detail), thin: !img };
     };
     const set = (id: number, f: number, k: number, d: number, now: number) => { paint[id] = now; seed[id] = (Math.random() * 255) | 0; fxc[id] = f; ikc[id] = k; dtc[id] = d; };
     // every stroke keeps its own effect, ink, brush and grain; a new one paints over the last
     const mark = (a: Pt, b: Pt, now: number) => {
-      const S = st.current, { f, k, d, trail } = now0(S);
-      const n = Math.max(1, Math.ceil(Math.hypot(b.x - a.x, b.y - a.y) / 3)), r = Math.round((trail ? BRUSH[S.brush] / 2 : BRUSH[S.brush]) / CELL);
+      const S = st.current, { f, k, d, thin } = now0(S);
+      const n = Math.max(1, Math.ceil(Math.hypot(b.x - a.x, b.y - a.y) / 3)), r = Math.round((thin ? BRUSH[S.brush] / 2 : BRUSH[S.brush]) / CELL);
       for (let i = 0; i <= n; i++) {
         const x = a.x + ((b.x - a.x) * i) / n, y = a.y + ((b.y - a.y) * i) / n;
         for (let dy = -r; dy <= r; dy++) for (let dx = -r; dx <= r; dx++) {
@@ -228,19 +231,10 @@ export function Camara({ page }: { page: CamaraPage }) {
       const combos = new Set<number>(); let bx0 = GW, by0 = GH, bx1 = -1, by1 = -1;
       const put = (id: number, c: number[], a = 255) => { const o = id * 4; D[o] = c[0]; D[o + 1] = c[1]; D[o + 2] = c[2]; D[o + 3] = a; };
       for (let y = 0; y < GH; y++) for (let x = 0; x < GW; x++) {
-        const id = y * GW + x, b = paint[id]; if (b < 0) continue;
+        const id = y * GW + x; if (paint[id] < 0) continue;
         const fx = FX[fxc[id]], k = ikc[id], multi = k === MULTI, dd = dtc[id];
-        // without the image (only the hand, the cursor) every stroke stays, in its ink (owner, 2026-11-27)
-        if (!px) { put(id, inkOf(k, seed[id])); continue; }
-        if (fx === 'trail') {
-          const age = now - b;
-          if (age > TRAIL) { paint[id] = -1; continue; }
-          const cool = (age - 260) / (TRAIL - 260), c = inkOf(k, seed[id]);
-          if (age < 260 && !reduce) put(id, INK0);
-          else if (cool < 0.45) put(id, c);
-          else if ((BAY[((y >> 1) & 3) * 4 + ((x >> 1) & 3)] + 0.5) / 16 > (cool - 0.45) / 0.55) put(id, c, 150);
-          continue;
-        }
+        // strokes made without the image (only the hand, the cursor) stay, in their ink (owner, 2026-11-27)
+        if (!px || fxc[id] === INKED) { put(id, inkOf(k, seed[id])); continue; }
         if (x < bx0) bx0 = x; if (x > bx1) bx1 = x; if (y < by0) by0 = y; if (y > by1) by1 = y;
         if (fx === 'pixels' || fx === 'dither') {
           // the cell's block: its colour is read once, at the block's centre
@@ -326,9 +320,10 @@ export function Camara({ page }: { page: CamaraPage }) {
     return () => cancelAnimationFrame(raf);
   }, []);
 
-  // the hands: one detection per new video frame
+  // the hands: one detection per new video frame, only while drawing and not paused (owner, 2026-11-27)
+  const tracking = source === 'hand' && mode === 'draw' && track;
   useEffect(() => {
-    if (source !== 'hand') return;
+    if (!tracking) { st.current.hands = []; st.current.pens = [false, false]; if (st.current.ptrDown) { st.current.ptrDown = false; setPen(false); } return; }
     const video = videoRef.current, cv = cvRef.current; if (!video || !cv) return;
     let raf = 0, lastT = -1;
     const loop = () => {
@@ -348,9 +343,20 @@ export function Camara({ page }: { page: CamaraPage }) {
     };
     raf = requestAnimationFrame(loop);
     return () => cancelAnimationFrame(raf);
-  }, [source]);
+  }, [tracking]);
 
-  useEffect(() => { lm.current?.setOptions({ numHands: two ? 2 : 1 }).catch(() => {}); }, [two, source]);
+  // the space bar pauses and resumes the hands
+  useEffect(() => {
+    if (source !== 'hand' || mode !== 'draw') return;
+    const key = (e: KeyboardEvent) => {
+      if (e.code !== 'Space' || e.repeat || (e.target as HTMLElement)?.closest?.('button, input, textarea')) return;
+      e.preventDefault(); setTrack((t) => !t);
+    };
+    window.addEventListener('keydown', key);
+    return () => window.removeEventListener('keydown', key);
+  }, [source, mode]);
+
+  useEffect(() => { lm.current?.setOptions({ numHands: two ? 2 : 1 }).catch(() => {}); }, [two, tracking]);
   useEffect(() => () => { stream.current?.getTracks().forEach((t) => t.stop()); lm.current?.close(); }, []);
 
   // the photo: 3, 2, 1, a clean frame, and it downloads
@@ -395,6 +401,8 @@ export function Camara({ page }: { page: CamaraPage }) {
     st.current.hands = []; st.current.pens = [false, false]; st.current.ptrDown = false; st.current.clear = true; setPen(false); setNote(''); setMode('draw'); setSource('cursor');
   };
   const local = (e: React.PointerEvent): Pt => { const r = e.currentTarget.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; };
+  // changing mode starts over: a clean image, the hands followed again
+  const switchMode = (m: Mode) => { if (m === mode) return; st.current.clear = true; setMode(m); setTrack(true); if (m === 'toy') setMirror(true); };
   const shown = Array.from({ length: WINDOW }, (_, i) => FX[(at + i) % FX.length]);
   const drawing = !toy;
 
@@ -415,7 +423,7 @@ export function Camara({ page }: { page: CamaraPage }) {
         <video ref={videoRef} className="camara__video" playsInline muted aria-hidden="true" />
         {on && (
           <div className="camara__state" aria-live="polite">
-            <span className="label">{toy ? page.sourceToy : source === 'hand' ? page.sourceHand : page.sourceCursor}</span>
+            <span className="label">{toy ? page.sourceToy : source === 'hand' ? (track ? page.sourceHand : page.track.paused) : page.sourceCursor}</span>
             {drawing && <span className="label" data-on={pen}>{pen ? page.penDown : page.penUp}</span>}
           </div>
         )}
@@ -443,8 +451,8 @@ export function Camara({ page }: { page: CamaraPage }) {
           <div role="group" aria-label={page.mode.label} className="camara__group">
             <span className="label">{page.mode.label}</span>
             <div className="camara__row">
-              <button type="button" className="camara__seg" aria-pressed={mode === 'draw'} onClick={() => setMode('draw')}>{page.mode.draw}</button>
-              <button type="button" className="camara__seg" aria-pressed={mode === 'toy'} onClick={() => { setMode('toy'); setMirror(true); }}>{page.mode.toy}</button>
+              <button type="button" className="camara__seg" aria-pressed={mode === 'draw'} onClick={() => switchMode('draw')}>{page.mode.draw}</button>
+              <button type="button" className="camara__seg" aria-pressed={mode === 'toy'} onClick={() => switchMode('toy')}>{page.mode.toy}</button>
             </div>
           </div>
         )}
@@ -469,6 +477,15 @@ export function Camara({ page }: { page: CamaraPage }) {
                 {shown.map((f) => <button key={f} type="button" className="camara__seg" aria-pressed={effect === f} onClick={() => setEffect(f)}>{page.effect[f]}</button>)}
               </div>
               <button type="button" className="camara__arrow" aria-label={page.effect.more} onClick={() => setAt((at + 1) % FX.length)}>→</button>
+            </div>
+          </div>
+        )}
+        {source === 'hand' && drawing && (
+          <div role="group" aria-label={page.track.label} className="camara__group">
+            <span className="label">{page.track.label} <span className="camara__at">{page.track.key}</span></span>
+            <div className="camara__row">
+              <button type="button" className="camara__seg" aria-pressed={track} onClick={() => setTrack(true)}>{page.track.on}</button>
+              <button type="button" className="camara__seg" aria-pressed={!track} onClick={() => setTrack(false)}>{page.track.off}</button>
             </div>
           </div>
         )}

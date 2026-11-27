@@ -190,7 +190,8 @@ export type CamaraPage = {
   full: { on: string; off: string };
   view: { label: string; mirror: string; hand: string };
   hands: { label: string; one: string; two: string };
-  effect: { label: string; pixels: string; dither: string; halftone: string; ascii: string; stitch: string; trail: string; more: string; back: string };
+  effect: { label: string; pixels: string; dither: string; halftone: string; ascii: string; stitch: string; more: string; back: string };
+  track: { label: string; on: string; off: string; key: string; paused: string };
   colour: { label: string; names: Record<string, string> };
   brush: { label: string; small: string; medium: string; large: string };
   pixel: { label: string; fine: string; medium: string; coarse: string };

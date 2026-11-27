@@ -73,6 +73,9 @@ The live camera as an instrument. Uses MediaPipe in the browser
 - Modes: draw (default on a computer; a closed loop fills in) and web toy (the
   whole image takes the effect). Phones get only the web toy, without hand
   tracking: camera on top, photo, controls below.
+- Tracking runs only in draw mode; the space bar or the tracking switch pauses
+  it. Changing mode clears the image. No trail effect: without the image,
+  strokes stay in ink.
 - genkō, the Japanese-text effect, is paused while the owner chooses among the
   three ways in the canvas (writing, density, current).
 - Reduced motion: the trail is drawn without the scramble and fades without

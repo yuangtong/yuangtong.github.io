@@ -90,6 +90,13 @@ Owner decisions and housekeeping, to pick up later:
   row moved with arrows. Only the hand, and the cursor, keep their strokes in
   ink. kana is taken out while the owner decides on genkō (canvas "lab:
   genkō"); the tap that covered the image on phones gives way to the web toy.
+- cámara, owner's notes 2026-11-27: the hands are tracked only while drawing;
+  the web toy runs without tracking. A tracking switch, and the space bar,
+  pause the hands so a finished figure stays put (the pointer still draws).
+  Changing mode clears the image and turns tracking back on. Pixels are
+  bigger (6, 12 or 20 px) so they read as pixels. The trail effect is gone:
+  without the image (only the hand, the cursor) strokes stay in their ink.
+  The lab door's text names the effects.
 
 - Lab: **boletos de lima** (`/lab/boletos`). The owner's 73 Lima bus tickets
   (72 on paper, one electronic receipt), cut out from the scans, on the grey
