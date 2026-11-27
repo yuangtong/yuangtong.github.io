@@ -63,7 +63,7 @@ export function Lalande({ page, coverSrc }: { page: LalandePage; coverSrc: strin
     const css = getComputedStyle(canvas);
     const eng = createLalande({
       canvas, gallop, dom: () => dom.current, reduce, W: fit.W, H: fit.H,
-      fonts: { word: css.getPropertyValue('--lalande-word') || css.fontFamily, mono: css.fontFamily, script: css.getPropertyValue('--lalande-script') || 'cursive' },
+      fonts: { word: css.getPropertyValue('--lalande-word') || css.fontFamily, mono: css.fontFamily },
       word: page.word, closeText: page.closeText, breezeLabel: page.breezeLabel,
     });
     canvas.style.width = `${eng.size.W * fit.s}px`; canvas.style.height = `${eng.size.H * fit.s}px`;

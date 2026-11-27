@@ -1,4 +1,4 @@
-import type { ArchivePage, BitsplashPage, BoletosPage, ContactPage, MetroCardsPage, HomePage, LabPage, LalandePage, NotePage, NotesPage, NotFoundPage, StoryPage, StudioPage, TravesiaPage } from '../../types';
+import type { ArchivePage, BitsplashPage, SketchbookPage, BoletosPage, ContactPage, MetroCardsPage, HomePage, LabPage, LalandePage, NotePage, NotesPage, NotFoundPage, StoryPage, StudioPage, TravesiaPage } from '../../types';
 
 export const home: HomePage = {
   intro: {
@@ -86,10 +86,7 @@ export const labPage: LabPage = {
     { id: 'boletos', group: 'archive', preview: 'tickets', title: 'boletos de lima', text: 'los boletos de bus que guardé en lima, clavados en la malla. ordénalos, ábrelos o juega pasaje con ellos.', cta: { label: 'ver los boletos', href: '/lab/boletos' } },
     { id: 'metro-cards', group: 'archive', preview: 'card', title: 'metro cards', text: 'las tarjetas de transporte que guardé, una por ciudad, sobre el globo de puntos. dales la vuelta.', cta: { label: 'ver las tarjetas', href: '/lab/metro-cards' } },
     { id: 'bitsplash', group: 'play', preview: 'splash', title: 'bitsplash', text: 'haz clic y cae una salpicadura ácida de 8 bits sobre la malla gris. haz un desastre y guárdalo como imagen.', cta: { label: 'salpicar', href: '/lab/bitsplash' } },
-    { id: 'sketchbook', group: 'archive', preview: 'still', soon: true, title: 'sketchbook', text: 'mi sketchbook, escaneado página por página, como un libro que hojeas en 3d.', cta: { label: 'ver qué será', href: '/lab/sketchbook' },
-      points: ['las páginas abiertas como acordeón; arrastra para pasarlas.', 'dibujos, collage y lo que pego en él.', 'las páginas se están eligiendo.'] },
-    { id: 'menta-lola', group: 'play', preview: 'still', soon: true, title: 'menta&lola', text: 'mis gatas, menta y lola, para tramar una imagen con unos treinta y dos algoritmos y sus perillas.', cta: { label: 'ver qué será', href: '/lab/menta-lola' },
-      points: ['tres imágenes: menta, lola y el caballo.', 'difusión de error, bayer, medio tono, patrones, bordes, ruido, crt y ascii, entre otros.', 'la carcoma que se come la imagen por dentro y la vuelve ascii.', 'escala, umbral, contraste, gamma, brillo y paleta; antes y después; copiar enlace.'] },
+    { id: 'sketchbook', group: 'archive', preview: 'book', title: 'sketchbook', text: 'mi sketchbook, escaneado página por página. pasa las hojas como en un libro.', cta: { label: 'hojear el sketchbook', href: '/lab/sketchbook' } },
     { id: 'camara', group: 'play', preview: 'still', soon: true, title: 'cámara', text: 'tu cámara y tu mano: juntas el pulgar y el índice y la punta del dedo deja una estela de glifos.', cta: { label: 'ver qué será', href: '/lab/camara' },
       points: ['sigue tu mano con mediapipe, en tu navegador.', 'pellizca para dibujar, abre la mano para soltar; la estela se apaga sola.', 'tu imagen no sale de tu dispositivo.', 'sin cámara, dibujas con el cursor o con el dedo.'] },
     { id: 'dona', group: 'play', preview: 'still', soon: true, title: 'dona de teselas', text: 'una dona y otros sólidos en 3d hechos de teselas y glifos. los giras y cambias la imagen de la que están hechos.', cta: { label: 'ver qué será', href: '/lab/dona' },
@@ -256,6 +253,17 @@ export const metroCardsPage: MetroCardsPage = {
   front: 'anverso', back: 'reverso', turn: 'clic para voltear', variants: 'variantes', count: '{cities} ciudades, {cards} tarjetas',
   cardLabel: 'tarjeta {system}, {city}, mostrando su {side}. presiona para darle la vuelta.',
   globeLabel: 'un globo de puntos con {city}, {country} marcada en azul al centro. las otras ciudades con tarjeta: {others}.',
+};
+
+export const sketchbookPage: SketchbookPage = {
+  title: 'sketchbook',
+  lead: 'mi sketchbook, escaneado página por página. arrastra una esquina o usa las flechas para pasar las hojas.',
+  cover: 'sketchbook', coverBy: 'yuang tong', back: 'más páginas pronto: las estoy escaneando.',
+  prev: 'página anterior', next: 'página siguiente', bookLabel: 'el sketchbook, un libro que se hojea',
+  alts: {
+    menta: 'página de menta: su nombre en verde arriba y su retrato a lápiz, en papel de calco, sobre un paisaje de crayón azul y verde.',
+    lola: 'página de lola: su nombre en rojo y su retrato con boina roja sobre un fondo amarillo, entre recortes pegados y una frase escrita a mano.',
+  },
 };
 
 export const bitsplashPage: BitsplashPage = {

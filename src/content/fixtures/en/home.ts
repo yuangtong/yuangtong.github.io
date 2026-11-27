@@ -1,4 +1,4 @@
-import type { ArchivePage, BitsplashPage, BoletosPage, ContactPage, MetroCardsPage, HomePage, LabPage, LalandePage, NotePage, NotesPage, NotFoundPage, StoryPage, StudioPage, TravesiaPage } from '../../types';
+import type { ArchivePage, BitsplashPage, SketchbookPage, BoletosPage, ContactPage, MetroCardsPage, HomePage, LabPage, LalandePage, NotePage, NotesPage, NotFoundPage, StoryPage, StudioPage, TravesiaPage } from '../../types';
 
 export const home: HomePage = {
   intro: {
@@ -86,10 +86,7 @@ export const labPage: LabPage = {
     { id: 'boletos', group: 'archive', preview: 'tickets', title: 'boletos de lima', text: "the bus tickets i kept in lima, pinned to the grid. sort them, open them, or play pasaje with them.", cta: { label: 'see the tickets', href: '/lab/boletos' } },
     { id: 'metro-cards', group: 'archive', preview: 'card', title: 'metro cards', text: 'the transport cards i kept, one city each, on the dot-grid globe. turn them over.', cta: { label: 'see the cards', href: '/lab/metro-cards' } },
     { id: 'bitsplash', group: 'play', preview: 'splash', title: 'bitsplash', text: 'click and an 8-bit acid splash lands on the grey grid. make a mess and keep it as an image.', cta: { label: 'make a splash', href: '/lab/bitsplash' } },
-    { id: 'sketchbook', group: 'archive', preview: 'still', soon: true, title: 'sketchbook', text: 'my sketchbook, scanned page by page, as a book you leaf through in 3d.', cta: { label: 'see what it will be', href: '/lab/sketchbook' },
-      points: ['the pages fanned like an accordion; drag to turn them.', 'drawings, collage and what i paste in it.', 'the pages are being chosen.'] },
-    { id: 'menta-lola', group: 'play', preview: 'still', soon: true, title: 'menta&lola', text: 'my cats, menta and lola, to screen an image with some thirty-two algorithms and their knobs.', cta: { label: 'see what it will be', href: '/lab/menta-lola' },
-      points: ['three images: menta, lola and the horse.', 'error diffusion, bayer, halftone, patterns, edges, noise, crt and ascii, among others.', 'the carcoma that eats the image from inside and turns it into ascii.', 'scale, threshold, contrast, gamma, brightness and palette; before and after; copy link.'] },
+    { id: 'sketchbook', group: 'archive', preview: 'book', title: 'sketchbook', text: 'my sketchbook, scanned page by page. turn the pages as in a book.', cta: { label: 'leaf through the sketchbook', href: '/lab/sketchbook' } },
     { id: 'camara', group: 'play', preview: 'still', soon: true, title: 'cámara', text: 'your camera and your hand: pinch thumb and index together and your fingertip leaves a trail of glyphs.', cta: { label: 'see what it will be', href: '/lab/camara' },
       points: ['it follows your hand with mediapipe, in your browser.', 'pinch to draw, open your hand to let go; the trail fades on its own.', 'your image never leaves your device.', 'without a camera, you draw with the cursor or a finger.'] },
     { id: 'dona', group: 'play', preview: 'still', soon: true, title: 'dona de teselas', text: 'a donut and other 3d solids made of tiles and glyphs. you turn them and change the image they are made of.', cta: { label: 'see what it will be', href: '/lab/dona' },
@@ -256,6 +253,17 @@ export const metroCardsPage: MetroCardsPage = {
   front: 'front', back: 'back', turn: 'click to turn', variants: 'variants', count: '{cities} cities, {cards} cards',
   cardLabel: '{system} card, {city}, showing its {side}. press to turn it over.',
   globeLabel: 'a dot-grid globe with {city}, {country} marked in blue in the middle. the other cities with cards: {others}.',
+};
+
+export const sketchbookPage: SketchbookPage = {
+  title: 'sketchbook',
+  lead: 'my sketchbook, scanned page by page. drag a corner or use the arrows to turn the pages.',
+  cover: 'sketchbook', coverBy: 'yuang tong', back: 'more pages soon: i am scanning them.',
+  prev: 'previous page', next: 'next page', bookLabel: 'the sketchbook, a book to leaf through',
+  alts: {
+    menta: "menta's page: her name in green at the top and her pencil portrait, on tracing paper, over a blue and green crayon landscape.",
+    lola: "lola's page: her name in red and her portrait in a red beret on a yellow ground, among pasted cut-outs and a handwritten line.",
+  },
 };
 
 export const bitsplashPage: BitsplashPage = {
