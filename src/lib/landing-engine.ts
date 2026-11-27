@@ -430,6 +430,7 @@ export function createLanding(o: LandingOptions) {
   }
   let contentH: number[] = [], measured = false, fitted = false;
   const headAt = [-1, -1, -1, -1, -1];
+  let titleAt = -1;
   function layoutSheets(d: LandingDom, x: number, enter: number) {
     const geo = sheetGeo(x);
     // phones: an open sheet's content is as tall as the room it has, so its
@@ -509,7 +510,11 @@ export function createLanding(o: LandingOptions) {
           setText(el, u >= 1 ? T : decode(u, T));
         });
       }
-      setText(d.title, t5 < 1 ? decode((t5 - 0.62) / 0.33) : o.title);
+      // the first sheet's title too, on a clock: it waits a beat once the sheet has
+      // slid in, then decodes, so a snapped arrival on a phone still shows it (owner, 2026-11-27)
+      if (geo && enter > 0.9 && geo.hs[0] > C.strip + 2) { if (titleAt < 0) titleAt = now; } else titleAt = -1;
+      const tu = reduce ? 1 : titleAt < 0 ? 0 : clamp((now - titleAt - 300) / 1100);
+      setText(d.title, tu >= 1 ? o.title : decode(tu));
       const glyphVisible = glyphMode && x < 1.05;
       if ((step !== drawn || moving || glyphVisible) && now - lastDraw > 28) {
         if (glyphMode) {

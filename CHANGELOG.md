@@ -50,6 +50,18 @@ Owner decisions and housekeeping, to pick up later:
 
 ### Changed
 
+- About me on phones (owner, 2026-11-27):
+  - The "about me" sheet of the landing sets its line like the other sheets
+    (28px, 22px on phones, light, tight tracking) instead of the small body
+    size.
+  - Its title decodes on a clock, like the other sheet titles: a short pause
+    once the sheet is in place, then the scramble. Tied to the scroll it was
+    already over when a snapped swipe arrived.
+  - On the about page, phones type each paragraph on its own clock once it is
+    well inside the strip below the portrait, and keep it typed; tied to the
+    scroll it was written while hidden under the sticky portrait. The last
+    paragraph rests in that strip at the end of the page instead of under the
+    portrait. Copy and the desktop behaviour are unchanged.
 - Landing, owner's notes (2026-11-27):
   - The availability line, which falls with the hero, drops back in from the
     top once the story is over (`HeroFall.release`).

@@ -47,7 +47,8 @@ export function About({ page }: { page: AboutPage }) {
     const setTop = () => root.style.setProperty('--about-top', `${header?.getBoundingClientRect().height ?? 0}px`);
     setTop(); window.addEventListener('resize', setTop);
     const P = texts.map((s, i) => ({ T: s, pre: i === texts.length - 1 ? page.closing.length : s.length }));
-    const count = P.map(() => 0);
+    const count = P.map(() => 0), seen = P.map(() => false);
+    const phone = window.matchMedia('(max-width: 760px)'), photoEl = root.querySelector<HTMLElement>('.about__photo');
     let raf = 0, lastSec = 0, lastStep = -1, g: Grid | null = null, still = false;
     const img = new Image(); let imgOk = false; img.onload = () => { imgOk = true; }; img.src = PORTRAIT;
 
@@ -61,7 +62,17 @@ export function About({ page }: { page: AboutPage }) {
       P.forEach((p, i) => {
         const el = paraRefs.current[i], r = parts.current[i]; if (!el || !r) return;
         const N = p.T.length;
-        let target = reduce ? N : i === 0 ? clamp(((sec - 0.9) * CPS) / N) * N : clamp((line - el.getBoundingClientRect().top) / (vh * 0.42)) * N;
+        let target: number;
+        if (reduce) target = N;
+        else if (i === 0) target = clamp(((sec - 0.9) * CPS) / N) * N;
+        else if (phone.matches) {
+          // phones: the portrait covers the top of the screen, so a paragraph types
+          // itself on its own clock once it is well inside the strip below it, and
+          // stays typed; tied to the scroll it was written under the portrait (owner, 2026-11-27)
+          const box = (el.querySelector('.about__ghost') ?? el).getBoundingClientRect(), top = photoEl?.getBoundingClientRect().bottom ?? 0;
+          if (box.bottom <= vh - 24 || box.top <= top + (vh - top) * 0.4) seen[i] = true;
+          target = seen[i] ? N : 0;
+        } else target = clamp((line - el.getBoundingClientRect().top) / (vh * 0.42)) * N;
         if (atEnd) target = N;                                                   // reaching the bottom finishes it
         if (i > 0 && count[i - 1] < P[i - 1].T.length) target = 0;             // one paragraph after another
         let c = count[i]; const step = CPS * dt * (Math.abs(target - c) > 40 ? 2.2 : 1);
