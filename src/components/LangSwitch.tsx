@@ -4,6 +4,7 @@ import { useEffect, useId, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import type { Settings } from '@/content/types';
 import { isLocale, localePath, splitPath } from '@/content/locale';
+import { LANG_KEY } from '@/lib/lang-detect';
 
 type Props = { languages: Settings['languages']; className?: string; /** Inline list for the phone menu, no button. */ inline?: boolean };
 
@@ -14,6 +15,9 @@ type Props = { languages: Settings['languages']; className?: string; /** Inline 
  * translated and marked as such. Those wait for DeepL and say "soon" until
  * their content is ready.
  */
+/** The visitor's choice wins over the browser's language from now on (see lang-detect). */
+const remember = (code: string) => { try { localStorage.setItem(LANG_KEY, code); } catch { /* private mode */ } };
+
 export function LangSwitch({ languages, className, inline }: Props) {
   const pathname = usePathname() ?? '/';
   const { locale, path } = splitPath(pathname);
@@ -43,7 +47,7 @@ export function LangSwitch({ languages, className, inline }: Props) {
           const href = isLocale(l.code) ? localePath(l.code, path) + hash : '#';
           return (
             <li key={l.code}>
-              <a className="lang__opt" href={href} hrefLang={l.code} lang={l.code} aria-current={on ? 'true' : undefined}>
+              <a className="lang__opt" href={href} hrefLang={l.code} lang={l.code} aria-current={on ? 'true' : undefined} onClick={() => remember(l.code)}>
                 <span className="lang__name">{l.name}</span><span className="lang__code">{l.code}</span>
               </a>
             </li>
