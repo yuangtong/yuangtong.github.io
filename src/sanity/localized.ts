@@ -1,5 +1,5 @@
 import { defineArrayMember, defineField } from 'sanity';
-import { locales } from '@/content/locale';
+import { writtenLocales as locales } from '@/content/locale';
 
 type Kind = 'string' | 'text' | 'list';
 
