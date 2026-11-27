@@ -85,6 +85,14 @@ Owner decisions and housekeeping, to pick up later:
 
 ### Added
 
+- Machine translation with DeepL for Portuguese, Chinese and Japanese:
+  `scripts/translate.mts` translates the English fixtures into
+  `src/content/fixtures/<locale>/content.json`, only new or changed strings,
+  with placeholders and piece titles protected. The GitHub Action "Translate
+  with DeepL" runs it with the repository secret `DEEPL_API_KEY` and opens a
+  pull request. See `docs/TRANSLATION.md`. The routes for those languages
+  come in a follow-up change.
+
 - Cookie notice (owner, 2026-11-27), in every language, drawn like the
   availability card (paper, 1px ink rule, hard ink shadow) at the lower left.
   The site sets no cookies and loads no analytics, so it informs and asks
