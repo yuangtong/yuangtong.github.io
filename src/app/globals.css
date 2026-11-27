@@ -815,3 +815,7 @@ img, canvas { display: block; }
   .about__text { padding: var(--s-5) var(--gutter) 0; }
   .about__para { font-size: 17px; margin-bottom: 12vh; max-width: none; }
 }
+
+/* the site's cursor on a computer (owner, 2026-11-27): the system pointer is hidden everywhere, a blue cell and its trail draw instead */
+.ascii-cursor__cv { position: fixed; inset: 0; width: 100vw; height: 100vh; z-index: 1000; pointer-events: none; font-family: var(--font-mono); }
+html.ascii-cursor, html.ascii-cursor * { cursor: none !important; }

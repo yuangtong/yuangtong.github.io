@@ -111,7 +111,7 @@ export function Landing({ page, nav, links, ui, languages, glyphFamily, piece }:
     const canvas = canvasRef.current, wrap = wrapRef.current;
     if (!canvas || !wrap) return;
     const reduce = prefersReducedMotion();
-    let raf = 0, dead = false, sys = 0, cursorOn = false, statusBack = false;
+    let raf = 0, dead = false, sys = 0, statusBack = false;
     Promise.all([loadGallop(), piece ? Promise.resolve(null) : loadRider().catch(() => null)]).then(([g, rider]) => {
       if (dead) return;
       setFlight(g.flight);
@@ -193,11 +193,9 @@ export function Landing({ page, nav, links, ui, languages, glyphFamily, piece }:
         if (st && over && !statusBack) { statusBack = true; fallRef.current?.release(st); st.classList.add('is-back'); }
         else if (st && statusBack && sys < C.VOID * 0.012) { statusBack = false; st.classList.remove('is-back'); }
       }
-      // the dithered cursor wakes up once the story is over
-      if (!piece) { const cur = sys >= C.VOID + C.STORY + C.TEXT * 0.3; if (cur !== cursorOn) { cursorOn = cur; document.documentElement.toggleAttribute('data-cursor', cur); } }
     };
     raf = requestAnimationFrame(loop);
-    return () => { dead = true; cancelAnimationFrame(raf); window.clearTimeout(sheetRef.current.settle); document.documentElement.classList.remove('snap-sheets'); engineRef.current = null; fallRef.current?.reset(); fallRef.current = null; if (!piece) document.documentElement.removeAttribute('data-cursor'); };
+    return () => { dead = true; cancelAnimationFrame(raf); window.clearTimeout(sheetRef.current.settle); document.documentElement.classList.remove('snap-sheets'); engineRef.current = null; fallRef.current?.reset(); fallRef.current = null; };
     // the engine is rebuilt when the stage changes size or switches frame
   }, [fitKey, top]); // eslint-disable-line react-hooks/exhaustive-deps
 

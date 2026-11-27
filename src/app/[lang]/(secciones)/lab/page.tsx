@@ -15,7 +15,7 @@ export default async function LabPage({ params }: LangParams) {
         <h1 className="h2">{page.title}</h1>
         <p className="lead">{page.lead}</p>
       </div>
-      <LabDoors page={{ ...page, doors: released(page.doors) }} />
+      <LabDoors page={{ ...page, doors: released(page.doors, page.soon.cta) }} />
     </main>
   );
 }

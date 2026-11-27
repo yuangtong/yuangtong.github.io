@@ -29,7 +29,7 @@ export function Studio({ page }: { page: StudioPage }) {
 
   return (
     <main
-      className="section section--studio" aria-label={page.title} data-cursor-tone="fommo"
+      className="section section--studio" aria-label={page.title}
       onPointerMove={(ev) => { const r = ev.currentTarget.getBoundingClientRect(); engine.current?.pointer(ev.clientX - r.left, ev.clientY - r.top); }}
       onPointerLeave={() => engine.current?.pointer(null)}
     >

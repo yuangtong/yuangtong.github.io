@@ -145,7 +145,7 @@ export type LabPreview = 'gallop' | 'drop' | 'tunnel' | 'desk' | 'tickets' | 'ca
 /** `held`: built and on the previews, but kept out of production until the owner presents it. */
 export type LabDoor = { id: string; title: string; text: string; cta: Link; group: 'story' | 'play' | 'archive'; preview: LabPreview; soon?: boolean; held?: boolean; points?: string[] };
 
-export type LabPage = { title: string; lead: string; doors: LabDoor[]; groups: Record<LabDoor['group'], string>; previewLabel: string; experiments: Experiment[]; soon: { label: string; back: Link } };
+export type LabPage = { title: string; lead: string; doors: LabDoor[]; groups: Record<LabDoor['group'], string>; previewLabel: string; experiments: Experiment[]; soon: { label: string; back: Link; cta: string } };
 
 /** A story in the lab, told with the landing's engine and its narration on. */
 export type StoryPage = { title: string; label: string; hint: string; replay: string };

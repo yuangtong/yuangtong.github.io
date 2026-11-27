@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { color } from '@/lib/tokens';
 import { getSettings, locales, localePath } from '@/content';
 import { CarcomaProvider } from '@/components/Carcoma';
-import { DitherCursor } from '@/components/DitherCursor';
+import { AsciiCursor } from '@/components/AsciiCursor';
 import { geistMono, host, notoTc, script } from '../fonts';
 import { routeLocale, type LangParams } from '@/app/[lang]/locale';
 import '../tokens.css';
@@ -33,7 +33,7 @@ export default async function RootLayout({ children, params }: { children: React
   const locale = await routeLocale(params);
   return (
     <html lang={locale} className={[host.variable, geistMono.variable, notoTc.variable, script.variable].join(' ')}>
-      <body><CarcomaProvider>{children}<DitherCursor /></CarcomaProvider></body>
+      <body><CarcomaProvider>{children}<AsciiCursor /></CarcomaProvider></body>
     </html>
   );
 }

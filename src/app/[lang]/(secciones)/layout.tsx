@@ -1,6 +1,5 @@
 import { getContactPage, getHomePage, getSettings } from '@/content';
 import { SiteHeader } from '@/components/SiteHeader';
-import { CursorOn } from '@/components/CursorOn';
 import { routeLocale, type LangParams } from '@/app/[lang]/locale';
 
 const pad = (n: number) => String(n).padStart(2, '0');
@@ -20,7 +19,6 @@ export default async function SectionsLayout({ children, params }: { children: R
   ].map((s, i) => ({ ...s, n: pad(i + 1) }));
   return (
     <div className="section-shell">
-      <CursorOn />
       <SiteHeader nav={settings.nav} links={contact.links} ui={settings.ui} languages={settings.languages} name={home.intro.name} nameZh={home.intro.nameZh} availability={home.intro.availability} crumbs={settings.crumbs} strips={strips} />
       {children}
     </div>

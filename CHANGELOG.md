@@ -67,8 +67,9 @@ Owner decisions and housekeeping, to pick up later:
   cities in ink, `globe.other`). LinkedIn joins the links (yuangtong).
 - boletos de lima and metro cards are held back from production (`held` on
   their doors, `src/lib/release.ts`, Vercel's `VERCEL_ENV`): on previews they
-  stay; on the live site their doors are gone and their pages 404. Boletos
-  needs a vertical phone layout, to design first.
+  stay; on the live site they show as coming soon, door and page (the
+  shared `SoonPiece`), with the "see what it will be" link (`LabPage.soon.cta`).
+  Boletos needs a vertical phone layout, to design first.
 
 ### Added
 -- **About** (`/about`), canvas "about v3" (approved 2026-11-27):
@@ -84,6 +85,15 @@ Owner decisions and housekeeping, to pick up later:
     Reduced motion shows all of it, with the portrait already eaten.
   - The navigation's "about" now opens this page, and the sections' header
     numbers it 01.
+  - The greeting carries the owner's Chinese name: "hola. i'm yuang tong
+    (唐源), …".
+- The site's cursor on a computer (owner, 2026-11-27; after Originkit's
+  "Character Cursor"): the system pointer is hidden from the moment the site
+  opens, and a blue cell edged in paper follows the mouse. Moving it lights
+  a small trail of blue cells with scrambled characters, the owner's name
+  among them. Touch screens and reduced motion keep the system pointer. It
+  replaces the dithered cursor (`DitherCursor`, `CursorOn` and
+  `cursorTones` are gone).
 
  Hero v2 (canvas "hero v2: todo cae menos el navbar", approved 2026-11-24): on the first scroll everything but the navigation comes loose. The availability line falls with the letters, the buttons and the scroll hint, and the blocks now land on the floor (without pushing the letters) so the void swallows them with the pile, instead of dropping out of view. Only the navigation and the phone's menu button stay still.
 - "Keep scrolling" / "sigue bajando" (owner, 2026-11-24): whenever the visitor stops for more than a moment between the first scroll and the first sheet (about), a small line at the bottom of the stage blinks and bounces until they scroll again; it never shows on the sheets. Desktop and phones, every language (`intro.keepScrolling`). Reduced motion keeps it still.

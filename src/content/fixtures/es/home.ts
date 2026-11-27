@@ -99,7 +99,7 @@ export const labPage: LabPage = {
   ],
   groups: { story: 'historia', play: 'para jugar', archive: 'archivo' },
   previewLabel: '{title}, en vivo',
-  soon: { label: 'próximamente', back: { label: 'volver al lab', href: '/lab' } },
+  soon: { label: 'próximamente', back: { label: 'volver al lab', href: '/lab' }, cta: 'ver qué será' },
   experiments: [
     { id: 'medio', title: 'medio tono', meta: 'código, 2026', alt: 'El galope en puntos azules de tamaño variable', visual: 'medio', defaultCell: 8, href: '/lab' },
     { id: 'camara', title: 'cámara tramada', meta: 'código, 2026', alt: 'Fotografía del galope tramada en azul y papel', visual: 'camara', defaultCell: 4, href: '/lab' },
@@ -263,7 +263,7 @@ export const metroCardsPage: MetroCardsPage = {
 export const aboutPage: AboutPage = {
   title: 'sobre mí',
   paras: [
-    'hola. soy yuang tong, diseñador web en lima.',
+    'hola. soy yuang tong (唐源), diseñador web en lima.',
     'nací en 2001 y crecí en lima. desde muy chico encontré pasión por el arte digital.',
     'mientras crecía estudié ingeniería informática, y esa base sigue presente en cómo trabajo.',
     'disfruto mucho todo lo que rodea al arte digital: tomar fotos, grabar y editar videos, hacer collage digital. últimamente me estoy metiendo en la programación creativa, el live coding de música con strudel y la práctica de dj. también me gusta mucho leer y escribir.',

@@ -99,7 +99,7 @@ export const labPage: LabPage = {
   ],
   groups: { story: 'story', play: 'to play', archive: 'archive' },
   previewLabel: '{title}, live',
-  soon: { label: 'coming soon', back: { label: 'back to the lab', href: '/lab' } },
+  soon: { label: 'coming soon', back: { label: 'back to the lab', href: '/lab' }, cta: 'see what it will be' },
   experiments: [
     { id: 'medio', title: 'medio tono', meta: 'code, 2026', alt: 'The gallop in blue dots of varying size', visual: 'medio', defaultCell: 8, href: '/lab' },
     { id: 'camara', title: 'cámara tramada', meta: 'code, 2026', alt: 'A photograph of the gallop screened in blue and paper', visual: 'camara', defaultCell: 4, href: '/lab' },
@@ -263,7 +263,7 @@ export const metroCardsPage: MetroCardsPage = {
 export const aboutPage: AboutPage = {
   title: 'about me',
   paras: [
-    "hola. i'm yuang tong, a web designer in lima.",
+    "hola. i'm yuang tong (唐源), a web designer in lima.",
     'born in 2001, raised in lima. from a very young age i found a passion for digital art.',
     'as i grew up, i studied information technology engineering, and that background still shapes how i work.',
     "i find real joy in everything around digital art: taking photos, shooting and editing video, making digital collage. lately i've been getting into creative coding, live coding music with strudel and practicing djing. i also love reading and writing.",
