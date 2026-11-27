@@ -189,6 +189,8 @@ export type CamaraPage = {
   hands: { label: string; one: string; two: string };
   effect: { label: string; pixels: string; dither: string; glyphs: string; trail: string };
   colour: { label: string; names: Record<string, string> };
+  brush: { label: string; small: string; medium: string; large: string };
+  pixel: { label: string; fine: string; medium: string; coarse: string };
   clear: string; photo: string; saved: string;
   how: string[];
 };

@@ -719,3 +719,4 @@ img, canvas { display: block; }
 .camara__how li { display: flex; gap: var(--s-2); }
 .camara__count { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); margin: 0; font-size: clamp(120px, 18vw, 240px); line-height: 1; font-weight: 300; color: var(--paper); text-shadow: 0 0 0 var(--ink), 4px 4px 0 var(--ink); pointer-events: none; }
 @media (max-width: 900px) { .camara__how { display: none; } }
+.camara__ink--multi { background: conic-gradient(var(--signal) 0 17%, var(--acid-red) 0 34%, var(--acid-yellow) 0 50%, var(--lima) 0 67%, var(--rosado) 0 84%, var(--acid-violet) 0); }

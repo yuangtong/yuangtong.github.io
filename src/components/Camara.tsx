@@ -3,9 +3,9 @@
 import { useEffect, useRef, useState } from 'react';
 import type { CamaraPage } from '@/content/types';
 import { prefersReducedMotion } from '@/lib/dither';
-import { camaraInks, color, corkGrid, type CamaraInk } from '@/lib/tokens';
+import { camaraInks, camaraRetro, color, corkGrid, type CamaraInk } from '@/lib/tokens';
 
-const CELL = 8;
+const CELL = 5;   // finer cells: more detail in the effects (owner, 2026-11-27)
 const BAY = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5];
 const GLY = ' .:-=+*#%@';
 const SCR = '#%@&*+=01<>/\\';
@@ -13,6 +13,21 @@ const BONES = [[0, 1], [1, 2], [2, 3], [3, 4], [0, 5], [5, 6], [6, 7], [7, 8], [
 const TRAIL = 3200;
 const FX: Effect[] = ['pixels', 'dither', 'glyphs', 'trail'];
 const INKS = Object.keys(camaraInks) as CamaraInk[];
+type Ink = CamaraInk | 'multi';
+const MULTI = INKS.length;                       // the multicolour ink's index in a cell
+const BRUSH = { small: 2, medium: 4, large: 7 }; // radius in cells
+type Brush = keyof typeof BRUSH;
+const DETAIL = { fine: 1, medium: 2, coarse: 4 }; // block size in cells
+type Detail = keyof typeof DETAIL;
+const RETRO = camaraRetro.map((h) => [parseInt(h.slice(1, 3), 16), parseInt(h.slice(3, 5), 16), parseInt(h.slice(5, 7), 16)]);
+/** The nearest colour of the retro palette. */
+function nearest(r: number, g: number, b: number) {
+  let best = 0, bd = 1e9;
+  for (let i = 0; i < RETRO.length; i++) { const c = RETRO[i], d = (c[0] - r) ** 2 * 0.3 + (c[1] - g) ** 2 * 0.59 + (c[2] - b) ** 2 * 0.11; if (d < bd) { bd = d; best = i; } }
+  return camaraRetro[best];
+}
+/** Posterized, like an old game's textures: four levels per channel. */
+const poster = (v: number) => Math.round(v / 85) * 85;
 type Effect = 'pixels' | 'dither' | 'glyphs' | 'trail';
 type Source = 'idle' | 'loading' | 'hand' | 'cursor';
 type Pt = { x: number; y: number };
@@ -37,13 +52,15 @@ export function Camara({ page }: { page: CamaraPage }) {
   const [mirror, setMirror] = useState(true);
   const [two, setTwo] = useState(false);
   const [effect, setEffect] = useState<Effect>('pixels');
-  const [ink, setInk] = useState<CamaraInk>('signal');
+  const [ink, setInk] = useState<Ink>('signal');
+  const [brush, setBrush] = useState<Brush>('medium');
+  const [detail, setDetail] = useState<Detail>('medium');
   const [pen, setPen] = useState(false);
   const [note, setNote] = useState('');
   const [count, setCount] = useState(0);
   const [top, setTop] = useState(0);
-  const st = useRef({ source: 'idle' as Source, mirror: true, effect: 'pixels' as Effect, ink: 'signal' as CamaraInk, ptr: null as Pt | null, ptrDown: false, mouse: false, hands: [] as Pt[][], pens: [false, false], clear: false, clean: false });
-  Object.assign(st.current, { source, mirror, effect, ink });
+  const st = useRef({ source: 'idle' as Source, mirror: true, effect: 'pixels' as Effect, ink: 'signal' as Ink, brush: 'medium' as Brush, detail: 'medium' as Detail, ptr: null as Pt | null, ptrDown: false, mouse: false, hands: [] as Pt[][], pens: [false, false], clear: false, clean: false });
+  Object.assign(st.current, { source, mirror, effect, ink, brush, detail });
   const lm = useRef<HL | null>(null);
   const stream = useRef<MediaStream | null>(null);
   const live = source === 'hand', image = live && mirror;
@@ -53,22 +70,23 @@ export function Camara({ page }: { page: CamaraPage }) {
     const root = rootRef.current, cv = cvRef.current, video = videoRef.current; if (!root || !cv || !video) return;
     setTop(root.getBoundingClientRect().top + window.scrollY);
     const reduce = prefersReducedMotion(), ctx = cv.getContext('2d')!, sc = document.createElement('canvas'), sx = sc.getContext('2d', { willReadFrequently: true })!;
-    let GW = 0, GH = 0, paint = new Float32Array(0), seed = new Uint8Array(0), fxc = new Uint8Array(0), ikc = new Uint8Array(0), last: (Pt | null)[] = [null, null, null], lastPen = [false, false, false], step = -1, raf = 0;
+    let GW = 0, GH = 0, paint = new Float32Array(0), seed = new Uint8Array(0), fxc = new Uint8Array(0), ikc = new Uint8Array(0), blc = new Uint8Array(0), last: (Pt | null)[] = [null, null, null], lastPen = [false, false, false], step = -1, raf = 0;
     const fit = () => {
       const w = Math.ceil(cv.clientWidth / CELL), h = Math.ceil(cv.clientHeight / CELL); if (w === GW && h === GH) return;
-      GW = w; GH = h; paint = new Float32Array(GW * GH).fill(-1); seed = new Uint8Array(GW * GH); fxc = new Uint8Array(GW * GH); ikc = new Uint8Array(GW * GH);
+      GW = w; GH = h; paint = new Float32Array(GW * GH).fill(-1); seed = new Uint8Array(GW * GH); fxc = new Uint8Array(GW * GH); ikc = new Uint8Array(GW * GH); blc = new Uint8Array(GW * GH);
       cv.width = GW * CELL; cv.height = GH * CELL; sc.width = GW; sc.height = GH;
     };
     // every stroke keeps its own effect and ink
     const mark = (a: Pt, b: Pt, now: number) => {
-      const S = st.current, img = S.source === 'hand' && S.mirror, f = FX.indexOf(img ? S.effect : 'trail'), k = INKS.indexOf(S.ink);
-      const n = Math.max(1, Math.ceil(Math.hypot(b.x - a.x, b.y - a.y) / 4)), r = img && S.effect !== 'trail' ? 3 : 1;
+      const S = st.current, img = S.source === 'hand' && S.mirror, f = FX.indexOf(img ? S.effect : 'trail'), k = S.ink === 'multi' ? MULTI : INKS.indexOf(S.ink), bl = DETAIL[S.detail];
+      // every stroke keeps its brush, effect, ink and pixel size
+      const n = Math.max(1, Math.ceil(Math.hypot(b.x - a.x, b.y - a.y) / 3)), r = img && S.effect !== 'trail' ? BRUSH[S.brush] : Math.max(1, Math.round(BRUSH[S.brush] / 2));
       for (let i = 0; i <= n; i++) {
         const x = a.x + ((b.x - a.x) * i) / n, y = a.y + ((b.y - a.y) * i) / n;
         for (let dy = -r; dy <= r; dy++) for (let dx = -r; dx <= r; dx++) {
           if (dx * dx + dy * dy > r * r + 1) continue;
           const cx = Math.floor(x / CELL) + dx, cy = Math.floor(y / CELL) + dy; if (cx < 0 || cy < 0 || cx >= GW || cy >= GH) continue;
-          paint[cy * GW + cx] = now; seed[cy * GW + cx] = Math.floor(Math.random() * 255); fxc[cy * GW + cx] = f; ikc[cy * GW + cx] = k;
+          paint[cy * GW + cx] = now; seed[cy * GW + cx] = Math.floor(Math.random() * 255); fxc[cy * GW + cx] = f; ikc[cy * GW + cx] = k; blc[cy * GW + cx] = bl;
         }
       }
     };
@@ -84,7 +102,7 @@ export function Camara({ page }: { page: CamaraPage }) {
       const fps = img ? 24 : 12, s = Math.floor(now / (1000 / fps)); if (s === step) return; step = s;
       fit();
       if (S.clear) { paint.fill(-1); S.clear = false; }
-      const inkHex = camaraInks[S.ink], rgbs = INKS.map((k) => rgb(camaraInks[k]));
+      const inkHex = S.ink === 'multi' ? color.signal : camaraInks[S.ink], rgbs = INKS.map((k) => rgb(camaraInks[k]));
       // pens: each hand, or the cursor
       const tips: (Pt | null)[] = [], downs: boolean[] = [];
       if (S.source === 'hand') for (let h = 0; h < 2; h++) { tips.push(S.hands[h]?.[8] ?? null); downs.push(!!S.hands[h] && S.pens[h]); }
@@ -96,16 +114,16 @@ export function Camara({ page }: { page: CamaraPage }) {
       if (img) { cover(ctx, cv.width, cv.height); cover(sx, GW, GH); px = sx.getImageData(0, 0, GW, GH).data; }
       else {
         ctx.fillStyle = corkGrid.paper; ctx.fillRect(0, 0, cv.width, cv.height);
-        ctx.fillStyle = corkGrid.dot; for (let y = 0; y < GH; y++) for (let x = (y & 1); x < GW; x += 2) ctx.fillRect(x * CELL + 3, y * CELL + 3, 2, 2);
+        ctx.fillStyle = corkGrid.dot; for (let y = 4; y < cv.height; y += 8) for (let x = 4; x < cv.width; x += 8) if ((((x + y) / 8) & 1) === 0) ctx.fillRect(x - 1, y - 1, 2, 2);
       }
       // the hand screened from its points, when the image is not shown
       if (S.source === 'hand' && !S.mirror) {
         ctx.fillStyle = color.ink;
         for (const H of S.hands) H.forEach((p, i) => {
-          const r = i === 0 ? 7 : 3.4, cx = p.x / CELL, cy = p.y / CELL;
+          const r = i === 0 ? 11 : 5.4, cx = p.x / CELL, cy = p.y / CELL;
           for (let y = Math.floor(cy - r); y <= cy + r; y++) for (let x = Math.floor(cx - r); x <= cx + r; x++) {
             if (x < 0 || y < 0 || x >= GW || y >= GH) continue; const d = 1 - Math.hypot(x - cx, y - cy) / r;
-            if (d > 0 && d * 0.7 * 16 > BAY[(y & 3) * 4 + (x & 3)]) ctx.fillRect(x * CELL + 2, y * CELL + 2, 4, 4);
+            if (d > 0 && d * 0.7 * 16 > BAY[(y & 3) * 4 + (x & 3)]) ctx.fillRect(x * CELL + 1, y * CELL + 1, CELL - 2, CELL - 2);
           }
         });
       }
@@ -114,7 +132,7 @@ export function Camara({ page }: { page: CamaraPage }) {
       const tt = Math.floor(now / 80);
       for (let y = 0; y < GH; y++) for (let x = 0; x < GW; x++) {
         const id = y * GW + x, b = paint[id]; if (b < 0) continue;
-        const X = x * CELL, Y = y * CELL, age = now - b, cellInk = camaraInks[INKS[ikc[id]]], inkRgb = rgbs[ikc[id]];
+        const X = x * CELL, Y = y * CELL, age = now - b, multi = ikc[id] === MULTI, cellInk = multi ? camaraRetro[3 + (seed[id] % 12)] : camaraInks[INKS[ikc[id]]], inkRgb = multi ? null : rgbs[ikc[id]];
         // an image effect without the image (only the hand, the cursor) shows as the trail
         const fx: Effect = FX[fxc[id]] !== 'trail' && px ? FX[fxc[id]] : 'trail';
         if (fx === 'trail') {
@@ -126,17 +144,26 @@ export function Camara({ page }: { page: CamaraPage }) {
           continue;
         }
         if (!px) continue;
+        // the cell's block: its colour is read once, at the block's centre
+        const bl = blc[id] || 2, bx = x - (x % bl), by = y - (y % bl), sxp = Math.min(GW - 1, bx + (bl >> 1)), syp = Math.min(GH - 1, by + (bl >> 1)), o = (syp * GW + sxp) * 4;
+        const R = px[o], G = px[o + 1], B = px[o + 2], L = (0.299 * R + 0.587 * G + 0.114 * B) / 255, bq = BAY[((by / bl) & 3) * 4 + ((bx / bl) & 3)];
         if (fx === 'pixels') {
-          // blocks of 2 x 2 cells take one colour, tinted toward the ink
-          const bx = x & ~1, by = y & ~1, o = (by * GW + bx) * 4, t = 0.25;
-          ctx.fillStyle = `rgb(${px[o] * (1 - t) + inkRgb[0] * t | 0},${px[o + 1] * (1 - t) + inkRgb[1] * t | 0},${px[o + 2] * (1 - t) + inkRgb[2] * t | 0})`;
+          if (multi) ctx.fillStyle = `rgb(${poster(R)},${poster(G)},${poster(B)})`;              // like an old game's textures
+          else { const t = 0.25; ctx.fillStyle = `rgb(${R * (1 - t) + inkRgb![0] * t | 0},${G * (1 - t) + inkRgb![1] * t | 0},${B * (1 - t) + inkRgb![2] * t | 0})`; }
           ctx.fillRect(X, Y, CELL, CELL); continue;
         }
-        const o = id * 4, L = (0.299 * px[o] + 0.587 * px[o + 1] + 0.114 * px[o + 2]) / 255;
+        if (fx === 'dither') {
+          if (multi) { const d = ((bq + 0.5) / 16 - 0.5) * 72; ctx.fillStyle = nearest(R + d, G + d, B + d); }   // ordered dither into the retro palette
+          else ctx.fillStyle = (1 - L) * 16 > bq + 0.5 ? cellInk : corkGrid.paper;
+          ctx.fillRect(X, Y, CELL, CELL); continue;
+        }
+        // glyphs: one per block, at least two cells wide so it reads
         ctx.fillStyle = corkGrid.paper; ctx.fillRect(X, Y, CELL, CELL);
-        ctx.fillStyle = cellInk;
-        if (fx === 'dither') { if ((1 - L) * 16 > BAY[(y & 3) * 4 + (x & 3)] + 0.5) ctx.fillRect(X, Y, CELL, CELL); }
-        else ctx.fillText(GLY[Math.min(GLY.length - 1, Math.floor((1 - L) * GLY.length))], X, Y);
+        const gb = Math.max(2, bl);
+        if (x % gb || y % gb) continue;
+        ctx.fillStyle = multi ? `rgb(${poster(R)},${poster(G)},${poster(B)})` : cellInk;
+        ctx.font = `500 ${gb * CELL}px ${getComputedStyle(cv).fontFamily}`;
+        ctx.fillText(GLY[Math.min(GLY.length - 1, Math.floor((1 - L) * GLY.length))], X, Y);
       }
       // the hands' points (left out of the photo)
       if (!S.clean) {
@@ -277,11 +304,22 @@ export function Camara({ page }: { page: CamaraPage }) {
                   {effects.map((f) => <button key={f} type="button" className="camara__seg" aria-pressed={effect === f} onClick={() => setEffect(f)}>{page.effect[f]}</button>)}
                 </div>
               )}
+              <div role="group" aria-label={page.brush.label} className="camara__group">
+                <span className="label">{page.brush.label}</span>
+                {(Object.keys(BRUSH) as Brush[]).map((b) => <button key={b} type="button" className="camara__seg" aria-pressed={brush === b} onClick={() => setBrush(b)}>{page.brush[b]}</button>)}
+              </div>
+              {image && (
+                <div role="group" aria-label={page.pixel.label} className="camara__group">
+                  <span className="label">{page.pixel.label}</span>
+                  {(Object.keys(DETAIL) as Detail[]).map((d) => <button key={d} type="button" className="camara__seg" aria-pressed={detail === d} onClick={() => setDetail(d)}>{page.pixel[d]}</button>)}
+                </div>
+              )}
               <div role="group" aria-label={page.colour.label} className="camara__group">
                 <span className="label">{page.colour.label}</span>
-                {(Object.keys(camaraInks) as CamaraInk[]).map((k) => (
+                {INKS.map((k) => (
                   <button key={k} type="button" className="camara__ink" aria-pressed={ink === k} aria-label={page.colour.names[k]} title={page.colour.names[k]} style={{ background: camaraInks[k] }} onClick={() => setInk(k)} />
                 ))}
+                <button type="button" className="camara__ink camara__ink--multi" aria-pressed={ink === 'multi'} aria-label={page.colour.names.multi} title={page.colour.names.multi} onClick={() => setInk('multi')} />
               </div>
             </div>
             <div className="camara__actions">

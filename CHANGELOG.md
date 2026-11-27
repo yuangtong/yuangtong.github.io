@@ -56,7 +56,11 @@ Owner decisions and housekeeping, to pick up later:
   dither, glyphs, or the trail that glows and cools; in an ink from the
   site's palette (`camaraInks`). Every stroke keeps its effect and ink. The
   pointer paints too. "take the photo" counts 3, 2, 1 and downloads a clean
-  PNG (no hand points). The view can also show only the hand, screened from
+  PNG (no hand points). Brush small, medium or large; pixel fine, medium or
+  coarse on 5 px cells; a multicolour ink posterizes the image, or dithers it
+  into a small retro palette (`camaraRetro`), like an old game's textures;
+  every stroke keeps its brush and pixel size too. The view can also show
+  only the hand, screened from
   its 21 points; without a camera the cursor draws. How it works is listed
   on the page. MediaPipe and its model load only when the camera is turned
   on, from this site (model in `public/lab/camara/`, wasm copied from the

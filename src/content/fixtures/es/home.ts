@@ -277,7 +277,9 @@ export const camaraPage: CamaraPage = {
   view: { label: 'ver', mirror: 'a ti', hand: 'solo la mano' },
   hands: { label: 'manos', one: 'una', two: 'dos' },
   effect: { label: 'efecto', pixels: 'píxeles', dither: 'trama', glyphs: 'glifos', trail: 'rastro' },
-  colour: { label: 'color', names: { signal: 'azul', ink: 'tinta', naranja: 'naranja', rosado: 'rosado', lima: 'lima', violeta: 'violeta' } },
+  colour: { label: 'color', names: { signal: 'azul', ink: 'tinta', naranja: 'naranja', rosado: 'rosado', lima: 'lima', violeta: 'violeta', multi: 'multicolor' } },
+  brush: { label: 'pincel', small: 'chico', medium: 'mediano', large: 'grande' },
+  pixel: { label: 'píxel', fine: 'fino', medium: 'medio', coarse: 'grueso' },
   clear: 'limpiar', photo: 'tomar la foto', saved: 'foto guardada',
   how: ['junta pulgar e índice: por donde pasa tu dedo, aparece el efecto.', 'elige el efecto y su color.', 'toma la foto: 3, 2, 1, y se descarga.'],
 };

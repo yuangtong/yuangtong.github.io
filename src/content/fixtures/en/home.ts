@@ -277,7 +277,9 @@ export const camaraPage: CamaraPage = {
   view: { label: 'see', mirror: 'you', hand: 'only the hand' },
   hands: { label: 'hands', one: 'one', two: 'two' },
   effect: { label: 'effect', pixels: 'pixels', dither: 'dither', glyphs: 'glyphs', trail: 'trail' },
-  colour: { label: 'colour', names: { signal: 'blue', ink: 'ink', naranja: 'orange', rosado: 'pink', lima: 'lime', violeta: 'violet' } },
+  colour: { label: 'colour', names: { signal: 'blue', ink: 'ink', naranja: 'orange', rosado: 'pink', lima: 'lime', violeta: 'violet', multi: 'multicolour' } },
+  brush: { label: 'brush', small: 'small', medium: 'medium', large: 'large' },
+  pixel: { label: 'pixel', fine: 'fine', medium: 'medium', coarse: 'coarse' },
   clear: 'clear', photo: 'take the photo', saved: 'photo saved',
   how: ['pinch thumb and index: where your fingertip goes, the effect appears.', 'choose the effect and its colour.', 'take the photo: 3, 2, 1, and it downloads.'],
 };
