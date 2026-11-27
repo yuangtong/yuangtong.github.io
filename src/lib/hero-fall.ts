@@ -3,7 +3,10 @@
  * At the first scroll every letter of the name and the tagline, the buttons
  * and the scroll hint pull in toward the middle of the name, then come loose:
  * gravity takes them; the letters spin, bounce on the floor and on each other
- * and pile up, and the buttons and the hint drop out of view. As the void opens it swallows whatever it reaches, turning it in
+ * and pile up. The blocks (the buttons, the scroll hint and the availability
+ * line; canvas "hero v2", 2026-11-24) land on the floor too but do not push
+ * the letters, so wide phone buttons never shove the pile around. Only the
+ * navigation stays still. As the void opens it swallows whatever it reaches, turning it in
  * toward its centre. Back at the top, GSAP springs every piece home.
  *
  * It works in the stage's design pixels (the stage is scaled as a whole) and
@@ -93,9 +96,8 @@ export function createHeroFall(stage: HTMLElement, root: HTMLElement, extra: HTM
         } else b.vy += g * h;
         b.vx *= 0.996; b.va *= 0.99;
         b.x += b.vx * h; b.y += b.vy * h; b.a += b.va * h;
-        // blocks (the buttons, the hint) drop out of view; letters land and pile
-        if (b.kind === 'block') { if (b.y > o.H + 200) b.gone = true; }
-        else if (b.y > FLOOR - b.r) { b.y = FLOOR - b.r; b.vy *= -BOUNCE; b.vx *= 0.86; b.va *= 0.7; if (Math.abs(b.vy) < 30 * scale) b.vy = 0; }
+        // everything lands on the floor and waits there for the void
+        if (b.y > FLOOR - b.r) { b.y = FLOOR - b.r; b.vy *= -BOUNCE; b.vx *= 0.86; b.va *= 0.7; if (Math.abs(b.vy) < 30 * scale) b.vy = 0; }
         if (b.x < b.r) { b.x = b.r; b.vx *= -BOUNCE; }
         if (b.x > o.W - b.r) { b.x = o.W - b.r; b.vx *= -BOUNCE; }
       }

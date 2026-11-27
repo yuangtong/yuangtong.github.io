@@ -49,7 +49,8 @@ Owner decisions and housekeeping, to pick up later:
       "lab: genkō") before it returns to the effects.
 
 ### Added
-
+- Hero v2 (canvas "hero v2: todo cae menos el navbar", approved 2026-11-24): on the first scroll everything but the navigation comes loose. The availability line falls with the letters, the buttons and the scroll hint, and the blocks now land on the floor (without pushing the letters) so the void swallows them with the pile, instead of dropping out of view. Only the navigation and the phone's menu button stay still.
+- "Keep scrolling" / "sigue bajando" (owner, 2026-11-24): whenever the visitor stops for more than a moment between the first scroll and the first sheet (about), a small line at the bottom of the stage blinks and bounces until they scroll again; it never shows on the sheets. Desktop and phones, every language (`intro.keepScrolling`). Reduced motion keeps it still.
 - Lab: **sketchbook** (`/lab/sketchbook`) leaves "coming soon" with its first two
   scanned pages, menta then lola (`public/lab/sketchbook/`, `SKETCHBOOK` in
   `collections.ts`), between a hard cover and a hard back. page-flip 2.0.7
