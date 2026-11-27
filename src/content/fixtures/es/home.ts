@@ -32,7 +32,10 @@ export const home: HomePage = {
     progressLabel: 'dónde estás',
   },
   jugar: {
-    title: 'jugar con los píxeles',
+    title: 'sobre mí',
+    line: 'soy yuang tong (唐源), diseñador web y creative coder en lima. dirijo FOMMO, un estudio a medida, y aquí guardo lo que hago por gusto: arte digital, fotos y música.',
+    // the about page is still to come; the button already points to it (owner, 2026-11-27)
+    cta: { label: 'más sobre mí', href: '/about' },
   },
   sheets: {
     lab: { title: 'el lab', line: 'historias, juguetes hechos de píxeles y mi archivo de fotos.', href: '/lab' },

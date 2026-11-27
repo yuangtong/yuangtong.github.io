@@ -32,7 +32,10 @@ export const home: HomePage = {
     progressLabel: 'where you are',
   },
   jugar: {
-    title: 'play with the pixels',
+    title: 'about me',
+    line: "i'm yuang tong (唐源), a web designer and creative coder in lima. i direct FOMMO, a bespoke studio, and here i keep what i make for the love of it: digital art, photos and music.",
+    // the about page is still to come; the button already points to it (owner, 2026-11-27)
+    cta: { label: 'more about me', href: '/about' },
   },
   sheets: {
     lab: { title: 'the lab', line: 'stories, toys made of pixels and my photo archive.', href: '/lab' },

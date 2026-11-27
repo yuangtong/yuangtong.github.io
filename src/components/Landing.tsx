@@ -111,7 +111,7 @@ export function Landing({ page, nav, links, ui, languages, glyphFamily, piece }:
     const canvas = canvasRef.current, wrap = wrapRef.current;
     if (!canvas || !wrap) return;
     const reduce = prefersReducedMotion();
-    let raf = 0, dead = false, sys = 0, cursorOn = false;
+    let raf = 0, dead = false, sys = 0, cursorOn = false, statusBack = false;
     Promise.all([loadGallop(), piece ? Promise.resolve(null) : loadRider().catch(() => null)]).then(([g, rider]) => {
       if (dead) return;
       setFlight(g.flight);
@@ -187,6 +187,12 @@ export function Landing({ page, nav, links, ui, languages, glyphFamily, piece }:
       if (Math.abs(target - sys) < 0.5) sys = target;
       eng.frame({ sys, now, ptr: ptr.current, manual: manual.current, selected: selRef.current });
       fallRef.current?.update(sys / C.VOID, now);
+      // the availability line, gone with the fall, drops back in from the top once the story is over (owner, 2026-11-27)
+      if (!piece) {
+        const st = statusRef.current, over = sys >= C.VOID + C.STORY + C.TEXT * 0.3;
+        if (st && over && !statusBack) { statusBack = true; fallRef.current?.release(st); st.classList.add('is-back'); }
+        else if (st && statusBack && sys < C.VOID * 0.012) { statusBack = false; st.classList.remove('is-back'); }
+      }
       // the dithered cursor wakes up once the story is over
       if (!piece) { const cur = sys >= C.VOID + C.STORY + C.TEXT * 0.3; if (cur !== cursorOn) { cursorOn = cur; document.documentElement.toggleAttribute('data-cursor', cur); } }
     };
@@ -337,6 +343,8 @@ export function Landing({ page, nav, links, ui, languages, glyphFamily, piece }:
               <div ref={setIn(0)} className="sheet__inner">
                 <div ref={(el) => { dom.current.jside = el; }} className="jugar__side">
                   <h2 className="jugar__title"><span className="vh">{jugar.title}</span><span ref={(el) => { dom.current.title = el; }} aria-hidden="true">{jugar.title}</span></h2>
+                  <p className="jugar__line">{jugar.line}</p>
+                  <CarcomaLink href={jugar.cta.href} className="btn btn--ink sheet__enter">{jugar.cta.label} <span aria-hidden="true">-&gt;</span></CarcomaLink>
                 </div>
               </div>
             </section>

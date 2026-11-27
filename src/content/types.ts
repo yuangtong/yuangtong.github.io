@@ -46,7 +46,8 @@ export type Intro = {
 };
 
 /** First sheet: the horse made of letters; the pointer nudges them as it passes. */
-export type Jugar = { title: string };
+/** The first sheet ("about"): who the owner is, a button to the about page, and the pixel horse to play with beside it. */
+export type Jugar = { title: string; line: string; cta: Link };
 
 export type ExperimentVisual = 'medio' | 'camara' | 'dona' | 'fotos';
 
