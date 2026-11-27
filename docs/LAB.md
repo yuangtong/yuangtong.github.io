@@ -10,20 +10,34 @@ never on the home page.
 
 ## Index
 
-- A grid of doors in two groups: **historias** (pieces with a narrative) and
-  **exploraciones** (pieces to play with).
+- One grid of doors, four to a row, each marked **story**, **to play** or
+  **archive** (the owner keeps things: tickets, cards, stickers, postcards).
 - On hover a door slides aside and shows a live preview of its piece. On
-  touch screens the preview is a still frame; there is no hover.
+  touch screens there is no preview; one tap on the door opens the piece
+  (owner, 2026-11-27).
 - historias: sísifo feliz; lalande, lágrimas de ángel.
-- exploraciones: travesía ácida, archivo.exe, menta&lola, cámara, dona de
-  teselas, píxeles ácidos, ambiente efímero.
+- exploraciones: travesía ácida, archivo.exe, boletos de lima (with the game
+  pasaje), metro cards, bitsplash, sketchbook, cámara, dona de teselas, ambiente efímero.
+- Collections (2026-11-26): the owner's scans live in `public/lab/` and their
+  data in `src/content/collections.ts`, the same in every language; only the
+  words around them are translated.
 - Pieces that are not built yet have their door and their own page at
   `/lab/[pieza]`, marked "próximamente": the page says what the piece will do.
   A piece drops the mark when it ships.
 
 ## Pieces
 
-### menta&lola (Menta and Lola, the owner's cats)
+### sketchbook (shipped 2026-11-27)
+
+The owner's sketchbook as a book you leaf through (page-flip). The first two
+pages are menta and lola; the owner is scanning more. Pages live in
+`public/lab/sketchbook/` and in `SKETCHBOOK`, in order.
+
+### menta&lola (removed 2026-11-27; kept as an idea)
+
+The owner took it out: cámara already does what it promised. Kept below as
+the record of the idea.
+
 
 The section is written `menta&lola`. One dither lab: pick an image, pick how
 to screen it.
@@ -75,7 +89,11 @@ piece, not two.
 - Controls: image, solid, tile set, cell size, palette, speed.
 - An ASCII-art version is pending: the owner is looking for the reference.
 
-### píxeles ácidos
+### píxeles ácidos (set aside, 2026-11-26)
+
+Out of the lab: bitsplash is this piece. Kept as an idea (acid pixels that
+eat the paper) in the Notion tracker.
+
 
 The acid pixels that are born in the carcoma, as a toy of their own: the
 acid shapes land, eat the paper and heal into glyph rain, and the visitor
@@ -87,6 +105,12 @@ hungry they are can be changed.
 Live coding: music with Strudel and visuals with Hydra, pieces that exist
 while they play. It may also hold the owner's DJ sets, or the sets may get a
 section of their own; under discussion.
+
+### boletos de lima, pasaje, metro cards, bitsplash (shipped 2026-11-26)
+
+See the changelog. Still open: a phone layout for the board (today it is the
+desktop board scaled down), sound for pasaje, the lab index redesign (one
+grid of doors that expand on hover with a live preview).
 
 ## Shared rules
 

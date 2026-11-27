@@ -4,7 +4,8 @@
  * spell "Lalande"; the word becomes a drop that falls on a small narcissus
  * against a dithered blue sky; the pointer is the breeze; the narcissus spins
  * and implodes into red, and Clarice Lispector's book is born from that point,
- * turns, opens on the quote, and the close is embroidered in cross-stitch.
+ * turns, opens on the quote, and the close names the book: its title, then
+ * the author and the year (owner, 2026-11-27; it was embroidered before).
  *
  * The scene is drawn in a 1440 x 900 frame centred in a grid that fills the
  * stage; sky and rain cover the whole grid.
@@ -24,8 +25,7 @@ const smooth = (a: number, b: number, v: number) => { v = clamp((v - a) / (b - a
 const bell = (q: number, a: number, b: number) => smooth(a, a + 0.03, q) * (1 - smooth(b - 0.03, b, q));
 function h2(i: number, j: number) { let h = Math.imul(i, 374761393) ^ Math.imul(j, 668265263); h = Math.imul(h ^ (h >>> 13), 1274126177); return ((h ^ (h >>> 16)) >>> 0) / 4294967296; }
 const BAYN = BAYER.map((v) => (v + 0.5) / 16);
-const WORD = 'lalande', // the letters the horse carries
-  TEAR = 'lagrimasdeangel', RAIN = 'lalandelagrimasdeangelnarcisomarmadrugada';
+const TEAR = 'lagrimasdeangel', RAIN = 'lalandelagrimasdeangelnarcisomarmadrugada';
 type V3 = [number, number, number];
 const norm = (a: V3): V3 => { const l = Math.hypot(a[0], a[1], a[2]) || 1; return [a[0] / l, a[1] / l, a[2] / l]; };
 const cross = (a: V3, b: V3): V3 => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
@@ -38,12 +38,15 @@ export type LalandeOptions = {
   canvas: HTMLCanvasElement; gallop: Gallop; dom: () => LalandeDom; reduce: boolean;
   /** Grid size in design pixels (at least the frame). */
   W: number; H: number;
-  fonts: { word: string; mono: string; script: string }; word: string; closeText: string; breezeLabel: string;
+  fonts: { word: string; mono: string }; word: string; breezeLabel: string;
+  /** The text the horse is written with, read line by line across it. */
+  horseText: string;
 };
 
 type FP = { ty: number; x?: number; y?: number; z?: number; g?: number; sl?: number; lx?: number; ly?: number; lz?: number; u?: V3; v?: V3; n?: V3; a?: number; pet?: number; rim?: boolean };
 
 export function createLalande(o: LalandeOptions) {
+  const TEXT = Array.from(o.horseText.replace(/\s+/g, ' '));   // the letters the horse carries
   const W = Math.ceil(o.W / G) * G, H = Math.ceil(o.H / G) * G, COLS = W / G, ROWS = H / G;
   const OX = Math.round((W - FRAME.W) / 2 / G) * G, OY = Math.round((H - FRAME.H) / 2 / G) * G;
   const CX = OX + 720;
@@ -56,21 +59,22 @@ export function createLalande(o: LalandeOptions) {
 
   // the horse: the same frame in the air with which Sísifo ends
   const FW = 300, FH = 176;
-  const horseCells: { x: number; y: number; v: number; h: number }[] = [];
+  const horseCells: { x: number; y: number; v: number; h: number; k: number }[] = [];
   {
     const fr = o.gallop.frames[o.gallop.flight], sc = FW / 980, hcx = CX, hcy = OY + 470;
     for (let r = 0; r < ROWS; r++) for (let c = 0; c < COLS; c++) {
       const X = 150 + (c * G + G / 2 - hcx) * sc, Y = 88 + (r * G + G / 2 - hcy) * sc;
       if (X < 0 || Y < 0 || X >= FW || Y >= FH) continue;
       const v = fr[(Y | 0) * FW + (X | 0)];
-      if (v > 30) horseCells.push({ x: c * G + G / 2, y: r * G + G / 2, v, h: h2(c, r) });
+      if (v > 30) horseCells.push({ x: c * G + G / 2, y: r * G + G / 2, v, h: h2(c, r), k: 0 });
     }
     horseCells.sort((a, b) => a.x - b.x || a.y - b.y);
+    // the text reads across the horse, line by line (owner, 2026-11-27)
+    [...horseCells].sort((a, b) => a.y - b.y || a.x - b.x).forEach((hc, k) => { hc.k = k; });
   }
 
   // the word and the embroidered close: built once the fonts are in
-  let wordCells: { x: number; y: number; h: number }[] = [], stitches: { x: number; y: number }[] = [];
-  const LINE = { size: 100, k: 8, x: OX + 690, y: OY + 260, a: 0.865, b: 0.925 };
+  let wordCells: { x: number; y: number; h: number }[] = [];
   const buildText = () => {
     const oc = document.createElement('canvas'); oc.width = W; oc.height = H;
     const x = oc.getContext('2d', { willReadFrequently: true })!;
@@ -80,15 +84,8 @@ export function createLalande(o: LalandeOptions) {
     wordCells = [];
     for (let r = 0; r < ROWS; r++) for (let c = 0; c < COLS; c++) { const px = c * G + G / 2, py = r * G + G / 2; if (d[(py * W + px) * 4 + 3] > 110) wordCells.push({ x: px, y: py, h: h2(c + 3, r + 5) }); }
     wordCells.sort((a, b) => a.x - b.x || a.y - b.y);
-    const cw = 760, ch = Math.ceil(LINE.size * 1.6), sc = document.createElement('canvas'); sc.width = cw; sc.height = ch;
-    const sx = sc.getContext('2d', { willReadFrequently: true })!;
-    sx.fillStyle = '#000'; sx.textBaseline = 'middle'; sx.font = `500 ${LINE.size}px ${o.fonts.script}`; sx.fillText(o.closeText, 0, ch / 2);
-    const dd = sx.getImageData(0, 0, cw, ch).data, list: { x: number; y: number }[] = [];
-    for (let yy = 0; yy < ch; yy += LINE.k) for (let xx = 0; xx < cw; xx += LINE.k) { const cx = Math.min(cw - 1, xx + (LINE.k >> 1)), cy = Math.min(ch - 1, yy + (LINE.k >> 1)); if (dd[(cy * cw + cx) * 4 + 3] > 100) list.push({ x: LINE.x + xx, y: LINE.y - ch / 2 + yy }); }
-    list.sort((a, b) => a.x - b.x || a.y - b.y);
-    stitches = list;
   };
-  const fl = document.fonts?.load ? Promise.all([document.fonts.load(`300 330px ${o.fonts.word}`), document.fonts.load(`500 56px ${o.fonts.script}`), document.fonts.load(MONO)]) : Promise.resolve();
+  const fl = document.fonts?.load ? Promise.all([document.fonts.load(`300 330px ${o.fonts.word}`), document.fonts.load(MONO)]) : Promise.resolve();
   fl.then(buildText, buildText);
 
   // the narcissus in 3D: points projected to the grid
@@ -173,7 +170,7 @@ export function createLalande(o: LalandeOptions) {
           if (mj >= 1) continue;
           col = onBlue ? P.white : P.signal;
         }
-        const ch = mi > 0 && mi < 1 && h2(i, tick) < 0.25 ? RAIN[(i + tick) % RAIN.length] : WORD[i % WORD.length];
+        const ch = mi > 0 && mi < 1 && h2(i, tick) < 0.25 ? RAIN[(i + tick) % RAIN.length] : TEXT[hc.k % TEXT.length];
         const solid = (mi <= 0 && hc.v > 170) || (mi >= 1 && mM <= 0);
         if (solid) cell(x, y, P.signal, P.white, ch);
         else cell(x, y, null, col, mi <= 0 && hc.v < 120 ? '·' : ch);
@@ -273,28 +270,13 @@ export function createLalande(o: LalandeOptions) {
       }
     }
 
-    // 4. the close, embroidered in cross-stitch
-    if (p > 0.86 && stitches.length) {
-      const cnt = Math.floor(stitches.length * clamp((p - LINE.a) / (LINE.b - LINE.a)));
-      if (cnt > 0) {
-        const kk = LINE.k, m = kk * 0.2;
-        ctx.lineCap = 'round'; ctx.lineWidth = Math.max(1.3, kk * 0.24);
-        ctx.strokeStyle = P.red[0]; ctx.beginPath();
-        for (i = 0; i < cnt; i++) { const s0 = stitches[i]; ctx.moveTo(s0.x + m, s0.y + kk - m); ctx.lineTo(s0.x + kk - m, s0.y + m); }
-        ctx.stroke();
-        ctx.strokeStyle = P.bookRed; ctx.beginPath();
-        for (i = 0; i < cnt; i++) { const s1 = stitches[i]; ctx.moveTo(s1.x + m, s1.y + m); ctx.lineTo(s1.x + kk - m, s1.y + kk - m); }
-        ctx.stroke();
-      }
-    }
-
     // the DOM texts
     const op = (el: HTMLElement | null, v: number) => { if (!el) return; el.style.opacity = v.toFixed(3); el.style.transform = `translateY(${((1 - v) * 16).toFixed(1)}px)`; };
     op(d.n1, bell(p, 0.27, 0.41));
     op(d.n2, bell(p, 0.44, 0.57));
     if (d.spec) d.spec.style.opacity = bell(p, 0.25, 0.6).toFixed(3);
     if (d.cue) d.cue.style.opacity = (1 - clamp(p / 0.02)).toFixed(3);
-    if (d.title) { const w = ease(clamp((p - 0.905) / 0.03)); d.title.style.clipPath = `inset(-10% ${((1 - w) * 100).toFixed(1)}% -10% 0)`; }
+    if (d.title) { const w = ease(clamp((p - 0.87) / 0.05)); d.title.style.clipPath = `inset(-10% ${((1 - w) * 100).toFixed(1)}% -10% 0)`; }
   }
 
   return { draw, size: { W, H, OX, OY } };

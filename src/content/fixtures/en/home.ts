@@ -1,4 +1,4 @@
-import type { ArchivePage, ContactPage, HomePage, LabPage, LalandePage, NotePage, NotesPage, NotFoundPage, StoryPage, StudioPage, TravesiaPage } from '../../types';
+import type { ArchivePage, BitsplashPage, SketchbookPage, BoletosPage, ContactPage, MetroCardsPage, HomePage, LabPage, LalandePage, NotePage, NotesPage, NotFoundPage, StoryPage, StudioPage, TravesiaPage } from '../../types';
 
 export const home: HomePage = {
   intro: {
@@ -80,21 +80,23 @@ export const labPage: LabPage = {
   title: 'the lab',
   lead: 'stories, toys made of pixels and my photo archive. every piece can be re-screened and shared.',
   doors: [
-    { id: 'sisifo', title: 'sísifo feliz', text: "Muybridge's 1878 gallop told as sisyphus: twelve threads, the hill and the rock that rolls back.", cta: { label: 'see sísifo feliz', href: '/lab/sisifo' } },
-    { id: 'lalande', title: 'lalande, lágrimas de ángel', text: "a word by clarice lispector falls like a drop onto a small narcissus. you are the breeze.", cta: { label: 'see lalande', href: '/lab/lalande' } },
-    { id: 'travesia', title: 'travesía ácida', text: 'the void from the opening, with no bottom. scrolling takes you in and every twelve layers the acid changes.', cta: { label: 'enter the travesía', href: '/lab/travesia' } },
-    { id: 'archivo', title: 'archivo.exe', text: 'my photos of california and nevada, february 2017. move them, open them, pixelate them.', cta: { label: 'open archivo.exe', href: '/lab/archivo' } },
-    { id: 'menta-lola', soon: true, title: 'menta&lola', text: 'my cats, menta and lola, to screen an image with some thirty-two algorithms and their knobs.', cta: { label: 'see what it will be', href: '/lab/menta-lola' },
-      points: ['three images: menta, lola and the horse.', 'error diffusion, bayer, halftone, patterns, edges, noise, crt and ascii, among others.', 'the carcoma that eats the image from inside and turns it into ascii.', 'scale, threshold, contrast, gamma, brightness and palette; before and after; copy link.'] },
-    { id: 'camara', soon: true, title: 'cámara', text: 'your camera and your hand: pinch thumb and index together and your fingertip leaves a trail of glyphs.', cta: { label: 'see what it will be', href: '/lab/camara' },
+    { id: 'sisifo', group: 'story', preview: 'gallop', title: 'sísifo feliz', text: "Muybridge's 1878 gallop told as sisyphus: twelve threads, the hill and the rock that rolls back.", cta: { label: 'see sísifo feliz', href: '/lab/sisifo' } },
+    { id: 'lalande', group: 'story', preview: 'drop', title: 'lalande, lágrimas de ángel', text: "a word by clarice lispector falls like a drop onto a small narcissus. you are the breeze.", cta: { label: 'see lalande', href: '/lab/lalande' } },
+    { id: 'travesia', group: 'play', preview: 'tunnel', title: 'travesía ácida', text: 'the void from the opening, with no bottom. scrolling takes you in and every twelve layers the acid changes.', cta: { label: 'enter the travesía', href: '/lab/travesia' } },
+    { id: 'archivo', group: 'archive', preview: 'desk', title: 'archivo.exe', text: 'my photos of california and nevada, february 2017. move them, open them, pixelate them.', cta: { label: 'open archivo.exe', href: '/lab/archivo' } },
+    { id: 'boletos', group: 'archive', preview: 'tickets', title: 'boletos de lima', text: "the bus tickets i kept in lima, pinned to the grid. sort them, open them, or play pasaje with them.", cta: { label: 'see the tickets', href: '/lab/boletos' } },
+    { id: 'metro-cards', group: 'archive', preview: 'card', title: 'metro cards', text: 'the transport cards i kept, one city each, on the dot-grid globe. turn them over.', cta: { label: 'see the cards', href: '/lab/metro-cards' } },
+    { id: 'bitsplash', group: 'play', preview: 'splash', title: 'bitsplash', text: 'click and an 8-bit acid splash lands on the grey grid. make a mess and keep it as an image.', cta: { label: 'make a splash', href: '/lab/bitsplash' } },
+    { id: 'sketchbook', group: 'archive', preview: 'book', title: 'sketchbook', text: 'my sketchbook, scanned page by page. turn the pages as in a book.', cta: { label: 'leaf through the sketchbook', href: '/lab/sketchbook' } },
+    { id: 'camara', group: 'play', preview: 'still', soon: true, title: 'cámara', text: 'your camera and your hand: pinch thumb and index together and your fingertip leaves a trail of glyphs.', cta: { label: 'see what it will be', href: '/lab/camara' },
       points: ['it follows your hand with mediapipe, in your browser.', 'pinch to draw, open your hand to let go; the trail fades on its own.', 'your image never leaves your device.', 'without a camera, you draw with the cursor or a finger.'] },
-    { id: 'dona', soon: true, title: 'dona de teselas', text: 'a donut and other 3d solids made of tiles and glyphs. you turn them and change the image they are made of.', cta: { label: 'see what it will be', href: '/lab/dona' },
+    { id: 'dona', group: 'play', preview: 'still', soon: true, title: 'dona de teselas', text: 'a donut and other 3d solids made of tiles and glyphs. you turn them and change the image they are made of.', cta: { label: 'see what it will be', href: '/lab/dona' },
       points: ['drag to turn it.', 'tiles: molinete, damero, contorno, puntos, tick, macizo and glyphs.', 'image, solid, cell, palette and speed.'] },
-    { id: 'acidos', soon: true, title: 'píxeles ácidos', text: 'the acid pixels born in the carcoma, set loose: they land, eat the paper and heal into a rain of glyphs.', cta: { label: 'see what it will be', href: '/lab/acidos' },
-      points: ['you steer them with the cursor or a finger.', 'palette, cell and how hungry they are.'] },
-    { id: 'efimero', soon: true, title: 'ambiente efímero', text: 'live code: music with strudel and visuals with hydra, which exist while they play.', cta: { label: 'see what it will be', href: '/lab/efimero' },
+    { id: 'efimero', group: 'play', preview: 'still', soon: true, title: 'ambiente efímero', text: 'live code: music with strudel and visuals with hydra, which exist while they play.', cta: { label: 'see what it will be', href: '/lab/efimero' },
       points: ['music written live with strudel.', 'live visuals with hydra.', 'maybe my sets too.'] },
   ],
+  groups: { story: 'story', play: 'to play', archive: 'archive' },
+  previewLabel: '{title}, live',
   soon: { label: 'coming soon', back: { label: 'back to the lab', href: '/lab' } },
   experiments: [
     { id: 'medio', title: 'medio tono', meta: 'code, 2026', alt: 'The gallop in blue dots of varying size', visual: 'medio', defaultCell: 8, href: '/lab' },
@@ -107,10 +109,10 @@ export const labPage: LabPage = {
 export const notesPage: NotesPage = {
   title: 'notes',
   lead: 'how each piece is made, written while I build it. every note carries its screened image.',
+  soon: 'coming soon',
+  // one note for now, not published yet (owner, 2026-11-27)
   items: [
-    { id: 'jinete', title: 'taking the rider off an 1878 gallop', excerpt: "Muybridge's photographs come with a rider on top. I erased him with code so the horse could run free.", meta: 'november 2026, 2 min read', href: '/notes/jinete', alt: 'The original photograph of the gallop, screened in blue', visual: 'foto', accent: 'azul' },
-    { id: 'ecos', title: 'echoes: drawing time behind a figure', excerpt: 'how the opening draws the earlier frames of the gallop behind the horse.', meta: '[date], [min] read', href: '/notes', alt: 'The horse with its echoes, screened in pink', visual: 'ecos', accent: 'rosado' },
-    { id: 'dona', title: 'a 3d donut with four tiles', excerpt: 'a three-dimensional donut shaded with only four eight-by-eight tiles.', meta: '[date], [min] read', href: '/notes', alt: 'A spinning donut, screened in lime on ink', visual: 'dona', accent: 'lima' },
+    { id: 'manifiesto', soon: true, title: 'manifesto', excerpt: '', meta: '', href: '/notes', alt: 'The gallop screened in blue', visual: 'foto', accent: 'azul' },
   ],
 };
 
@@ -137,10 +139,10 @@ export const contactPage: ContactPage = {
   lead: 'I work from Lima for any time zone. write to me about a project, a collaboration or just to play with pixels.',
   email: { label: 'hola@yuangtong.dev', href: 'mailto:hola@yuangtong.dev' },
   emailLabel: 'email',
-  // upwork and instagram wait for their real links; '#' keeps them off the contact page
+  // upwork waits for its real link; '#' keeps it off the contact page
   links: [
     { label: 'upwork', href: '#', detail: '' },
-    { label: 'instagram', href: '#', detail: '' },
+    { label: 'instagram', href: 'https://www.instagram.com/yuang_tong/', detail: '@yuang_tong' },
     { label: 'github', href: 'https://github.com/yuangtong', detail: 'yuangtong' },
   ],
   clocks: { mine: 'my time, Lima', you: 'you, {place}', youSame: 'you too, Lima' },
@@ -185,9 +187,10 @@ export const lalandePage: LalandePage = {
     author: 'clarice lispector', title: 'perto do coração selvagem',
     quote: '“freedom is not enough. what I desire has no name yet.”', quoteSource: 'clarice lispector',
   },
-  closeText: 'clarice lispector',
+  closeText: 'clarice lispector, 1943',
   word: 'lalande',
-  closeTitle: 'near to the wild heart, 1943',
+  horseText: "It is like angel's tears. Do you know what angel's tears are? A kind of small narcissus; the lightest breeze moves it to one side and the other. Lalande is also the sea at dawn, when no eye has yet seen the beach, when the sun has not been born. Whenever I say: Lalande, you must feel the cool, salty vibration of the sea, you must walk along the still dark beach, slowly, naked. At once you will feel Lalande.",
+  closeTitle: 'near to the wild heart',
 };
 
 export const travesiaPage: TravesiaPage = {
@@ -225,4 +228,49 @@ export const archivePage: ArchivePage = {
     photo: 'photo', photos: 'photos', cell: 'cell', palette: 'palette', original: 'original', openHint: 'double click to open', open: 'open',
     paletteNames: { tinta: 'ink', azul: 'blue', rojo: 'red', acida: 'acid', color: 'colour' },
   },
+};
+
+export const boletosPage: BoletosPage = {
+  title: 'boletos de lima',
+  lead: "the bus tickets i kept in lima: 72 on paper and one electronic receipt. lima's transport is informal and hard, and still these tickets are ours. drag them, sort them, open them.",
+  boardLabel: 'bus tickets from lima pinned to the grey dot grid with coloured push pins',
+  sort: { label: 'sort', loose: 'loose', colour: 'by colour', company: 'by company', price: 'by price' },
+  hint: { loose: 'click a ticket to see it; drag it and it pins to the grid', sorted: 'sorted; click one to see it, drag one to set it loose' },
+  colours: { amarillo: 'yellow', naranja: 'orange', rojo: 'red', rosado: 'pink', morado: 'purple', azul: 'blue', celeste: 'light blue', verde: 'green', 'marrón': 'brown', gris: 'grey', negro: 'black', blanco: 'white' },
+  lightbox: { label: 'ticket', of: 'of', price: 'price', fare: 'fare', colour: 'colour', noPrice: 'no price printed', notPrinted: 'not printed', prev: 'previous ticket', next: 'next ticket', close: 'close' },
+  play: { title: 'pasaje', text: 'every ticket is money. want to play?', cta: 'play' },
+  game: {
+    title: 'pasaje', lead: 'every ticket is money. click them before they go and collect the fare.',
+    canvasLabel: 'bus tickets from lima pop up on the grey dot grid and vanish; click them to collect their fare before they go.',
+    back: 'back to the tickets', time: 'time', collected: 'collected', tickets: 'tickets', start: 'start', restart: 'restart', again: 'play again',
+    ready: 'press start, then click the tickets as they appear', playing: 'the dearer the ticket, the faster it goes',
+    result: '{money} from {n} tickets', best: 'your best.', bestWas: 'your best: {money}',
+  },
+};
+
+export const metroCardsPage: MetroCardsPage = {
+  title: 'metro cards',
+  lead: 'the transport cards i kept, one city each. click a card to turn it over.',
+  countries: { pe: 'peru', cl: 'chile', ar: 'argentina', co: 'colombia' },
+  front: 'front', back: 'back', turn: 'click to turn', variants: 'variants', count: '{cities} cities, {cards} cards',
+  cardLabel: '{system} card, {city}, showing its {side}. press to turn it over.',
+  globeLabel: 'a dot-grid globe with {city}, {country} marked in blue in the middle. the other cities with cards: {others}.',
+};
+
+export const sketchbookPage: SketchbookPage = {
+  title: 'sketchbook',
+  lead: 'my sketchbook, scanned page by page. drag a corner or use the arrows to turn the pages.',
+  cover: 'sketchbook', coverBy: 'yuang tong', back: 'more pages soon: i am scanning them.',
+  prev: 'previous page', next: 'next page', bookLabel: 'the sketchbook, a book to leaf through',
+  alts: {
+    menta: "menta's page: her name in green at the top and her pencil portrait, on tracing paper, over a blue and green crayon landscape.",
+    lola: "lola's page: her name in red and her portrait in a red beret on a yellow ground, among pasted cut-outs and a handwritten line.",
+  },
+};
+
+export const bitsplashPage: BitsplashPage = {
+  title: 'bitsplash',
+  lead: 'click anywhere: an 8-bit acid splash lands on the grid.',
+  canvasLabel: 'a grey dot grid. every click throws an 8-bit acid splash where it lands, in dithered acid colours, with a few drops around it.',
+  hint: 'click anywhere', clean: 'clean', download: 'download', one: 'splash', many: 'splashes',
 };

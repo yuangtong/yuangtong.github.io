@@ -81,7 +81,7 @@ export function Landing({ page, nav, links, ui, languages, glyphFamily, piece }:
   const [hint, setHint] = useState(true);
   // phones, from the first sheet on: which sheet is open (-1 in the story), and the pull back to the start
   const [sheetUi, setSheetUi] = useState<{ idx: number; pull: number; going: boolean }>({ idx: -1, pull: 0, going: false });
-  const sheetRef = useRef({ armed: false, going: false, last: -1, settle: 0, jump: false, ui: '' });
+  const sheetRef = useRef({ armed: false, going: false, last: -1, settle: 0, jump: false, ui: '', rest: -1, idx: -1, restT: 0 });
 
   const pickFrame = (k: number, byHand: boolean) => { manual.current = byHand; selRef.current = k; setSelected(k); };
 
@@ -147,6 +147,17 @@ export function Landing({ page, nav, links, ui, languages, glyphFamily, piece }:
       if (!pulling) window.clearTimeout(st.settle);
       st.last = target;
       const idx = past < -2 ? -1 : Math.max(0, Math.min(4, Math.round((target - s0) / C.SECT)));
+      // a strong fling never skips a sheet: past the next sheet's stop, the
+      // scroll is held there (iOS does not always honour scroll-snap-stop)
+      st.idx = idx;
+      if (idx < 0 || st.going) st.rest = -1;
+      else {
+        if (st.rest < 0) st.rest = idx;
+        const stops = sheetStops(C), over = 60;
+        if (st.rest < 4 && target > stops[st.rest + 1] + over) { st.rest += 1; scrollToSection(st.rest, true); }
+        else if (st.rest > 0 && target < stops[st.rest - 1] - over) { st.rest -= 1; scrollToSection(st.rest, true); }
+        window.clearTimeout(st.restT); st.restT = window.setTimeout(() => { if (st.idx >= 0) st.rest = st.idx; }, 260);
+      }
       const key = `${idx}|${Math.round(pull * 40)}|${st.going}`;
       if (key !== st.ui) { st.ui = key; setSheetUi({ idx, pull: Math.round(pull * 40) / 40, going: st.going }); }
     };
@@ -200,10 +211,16 @@ export function Landing({ page, nav, links, ui, languages, glyphFamily, piece }:
     window.scrollTo({ top: at + y, behavior: instant || prefersReducedMotion() ? 'auto' : 'smooth' });
   };
   const jump = (k: number) => (e: React.MouseEvent) => { e.preventDefault(); scrollToSection(k); };
-  // "/#jugar" scrolls inside the landing; any other route goes through the carcoma
+  // only "/" and a hash ("/#jugar") scroll inside the landing; a section's path
+  // ("/lab") opens its page, on a computer and on a phone (owner, 2026-11-27)
+  const inLanding = (href: string) => {
+    const [base, hash] = href.split('#'), { path } = splitPath(base || '/');
+    if (path !== '/') return null;
+    return hash ? sectionIndex(hash) : -1;
+  };
   const navigate = (href: string, e: React.MouseEvent) => {
-    const { path } = splitPath(href), k = sectionIndex(path.replace(/^\//, ''));
-    if (path === '/' || k >= 0) { e.preventDefault(); scrollToSection(path === '/' ? -1 : k); return; }
+    const k = inLanding(href);
+    if (k !== null) { e.preventDefault(); scrollToSection(k); return; }
     if (href.startsWith('/')) { e.preventDefault(); go(href); }
   };
 
@@ -386,9 +403,9 @@ export function Landing({ page, nav, links, ui, languages, glyphFamily, piece }:
           onSelect={(href, e) => {
             e.preventDefault();
             setMenuOpen(false);
-            const { path } = splitPath(href), k = sectionIndex(path.replace(/^\//, ''));
+            const k = inLanding(href);
             // wait for the menu to close and the page to scroll again
-            requestAnimationFrame(() => requestAnimationFrame(() => { if (path === '/' || k >= 0) scrollToSection(path === '/' ? -1 : k); else go(href); }));
+            requestAnimationFrame(() => requestAnimationFrame(() => { if (k !== null) scrollToSection(k); else go(href); }));
           }}
         />
       )}
