@@ -88,7 +88,8 @@ export const cursorTones = {
 } as const;
 
 /** Contact globe (G8, contacto v2): sea dots, land dots, the arc and the marks. */
-export const globe = { sea: '#d4d4ce', land: '#141414', arc: '#1847ff', arcHead: '#0b14c9', me: '#0b14c9', you: '#141414', label: '#ffffff' } as const;
+/** The contact globe: my time in blue, the visitor's time in red (owner, 2026-11-27). */
+export const globe = { sea: '#d4d4ce', land: '#141414', arc: '#1847ff', arcHead: '#0b14c9', me: '#0b14c9', you: '#ff3d24', other: '#141414', label: '#ffffff' } as const;
 
 /** Lalande (historia 02): sky, reds, the narcissus and the rain. */
 export const lalande = {

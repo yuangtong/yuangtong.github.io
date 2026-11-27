@@ -61,6 +61,14 @@ Owner decisions and housekeeping, to pick up later:
     fixed 1.1 s once it starts to open, so a quick scroll does not swallow it.
   - The contact sheet's button keeps its colours: the sheet's link colours
     had made it paper on paper, and pale on blue on hover.
+- Contact: the clocks and the globe say "my time" and "your time" ("mi hora",
+  "tu hora"), each with its city; on the globe my time is blue and the
+  visitor's is red (`globe.you`; the metro cards' globe keeps its other
+  cities in ink, `globe.other`). LinkedIn joins the links (yuangtong).
+- boletos de lima and metro cards are held back from production (`held` on
+  their doors, `src/lib/release.ts`, Vercel's `VERCEL_ENV`): on previews they
+  stay; on the live site their doors are gone and their pages 404. Boletos
+  needs a vertical phone layout, to design first.
 
 ### Added
 - Hero v2 (canvas "hero v2: todo cae menos el navbar", approved 2026-11-24): on the first scroll everything but the navigation comes loose. The availability line falls with the letters, the buttons and the scroll hint, and the blocks now land on the floor (without pushing the letters) so the void swallows them with the pile, instead of dropping out of view. Only the navigation and the phone's menu button stay still.
