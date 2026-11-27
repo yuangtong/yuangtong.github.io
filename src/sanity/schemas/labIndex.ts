@@ -1,4 +1,5 @@
-import { defineField, defineType } from 'sanity';
+import { SortIcon } from '@sanity/icons/Sort';
+import { defineArrayMember, defineField, defineType } from 'sanity';
 
 /**
  * The order of the doors in the lab. The pieces themselves (their pages and
@@ -22,10 +23,11 @@ export const labIndex = defineType({
   name: 'labIndex',
   title: 'Lab: order',
   type: 'document',
+  icon: SortIcon,
   fields: [
     defineField({
       name: 'order', title: 'Order of the pieces', description: 'Drag to reorder. Pieces left out keep their place after these.',
-      type: 'array', of: [{ type: 'string', options: { list: LAB_PIECES } }],
+      type: 'array', of: [defineArrayMember({ type: 'string', options: { list: LAB_PIECES } })],
       validation: (r) => r.unique(),
     }),
   ],

@@ -1,0 +1,28 @@
+# Copies the content that lives in the code into Sanity (scripts/sanity-seed.mjs).
+# Runs only on demand: from the Actions tab once this file is on main, or by
+# adding the label "sanity-seed" to a pull request from this repository.
+# Needs the repository secret SANITY_AUTH_TOKEN (a Sanity token with Editor
+# rights) and the variable NEXT_PUBLIC_SANITY_PROJECT_ID.
+name: Sanity seed
+
+on:
+  workflow_dispatch:
+  pull_request:
+    types: [labeled]
+
+jobs:
+  seed:
+    if: github.event_name == 'workflow_dispatch' || github.event.label.name == 'sanity-seed'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run sanity:seed
+        env:
+          SANITY_AUTH_TOKEN: ${{ secrets.SANITY_AUTH_TOKEN }}
+          NEXT_PUBLIC_SANITY_PROJECT_ID: ${{ vars.NEXT_PUBLIC_SANITY_PROJECT_ID }}
+          NEXT_PUBLIC_SANITY_DATASET: production

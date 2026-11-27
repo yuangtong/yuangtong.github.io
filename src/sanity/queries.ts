@@ -1,5 +1,6 @@
 import type { ArchivePalette, ArchivePhoto } from '@/content/types';
 import type { Locale } from '@/content/locale';
+import { defineQuery } from 'next-sanity';
 import { sanityFetch } from './fetch';
 
 type Localized = Partial<Record<Locale, string>> | null;
@@ -10,16 +11,18 @@ type SanityArchivePhoto = {
   cell: number | null; palette: string | null; spotX: number | null; spotY: number | null;
 };
 
+export const ARCHIVE_PHOTOS_QUERY = defineQuery(`*[_type == "archivePhoto" && defined(image.asset)] | order(order asc, _createdAt asc) {
+  photoId, "url": image.asset->url, serie, date, alt, cell, palette, spotX, spotY
+}`);
+
+export const LAB_ORDER_QUERY = defineQuery(`*[_id == "labIndex"][0]{ order }`);
+
 const CELLS = [0, 2, 4, 8, 16] as const;
 const PALETTES: ArchivePalette[] = ['tinta', 'azul', 'rojo', 'acida', 'color'];
 
 /** archivo.exe's photos, in their order, with their series in order of first appearance. Null when the CMS has none. */
 export async function fetchArchivePhotos(locale: Locale): Promise<{ photos: ArchivePhoto[]; series: string[] } | null> {
-  const rows = await sanityFetch<SanityArchivePhoto[]>(
-    `*[_type == "archivePhoto" && defined(image.asset)] | order(order asc, _createdAt asc) {
-      photoId, "url": image.asset->url, serie, date, alt, cell, palette, spotX, spotY
-    }`,
-  );
+  const rows = await sanityFetch<SanityArchivePhoto[]>(ARCHIVE_PHOTOS_QUERY);
   if (!rows?.length) return null;
   const photos = rows.filter((r) => r.url).map((r): ArchivePhoto => ({
     id: r.photoId,
@@ -38,6 +41,6 @@ export async function fetchArchivePhotos(locale: Locale): Promise<{ photos: Arch
 
 /** The ids of the lab's pieces in the order the owner set. Null when not set. */
 export async function fetchLabOrder(): Promise<string[] | null> {
-  const doc = await sanityFetch<{ order: string[] | null } | null>(`*[_type == "labIndex" && _id == "labIndex"][0]{ order }`);
+  const doc = await sanityFetch<{ order: string[] | null } | null>(LAB_ORDER_QUERY);
   return doc?.order?.length ? doc.order : null;
 }

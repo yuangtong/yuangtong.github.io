@@ -2,6 +2,7 @@
 
 import { defineConfig } from 'sanity';
 import { structureTool } from 'sanity/structure';
+import { SortIcon } from '@sanity/icons/Sort';
 import { apiVersion, dataset, projectId } from './env';
 import { schemaTypes, singletons } from './schemas';
 
@@ -26,7 +27,7 @@ export default defineConfig({
     structureTool({
       structure: (S) =>
         S.list().title('Content').items([
-          S.listItem().title('Lab: order').id('labIndex').child(S.document().schemaType('labIndex').documentId('labIndex')),
+          S.listItem().title('Lab: order').id('labIndex').icon(SortIcon).child(S.document().schemaType('labIndex').documentId('labIndex')),
           S.divider(),
           S.documentTypeListItem('archivePhoto').title('archivo.exe: photos'),
         ]),

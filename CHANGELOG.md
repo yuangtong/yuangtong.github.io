@@ -100,6 +100,11 @@ Owner decisions and housekeeping, to pick up later:
   once (the lab's order and archivo.exe's photos with their files), through
   the Sanity CLI and the owner's own login. Fixed document ids, so running it
   again overwrites instead of duplicating.
+- GitHub Action "Sanity seed" runs that copy in the cloud, on demand (the
+  label `sanity-seed` on a pull request, or from the Actions tab), with a
+  Sanity write token in the `SANITY_AUTH_TOKEN` secret.
+- Sanity schemas follow Sanity's agent best practices: icons from
+  `@sanity/icons` subpaths, `defineArrayMember`, queries in `defineQuery`.
 
 - **About** (`/about`), canvas "about v3" (approved 2026-11-27):
   - The owner's portrait sticks on the left. On the right, the title decodes

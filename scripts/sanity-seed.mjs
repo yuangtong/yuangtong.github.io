@@ -1,11 +1,11 @@
 /**
  * Copies the content that now lives in the code into Sanity, once: the lab's
  * order and archivo.exe's photos (with their image files from /public).
- * Runs on the owner's machine with the Sanity CLI and their own login, so no
- * token is needed:
- *
- *   npx sanity login
- *   npm run sanity:seed
+ * Two ways to run it:
+ *  - in the cloud: the "Sanity seed" GitHub Action (.github/workflows/sanity-seed.yml),
+ *    with a write token in the SANITY_AUTH_TOKEN secret;
+ *  - on a machine, with the owner's own login: `npx sanity login`, then
+ *    `npm run sanity:seed`.
  *
  * Documents get fixed ids, so running it again overwrites them with the
  * code's version instead of making copies. Needs NEXT_PUBLIC_SANITY_PROJECT_ID
@@ -66,5 +66,7 @@ const out = join(mkdtempSync(join(tmpdir(), 'sanity-seed-')), 'seed.ndjson');
 writeFileSync(out, docs.map((d) => JSON.stringify(d)).join('\n') + '\n');
 console.log(`${docs.length} documents -> ${dataset}`);
 
-const r = spawnSync('npx', ['sanity', 'dataset', 'import', out, dataset, '--replace'], { cwd: root, stdio: 'inherit', env: process.env });
+// in CI there is no login: a write token (SANITY_AUTH_TOKEN) stands in for it
+const token = process.env.SANITY_AUTH_TOKEN ? ['--token', process.env.SANITY_AUTH_TOKEN] : [];
+const r = spawnSync('npx', ['sanity', 'dataset', 'import', out, dataset, '--replace', ...token], { cwd: root, stdio: 'inherit', env: process.env });
 process.exit(r.status ?? 1);
