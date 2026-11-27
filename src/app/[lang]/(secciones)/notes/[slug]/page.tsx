@@ -14,7 +14,9 @@ export async function generateStaticParams() {
   for (const l of locales) { const on = new Set((await getNotesPage(l)).items.filter((n) => !n.soon).map((n) => n.id)); for (const s of await getNoteSlugs(l)) if (on.has(s)) slugs.add(s); }
   return [...slugs].map((slug) => ({ slug }));
 }
-export const dynamicParams = false;
+// notes published in the CMS after a deploy get their page on first visit
+export const dynamicParams = true;
+export const revalidate = 60;
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const note = await getNote(await routeLocale(params), (await params).slug);

@@ -9,6 +9,8 @@ import { defaultLocale, isLocale } from '@/content/locale';
 export function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
   const first = pathname.split('/')[1] ?? '';
+  // the editing panel (Sanity Studio) is not a page of the site
+  if (first === 'admin') return NextResponse.next();
   if (first === defaultLocale) {
     const url = req.nextUrl.clone();
     url.pathname = pathname.slice(defaultLocale.length + 1) || '/';

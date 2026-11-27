@@ -1,0 +1,34 @@
+[
+  {
+    "id": "labPiece-boletos",
+    "why": "what it will be, owner 2026-11-27",
+    "set": {
+      "points.en": [
+        "an archive of the graphic design of lima's bus tickets: their colours, their type, their companies.",
+        "every ticket scanned, to be seen up close and in detail.",
+        "and a small game made with them, pasaje."
+      ],
+      "points.es": [
+        "un archivo del diseño gráfico de los boletos de bus de lima: sus colores, su tipografía, sus empresas.",
+        "cada boleto escaneado, para verlo de cerca y en detalle.",
+        "y un pequeño juego hecho con ellos, pasaje."
+      ]
+    }
+  },
+  {
+    "id": "labPiece-metro-cards",
+    "why": "what it will be, owner 2026-11-27",
+    "set": {
+      "points.en": [
+        "an archive of the design of metro cards, one per city.",
+        "the front and the back of each card, with its variants.",
+        "each city marked on a globe of dots."
+      ],
+      "points.es": [
+        "un archivo del diseño de las tarjetas de metro, una por ciudad.",
+        "el frente y el reverso de cada tarjeta, con sus variantes.",
+        "cada ciudad marcada en un globo de puntos."
+      ]
+    }
+  }
+]
