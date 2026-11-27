@@ -295,6 +295,8 @@ Owner decisions and housekeeping, to pick up later:
   says what the note is about and opens nothing, and the note pages are gone
   (`Note.soon`).
 - Contact: Instagram, @yuang_tong, in both languages.
+- Navigation: "home" ("inicio") comes first and takes you to the start of
+  the landing; it is marked as current only on the landing itself.
 - lalande: the horse is written with Clarice Lispector's passage on Lalande
   (the owner's Spanish text, and an English translation), read line by line
   across it, instead of repeating "lalande" (`LalandePage.horseText`).
