@@ -85,6 +85,13 @@ Owner decisions and housekeeping, to pick up later:
 
 ### Added
 
+- Machine translation with DeepL for Portuguese, Chinese and Japanese:
+  `scripts/translate.mts` translates the English fixtures into
+  `src/content/fixtures/<locale>/content.json`, only new or changed strings,
+  with placeholders and piece titles protected. The GitHub Action "Translate
+  with DeepL" runs it with the repository secret `DEEPL_API_KEY` and opens a
+  pull request. See `docs/TRANSLATION.md`. The routes for those languages
+  come in a follow-up change.
 - The site picks the language on the first visit (owner, 2026-11-27): an
   English page reads the browser's preferred languages and moves to the first
   one the site speaks (`es-PE` goes to `/es`), English when none matches. A
