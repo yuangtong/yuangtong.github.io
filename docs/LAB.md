@@ -73,6 +73,7 @@ The live camera as an instrument. Uses MediaPipe in the browser
 - Modes: draw (default on a computer; a closed loop fills in) and web toy (the
   whole image takes the effect). Phones get only the web toy, without hand
   tracking: camera on top, photo, controls below.
+- Always the camera image (no "only the hand" view) and always both hands.
 - Tracking runs only in draw mode; the space bar or the tracking switch pauses
   it. Changing mode clears the image. No trail effect: without the image,
   strokes stay in ink.

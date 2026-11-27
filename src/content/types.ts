@@ -184,12 +184,10 @@ export type CamaraPage = {
   gate: { title: string; text: string; camera: string; cursor: string; touch: string };
   loading: string; stop: string; cursor: string; camera: string; denied: string; noCamera: string;
   sourceHand: string; sourceToy: string; sourceCursor: string; penUp: string; penDown: string;
-  canvasMirror: string; canvasToy: string; canvasHand: string; canvasCursor: string;
+  canvasMirror: string; canvasToy: string; canvasCursor: string;
   leadToy: string; controls: string;
   mode: { label: string; draw: string; toy: string };
   full: { on: string; off: string };
-  view: { label: string; mirror: string; hand: string };
-  hands: { label: string; one: string; two: string };
   effect: { label: string; pixels: string; dither: string; halftone: string; ascii: string; stitch: string; more: string; back: string };
   track: { label: string; on: string; off: string; key: string; paused: string };
   colour: { label: string; names: Record<string, string> };

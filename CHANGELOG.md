@@ -97,6 +97,9 @@ Owner decisions and housekeeping, to pick up later:
   bigger (6, 12 or 20 px) so they read as pixels. The trail effect is gone:
   without the image (only the hand, the cursor) strokes stay in their ink.
   The lab door's text names the effects.
+- cámara: the "see" (you / only the hand) and "hands" (one / two) options are
+  gone; the piece is a camera, not a whiteboard, so it always shows you and
+  MediaPipe always looks for both hands (owner, 2026-11-27).
 
 - Lab: **boletos de lima** (`/lab/boletos`). The owner's 73 Lima bus tickets
   (72 on paper, one electronic receipt), cut out from the scans, on the grey
