@@ -76,6 +76,8 @@ Owner decisions and housekeeping, to pick up later:
   screens the preview is a still frame under the text. The lower grid of
   experiments (`LabGrid`) is no longer on the page. The sketchbook door, lost
   when the píxeles ácidos door was removed, is back.
+  sísifo feliz's preview is only the horse, small and whole inside the door,
+  galloping in blue dots (owner, 2026-11-27).
 - Shared data for the collections in `src/content/collections.ts`; new token
   groups `corkGrid`, `boletos` and `bitsplash` in `src/lib/tokens.ts`, and
   `--cork-dot`, `--ticket-shadow`, `--pin-shadow`, `--card-lift`,
