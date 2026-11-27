@@ -14,7 +14,7 @@ export default async function NotesPage({ params }: LangParams) {
         <h1 className="h2">{page.title}</h1>
         <p className="lead">{page.lead}</p>
       </div>
-      <NotesGrid items={page.items} ui={settings.ui} />
+      <NotesGrid items={page.items} ui={settings.ui} soon={page.soon} />
     </main>
   );
 }

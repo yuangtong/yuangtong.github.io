@@ -286,6 +286,18 @@ Owner decisions and housekeeping, to pick up later:
     (Host Grotesk) instead of the script face, so it reads.
 - menta&lola is removed from the lab (door and page): cámara does what it
   promised. Kept in `docs/LAB.md` as the record of the idea.
+- Lab previews (owner, 2026-11-27): the tickets carry the piece's own push
+  pins; each half turn of the metro card brings the next city's card; the
+  sketchbook starts closed, its cover opens once onto menta and lola and it
+  stays open. A preview starts when its door opens.
+- Notes: the screened image keeps its own proportion (it was stretched). No
+  note is published yet, so every card is switched off ("coming soon"): it
+  says what the note is about and opens nothing, and the note pages are gone
+  (`Note.soon`).
+- Contact: Instagram, @yuang_tong, in both languages.
+- lalande: the horse is written with Clarice Lispector's passage on Lalande
+  (the owner's Spanish text, and an English translation), read line by line
+  across it, instead of repeating "lalande" (`LalandePage.horseText`).
 - Version 1 (Vite) is kept in the branches `version-1` and `version-2025` on `db6054a` and
   removed from version 2, leftovers included (`node_modules 2/`, `nohup.out`,
   `vite.config.ts.timestamp-*.mjs`).

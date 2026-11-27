@@ -107,10 +107,11 @@ export const labPage: LabPage = {
 export const notesPage: NotesPage = {
   title: 'notes',
   lead: 'how each piece is made, written while I build it. every note carries its screened image.',
+  soon: 'coming soon',
   items: [
-    { id: 'jinete', title: 'taking the rider off an 1878 gallop', excerpt: "Muybridge's photographs come with a rider on top. I erased him with code so the horse could run free.", meta: 'november 2026, 2 min read', href: '/notes/jinete', alt: 'The original photograph of the gallop, screened in blue', visual: 'foto', accent: 'azul' },
-    { id: 'ecos', title: 'echoes: drawing time behind a figure', excerpt: 'how the opening draws the earlier frames of the gallop behind the horse.', meta: '[date], [min] read', href: '/notes', alt: 'The horse with its echoes, screened in pink', visual: 'ecos', accent: 'rosado' },
-    { id: 'dona', title: 'a 3d donut with four tiles', excerpt: 'a three-dimensional donut shaded with only four eight-by-eight tiles.', meta: '[date], [min] read', href: '/notes', alt: 'A spinning donut, screened in lime on ink', visual: 'dona', accent: 'lima' },
+    { id: 'jinete', soon: true, title: 'taking the rider off an 1878 gallop', excerpt: "Muybridge's photographs come with a rider on top. I erased him with code so the horse could run free.", meta: 'november 2026, 2 min read', href: '/notes/jinete', alt: 'The original photograph of the gallop, screened in blue', visual: 'foto', accent: 'azul' },
+    { id: 'ecos', soon: true, title: 'echoes: drawing time behind a figure', excerpt: 'how the opening draws the earlier frames of the gallop behind the horse.', meta: '[date], [min] read', href: '/notes', alt: 'The horse with its echoes, screened in pink', visual: 'ecos', accent: 'rosado' },
+    { id: 'dona', soon: true, title: 'a 3d donut with four tiles', excerpt: 'a three-dimensional donut shaded with only four eight-by-eight tiles.', meta: '[date], [min] read', href: '/notes', alt: 'A spinning donut, screened in lime on ink', visual: 'dona', accent: 'lima' },
   ],
 };
 
@@ -137,10 +138,10 @@ export const contactPage: ContactPage = {
   lead: 'I work from Lima for any time zone. write to me about a project, a collaboration or just to play with pixels.',
   email: { label: 'hola@yuangtong.dev', href: 'mailto:hola@yuangtong.dev' },
   emailLabel: 'email',
-  // upwork and instagram wait for their real links; '#' keeps them off the contact page
+  // upwork waits for its real link; '#' keeps it off the contact page
   links: [
     { label: 'upwork', href: '#', detail: '' },
-    { label: 'instagram', href: '#', detail: '' },
+    { label: 'instagram', href: 'https://www.instagram.com/yuang_tong/', detail: '@yuang_tong' },
     { label: 'github', href: 'https://github.com/yuangtong', detail: 'yuangtong' },
   ],
   clocks: { mine: 'my time, Lima', you: 'you, {place}', youSame: 'you too, Lima' },
@@ -187,6 +188,7 @@ export const lalandePage: LalandePage = {
   },
   closeText: 'clarice lispector',
   word: 'lalande',
+  horseText: "It is like angel's tears. Do you know what angel's tears are? A kind of small narcissus; the lightest breeze moves it to one side and the other. Lalande is also the sea at dawn, when no eye has yet seen the beach, when the sun has not been born. Whenever I say: Lalande, you must feel the cool, salty vibration of the sea, you must walk along the still dark beach, slowly, naked. At once you will feel Lalande.",
   closeTitle: 'near to the wild heart, 1943',
 };
 

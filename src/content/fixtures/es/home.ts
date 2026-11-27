@@ -107,10 +107,11 @@ export const labPage: LabPage = {
 export const notesPage: NotesPage = {
   title: 'notas',
   lead: 'cómo está hecha cada pieza, escrito mientras la construyo. cada nota lleva su imagen tramada.',
+  soon: 'próximamente',
   items: [
-    { id: 'jinete', title: 'quitarle el jinete a un galope de 1878', excerpt: 'las fotos de Muybridge traen un jinete encima. lo borré con código para que el caballo fuera libre.', meta: 'noviembre 2026, 2 min de lectura', href: '/notes/jinete', alt: 'La foto original del galope, tramada en azul', visual: 'foto', accent: 'azul' },
-    { id: 'ecos', title: 'ecos: dibujar el tiempo detrás de una figura', excerpt: 'cómo la portada dibuja los cuadros anteriores del galope detrás del caballo.', meta: '[fecha], [min] de lectura', href: '/notes', alt: 'El caballo con sus ecos, tramado en rosado', visual: 'ecos', accent: 'rosado' },
-    { id: 'dona', title: 'una dona 3d con cuatro teselas', excerpt: 'una dona en tres dimensiones sombreada solo con cuatro teselas de ocho por ocho.', meta: '[fecha], [min] de lectura', href: '/notes', alt: 'Una dona que gira, tramada en lima sobre tinta', visual: 'dona', accent: 'lima' },
+    { id: 'jinete', soon: true, title: 'quitarle el jinete a un galope de 1878', excerpt: 'las fotos de Muybridge traen un jinete encima. lo borré con código para que el caballo fuera libre.', meta: 'noviembre 2026, 2 min de lectura', href: '/notes/jinete', alt: 'La foto original del galope, tramada en azul', visual: 'foto', accent: 'azul' },
+    { id: 'ecos', soon: true, title: 'ecos: dibujar el tiempo detrás de una figura', excerpt: 'cómo la portada dibuja los cuadros anteriores del galope detrás del caballo.', meta: '[fecha], [min] de lectura', href: '/notes', alt: 'El caballo con sus ecos, tramado en rosado', visual: 'ecos', accent: 'rosado' },
+    { id: 'dona', soon: true, title: 'una dona 3d con cuatro teselas', excerpt: 'una dona en tres dimensiones sombreada solo con cuatro teselas de ocho por ocho.', meta: '[fecha], [min] de lectura', href: '/notes', alt: 'Una dona que gira, tramada en lima sobre tinta', visual: 'dona', accent: 'lima' },
   ],
 };
 
@@ -137,10 +138,10 @@ export const contactPage: ContactPage = {
   lead: 'trabajo desde Lima para cualquier huso horario. escríbeme por un proyecto, una colaboración o solo para jugar con píxeles.',
   email: { label: 'hola@yuangtong.dev', href: 'mailto:hola@yuangtong.dev' },
   emailLabel: 'correo',
-  // upwork and instagram wait for their real links; '#' keeps them off the contact page
+  // upwork waits for its real link; '#' keeps it off the contact page
   links: [
     { label: 'upwork', href: '#', detail: '' },
-    { label: 'instagram', href: '#', detail: '' },
+    { label: 'instagram', href: 'https://www.instagram.com/yuang_tong/', detail: '@yuang_tong' },
     { label: 'github', href: 'https://github.com/yuangtong', detail: 'yuangtong' },
   ],
   clocks: { mine: 'mi hora, Lima', you: 'tú, {place}', youSame: 'tú también, Lima' },
@@ -187,6 +188,7 @@ export const lalandePage: LalandePage = {
   },
   closeText: 'clarice lispector',
   word: 'lalande',
+  horseText: 'Es como lágrimas de ángel. ¿Sabes lo que son las lágrimas de ángel? Una especie de narciso pequeño, la brisa más ligera lo mueve a un lado y a otro. Lalande es también mar de madrugada, cuando ninguna mirada ha visto todavía la playa, cuando el sol no ha nacido. Siempre que diga: Lalande, debes sentir la vibración fresca y salada del mar, debes andar a lo largo de la playa aún oscura, lentamente, desnudo. De inmediato sentirás Lalande.',
   closeTitle: 'cerca del corazón salvaje, 1943',
 };
 

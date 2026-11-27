@@ -64,7 +64,7 @@ export function Lalande({ page, coverSrc }: { page: LalandePage; coverSrc: strin
     const eng = createLalande({
       canvas, gallop, dom: () => dom.current, reduce, W: fit.W, H: fit.H,
       fonts: { word: css.getPropertyValue('--lalande-word') || css.fontFamily, mono: css.fontFamily },
-      word: page.word, closeText: page.closeText, breezeLabel: page.breezeLabel,
+      word: page.word, closeText: page.closeText, breezeLabel: page.breezeLabel, horseText: page.horseText,
     });
     canvas.style.width = `${eng.size.W * fit.s}px`; canvas.style.height = `${eng.size.H * fit.s}px`;
     setFit((o) => (o.OX === eng.size.OX && o.OY === eng.size.OY ? o : { ...o, OX: eng.size.OX, OY: eng.size.OY }));

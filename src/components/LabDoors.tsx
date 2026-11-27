@@ -27,9 +27,10 @@ export function LabDoors({ page }: { page: LabPage }) {
   useEffect(() => {
     const media: PreviewMedia = {}, reduce = prefersReducedMotion(), drawn = new Map<string, number>();
     let raf = 0, last = -1, dirty = true;
+    const opened = { id: '', at: 0 };
     const img = (src: string) => { const im = new Image(); im.onload = () => { dirty = true; }; im.src = src; return im; };
     media.tickets = ['b07', 'b16', 'b21', 'b39'].map((id) => img(boletoSrc(id)));
-    media.card = img(METRO_CITIES[0].variants[0].front);
+    media.cards = METRO_CITIES.map((c) => img(c.variants[0].front));
     media.pages = SKETCHBOOK.slice(0, 2).map((l) => img(l.src));
     loadGallop().then((g) => { media.gallop = g; dirty = true; }).catch(() => {});
     loadPhoto().then((p) => { media.photo = p; dirty = true; }).catch(() => {});
@@ -47,8 +48,11 @@ export function LabDoors({ page }: { page: LabPage }) {
         // only the open door runs; the others keep one still frame
         const live = openRef.current === d.id && !d.soon && !reduce;
         if (!live && !resized && !dirty && drawn.has(d.id)) continue;
-        drawPreview(cv, d.soon ? 'still' : d.preview, live ? step : 0, media); drawn.set(d.id, step);
+        // a preview starts when its door opens, so the book opens and the cards turn from the start
+        if (live && opened.id !== d.id) { opened.id = d.id; opened.at = step; }
+        drawPreview(cv, d.soon ? 'still' : d.preview, live ? step - opened.at : 0, media); drawn.set(d.id, step);
       }
+      if (!openRef.current) opened.id = '';
       dirty = false;
     };
     raf = requestAnimationFrame(loop);

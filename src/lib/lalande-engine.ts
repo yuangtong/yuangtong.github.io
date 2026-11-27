@@ -24,8 +24,7 @@ const smooth = (a: number, b: number, v: number) => { v = clamp((v - a) / (b - a
 const bell = (q: number, a: number, b: number) => smooth(a, a + 0.03, q) * (1 - smooth(b - 0.03, b, q));
 function h2(i: number, j: number) { let h = Math.imul(i, 374761393) ^ Math.imul(j, 668265263); h = Math.imul(h ^ (h >>> 13), 1274126177); return ((h ^ (h >>> 16)) >>> 0) / 4294967296; }
 const BAYN = BAYER.map((v) => (v + 0.5) / 16);
-const WORD = 'lalande', // the letters the horse carries
-  TEAR = 'lagrimasdeangel', RAIN = 'lalandelagrimasdeangelnarcisomarmadrugada';
+const TEAR = 'lagrimasdeangel', RAIN = 'lalandelagrimasdeangelnarcisomarmadrugada';
 type V3 = [number, number, number];
 const norm = (a: V3): V3 => { const l = Math.hypot(a[0], a[1], a[2]) || 1; return [a[0] / l, a[1] / l, a[2] / l]; };
 const cross = (a: V3, b: V3): V3 => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
@@ -39,11 +38,14 @@ export type LalandeOptions = {
   /** Grid size in design pixels (at least the frame). */
   W: number; H: number;
   fonts: { word: string; mono: string }; word: string; closeText: string; breezeLabel: string;
+  /** The text the horse is written with, read line by line across it. */
+  horseText: string;
 };
 
 type FP = { ty: number; x?: number; y?: number; z?: number; g?: number; sl?: number; lx?: number; ly?: number; lz?: number; u?: V3; v?: V3; n?: V3; a?: number; pet?: number; rim?: boolean };
 
 export function createLalande(o: LalandeOptions) {
+  const TEXT = Array.from(o.horseText.replace(/\s+/g, ' '));   // the letters the horse carries
   const W = Math.ceil(o.W / G) * G, H = Math.ceil(o.H / G) * G, COLS = W / G, ROWS = H / G;
   const OX = Math.round((W - FRAME.W) / 2 / G) * G, OY = Math.round((H - FRAME.H) / 2 / G) * G;
   const CX = OX + 720;
@@ -56,16 +58,18 @@ export function createLalande(o: LalandeOptions) {
 
   // the horse: the same frame in the air with which Sísifo ends
   const FW = 300, FH = 176;
-  const horseCells: { x: number; y: number; v: number; h: number }[] = [];
+  const horseCells: { x: number; y: number; v: number; h: number; k: number }[] = [];
   {
     const fr = o.gallop.frames[o.gallop.flight], sc = FW / 980, hcx = CX, hcy = OY + 470;
     for (let r = 0; r < ROWS; r++) for (let c = 0; c < COLS; c++) {
       const X = 150 + (c * G + G / 2 - hcx) * sc, Y = 88 + (r * G + G / 2 - hcy) * sc;
       if (X < 0 || Y < 0 || X >= FW || Y >= FH) continue;
       const v = fr[(Y | 0) * FW + (X | 0)];
-      if (v > 30) horseCells.push({ x: c * G + G / 2, y: r * G + G / 2, v, h: h2(c, r) });
+      if (v > 30) horseCells.push({ x: c * G + G / 2, y: r * G + G / 2, v, h: h2(c, r), k: 0 });
     }
     horseCells.sort((a, b) => a.x - b.x || a.y - b.y);
+    // the text reads across the horse, line by line (owner, 2026-11-27)
+    [...horseCells].sort((a, b) => a.y - b.y || a.x - b.x).forEach((hc, k) => { hc.k = k; });
   }
 
   // the word and the embroidered close: built once the fonts are in
@@ -173,7 +177,7 @@ export function createLalande(o: LalandeOptions) {
           if (mj >= 1) continue;
           col = onBlue ? P.white : P.signal;
         }
-        const ch = mi > 0 && mi < 1 && h2(i, tick) < 0.25 ? RAIN[(i + tick) % RAIN.length] : WORD[i % WORD.length];
+        const ch = mi > 0 && mi < 1 && h2(i, tick) < 0.25 ? RAIN[(i + tick) % RAIN.length] : TEXT[hc.k % TEXT.length];
         const solid = (mi <= 0 && hc.v > 170) || (mi >= 1 && mM <= 0);
         if (solid) cell(x, y, P.signal, P.white, ch);
         else cell(x, y, null, col, mi <= 0 && hc.v < 120 ? '·' : ch);

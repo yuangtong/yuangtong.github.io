@@ -71,6 +71,8 @@ export type Note = {
   alt: string;
   visual: NoteVisual;
   accent: Accent;
+  /** Not published yet: the card shows what it is about, switched off, and its page does not exist. */
+  soon?: boolean;
 };
 
 /** A language of the site. `learning` languages are the ones the owner is learning: machine translated, marked as such. */
@@ -152,6 +154,8 @@ export type LalandePage = {
   book: { label: string; author: string; title: string; quote: string; quoteSource: string };
   /** The word the horse's letters spell. */
   word: string;
+  /** The text the horse is written with (Clarice Lispector, Near to the Wild Heart). */
+  horseText: string;
   closeText: string; closeTitle: string;
 };
 
@@ -250,7 +254,7 @@ export type NotePage = {
   credit: string;
 };
 
-export type NotesPage = { title: string; lead: string; items: Note[] };
+export type NotesPage = { title: string; lead: string; items: Note[]; soon: string };
 /** Studio (G8, estudio v3): the owner directs FOMMO; FOMMO's colours eat the paper. */
 /**
  * `preview`: the window onto the studio's site (canvas "studio: glitch FOMMO +
