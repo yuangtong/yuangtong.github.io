@@ -12,6 +12,8 @@ export function getImage(src: string, cb: (img: HTMLImageElement) => void) {
   images.set(src, o);
   const rec = o;
   rec.img.onload = () => { rec.ok = true; rec.cbs.forEach((f) => f(rec.img)); rec.cbs = []; };
+  // photos from the CMS come from another origin; the canvas reads their pixels
+  if (/^https?:/.test(src)) rec.img.crossOrigin = 'anonymous';
   rec.img.src = src;
 }
 
