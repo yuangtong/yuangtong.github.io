@@ -183,18 +183,19 @@ export type CamaraPage = {
   title: string; lead: string;
   gate: { title: string; text: string; camera: string; cursor: string; touch: string };
   loading: string; stop: string; cursor: string; camera: string; denied: string; noCamera: string;
-  sourceHand: string; sourceCamera: string; sourceCursor: string; penUp: string; penDown: string;
-  canvasMirror: string; canvasHand: string; canvasCursor: string;
+  sourceHand: string; sourceToy: string; sourceCursor: string; penUp: string; penDown: string;
+  canvasMirror: string; canvasToy: string; canvasHand: string; canvasCursor: string;
+  leadToy: string; controls: string;
+  mode: { label: string; draw: string; toy: string };
+  full: { on: string; off: string };
   view: { label: string; mirror: string; hand: string };
   hands: { label: string; one: string; two: string };
-  effect: { label: string; pixels: string; dither: string; halftone: string; ascii: string; stitch: string; kana: string; trail: string };
-  /** kana's text: the characters that fill a closed shape (public domain). */
-  kana: { text: string; credit: string };
+  effect: { label: string; pixels: string; dither: string; halftone: string; ascii: string; stitch: string; trail: string; more: string; back: string };
   colour: { label: string; names: Record<string, string> };
   brush: { label: string; small: string; medium: string; large: string };
   pixel: { label: string; fine: string; medium: string; coarse: string };
   clear: string; photo: string; saved: string;
-  how: string[]; howTouch: string[];
+  how: string[]; howToy: string[];
 };
 
 /** bitsplash (lab): acid splashes on the grey grid; the visitor keeps what they made. */

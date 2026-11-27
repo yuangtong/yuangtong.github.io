@@ -79,6 +79,17 @@ Owner decisions and housekeeping, to pick up later:
   phones the camera turns on without hand tracking: the gate says the full
   experience is on a computer, a tap covers the whole image with the effect
   and a drag paints part of it. Control rows wrap on narrow screens.
+- cámara v2 (canvas "lab: cámara v2", approved 2026-11-27): once the camera
+  is on, the gate fades and the controls slide in as a column on the left;
+  the camera takes the rest, with "take the photo" under it. "full screen"
+  gives the camera the whole page and folds the controls into a card. Two
+  modes: draw, the default on a computer (a stroke that closes a loop fills
+  what it circles; a new stroke paints over the last) and web toy (the whole
+  image takes the effect, live), the only mode on phones, where the camera
+  sits on top, the photo under it and the controls below. Effects sit in one
+  row moved with arrows. Only the hand, and the cursor, keep their strokes in
+  ink. kana is taken out while the owner decides on genkō (canvas "lab:
+  genkō"); the tap that covered the image on phones gives way to the web toy.
 
 - Lab: **boletos de lima** (`/lab/boletos`). The owner's 73 Lima bus tickets
   (72 on paper, one electronic receipt), cut out from the scans, on the grey
