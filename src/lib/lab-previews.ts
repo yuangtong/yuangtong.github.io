@@ -12,11 +12,22 @@ import { createTravesia } from './travesia-engine';
 
 const tunnels = new WeakMap<HTMLCanvasElement, ReturnType<typeof createTravesia>>();
 
-export type PreviewMedia = Media & { tickets?: HTMLImageElement[]; card?: HTMLImageElement; pages?: HTMLImageElement[] };
+export type PreviewMedia = Media & { tickets?: HTMLImageElement[]; cards?: HTMLImageElement[]; pages?: HTMLImageElement[] };
 
 function grid(c: CanvasRenderingContext2D, w: number, h: number, dot: string = corkGrid.dot) {
   c.fillStyle = corkGrid.paper; c.fillRect(0, 0, w, h); c.fillStyle = dot;
   for (let y = 4; y < h; y += 8) for (let x = 4; x < w; x += 8) if ((((x + y) / 8) & 1) === 0) c.fillRect(x - 1, y - 1, 2, 2);
+}
+
+/** The piece's push pin (Boletos.tsx), drawn on the canvas: tilted, with its needle, shade and shine. */
+const PIN = { stem: new Path2D('M8.6 7.5 H15.4 L16.6 19 H7.4 Z'), shade: new Path2D('M13.6 8.5 H15.4 L16.4 18.4 H14.2 Z') };
+function pin(c: CanvasRenderingContext2D, x: number, y: number, col: string, k = 1) {
+  c.save(); c.translate(x - 12 * k, y - 16 * k); c.scale(k, k); c.translate(12, 16); c.rotate(-0.314); c.translate(-12, -16);
+  c.strokeStyle = boletos.needle; c.lineWidth = 1.4; c.lineCap = 'round'; c.beginPath(); c.moveTo(12, 20); c.lineTo(12, 31); c.stroke();
+  c.fillStyle = col; c.beginPath(); c.ellipse(12, 19, 8, 3.2, 0, 0, 6.2832); c.fill(); c.fill(PIN.stem); c.beginPath(); c.ellipse(12, 7, 7.6, 4.6, 0, 0, 6.2832); c.fill();
+  c.fillStyle = boletos.ink; c.globalAlpha = 0.14; c.beginPath(); c.ellipse(13, 19.6, 7, 2.2, 0, 0, 6.2832); c.fill(); c.globalAlpha = 0.12; c.fill(PIN.shade);
+  c.fillStyle = boletos.light; c.globalAlpha = 0.4; c.fillRect(9.4, 9, 1.7, 9); c.globalAlpha = 0.55; c.beginPath(); c.ellipse(9.8, 5.6, 3.2, 1.6, 0, 0, 6.2832); c.fill();
+  c.restore();
 }
 
 /** Draw one frame of a door's preview. `step` counts 12 fps frames. */
@@ -64,23 +75,27 @@ export function drawPreview(cv: HTMLCanvasElement, kind: LabPreview, step: numbe
       const x = 40 + i * 118 + Math.sin(t + i) * 3, y = 30 + (i % 2) * 18;
       c.save(); c.translate(x + tw / 2, y + th / 2); c.rotate((i - 1.5) * 0.08);
       c.shadowColor = boletos.shadow; c.shadowOffsetX = 2; c.shadowOffsetY = 3; c.drawImage(im, -tw / 2, -th / 2, tw, th); c.restore();
-      c.fillStyle = boletos.pins[(i * 5) % boletos.pins.length]; c.beginPath(); c.arc(x + tw / 2, y + 2, 6, 0, 6.3); c.fill();
+      pin(c, x + tw / 2, y - 2, boletos.pins[(i * 5) % boletos.pins.length], 1.1);   // the piece's pins (owner, 2026-11-27)
     });
   } else if (kind === 'card') {
     grid(c, w, h);
-    const im = m.card; if (!im?.naturalWidth) return;
-    const sx = Math.cos(t * 1.1), cw = 230 * Math.abs(sx), ch = 145;
+    // each half turn brings the next city's card, not the same card's back (owner, 2026-11-27)
+    const cards = (m.cards ?? []).filter((im) => im.naturalWidth); if (!cards.length) return;
+    const a = t * 1.1, im = cards[Math.floor((a + Math.PI / 2) / Math.PI) % cards.length];
+    const cw = 230 * Math.abs(Math.cos(a)), ch = 145;
     c.save(); c.translate(Math.min(w * 0.45, w - 140), h / 2); c.shadowColor = boletos.shadow; c.shadowOffsetY = 10; c.shadowBlur = 16; c.drawImage(im, -cw / 2, -ch / 2, cw, ch); c.restore();
   } else if (kind === 'book') {
-    // the sketchbook open on its spread; the right page turns over and back
+    // the sketchbook closed; its cover opens once onto menta and lola, and it stays open (owner, 2026-11-27)
     grid(c, w, h);
     const [l, r] = m.pages ?? []; if (!l?.naturalWidth || !r?.naturalWidth) return;
-    const ph = Math.min(h - 40, 190), pw = ph * (l.naturalWidth / l.naturalHeight), cx = Math.min(w / 2, w - pw - 24), y = (h - ph) / 2;
+    const ph = Math.min(h - 40, 190), pw = ph * (l.naturalWidth / l.naturalHeight), sp = Math.min(w / 2, w - pw - 24), y = (h - ph) / 2;
+    const e = Math.min(1, Math.max(0, (step - 4) / 14)), turn = (1 - Math.cos(e * Math.PI)) / 2, k = Math.cos(turn * Math.PI);
     c.save(); c.shadowColor = boletos.shadow; c.shadowOffsetY = 6; c.shadowBlur = 12;
-    c.drawImage(l, cx - pw, y, pw, ph);
-    const k = Math.cos(t * 1.2), turn = Math.abs(k);
-    c.drawImage(k >= 0 ? r : l, cx, y, pw * turn, ph);
+    if (turn > 0) c.drawImage(r, sp, y, pw, ph);                                   // lola, under the cover
+    if (k > 0) { c.fillStyle = color.ink; c.fillRect(sp, y, pw * k, ph); }        // the cover, turning on the spine
+    else c.drawImage(l, sp + pw * k, y, -pw * k, ph);                             // menta lands on the left
     c.restore();
+    if (k > 0.35) { c.fillStyle = corkGrid.paper; c.font = `300 ${Math.round(ph * 0.13 * k)}px ${getComputedStyle(cv).fontFamily}`; c.textBaseline = 'top'; c.fillText('sketchbook', sp + 12 * k, y + 14, pw * k - 20); }
   } else if (kind === 'splash') {
     grid(c, w, h);
     for (let s = 0; s < 3; s++) {
