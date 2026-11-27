@@ -119,7 +119,8 @@ Owner decisions and housekeeping, to pick up later:
 - A built lab piece marked "coming soon" shows its coming soon page on
   previews too, not only on yuangtong.dev.
 - Lab: boletos de lima and metro cards say what they will be, in the owner's
-  words (2026-11-27), in English and Spanish.
+  words (2026-11-27), in English and Spanish, and three lines on what each
+  piece is for their coming soon pages.
 - `npm run sanity:update` and the label `sanity-update` apply only the edits
   listed in `scripts/sanity-updates.json` to Sanity (published and draft),
   leaving the owner's other edits as they are.
