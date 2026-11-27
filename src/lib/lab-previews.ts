@@ -4,8 +4,9 @@
  * door is open; a door that is closed keeps one still frame.
  */
 import type { LabPreview } from '@/content/types';
-import { BAYER, pixelView, type PixelView } from './dither';
-import { drawCard, type Media } from './lab-cards';
+import { BAYER } from './dither';
+import type { Media } from './lab-cards';
+import { GALLOP, horseAt } from './media';
 import { bitsplash, boletos, color, corkGrid, labDesk, lalande, travesia } from './tokens';
 
 export type PreviewMedia = Media & { tickets?: HTMLImageElement[]; card?: HTMLImageElement };
@@ -15,16 +16,21 @@ function grid(c: CanvasRenderingContext2D, w: number, h: number, dot: string = c
   for (let y = 4; y < h; y += 8) for (let x = 4; x < w; x += 8) if ((((x + y) / 8) & 1) === 0) c.fillRect(x - 1, y - 1, 2, 2);
 }
 
-const views = new WeakMap<HTMLCanvasElement, PixelView>();
-
 /** Draw one frame of a door's preview. `step` counts 12 fps frames. */
 export function drawPreview(cv: HTMLCanvasElement, kind: LabPreview, step: number, m: PreviewMedia) {
   const c = cv.getContext('2d'); if (!c) return;
   const w = cv.width, h = cv.height, t = step / 12;
   if (kind === 'gallop') {
-    let v = views.get(cv);
-    if (!v || v.w !== w || v.h !== h) { v = pixelView(cv)!; views.set(cv, v); }
-    drawCard(v, 'medio', 8, step, m);
+    // only the horse, small and whole inside the door, galloping in blue dots (owner, 2026-11-27)
+    grid(c, w, h);
+    const g = m.gallop; if (!g) return;
+    const cs = 4, gh = Math.min(h - 32, 150), k = GALLOP.h / gh, gw = GALLOP.w / k, ox = (w - gw) / 2, oy = (h - gh) / 2, f = step % GALLOP.count;
+    c.fillStyle = color.signal;
+    for (let y = 0; y < gh; y += cs) for (let x = 0; x < gw; x += cs) {
+      const val = horseAt(g.frames, f, (x + cs / 2) * k, (y + cs / 2) * k); if (!val) continue;
+      const r = (cs / 2) * (0.45 + (0.55 * (val - 120)) / 135); if (r <= 0) continue;
+      c.fillRect(ox + x + cs / 2 - r, oy + y + cs / 2 - r, r * 2, r * 2);
+    }
   } else if (kind === 'drop') {
     c.fillStyle = lalande.signal; c.fillRect(0, 0, w, h);
     const fx = w * 0.62, y = ((step * 7) % (h + 40)) - 20;
