@@ -66,6 +66,19 @@ Owner decisions and housekeeping, to pick up later:
   on, from this site (model in `public/lab/camara/`, wasm copied from the
   package at build by `scripts/copy-mediapipe.mjs`). Drawing pauses while
   the tab is hidden. The door drops its coming-soon mark.
+- cámara, second round (owner's notes 2026-11-27): cells of 2 px instead of
+  5, so the effects read the face; "pixel" sets each effect's grain. An
+  automatic exposure, measured every frame inside what is painted, stretches
+  lights and shadows so every effect keeps drawing the image as it changes.
+  New effects: halftone (process screens in cyan, magenta, yellow and black
+  printed with multiply in multicolour, `camaraProcess`; one ink otherwise),
+  ascii (replaces glyphs, finer), cross-stitch, and kana: with the pen down
+  the visitor draws an outline that closes on release and fills with
+  Japanese text line by line (Miyazawa Kenji, public domain), darker where
+  the image is dark; kana also works with only the hand and the cursor. On
+  phones the camera turns on without hand tracking: the gate says the full
+  experience is on a computer, a tap covers the whole image with the effect
+  and a drag paints part of it. Control rows wrap on narrow screens.
 
 - Lab: **boletos de lima** (`/lab/boletos`). The owner's 73 Lima bus tickets
   (72 on paper, one electronic receipt), cut out from the scans, on the grey

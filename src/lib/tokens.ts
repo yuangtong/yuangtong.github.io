@@ -139,4 +139,6 @@ export const labDesk = '#0e7c7b';
 export const camaraInks = { signal: '#0b14c9', ink: '#141414', naranja: '#e8451a', rosado: '#ff3ea5', lima: '#c8ff2e', violeta: '#a937e1' } as const;
 export type CamaraInk = keyof typeof camaraInks;
 /** cámara's multicolour: a small retro palette from the site's inks and acids; images are posterized or dithered into it (owner, 2026-11-27). */
+/** cámara's halftone in multicolour: four process screens, printed with multiply (owner's reference, 2026-11-27). */
+export const camaraProcess = { c: '#00a0e4', m: '#e6007e', y: '#ffe600', k: '#141414' } as const;
 export const camaraRetro = ['#141414', '#ededeb', '#ffffff', '#0b14c9', '#1847ff', '#8aadd6', '#0e7c7b', '#2fb35a', '#c8ff2e', '#ffe600', '#e8451a', '#ff3d24', '#ff3ea5', '#a937e1', '#5a2e22', '#d9b48f'] as const;

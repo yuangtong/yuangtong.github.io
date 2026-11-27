@@ -181,18 +181,20 @@ export type MetroCardsPage = {
 /** cámara (lab): a webcam toy; a pinch paints an effect over your image, and you take the photo. */
 export type CamaraPage = {
   title: string; lead: string;
-  gate: { title: string; text: string; camera: string; cursor: string };
+  gate: { title: string; text: string; camera: string; cursor: string; touch: string };
   loading: string; stop: string; cursor: string; camera: string; denied: string; noCamera: string;
-  sourceHand: string; sourceCursor: string; penUp: string; penDown: string;
+  sourceHand: string; sourceCamera: string; sourceCursor: string; penUp: string; penDown: string;
   canvasMirror: string; canvasHand: string; canvasCursor: string;
   view: { label: string; mirror: string; hand: string };
   hands: { label: string; one: string; two: string };
-  effect: { label: string; pixels: string; dither: string; glyphs: string; trail: string };
+  effect: { label: string; pixels: string; dither: string; halftone: string; ascii: string; stitch: string; kana: string; trail: string };
+  /** kana's text: the characters that fill a closed shape (public domain). */
+  kana: { text: string; credit: string };
   colour: { label: string; names: Record<string, string> };
   brush: { label: string; small: string; medium: string; large: string };
   pixel: { label: string; fine: string; medium: string; coarse: string };
   clear: string; photo: string; saved: string;
-  how: string[];
+  how: string[]; howTouch: string[];
 };
 
 /** bitsplash (lab): acid splashes on the grey grid; the visitor keeps what they made. */

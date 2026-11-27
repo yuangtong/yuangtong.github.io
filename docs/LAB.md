@@ -65,6 +65,10 @@ The live camera as an instrument. Uses MediaPipe in the browser
   plain sentence about why the camera is asked for.
 - Without a camera, or if it is refused, the pointer or a finger on the
   screen draws the same trail.
+- Effects (2026-11-27): pixels, dither, halftone, ascii, cross-stitch, kana
+  and the trail, on 2 px cells, with an automatic exposure per frame inside
+  the painted area. Kana fills a closed outline with Japanese text.
+- Phones: the camera without hand tracking; a tap covers the whole image.
 - Reduced motion: the trail is drawn without the scramble and fades without
   movement.
 
