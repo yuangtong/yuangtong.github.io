@@ -13,6 +13,7 @@ export const settings: Settings = {
   siteTitle: 'yuang tong | creative coder',
   description: 'yuang tong, web designer and creative coder in lima. he directs FOMMO. the lab gathers code, photography and music.',
   nav: [
+    { label: 'home', href: '/' },
     { label: 'about', href: '/#jugar' },
     { label: 'lab', href: '/lab' },
     { label: 'studio', href: '/studio' },
@@ -50,7 +51,6 @@ export const settings: Settings = {
     '/lab/sisifo': [{ label: 'lab', href: '/lab' }, { label: 'sísifo feliz', href: '/lab/sisifo' }],
     '/lab/lalande': [{ label: 'lab', href: '/lab' }, { label: 'lalande', href: '/lab/lalande' }],
     '/lab/travesia': [{ label: 'lab', href: '/lab' }, { label: 'travesía ácida', href: '/lab/travesia' }],
-    '/lab/menta-lola': [{ label: 'lab', href: '/lab' }, { label: 'menta&lola', href: '/lab/menta-lola' }],
     '/lab/camara': [{ label: 'lab', href: '/lab' }, { label: 'cámara', href: '/lab/camara' }],
     '/lab/dona': [{ label: 'lab', href: '/lab' }, { label: 'dona de teselas', href: '/lab/dona' }],
     '/lab/acidos': [{ label: 'lab', href: '/lab' }, { label: 'píxeles ácidos', href: '/lab/acidos' }],

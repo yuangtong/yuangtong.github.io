@@ -52,6 +52,13 @@
   --book-edge-low: #e9e4d7;
   --book-back: #ebe5d6;
   --book-line: rgba(20, 20, 20, 0.08);
+  /* lab collections (boletos de lima, metro cards, bitsplash; 2026-11-26) */
+  --cork-dot: #d1d1cc;
+  --ticket-shadow: rgba(20, 20, 20, 0.18);
+  --pin-shadow: rgba(20, 20, 20, 0.3);
+  --card-lift: rgba(20, 20, 20, 0.55);
+  --card-glare: rgba(255, 255, 255, 0.75);
+  --veil: rgba(237, 237, 235, 0.96);
 
   --font-sans: var(--font-host), 'Helvetica Neue', Arial, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, Menlo, monospace;

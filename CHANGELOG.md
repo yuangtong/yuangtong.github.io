@@ -44,6 +44,88 @@ Owner decisions and housekeeping, to pick up later:
 - [ ] Logo and favicon: pick one of the proposals in the design canvas.
 
 ### Added
+
+- Lab: **sketchbook** (`/lab/sketchbook`) leaves "coming soon" with its first two
+  scanned pages, menta then lola (`public/lab/sketchbook/`, `SKETCHBOOK` in
+  `collections.ts`), between a hard cover and a hard back. page-flip 2.0.7
+  (the engine behind react-pageflip, the owner's reference; pinned, with a
+  local type declaration) turns them: drag a corner, click, the arrows or
+  the keyboard; one page at a time on phones; the book fits the screen. Its
+  door gets a preview: the spread, with the right page turning.
+
+### Changed
+
+- Owner's notes on phones and navigation (2026-11-27):
+  - From the landing, on a computer and on a phone, the navigation opens each
+    section's page (`/lab`, `/studio`...); only "/" and hashes scroll inside
+    the landing.
+  - Phones: an open sheet's content is as tall as the room it has, so the
+    "enter" button sits above the strips of the next sheets instead of under
+    them; a strong fling is held at the next sheet, never skipping one.
+  - Lab index on touch screens: no previews (they are made for a computer);
+    one tap on a door opens its piece.
+  - travesía ácida's preview is the piece itself, small: the same engine,
+    dot grid and acids.
+- menta&lola is removed from the lab (door and page): cámara does what it
+  promised. Kept in `docs/LAB.md` as the record of the idea.
+- Lab previews (owner, 2026-11-27): the tickets carry the piece's own push
+  pins; each half turn of the metro card brings the next city's card; the
+  sketchbook starts closed, its cover opens once onto menta and lola and it
+  stays open. A preview starts when its door opens.
+- Notes: the screened image keeps its own proportion (it was stretched). No
+  note is published yet, so every card is switched off ("coming soon"): it
+  says what the note is about and opens nothing, and the note pages are gone
+  (`Note.soon`).
+- Contact: Instagram, @yuang_tong, in both languages.
+- Navigation: "home" ("inicio") comes first and takes you to the start of
+  the landing; it is marked as current only on the landing itself.
+- lalande's close names the book like a work's label: its title, large
+  ("near to the wild heart", "cerca del corazón salvaje"), then "clarice
+  lispector, 1943" in mono. The cross-stitch is gone (owner, 2026-11-27).
+- Notes: one note for now, "manifesto" ("manifiesto"), coming soon; the
+  earlier drafts leave the list, and only a listed, published note has a
+  page.
+- lalande: the horse is written with Clarice Lispector's passage on Lalande
+  (the owner's Spanish text, and an English translation), read line by line
+  across it, instead of repeating "lalande" (`LalandePage.horseText`).
+
+- Lab: **boletos de lima** (`/lab/boletos`). The owner's 73 Lima bus tickets
+  (72 on paper, one electronic receipt), cut out from the scans, on the grey
+  dot grid with drawn push pins. Drag one and it pins where it drops; sort by
+  colour, company or price into columns held by big clips (flat or binder),
+  with labels that fit their column; click (or Enter) opens a lightbox with
+  the ticket and what it says, with previous, next and Escape. From the page,
+  one panel invites to play **pasaje**: tickets pop up and go, a click
+  collects the fare, dearer tickets stay less, 30 seconds, best score kept in
+  the visitor's browser. Only paper tickets play; nothing subtracts. Canvas
+  "lab: boletos v2" and "lab: pasaje", approved 2026-11-26.
+- Lab: **metro cards** (`/lab/metro-cards`), named the same in every
+  language. The owner's transport cards, one per city (Lima with two
+  variants, Santiago, Buenos Aires, Medellín): the card tilts with the
+  pointer under a glare and turns over on click or Enter; the contact globe,
+  as `src/lib/city-globe.ts`, turns the chosen city to the middle and marks
+  it in blue, with no route (owner, 2026-11-26). Numbers shown in full.
+- Lab: **bitsplash** (`/lab/bitsplash`). Clicks throw 8-bit acid splashes on
+  the grey grid (the acid shapes, a glyph front, two dithered acids); clean,
+  and download the grid as a PNG.
+- Lab: **sketchbook** door and page, marked coming soon (the pages are being
+  chosen).
+- Lab: the **píxeles ácidos** door is gone; bitsplash is that piece (owner,
+  2026-11-26). The idea stays in the tracker.
+- Lab index v2 (canvas "lab: índice v2", approved 2026-11-26): one grid of
+  doors, four to a row, each with its group (story, to play, archive). Hover
+  or focus widens a door while its live preview slides in from the right
+  (`src/lib/lab-previews.ts`, 12 fps, only the open door runs); the row gives
+  way and never reflows. Pieces still coming keep a still frame. On touch
+  screens the preview is a still frame under the text. The lower grid of
+  experiments (`LabGrid`) is no longer on the page. The sketchbook door, lost
+  when the píxeles ácidos door was removed, is back.
+  sísifo feliz's preview is only the horse, small and whole inside the door,
+  galloping in blue dots (owner, 2026-11-27).
+- Shared data for the collections in `src/content/collections.ts`; new token
+  groups `corkGrid`, `boletos` and `bitsplash` in `src/lib/tokens.ts`, and
+  `--cork-dot`, `--ticket-shadow`, `--pin-shadow`, `--card-lift`,
+  `--card-glare` and `--veil` in `tokens.css`.
 - The hero comes apart on the first scroll (canvas "hero: secuencia completa", approved 2026-11-23). Every letter of the name, (唐源) and the tagline pulls in toward the middle of the name, then falls with gravity, spins, bounces and piles on the floor; the buttons and the scroll hint drop out of view. As the void opens it swallows the pile, turning it in toward its centre. Back at the top, GSAP springs every piece home. `src/lib/hero-fall.ts` moves the real DOM nodes in the stage's design pixels, so the text stays real text (each letter is its own span; the full name and tagline are read once by screen readers) and it runs the same in every language. Reduced motion keeps the old fade. New dependency: `gsap`.
 - Favicon "yt" (canvas "favicon v3", approved 2026-11-23): the initials in Host Grotesk, outlined from the site's own font so they do not depend on it, with the y's arm running into the t's bar, ink on a paper tile with soft corners. `public/favicon.svg`, `favicon.ico` (16, 32, 48), `apple-touch-icon.png` (paper on signal blue, full bleed for iOS to round) and `icon-512.png`.
 - The site speaks English first (owner, 2026-11-22): English at `/`, Spanish at `/es`.

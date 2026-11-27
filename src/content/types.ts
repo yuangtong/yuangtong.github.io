@@ -71,6 +71,8 @@ export type Note = {
   alt: string;
   visual: NoteVisual;
   accent: Accent;
+  /** Not published yet: the card shows what it is about, switched off, and its page does not exist. */
+  soon?: boolean;
 };
 
 /** A language of the site. `learning` languages are the ones the owner is learning: machine translated, marked as such. */
@@ -134,9 +136,12 @@ export type HomePage = {
  * (docs/LAB.md): its door says so and leads to a page that describes it.
  * `points` are the lines that page lists.
  */
-export type LabDoor = { id: string; title: string; text: string; cta: Link; soon?: boolean; points?: string[] };
+/** How a door's live preview hints at its piece (lab index v2). */
+export type LabPreview = 'gallop' | 'drop' | 'tunnel' | 'desk' | 'tickets' | 'card' | 'splash' | 'book' | 'still';
+/** A lab door: `group` sorts the pieces into stories, toys and the owner's archive. */
+export type LabDoor = { id: string; title: string; text: string; cta: Link; group: 'story' | 'play' | 'archive'; preview: LabPreview; soon?: boolean; points?: string[] };
 
-export type LabPage = { title: string; lead: string; doors: LabDoor[]; experiments: Experiment[]; soon: { label: string; back: Link } };
+export type LabPage = { title: string; lead: string; doors: LabDoor[]; groups: Record<LabDoor['group'], string>; previewLabel: string; experiments: Experiment[]; soon: { label: string; back: Link } };
 
 /** A story in the lab, told with the landing's engine and its narration on. */
 export type StoryPage = { title: string; label: string; hint: string; replay: string };
@@ -149,8 +154,40 @@ export type LalandePage = {
   book: { label: string; author: string; title: string; quote: string; quoteSource: string };
   /** The word the horse's letters spell. */
   word: string;
+  /** The text the horse is written with (Clarice Lispector, Near to the Wild Heart). */
+  horseText: string;
+  /** The close: the book's title, then its author and year. */
   closeText: string; closeTitle: string;
 };
+
+/** Boletos de Lima (lab): the owner's bus tickets on a corkboard, and pasaje, the game that comes with them. */
+export type BoletosPage = {
+  title: string; lead: string; boardLabel: string;
+  sort: { label: string; loose: string; colour: string; company: string; price: string };
+  hint: { loose: string; sorted: string };
+  /** Colour keys from the catalogue, named in this language. */
+  colours: Record<string, string>;
+  lightbox: { label: string; of: string; price: string; fare: string; colour: string; noPrice: string; notPrinted: string; prev: string; next: string; close: string };
+  play: { title: string; text: string; cta: string };
+  game: {
+    title: string; lead: string; canvasLabel: string; back: string;
+    time: string; collected: string; tickets: string; start: string; restart: string; again: string;
+    ready: string; playing: string; result: string; best: string; bestWas: string;
+  };
+};
+
+/** Metro cards (lab): one transport card per city, and the contact globe marking the city. */
+export type MetroCardsPage = {
+  title: string; lead: string; countries: Record<string, string>;
+  front: string; back: string; turn: string; variants: string; count: string;
+  cardLabel: string; globeLabel: string;
+};
+
+/** sketchbook (lab): the scanned pages as a book you leaf through. `alts` follows SKETCHBOOK's ids. */
+export type SketchbookPage = { title: string; lead: string; cover: string; coverBy: string; back: string; prev: string; next: string; bookLabel: string; alts: Record<string, string> };
+
+/** bitsplash (lab): acid splashes on the grey grid; the visitor keeps what they made. */
+export type BitsplashPage = { title: string; lead: string; canvasLabel: string; hint: string; clean: string; download: string; one: string; many: string };
 
 /** Travesía ácida: the void with no bottom, as a lab piece. */
 export type TravesiaPage = {
@@ -199,7 +236,7 @@ export type NotePage = {
   credit: string;
 };
 
-export type NotesPage = { title: string; lead: string; items: Note[] };
+export type NotesPage = { title: string; lead: string; items: Note[]; soon: string };
 /** Studio (G8, estudio v3): the owner directs FOMMO; FOMMO's colours eat the paper. */
 /**
  * `preview`: the window onto the studio's site (canvas "studio: glitch FOMMO +

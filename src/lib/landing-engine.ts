@@ -428,9 +428,16 @@ export function createLanding(o: LandingOptions) {
     for (let i = 0; i < 5; i++) { tops.push(acc); acc += hs[i]; }
     return { tops, hs, k, u };
   }
-  let contentH: number[] = [], measured = false;
+  let contentH: number[] = [], measured = false, fitted = false;
   function layoutSheets(d: LandingDom, x: number, enter: number) {
     const geo = sheetGeo(x);
+    // phones: an open sheet's content is as tall as the room it has, so its
+    // button sits at the bottom of what is seen, above the strips of the next
+    // sheets, not under them (owner, 2026-11-27)
+    if (C.K === 2 && !fitted) {
+      d.inner.forEach((el) => { if (el?.classList.contains('sheet__fill')) { el.style.height = 'auto'; el.style.minHeight = `${H - 5 * C.strip}px`; } });
+      fitted = true; measured = false;
+    }
     if (!measured) { contentH = d.inner.map((el) => (el ? el.scrollHeight : 0)); measured = true; }
     for (let i = 0; i < 5; i++) {
       const el = d.sh[i]; if (!el) continue;
