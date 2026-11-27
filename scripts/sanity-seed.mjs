@@ -68,5 +68,5 @@ console.log(`${docs.length} documents -> ${dataset}`);
 
 // in CI there is no login: a write token (SANITY_AUTH_TOKEN) stands in for it
 const token = process.env.SANITY_AUTH_TOKEN ? ['--token', process.env.SANITY_AUTH_TOKEN] : [];
-const r = spawnSync('npx', ['sanity', 'dataset', 'import', out, dataset, '--replace', ...token], { cwd: root, stdio: 'inherit', env: process.env });
+const r = spawnSync('npx', ['sanity', 'dataset', 'import', out, '--dataset', dataset, '--replace', ...token], { cwd: root, stdio: 'inherit', env: process.env });
 process.exit(r.status ?? 1);
