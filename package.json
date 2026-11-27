@@ -8,15 +8,22 @@
     "prebuild": "node scripts/copy-mediapipe.mjs",
     "build": "next build",
     "start": "next start",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "sanity:seed": "node scripts/sanity-seed.mjs",
+    "sanity:update": "node scripts/sanity-update.mjs"
   },
   "dependencies": {
     "@mediapipe/tasks-vision": "1.2.3",
+    "@sanity/client": "^7.28.0",
+    "@sanity/icons": "^5.4.0",
     "gsap": "^3.15.1",
     "next": "^16.4.6",
+    "next-sanity": "^13.5.1",
     "page-flip": "2.0.7",
     "react": "^19.3.1",
-    "react-dom": "^19.3.1"
+    "react-dom": "^19.3.1",
+    "sanity": "^6.25.0",
+    "styled-components": "^6.7.0"
   },
   "devDependencies": {
     "@types/node": "^22.20.5",

@@ -93,12 +93,52 @@ Owner decisions and housekeeping, to pick up later:
   pull request. See `docs/TRANSLATION.md`. The routes for those languages
   come in a follow-up change.
 
+- Sanity connected (CMS). The editing panel is served at `/admin` (Sanity
+  Studio, embedded with `next-sanity`), outside the locale routing and not
+  indexed. Two content types to start: "Lab: order", which sets the order of
+  the lab's doors, and "archivo.exe: photos", the photos of the archive with
+  their series, date, description in each language, cell, palette and place
+  on the desk. The loaders lay this content over the local content and fall
+  back to it when Sanity is not configured, unreachable or empty; pages ask
+  Sanity again every 60 seconds. New variables `NEXT_PUBLIC_SANITY_PROJECT_ID`,
+  `NEXT_PUBLIC_SANITY_DATASET` and `NEXT_PUBLIC_SANITY_API_VERSION` in
+  `.env.example`. archivo.exe loads photos from another origin with CORS so
+  its canvas can read them.
+- `npm run sanity:seed` copies the content that lives in the code into Sanity
+  once (the lab's order and archivo.exe's photos with their files), through
+  the Sanity CLI and the owner's own login. Fixed document ids, so running it
+  again overwrites instead of duplicating.
+- GitHub Action "Sanity seed" runs that copy in the cloud, on demand (the
+  label `sanity-seed` on a pull request, or from the Actions tab), with a
+  Sanity write token in the `SANITY_AUTH_TOKEN` secret.
+- Sanity schemas follow Sanity's agent best practices: icons from
+  `@sanity/icons` subpaths, `defineArrayMember`, queries in `defineQuery`.
+- The lab's pieces and the notes move to Sanity (owner, 2026-11-27). "Lab:
+  pieces" holds each door's title, text, button, group, the lines of its
+  coming soon page and a status (shown, previews only, coming soon, hidden);
+  "Lab: order" is now a list of those pieces to drag. A piece whose page is
+  not built is always coming soon; a built piece marked coming soon behaves
+  as held. boletos de lima and metro cards follow their status on
+  yuangtong.dev instead of always showing coming soon, and a hidden piece has
+  no page there. Notes are one document per language sharing a slug, with
+  their card, body (paragraphs, code, figures from Sanity's CDN) and links,
+  and a status (published, coming soon, hidden); note pages are rendered on
+  first visit when published after a deploy. The seed copies all of it.
+- A built lab piece marked "coming soon" shows its coming soon page on
+  previews too, not only on yuangtong.dev.
+- Lab: boletos de lima and metro cards say what they will be, in the owner's
+  words (2026-11-27), in English and Spanish, and three lines on what each
+  piece is for their coming soon pages.
+- `npm run sanity:update` and the label `sanity-update` apply only the edits
+  listed in `scripts/sanity-updates.json` to Sanity (published and draft),
+  leaving the owner's other edits as they are.
 - Cookie notice (owner, 2026-11-27), in every language, drawn like the
   availability card (paper, 1px ink rule, hard ink shadow) at the lower left.
   The site sets no cookies and loads no analytics, so it informs and asks
   nothing: it says what is kept on the device (only that the notice was
   closed, in local storage; owner, 2026-11-27) and closes with one button. Content in `Settings.cookies`; no new dependency.
--- **About** (`/about`), canvas "about v3" (approved 2026-11-27):
+
+- **About** (`/about`), canvas "about v3" (approved 2026-11-27):
   - The owner's portrait sticks on the left. On the right, the title decodes
     on arrival, the greeting types itself, and the next paragraphs are typed
     by the scroll, one after another. Seven scrambled letters run ahead of a
