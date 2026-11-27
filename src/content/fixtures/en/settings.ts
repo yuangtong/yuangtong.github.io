@@ -14,7 +14,7 @@ export const settings: Settings = {
   description: 'yuang tong, web designer and creative coder in lima. he directs FOMMO. the lab gathers code, photography and music.',
   nav: [
     { label: 'home', href: '/' },
-    { label: 'about', href: '/#jugar' },
+    { label: 'about', href: '/about' },
     { label: 'lab', href: '/lab' },
     { label: 'studio', href: '/studio' },
     { label: 'notes', href: '/notes' },

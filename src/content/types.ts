@@ -209,6 +209,12 @@ export type CamaraPage = {
 /** sketchbook (lab): the scanned pages as a book you leaf through. `alts` follows SKETCHBOOK's ids. */
 export type SketchbookPage = { title: string; lead: string; cover: string; coverBy: string; back: string; prev: string; next: string; bookLabel: string; alts: Record<string, string> };
 
+/**
+ * About (canvas "about v3", 2026-11-27). The paragraphs are typed by the scroll;
+ * the last one ends on the email, a mailto link.
+ */
+export type AboutPage = { title: string; paras: string[]; closing: string; email: Link; portraitAlt: string };
+
 /** bitsplash (lab): acid splashes on the grey grid; the visitor keeps what they made. */
 export type BitsplashPage = { title: string; lead: string; canvasLabel: string; hint: string; clean: string; download: string; one: string; many: string };
 

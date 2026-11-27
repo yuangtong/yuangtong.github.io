@@ -1,4 +1,4 @@
-import type { ArchivePage, BitsplashPage, SketchbookPage, BoletosPage, CamaraPage, ContactPage, MetroCardsPage, HomePage, LabPage, NotesPage, NotFoundPage, LalandePage, NotePage, Settings, StoryPage, StudioPage, TravesiaPage } from './types';
+import type { AboutPage, ArchivePage, BitsplashPage, SketchbookPage, BoletosPage, CamaraPage, ContactPage, MetroCardsPage, HomePage, LabPage, NotesPage, NotFoundPage, LalandePage, NotePage, Settings, StoryPage, StudioPage, TravesiaPage } from './types';
 import { localize, type Locale } from './locale';
 import * as en from './fixtures/en/home';
 import * as es from './fixtures/es/home';
@@ -78,6 +78,10 @@ export async function getMetroCardsPage(locale: Locale): Promise<MetroCardsPage>
 
 export async function getSketchbookPage(locale: Locale): Promise<SketchbookPage> {
   return get(locale, (p) => p.sketchbookPage);
+}
+
+export async function getAboutPage(locale: Locale): Promise<AboutPage> {
+  return get(locale, (p) => p.aboutPage);
 }
 
 export async function getBitsplashPage(locale: Locale): Promise<BitsplashPage> {

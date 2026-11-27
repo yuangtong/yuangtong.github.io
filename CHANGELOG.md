@@ -71,7 +71,21 @@ Owner decisions and housekeeping, to pick up later:
   needs a vertical phone layout, to design first.
 
 ### Added
-- Hero v2 (canvas "hero v2: todo cae menos el navbar", approved 2026-11-24): on the first scroll everything but the navigation comes loose. The availability line falls with the letters, the buttons and the scroll hint, and the blocks now land on the floor (without pushing the letters) so the void swallows them with the pile, instead of dropping out of view. Only the navigation and the phone's menu button stay still.
+-- **About** (`/about`), canvas "about v3" (approved 2026-11-27):
+  - The owner's portrait sticks on the left. On the right, the title decodes
+    on arrival, the greeting types itself, and the next paragraphs are typed
+    by the scroll, one after another. Seven scrambled letters run ahead of a
+    blue caret, and the last paragraph ends on the email.
+  - Content in English and Spanish (`AboutPage`).
+  - The portrait is eaten by César Vallejo's "los heraldos negros" (public
+    domain) on its own clock, style "retrato F": acid shapes seed it, the
+    carcoma spreads into letters, ink and blue, holds, and starts again.
+  - The text is real DOM text over an invisible copy, so nothing jumps.
+    Reduced motion shows all of it, with the portrait already eaten.
+  - The navigation's "about" now opens this page, and the sections' header
+    numbers it 01.
+
+ Hero v2 (canvas "hero v2: todo cae menos el navbar", approved 2026-11-24): on the first scroll everything but the navigation comes loose. The availability line falls with the letters, the buttons and the scroll hint, and the blocks now land on the floor (without pushing the letters) so the void swallows them with the pile, instead of dropping out of view. Only the navigation and the phone's menu button stay still.
 - "Keep scrolling" / "sigue bajando" (owner, 2026-11-24): whenever the visitor stops for more than a moment between the first scroll and the first sheet (about), a small line at the bottom of the stage blinks and bounces until they scroll again; it never shows on the sheets. Desktop and phones, every language (`intro.keepScrolling`). Reduced motion keeps it still.
 - Lab: **sketchbook** (`/lab/sketchbook`) leaves "coming soon" with its first two
   scanned pages, menta then lola (`public/lab/sketchbook/`, `SKETCHBOOK` in

@@ -12,11 +12,12 @@ export default async function SectionsLayout({ children, params }: { children: R
   // numbered as the landing's sheets, in the navigation's order: 01 about, 02 lab, 03 studio, 04 notes, 05 contact
   const { lab, notes, studio } = home.sheets;
   const strips = [
+    { href: home.jugar.cta.href, title: home.jugar.title },
     { href: lab.href, title: lab.title },
     { href: studio.href, title: studio.title },
     { href: notes.href, title: notes.title },
     { href: home.sheets.contact.href, title: label(home.sheets.contact.href, contact.title) },
-  ].map((s, i) => ({ ...s, n: pad(i + 2) }));
+  ].map((s, i) => ({ ...s, n: pad(i + 1) }));
   return (
     <div className="section-shell">
       <CursorOn />

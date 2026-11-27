@@ -143,3 +143,6 @@ export type CamaraInk = keyof typeof camaraInks;
 /** cámara's halftone in multicolour: four process screens, printed with multiply (owner's reference, 2026-11-27). */
 export const camaraProcess = { c: '#00a0e4', m: '#e6007e', y: '#ffe600', k: '#141414' } as const;
 export const camaraRetro = ['#141414', '#ededeb', '#ffffff', '#0b14c9', '#1847ff', '#8aadd6', '#0e7c7b', '#2fb35a', '#c8ff2e', '#ffe600', '#e8451a', '#ff3d24', '#ff3ea5', '#a937e1', '#5a2e22', '#d9b48f'] as const;
+
+/** About (canvas "about v3"): the portrait eaten by the poem, in the site's paper, ink and blues. */
+export const about = { paper: '#ededeb', ink: '#141414', blue: '#0b14c9', electric: '#2a36ff', quiet: '#4d4d49' } as const;
