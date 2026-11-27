@@ -42,6 +42,11 @@ Owner decisions and housekeeping, to pick up later:
       already point to `/lab/[id]?celda=`.
 - [ ] Folk Club webfont for the stitched "hablemos" (Dancing Script stands in).
 - [ ] Logo and favicon: pick one of the proposals in the design canvas.
+- [ ] cámara, ascii: the owner finds it too light (2026-11-27); to discuss.
+      Options: a denser ramp, bold characters, a dithered ground behind the
+      characters, or less exposure so the lights also carry characters.
+- [ ] cámara, genkō: choose among writing, density and current (canvas
+      "lab: genkō") before it returns to the effects.
 
 ### Added
 
