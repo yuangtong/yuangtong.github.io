@@ -66,8 +66,6 @@ Owner decisions and housekeeping, to pick up later:
     one tap on a door opens its piece.
   - travesía ácida's preview is the piece itself, small: the same engine,
     dot grid and acids.
-  - lalande: Clarice Lispector's stitched name uses the site's typeface
-    (Host Grotesk) instead of the script face, so it reads.
 - menta&lola is removed from the lab (door and page): cámara does what it
   promised. Kept in `docs/LAB.md` as the record of the idea.
 - Lab previews (owner, 2026-11-27): the tickets carry the piece's own push
