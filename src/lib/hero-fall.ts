@@ -120,6 +120,8 @@ export function createHeroFall(stage: HTMLElement, root: HTMLElement, extra: HTM
     update,
     /** The stage changed size: put everything home and measure again on the next fall. */
     reset() { gsap.killTweensOf(bodies); bodies.forEach((b) => { b.el.style.transform = ''; b.el.style.opacity = ''; }); bodies = []; state = 'home'; root.classList.remove('is-falling'); },
+    /** Let one piece go (the availability line, back once the story is over): the fall stops moving it. */
+    release(el: HTMLElement | null) { if (!el) return; const b = bodies.find((x) => x.el === el); if (!b) return; gsap.killTweensOf(b); bodies = bodies.filter((x) => x !== b); el.style.transform = ''; el.style.opacity = ''; },
     destroy() { gsap.killTweensOf(bodies); },
   };
 }

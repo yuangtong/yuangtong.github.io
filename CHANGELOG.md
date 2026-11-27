@@ -48,6 +48,28 @@ Owner decisions and housekeeping, to pick up later:
 - [ ] cámara, genkō: choose among writing, density and current (canvas
       "lab: genkō") before it returns to the effects.
 
+### Changed
+
+- Landing, owner's notes (2026-11-27):
+  - The availability line, which falls with the hero, drops back in from the
+    top once the story is over (`HeroFall.release`).
+  - The first sheet is "about me" ("sobre mí"): a short line about the owner
+    and a "more about me" button to `/about`, the page the owner is building;
+    the pixel horse stays beside it (`Jugar.line`, `Jugar.cta`).
+  - Less dead scroll between sheets (900 design pixels each instead of 1400 on
+    a computer and 1200 on a phone), and each sheet's title decodes over a
+    fixed 1.1 s once it starts to open, so a quick scroll does not swallow it.
+  - The contact sheet's button keeps its colours: the sheet's link colours
+    had made it paper on paper, and pale on blue on hover.
+- Contact: the clocks and the globe say "my time" and "your time" ("mi hora",
+  "tu hora"), each with its city; on the globe my time is blue and the
+  visitor's is red (`globe.you`; the metro cards' globe keeps its other
+  cities in ink, `globe.other`). LinkedIn joins the links (yuangtong).
+- boletos de lima and metro cards are held back from production (`held` on
+  their doors, `src/lib/release.ts`, Vercel's `VERCEL_ENV`): on previews they
+  stay; on the live site their doors are gone and their pages 404. Boletos
+  needs a vertical phone layout, to design first.
+
 ### Added
 - Hero v2 (canvas "hero v2: todo cae menos el navbar", approved 2026-11-24): on the first scroll everything but the navigation comes loose. The availability line falls with the letters, the buttons and the scroll hint, and the blocks now land on the floor (without pushing the letters) so the void swallows them with the pile, instead of dropping out of view. Only the navigation and the phone's menu button stay still.
 - "Keep scrolling" / "sigue bajando" (owner, 2026-11-24): whenever the visitor stops for more than a moment between the first scroll and the first sheet (about), a small line at the bottom of the stage blinks and bounces until they scroll again; it never shows on the sheets. Desktop and phones, every language (`intro.keepScrolling`). Reduced motion keeps it still.

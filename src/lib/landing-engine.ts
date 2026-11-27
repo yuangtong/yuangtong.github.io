@@ -28,9 +28,9 @@ export type LandingConfig = {
   jugar: { side: number; head: number };
 };
 
-export const DESKTOP: LandingConfig = { W: 1440, H: 900, CS: 6, K: 1, VOID: 4600, STORY: 4400, TEXT: 1000, SECT: 1400, LAST: 900, strip: 48, hero: { cx: 146.2, cy: 91.8, s: 1.7 }, coreFrac: 0.6, run: { ax: 96, ay: 120, s: 3.2 }, zoom: { ax: 120, s: 1.9, lift: 9, drop: 44 }, threads: { start: 50, gap: 22, top: 30, travel: 330 }, travel2: 260, wall: { top: 34 }, year: { left: 118, top: 26, k: 5 }, hills: { far: 50, mid: 24 }, rockR: 14, slope: 0.3, scrubBottom: 120, glyphB: 2, repel: 90, jugar: { side: 560, head: 0 } };
+export const DESKTOP: LandingConfig = { W: 1440, H: 900, CS: 6, K: 1, VOID: 4600, STORY: 4400, TEXT: 1000, SECT: 900, LAST: 900, strip: 48, hero: { cx: 146.2, cy: 91.8, s: 1.7 }, coreFrac: 0.6, run: { ax: 96, ay: 120, s: 3.2 }, zoom: { ax: 120, s: 1.9, lift: 9, drop: 44 }, threads: { start: 50, gap: 22, top: 30, travel: 330 }, travel2: 260, wall: { top: 34 }, year: { left: 118, top: 26, k: 5 }, hills: { far: 50, mid: 24 }, rockR: 14, slope: 0.3, scrubBottom: 120, glyphB: 2, repel: 90, jugar: { side: 560, head: 0 } };
 
-export const MOBILE: LandingConfig = { W: 390, H: 844, CS: 4, K: 2, VOID: 2700, STORY: 2900, TEXT: 900, SECT: 1200, LAST: 700, strip: 44, hero: { cx: 49, cy: 128, s: 3.26 }, coreFrac: 0.9, run: { ax: 44, ay: 150, s: 3.6 }, zoom: { ax: 49, s: 3.1, lift: 6, drop: 70 }, threads: { start: 26, gap: 14, top: 50, travel: 170 }, travel2: 140, wall: { top: 48 }, year: { left: 14, top: 22, k: 3, drift: 0.02 }, hills: { far: 50, mid: 24 }, rockR: 10, slope: 0.3, scrubBottom: 120, glyphB: 3, repel: 64, jugar: { side: 0, head: 170 } };
+export const MOBILE: LandingConfig = { W: 390, H: 844, CS: 4, K: 2, VOID: 2700, STORY: 2900, TEXT: 900, SECT: 900, LAST: 700, strip: 44, hero: { cx: 49, cy: 128, s: 3.26 }, coreFrac: 0.9, run: { ax: 44, ay: 150, s: 3.6 }, zoom: { ax: 49, s: 3.1, lift: 6, drop: 70 }, threads: { start: 26, gap: 14, top: 50, travel: 170 }, travel2: 140, wall: { top: 48 }, year: { left: 14, top: 22, k: 3, drift: 0.02 }, hills: { far: 50, mid: 24 }, rockR: 10, slope: 0.3, scrubBottom: 120, glyphB: 3, repel: 64, jugar: { side: 0, head: 300 } };
 
 /**
  * Fit a design configuration to the window: keep the design scale on the
@@ -429,6 +429,7 @@ export function createLanding(o: LandingOptions) {
     return { tops, hs, k, u };
   }
   let contentH: number[] = [], measured = false, fitted = false;
+  const headAt = [-1, -1, -1, -1, -1];
   function layoutSheets(d: LandingDom, x: number, enter: number) {
     const geo = sheetGeo(x);
     // phones: an open sheet's content is as tall as the room it has, so its
@@ -497,10 +498,14 @@ export function createLanding(o: LandingOptions) {
       if (sheetsOn) geo = layoutSheets(d, x, enter);
       // each sheet's title comes out of glyph noise as its sheet opens
       if (geo && d.heads) {
-        const S = C.strip, open = H - 4 * S;
+        const S = C.strip;
+        // the scramble plays over a fixed time once the sheet starts to open, so a
+        // quick scroll does not swallow it (owner, 2026-11-27)
         d.heads.forEach((el, k) => {
           if (!el) return;
-          const T = el.dataset.text ?? '', u = reduce ? 1 : clamp(((geo!.hs[k] - S) / (open - S)) * 1.25);
+          const T = el.dataset.text ?? '';
+          if (geo!.hs[k] > S + 2) { if (headAt[k] < 0) headAt[k] = now; } else headAt[k] = -1;
+          const u = reduce ? 1 : headAt[k] < 0 ? 0 : clamp((now - headAt[k]) / 1100);
           setText(el, u >= 1 ? T : decode(u, T));
         });
       }

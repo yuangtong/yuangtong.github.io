@@ -55,6 +55,10 @@ img, canvas { display: block; }
 
 .stage__header { position: absolute; inset: 0 0 auto; height: 72px; padding: 0 32px; display: flex; align-items: center; justify-content: space-between; gap: var(--s-6); font-size: var(--t-small); z-index: 4; pointer-events: none; }
 .stage__status { display: flex; align-items: center; gap: 10px; background: var(--paper); padding: 6px 10px; font-family: var(--font-mono); font-size: var(--t-label); pointer-events: auto; white-space: nowrap; }
+/* once the story is over, the availability line drops back in from the top (owner, 2026-11-27) */
+.stage__status.is-back { animation: status-back 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+@keyframes status-back { from { transform: translateY(-160%); opacity: 0; } to { transform: none; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .stage__status.is-back { animation: none; } }
 .stage__dot { width: 8px; height: 8px; border-radius: 4px; background: var(--signal); }
 .stage__nav { display: flex; align-items: center; gap: 28px; background: var(--paper); padding: 0 14px; pointer-events: auto; }
 .stage__nav a { padding: 12px 0; text-decoration: none; }
@@ -90,6 +94,7 @@ img, canvas { display: block; }
 
 .jugar__side { width: 560px; height: 660px; padding: 40px 40px 32px 32px; display: flex; flex-direction: column; gap: var(--s-5); background: var(--paper); border-right: 1px solid var(--ink); }
 .jugar__title { margin: 0; font-size: 92px; line-height: 0.9; font-weight: 300; letter-spacing: var(--track-display); }
+.jugar__line { margin: 0; font-size: var(--t-body-lg); line-height: 1.4; color: var(--body); }
 
 .lab__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 1px solid var(--ink); border-left: 1px solid var(--ink); }
 .lab-card { height: 340px; display: grid; grid-template-columns: minmax(0, 1fr) 344px; border-right: 1px solid var(--ink); border-bottom: 1px solid var(--ink); }
@@ -130,6 +135,9 @@ img, canvas { display: block; }
 .sheet--contact { background: var(--ink); color: var(--paper); }
 .sheet--contact a { color: var(--paper); }
 .sheet--contact a:hover { color: var(--on-signal-soft); }
+/* the button keeps its own colours: the sheet's link colours made it paper on paper, and pale on blue on hover (owner, 2026-11-27) */
+.sheet--contact .btn--paper { color: var(--ink); }
+.sheet--contact .btn--paper:hover { background: var(--signal); color: var(--on-signal); }
 .contact__title { margin: 0; font-size: 240px; line-height: 0.84; font-weight: 300; letter-spacing: -0.06em; }
 .contact__lead { margin: 0; font-size: 28px; line-height: 1.2; font-weight: 300; }
 .contact__links { margin-top: auto; display: flex; gap: var(--s-6); font-size: var(--t-small); }
@@ -157,8 +165,9 @@ img, canvas { display: block; }
 .stage[data-frame='m'] .sheet__headline { flex-direction: column; align-items: flex-start; gap: var(--s-3); }
 .stage[data-frame='m'] .sheet__headline .lead { width: auto; font-size: 17px; }
 .stage[data-frame='m'] .h2 { font-size: 64px; }
-.stage[data-frame='m'] .jugar__side { width: auto; height: 170px; padding: 20px 16px 14px; gap: 10px; border-right: 0; border-bottom: 1px solid var(--ink); }
+.stage[data-frame='m'] .jugar__side { width: auto; height: 300px; padding: 20px 16px 14px; gap: 10px; border-right: 0; border-bottom: 1px solid var(--ink); }
 .stage[data-frame='m'] .jugar__title { font-size: 50px; line-height: 0.92; letter-spacing: -0.045em; }
+.stage[data-frame='m'] .jugar__line { font-size: var(--t-small); }
 .stage[data-frame='m'] .lab__grid { grid-template-columns: minmax(0, 1fr); border-left: 0; }
 .stage[data-frame='m'] .lab-card { height: auto; grid-template-columns: minmax(0, 1fr); border-right: 0; }
 .stage[data-frame='m'] .lab-card__visual { order: -1; border-left: 0; }

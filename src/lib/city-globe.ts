@@ -25,7 +25,7 @@ export function createCityGlobe(cv: HTMLCanvasElement, o: { cities: GlobeCity[];
   };
   const mark = (ctx: CanvasRenderingContext2D, p: GlobeCity, R: number, cx: number, cy: number, on: boolean) => {
     const q = project(p.lat, p.lon, R, cx, cy); if (q[2] <= 0) return;
-    const col = on ? C.me : C.you, s = on ? 12 : 8;
+    const col = on ? C.me : C.other, s = on ? 12 : 8;   // the other cities stay in ink; red is the contact globe's visitor
     ctx.fillStyle = col;
     if (!on || o.reduce || Math.floor(performance.now() / 500) % 2 === 0) ctx.fillRect(q[0] - s / 2, q[1] - s / 2, s, s);
     if (on) { ctx.strokeStyle = col; ctx.lineWidth = 1; ctx.strokeRect(q[0] - 9.5, q[1] - 9.5, 19, 19); }
