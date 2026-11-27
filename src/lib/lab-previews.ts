@@ -7,9 +7,12 @@ import type { LabPreview } from '@/content/types';
 import { BAYER } from './dither';
 import type { Media } from './lab-cards';
 import { GALLOP, horseAt } from './media';
-import { bitsplash, boletos, color, corkGrid, labDesk, lalande, travesia } from './tokens';
+import { bitsplash, boletos, color, corkGrid, labDesk, lalande } from './tokens';
+import { createTravesia } from './travesia-engine';
 
-export type PreviewMedia = Media & { tickets?: HTMLImageElement[]; card?: HTMLImageElement };
+const tunnels = new WeakMap<HTMLCanvasElement, ReturnType<typeof createTravesia>>();
+
+export type PreviewMedia = Media & { tickets?: HTMLImageElement[]; card?: HTMLImageElement; pages?: HTMLImageElement[] };
 
 function grid(c: CanvasRenderingContext2D, w: number, h: number, dot: string = corkGrid.dot) {
   c.fillStyle = corkGrid.paper; c.fillRect(0, 0, w, h); c.fillStyle = dot;
@@ -39,14 +42,9 @@ export function drawPreview(cv: HTMLCanvasElement, kind: LabPreview, step: numbe
     for (let a = 0; a < 6; a++) { const ang = a * 1.047 + t * 0.6; c.fillRect(fx + Math.cos(ang) * 16 - 5, h - 46 + Math.sin(ang) * 16 - 5, 10, 10); }
     c.fillStyle = lalande.cupRim; c.fillRect(fx - 6, h - 52, 12, 12);
   } else if (kind === 'tunnel') {
-    c.fillStyle = travesia.ink; c.fillRect(0, 0, w, h);
-    const ramps = Object.values(travesia.ramps);
-    for (let k = 0; k < 14; k++) {
-      const s = (k * 40 + step * 5) % 560, a = s / 560;
-      c.strokeStyle = ramps[(k + Math.floor(t / 2)) % ramps.length][2]; c.globalAlpha = a; c.lineWidth = 2 + a * 4;
-      c.strokeRect(w / 2 - s * 0.9, h / 2 - s * 0.32, s * 1.8, s * 0.64);
-    }
-    c.globalAlpha = 1;
+    // the piece itself, small: the same engine, the same dot grid and acids (owner, 2026-11-27)
+    let eng = tunnels.get(cv); if (!eng) { eng = createTravesia(cv, 6); tunnels.set(cv, eng); }
+    eng.frame(performance.now(), { cell: 6, ramp: 'todos', base: 1.4, reduce: step === 0 }, null);
   } else if (kind === 'desk') {
     c.fillStyle = labDesk; c.fillRect(0, 0, w, h);
     const p = m.photo;
@@ -73,6 +71,16 @@ export function drawPreview(cv: HTMLCanvasElement, kind: LabPreview, step: numbe
     const im = m.card; if (!im?.naturalWidth) return;
     const sx = Math.cos(t * 1.1), cw = 230 * Math.abs(sx), ch = 145;
     c.save(); c.translate(Math.min(w * 0.45, w - 140), h / 2); c.shadowColor = boletos.shadow; c.shadowOffsetY = 10; c.shadowBlur = 16; c.drawImage(im, -cw / 2, -ch / 2, cw, ch); c.restore();
+  } else if (kind === 'book') {
+    // the sketchbook open on its spread; the right page turns over and back
+    grid(c, w, h);
+    const [l, r] = m.pages ?? []; if (!l?.naturalWidth || !r?.naturalWidth) return;
+    const ph = Math.min(h - 40, 190), pw = ph * (l.naturalWidth / l.naturalHeight), cx = Math.min(w / 2, w - pw - 24), y = (h - ph) / 2;
+    c.save(); c.shadowColor = boletos.shadow; c.shadowOffsetY = 6; c.shadowBlur = 12;
+    c.drawImage(l, cx - pw, y, pw, ph);
+    const k = Math.cos(t * 1.2), turn = Math.abs(k);
+    c.drawImage(k >= 0 ? r : l, cx, y, pw * turn, ph);
+    c.restore();
   } else if (kind === 'splash') {
     grid(c, w, h);
     for (let s = 0; s < 3; s++) {

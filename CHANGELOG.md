@@ -50,6 +50,13 @@ Owner decisions and housekeeping, to pick up later:
 
 ### Added
 
+- Lab: **sketchbook** (`/lab/sketchbook`) leaves "coming soon" with its first two
+  scanned pages, menta then lola (`public/lab/sketchbook/`, `SKETCHBOOK` in
+  `collections.ts`), between a hard cover and a hard back. page-flip 2.0.7
+  (the engine behind react-pageflip, the owner's reference; pinned, with a
+  local type declaration) turns them: drag a corner, click, the arrows or
+  the keyboard; one page at a time on phones; the book fits the screen. Its
+  door gets a preview: the spread, with the right page turning.
 - Lab: **cámara** (`/lab/camara`), a webcam toy (canvas "lab: cámara",
   2026-11-26; owner's notes 2026-11-27). The page opens on a gate that asks
   for the camera and says nothing is saved on the site (or draw with the
@@ -264,6 +271,21 @@ Owner decisions and housekeeping, to pick up later:
 
 ### Changed
 
+- Owner's notes on phones and navigation (2026-11-27):
+  - From the landing, on a computer and on a phone, the navigation opens each
+    section's page (`/lab`, `/studio`...); only "/" and hashes scroll inside
+    the landing.
+  - Phones: an open sheet's content is as tall as the room it has, so the
+    "enter" button sits above the strips of the next sheets instead of under
+    them; a strong fling is held at the next sheet, never skipping one.
+  - Lab index on touch screens: no previews (they are made for a computer);
+    one tap on a door opens its piece.
+  - travesía ácida's preview is the piece itself, small: the same engine,
+    dot grid and acids.
+  - lalande: Clarice Lispector's stitched name uses the site's typeface
+    (Host Grotesk) instead of the script face, so it reads.
+- menta&lola is removed from the lab (door and page): cámara does what it
+  promised. Kept in `docs/LAB.md` as the record of the idea.
 - Version 1 (Vite) is kept in the branches `version-1` and `version-2025` on `db6054a` and
   removed from version 2, leftovers included (`node_modules 2/`, `nohup.out`,
   `vite.config.ts.timestamp-*.mjs`).

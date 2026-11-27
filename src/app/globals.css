@@ -410,7 +410,7 @@ img, canvas { display: block; }
 /* ---------- Lalande, historia 02 ---------- */
 .lalande { position: relative; }
 .lalande__sticky { position: sticky; overflow: hidden; background: var(--paper); }
-.lalande__canvas { position: absolute; left: 0; top: 0; display: block; font-family: var(--font-mono); --lalande-word: var(--font-sans); --lalande-script: var(--font-cursive); }
+.lalande__canvas { position: absolute; left: 0; top: 0; display: block; font-family: var(--font-mono); --lalande-word: var(--font-sans); }
 .lalande__layer { --s: 1; position: absolute; left: 0; top: 0; transform-origin: 0 0; pointer-events: none; }
 .lalande__persp { position: absolute; inset: 0; perspective: 2200px; }
 .lalande__quote { position: absolute; left: 32px; top: 104px; z-index: 2; margin: 0; max-width: max(660px, calc(340px / var(--s))); display: flex; flex-direction: column; gap: var(--s-4); color: var(--on-signal); opacity: 0; }
@@ -646,6 +646,22 @@ img, canvas { display: block; }
 @media (prefers-reduced-motion: reduce) { .metro__card, .metro__tilt { transition: none; } }
 @media (max-width: 900px) { .metro { grid-template-columns: minmax(0, 1fr); } }
 
+/* sketchbook (owner, 2026-11-27): the scanned pages as a book; page-flip turns them */
+.sk { display: flex; flex-direction: column; align-items: center; gap: var(--s-5); padding: var(--s-6) var(--gutter) var(--s-7); }
+.sk__head { align-self: stretch; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: var(--s-3) var(--s-6); }
+.sk__title { margin: 0; font-size: clamp(40px, 5vw, 72px); line-height: 0.95; font-weight: 300; letter-spacing: var(--track-title); }
+.sk__lead { margin: 0; max-width: 520px; line-height: 1.45; color: var(--body); }
+.sk__host { width: min(1240px, 100%); display: flex; justify-content: center; }
+.sk__book { width: 100%; }
+.sk__page { background: var(--paper); overflow: hidden; }
+.sk__page--scan img { display: block; width: 100%; height: 100%; object-fit: cover; user-select: none; }
+.sk__page--cover, .sk__page--back { background: var(--ink); color: var(--paper); display: flex; flex-direction: column; justify-content: flex-end; padding: var(--s-6); box-sizing: border-box; }
+.sk__cover-title { margin: 0; font-size: clamp(36px, 5vw, 64px); line-height: 0.95; font-weight: 300; letter-spacing: var(--track-title); }
+.sk__cover-by { margin: var(--s-2) 0 0; font-family: var(--font-mono); font-size: 12px; }
+.sk__back-text { margin: 0; font-family: var(--font-mono); font-size: 12px; line-height: 1.5; }
+.sk__nav { display: flex; align-items: center; gap: var(--s-4); }
+.sk__count { margin: 0; color: var(--ink); }
+
 .bitsplash { position: relative; overflow: hidden; background: var(--paper); }
 .bitsplash__cv { position: absolute; inset: 0; width: 100%; height: 100%; display: block; cursor: crosshair; touch-action: manipulation; font-family: var(--font-mono); }
 .bitsplash__head { position: absolute; left: var(--gutter); top: var(--s-5); display: flex; flex-direction: column; gap: var(--s-2); max-width: 420px; padding: var(--s-2) var(--s-3) var(--s-3); background: var(--paper); pointer-events: none; }
@@ -677,13 +693,15 @@ img, canvas { display: block; }
 .lab-door__preview canvas { display: block; width: 100%; height: 100%; image-rendering: pixelated; }
 .lab-door__cap { position: absolute; left: var(--s-4); bottom: var(--s-3); margin: 0; padding: 4px 8px; background: var(--paper); color: var(--ink); }
 @media (prefers-reduced-motion: reduce) { .lab-door, .lab-door__preview { transition: none; } }
-/* touch: no hover; the preview is a still frame under the text */
+/* touch: no hover, so no preview (it is made for a computer); one tap on the
+   door opens its piece (owner, 2026-11-27) */
 @media (hover: none), (max-width: 760px) {
   .lab-doors__row { flex-direction: column; }
   .lab-door[data-open='true'] { flex-grow: 1; }
   .lab-door__text { height: auto; }
-  .lab-door__preview { position: relative; inset: auto; height: 120px; clip-path: none; }
-  .lab-door__cap { display: none; }
+  .lab-door__preview { display: none; }
+  .lab-door { position: relative; }
+  .lab-door__cta::after { content: ''; position: absolute; inset: 0; }
 }
 @media (hover: none) and (min-width: 761px) { .lab-doors__row { flex-direction: row; } }
 

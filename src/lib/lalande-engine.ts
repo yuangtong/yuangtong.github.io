@@ -38,7 +38,7 @@ export type LalandeOptions = {
   canvas: HTMLCanvasElement; gallop: Gallop; dom: () => LalandeDom; reduce: boolean;
   /** Grid size in design pixels (at least the frame). */
   W: number; H: number;
-  fonts: { word: string; mono: string; script: string }; word: string; closeText: string; breezeLabel: string;
+  fonts: { word: string; mono: string }; word: string; closeText: string; breezeLabel: string;
 };
 
 type FP = { ty: number; x?: number; y?: number; z?: number; g?: number; sl?: number; lx?: number; ly?: number; lz?: number; u?: V3; v?: V3; n?: V3; a?: number; pet?: number; rim?: boolean };
@@ -82,13 +82,13 @@ export function createLalande(o: LalandeOptions) {
     wordCells.sort((a, b) => a.x - b.x || a.y - b.y);
     const cw = 760, ch = Math.ceil(LINE.size * 1.6), sc = document.createElement('canvas'); sc.width = cw; sc.height = ch;
     const sx = sc.getContext('2d', { willReadFrequently: true })!;
-    sx.fillStyle = '#000'; sx.textBaseline = 'middle'; sx.font = `500 ${LINE.size}px ${o.fonts.script}`; sx.fillText(o.closeText, 0, ch / 2);
+    sx.fillStyle = '#000'; sx.textBaseline = 'middle'; sx.font = `500 ${LINE.size}px ${o.fonts.word}`; sx.fillText(o.closeText, 0, ch / 2);   // the site's typeface, so the stitched name reads (owner, 2026-11-27)
     const dd = sx.getImageData(0, 0, cw, ch).data, list: { x: number; y: number }[] = [];
     for (let yy = 0; yy < ch; yy += LINE.k) for (let xx = 0; xx < cw; xx += LINE.k) { const cx = Math.min(cw - 1, xx + (LINE.k >> 1)), cy = Math.min(ch - 1, yy + (LINE.k >> 1)); if (dd[(cy * cw + cx) * 4 + 3] > 100) list.push({ x: LINE.x + xx, y: LINE.y - ch / 2 + yy }); }
     list.sort((a, b) => a.x - b.x || a.y - b.y);
     stitches = list;
   };
-  const fl = document.fonts?.load ? Promise.all([document.fonts.load(`300 330px ${o.fonts.word}`), document.fonts.load(`500 56px ${o.fonts.script}`), document.fonts.load(MONO)]) : Promise.resolve();
+  const fl = document.fonts?.load ? Promise.all([document.fonts.load(`300 330px ${o.fonts.word}`), document.fonts.load(`500 56px ${o.fonts.word}`), document.fonts.load(MONO)]) : Promise.resolve();
   fl.then(buildText, buildText);
 
   // the narcissus in 3D: points projected to the grid

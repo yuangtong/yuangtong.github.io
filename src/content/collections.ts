@@ -105,3 +105,10 @@ export const METRO_CITIES: MetroCity[] = [
   { id: 'medellin', city: 'Medellín', country: 'co', lat: 6.25, lon: -75.57, system: 'Cívica, Metro de Medellín', variants: [
     { name: '', front: card('civica-front'), back: card('civica-back') }] },
 ];
+
+/** The sketchbook's scanned pages, in order (owner, 2026-11-27: menta, then lola; more being scanned). */
+export type SketchbookLeaf = { id: string; src: string };
+export const SKETCHBOOK: SketchbookLeaf[] = [
+  { id: 'menta', src: '/lab/sketchbook/01-menta.webp' },
+  { id: 'lola', src: '/lab/sketchbook/02-lola.webp' },
+];
