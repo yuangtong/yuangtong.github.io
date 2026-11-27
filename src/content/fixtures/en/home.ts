@@ -1,4 +1,4 @@
-import type { ArchivePage, BitsplashPage, SketchbookPage, BoletosPage, ContactPage, MetroCardsPage, HomePage, LabPage, LalandePage, NotePage, NotesPage, NotFoundPage, StoryPage, StudioPage, TravesiaPage } from '../../types';
+import type { ArchivePage, BitsplashPage, SketchbookPage, BoletosPage, CamaraPage, ContactPage, MetroCardsPage, HomePage, LabPage, LalandePage, NotePage, NotesPage, NotFoundPage, StoryPage, StudioPage, TravesiaPage } from '../../types';
 
 export const home: HomePage = {
   intro: {
@@ -87,8 +87,7 @@ export const labPage: LabPage = {
     { id: 'metro-cards', group: 'archive', preview: 'card', title: 'metro cards', text: 'the transport cards i kept, one city each, on the dot-grid globe. turn them over.', cta: { label: 'see the cards', href: '/lab/metro-cards' } },
     { id: 'bitsplash', group: 'play', preview: 'splash', title: 'bitsplash', text: 'click and an 8-bit acid splash lands on the grey grid. make a mess and keep it as an image.', cta: { label: 'make a splash', href: '/lab/bitsplash' } },
     { id: 'sketchbook', group: 'archive', preview: 'book', title: 'sketchbook', text: 'my sketchbook, scanned page by page. turn the pages as in a book.', cta: { label: 'leaf through the sketchbook', href: '/lab/sketchbook' } },
-    { id: 'camara', group: 'play', preview: 'still', soon: true, title: 'cámara', text: 'your camera and your hand: pinch thumb and index together and your fingertip leaves a trail of glyphs.', cta: { label: 'see what it will be', href: '/lab/camara' },
-      points: ['it follows your hand with mediapipe, in your browser.', 'pinch to draw, open your hand to let go; the trail fades on its own.', 'your image never leaves your device.', 'without a camera, you draw with the cursor or a finger.'] },
+    { id: 'camara', group: 'play', preview: 'trail', title: 'cámara', text: 'your camera and your hand: pinch thumb and index and paint pixels, halftone, ascii or cross-stitch over yourself.', cta: { label: 'draw with your hand', href: '/lab/camara' } },
     { id: 'dona', group: 'play', preview: 'still', soon: true, title: 'dona de teselas', text: 'a donut and other 3d solids made of tiles and glyphs. you turn them and change the image they are made of.', cta: { label: 'see what it will be', href: '/lab/dona' },
       points: ['drag to turn it.', 'tiles: molinete, damero, contorno, puntos, tick, macizo and glyphs.', 'image, solid, cell, palette and speed.'] },
     { id: 'efimero', group: 'play', preview: 'still', soon: true, title: 'ambiente efímero', text: 'live code: music with strudel and visuals with hydra, which exist while they play.', cta: { label: 'see what it will be', href: '/lab/efimero' },
@@ -272,4 +271,27 @@ export const bitsplashPage: BitsplashPage = {
   lead: 'click anywhere: an 8-bit acid splash lands on the grid.',
   canvasLabel: 'a grey dot grid. every click throws an 8-bit acid splash where it lands, in dithered acid colours, with a few drops around it.',
   hint: 'click anywhere', clean: 'clean', download: 'download', one: 'splash', many: 'splashes',
+};
+
+export const camaraPage: CamaraPage = {
+  title: 'cámara',
+  lead: 'a webcam toy: pinch and paint an effect over yourself, then take the photo.',
+  gate: { title: 'this piece needs your camera', text: 'your camera is read in your browser to find your hands. nothing is saved on this site: it is only for play, and to show what the web can do.', camera: 'turn the camera on', cursor: 'draw with the cursor instead', touch: 'the full experience, with your hands, is on a computer. on a phone the camera is a web toy: choose an effect and it covers the whole image.' },
+  loading: 'starting the camera…', stop: 'turn the camera off', cursor: 'draw with the cursor', camera: 'turn the camera on',
+  denied: 'the camera was not allowed. you can draw with the cursor: press and drag.', noCamera: 'no camera here. you can draw with the cursor: press and drag.',
+  sourceHand: 'camera on', sourceToy: 'web toy: the whole image', sourceCursor: 'cursor: press and drag', penUp: 'pen up', penDown: 'pen down',
+  canvasMirror: 'your camera image, mirrored; where you pinch and move, the chosen effect is painted over it.',
+  canvasToy: 'your camera image, mirrored, all of it in the chosen effect.',
+  leadToy: 'the whole image takes the effect. change it and it changes, live.', controls: 'camera controls',
+  mode: { label: 'mode', draw: 'draw', toy: 'web toy' },
+  full: { on: 'full screen', off: 'side panel' },
+  track: { label: 'tracking', on: 'on', off: 'paused', key: '(space bar)', paused: 'tracking paused' },
+  canvasCursor: 'a grey dot grid; press and drag to leave an ink stroke that stays.',
+  effect: { label: 'effect', pixels: 'pixels', dither: 'dither', halftone: 'halftone', ascii: 'ascii', stitch: 'cross-stitch', more: 'more effects', back: 'previous effects' },
+  colour: { label: 'colour', names: { signal: 'blue', ink: 'ink', naranja: 'orange', rosado: 'pink', lima: 'lime', violeta: 'violet', multi: 'multicolour' } },
+  brush: { label: 'brush', small: 'small', medium: 'medium', large: 'large' },
+  pixel: { label: 'pixel', fine: 'fine', medium: 'medium', coarse: 'coarse' },
+  clear: 'clear', photo: 'take the photo', saved: 'photo saved',
+  how: ['pinch thumb and index: where your fingertip goes, the effect appears. close a loop and what it circles fills in.', 'a new stroke paints over the last.', 'take the photo: 3, 2, 1, and it downloads.'],
+  howToy: ['choose an effect: it covers the whole image.', 'change the effect, the colour or the pixel, and it changes live.', 'take the photo: 3, 2, 1, and it downloads.'],
 };

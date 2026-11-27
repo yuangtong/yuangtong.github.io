@@ -137,7 +137,7 @@ export type HomePage = {
  * `points` are the lines that page lists.
  */
 /** How a door's live preview hints at its piece (lab index v2). */
-export type LabPreview = 'gallop' | 'drop' | 'tunnel' | 'desk' | 'tickets' | 'card' | 'splash' | 'book' | 'still';
+export type LabPreview = 'gallop' | 'drop' | 'tunnel' | 'desk' | 'tickets' | 'card' | 'splash' | 'trail' | 'book' | 'still';
 /** A lab door: `group` sorts the pieces into stories, toys and the owner's archive. */
 export type LabDoor = { id: string; title: string; text: string; cta: Link; group: 'story' | 'play' | 'archive'; preview: LabPreview; soon?: boolean; points?: string[] };
 
@@ -181,6 +181,25 @@ export type MetroCardsPage = {
   title: string; lead: string; countries: Record<string, string>;
   front: string; back: string; turn: string; variants: string; count: string;
   cardLabel: string; globeLabel: string;
+};
+
+/** cámara (lab): a webcam toy; a pinch paints an effect over your image, and you take the photo. */
+export type CamaraPage = {
+  title: string; lead: string;
+  gate: { title: string; text: string; camera: string; cursor: string; touch: string };
+  loading: string; stop: string; cursor: string; camera: string; denied: string; noCamera: string;
+  sourceHand: string; sourceToy: string; sourceCursor: string; penUp: string; penDown: string;
+  canvasMirror: string; canvasToy: string; canvasCursor: string;
+  leadToy: string; controls: string;
+  mode: { label: string; draw: string; toy: string };
+  full: { on: string; off: string };
+  effect: { label: string; pixels: string; dither: string; halftone: string; ascii: string; stitch: string; more: string; back: string };
+  track: { label: string; on: string; off: string; key: string; paused: string };
+  colour: { label: string; names: Record<string, string> };
+  brush: { label: string; small: string; medium: string; large: string };
+  pixel: { label: string; fine: string; medium: string; coarse: string };
+  clear: string; photo: string; saved: string;
+  how: string[]; howToy: string[];
 };
 
 /** sketchbook (lab): the scanned pages as a book you leaf through. `alts` follows SKETCHBOOK's ids. */
