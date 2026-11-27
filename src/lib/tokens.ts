@@ -131,3 +131,6 @@ export const bitsplash = {
   pairs: [['#e8451a', '#edaae8'], ['#c4e118', '#8aadd6'], ['#0b14c9', '#a937e1'], ['#ffe600', '#ff3d24'], ['#a937e1', '#edaae8'], ['#ff3d24', '#0d0f1e']],
   ink: '#141414',
 } as const;
+
+/** archivo.exe's desktop in the lab index preview: the same value as --w98-teal. */
+export const labDesk = '#0e7c7b';

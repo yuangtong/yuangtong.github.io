@@ -10,8 +10,8 @@ never on the home page.
 
 ## Index
 
-- A grid of doors in two groups: **historias** (pieces with a narrative) and
-  **exploraciones** (pieces to play with).
+- One grid of doors, four to a row, each marked **story**, **to play** or
+  **archive** (the owner keeps things: tickets, cards, stickers, postcards).
 - On hover a door slides aside and shows a live preview of its piece. On
   touch screens the preview is a still frame; there is no hover.
 - historias: sísifo feliz; lalande, lágrimas de ángel.

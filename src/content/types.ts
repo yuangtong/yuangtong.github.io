@@ -134,9 +134,12 @@ export type HomePage = {
  * (docs/LAB.md): its door says so and leads to a page that describes it.
  * `points` are the lines that page lists.
  */
-export type LabDoor = { id: string; title: string; text: string; cta: Link; soon?: boolean; points?: string[] };
+/** How a door's live preview hints at its piece (lab index v2). */
+export type LabPreview = 'gallop' | 'drop' | 'tunnel' | 'desk' | 'tickets' | 'card' | 'splash' | 'still';
+/** A lab door: `group` sorts the pieces into stories, toys and the owner's archive. */
+export type LabDoor = { id: string; title: string; text: string; cta: Link; group: 'story' | 'play' | 'archive'; preview: LabPreview; soon?: boolean; points?: string[] };
 
-export type LabPage = { title: string; lead: string; doors: LabDoor[]; experiments: Experiment[]; soon: { label: string; back: Link } };
+export type LabPage = { title: string; lead: string; doors: LabDoor[]; groups: Record<LabDoor['group'], string>; previewLabel: string; experiments: Experiment[]; soon: { label: string; back: Link } };
 
 /** A story in the lab, told with the landing's engine and its narration on. */
 export type StoryPage = { title: string; label: string; hint: string; replay: string };

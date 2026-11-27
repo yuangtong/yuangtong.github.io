@@ -68,6 +68,14 @@ Owner decisions and housekeeping, to pick up later:
   chosen).
 - Lab: the **píxeles ácidos** door is gone; bitsplash is that piece (owner,
   2026-11-26). The idea stays in the tracker.
+- Lab index v2 (canvas "lab: índice v2", approved 2026-11-26): one grid of
+  doors, four to a row, each with its group (story, to play, archive). Hover
+  or focus widens a door while its live preview slides in from the right
+  (`src/lib/lab-previews.ts`, 12 fps, only the open door runs); the row gives
+  way and never reflows. Pieces still coming keep a still frame. On touch
+  screens the preview is a still frame under the text. The lower grid of
+  experiments (`LabGrid`) is no longer on the page. The sketchbook door, lost
+  when the píxeles ácidos door was removed, is back.
 - Shared data for the collections in `src/content/collections.ts`; new token
   groups `corkGrid`, `boletos` and `bitsplash` in `src/lib/tokens.ts`, and
   `--cork-dot`, `--ticket-shadow`, `--pin-shadow`, `--card-lift`,
