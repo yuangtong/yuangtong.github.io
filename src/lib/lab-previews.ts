@@ -20,8 +20,9 @@ function grid(c: CanvasRenderingContext2D, w: number, h: number, dot: string = c
 }
 
 /** The piece's push pin (Boletos.tsx), drawn on the canvas: tilted, with its needle, shade and shine. */
-const PIN = { stem: new Path2D('M8.6 7.5 H15.4 L16.6 19 H7.4 Z'), shade: new Path2D('M13.6 8.5 H15.4 L16.4 18.4 H14.2 Z') };
+let PIN: { stem: Path2D; shade: Path2D } | null = null;   // made on first use: Path2D only exists in the browser
 function pin(c: CanvasRenderingContext2D, x: number, y: number, col: string, k = 1) {
+  PIN ??= { stem: new Path2D('M8.6 7.5 H15.4 L16.6 19 H7.4 Z'), shade: new Path2D('M13.6 8.5 H15.4 L16.4 18.4 H14.2 Z') };
   c.save(); c.translate(x - 12 * k, y - 16 * k); c.scale(k, k); c.translate(12, 16); c.rotate(-0.314); c.translate(-12, -16);
   c.strokeStyle = boletos.needle; c.lineWidth = 1.4; c.lineCap = 'round'; c.beginPath(); c.moveTo(12, 20); c.lineTo(12, 31); c.stroke();
   c.fillStyle = col; c.beginPath(); c.ellipse(12, 19, 8, 3.2, 0, 0, 6.2832); c.fill(); c.fill(PIN.stem); c.beginPath(); c.ellipse(12, 7, 7.6, 4.6, 0, 0, 6.2832); c.fill();

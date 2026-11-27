@@ -29,7 +29,8 @@ export function SiteHeader({ nav, links, ui, languages, name, nameZh, availabili
   const crumb = crumbs?.[pathname];
   const go = useCarcoma();
   const [open, setOpen] = useState(false);
-  const active = (href: string) => !href.includes('#') && (pathname === href || pathname.startsWith(href + '/'));
+  // the home link ("/", "/es") is current only on the landing itself, not on every page under it
+  const active = (href: string) => !href.includes('#') && (pathname === href || (splitPath(href).path !== '/' && pathname.startsWith(href + '/')));
   const strip = strips.find((s) => active(s.href));
   const sub = crumb && crumb.length > 1 ? crumb.slice(1) : [];
   return (
