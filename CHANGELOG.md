@@ -96,6 +96,10 @@ Owner decisions and housekeeping, to pick up later:
   `NEXT_PUBLIC_SANITY_DATASET` and `NEXT_PUBLIC_SANITY_API_VERSION` in
   `.env.example`. archivo.exe loads photos from another origin with CORS so
   its canvas can read them.
+- `npm run sanity:seed` copies the content that lives in the code into Sanity
+  once (the lab's order and archivo.exe's photos with their files), through
+  the Sanity CLI and the owner's own login. Fixed document ids, so running it
+  again overwrites instead of duplicating.
 
 - **About** (`/about`), canvas "about v3" (approved 2026-11-27):
   - The owner's portrait sticks on the left. On the right, the title decodes

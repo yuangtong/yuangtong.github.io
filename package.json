@@ -8,7 +8,8 @@
     "prebuild": "node scripts/copy-mediapipe.mjs",
     "build": "next build",
     "start": "next start",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "sanity:seed": "node scripts/sanity-seed.mjs"
   },
   "dependencies": {
     "@mediapipe/tasks-vision": "1.2.3",
