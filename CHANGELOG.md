@@ -50,6 +50,7 @@ Owner decisions and housekeeping, to pick up later:
 
 ### Changed
 
+- Copy rewritten by the owner (Claude Doc "Textos de yuangtong.dev", 2026-11-27), in every language: the about sheet and page, the lab, notes, studio and contact leads, the lab groups (historias, píxeles, archivo), every lab door (Sanity patches in `scripts/sanity-updates.json`), travesía, lalande, archivo.exe and boletos texts, and the site description. "estudio boutique" in Spanish, "boutique studio" in English. The horse glyphs now carry 唐源.
 - The Sisyphus story, corrected against Spanish Wikipedia ("El caballo en movimiento", owner 2026-11-27): it now speaks of the twelve photographs taken in half a second in 1878, not of twelve threads firing cameras nor of fifteen frames, and closes with "crear es volver a empezar, hasta que algo vuele" instead of a line about code. Same fix on the sísifo lab door and the first paragraph of the rider note, in every language; those two live in Sanity and reach it through `scripts/sanity-updates.json` (label `sanity-update`). The twelve threads stay in the animation as the trigger.
 
 - About me on phones (owner, 2026-11-27):
