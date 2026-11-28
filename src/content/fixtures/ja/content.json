@@ -1,0 +1,1131 @@
+{
+  "home": {
+    "aboutPage": {
+      "title": "自己紹介",
+      "paras": [
+        "こんにちは。リマ在住のウェブデザイナー、yuang tong（唐源）だ。",
+        "2001年生まれで、リマに住んでいる。幼い頃からデジタルアートに情熱を抱いていた。",
+        "私は、さまざまな分野の中でも特に情報技術工学を学んだが、そのバックグラウンドは今でも私の仕事の仕方に影響を与えている。",
+        "デジタルアートに関わるあらゆることに、私は大きな喜びを感じている。写真撮影、動画撮影、編集、デジタルコラージュの作成などだ。最近はクリエイティブコーディングやライブコーディング、DJにもハマっている。読書や執筆も大好きだ。",
+        "仕事としては、デジタルプロダクトデザインをエンドツーエンドで手掛けている。リマでオーダーメイドのブティックスタジオfommoを運営している。"
+      ],
+      "closing": "これが、まあ、僕だ。話そう： ",
+      "email": {
+        "label": "hola@yuangtong.dev",
+        "href": "mailto:hola@yuangtong.dev"
+      },
+      "portraitAlt": "yuang tongのモノクロの肖像写真。セサル・バジェホの詩が、それを細胞一つひとつを貪り、文字やインク、青いブロックへと変え、そしてまた最初から繰り返す。"
+    },
+    "archivePage": {
+      "title": "archivo.exe",
+      "windowTitle": "archivo.exe、C:\\photos",
+      "series": [
+        "highway",
+        "san francisco",
+        "chinatown",
+        "reno"
+      ],
+      "photos": [
+        {
+          "id": "IMG_4999",
+          "src": "/archivo/img_4999.jpg",
+          "serie": "highway",
+          "date": "2017年2月11日 13:30",
+          "alt": "コンクリートの高架橋の下を走る高速道路、青い空",
+          "cell": 8,
+          "palette": "tinta",
+          "spot": [
+            0.94,
+            0.04
+          ]
+        },
+        {
+          "id": "IMG_5071",
+          "src": "/archivo/img_5071.jpg",
+          "serie": "highway",
+          "date": "2017年2月11日 14:10",
+          "alt": "アルム・ロック・アベニューへの標識がある高速道路のインターチェンジ",
+          "cell": 4,
+          "palette": "color",
+          "spot": [
+            0.44,
+            0.5
+          ]
+        },
+        {
+          "id": "IMG_5185",
+          "src": "/archivo/img_5185.jpg",
+          "serie": "san francisco",
+          "date": "2017年2月11日 14:51",
+          "alt": "緑の野原の向こうに広がるゴールデンゲート",
+          "cell": 4,
+          "palette": "color",
+          "spot": [
+            0.34,
+            0.02
+          ]
+        },
+        {
+          "id": "IMG_5252",
+          "src": "/archivo/img_5252.jpg",
+          "serie": "san francisco",
+          "date": "2017年2月11日 15:28",
+          "alt": "トランスアメリカ・タワーと2基のクレーンがそびえるサンフランシスコのスカイライン",
+          "cell": 2,
+          "palette": "azul",
+          "spot": [
+            0.66,
+            0.1
+          ]
+        },
+        {
+          "id": "IMG_5253",
+          "src": "/archivo/img_5253.jpg",
+          "serie": "san francisco",
+          "date": "2017年2月11日 15:29",
+          "alt": "サンフランシスコのスカイライン、アップで",
+          "cell": 16,
+          "palette": "acida",
+          "spot": [
+            0.72,
+            0.74
+          ]
+        },
+        {
+          "id": "IMG_5383",
+          "src": "/archivo/img_5383.jpg",
+          "serie": "chinatown",
+          "date": "2017年2月11日 16:55",
+          "alt": "赤い春節の提灯が飾られたチャイナタウンの通り",
+          "cell": 4,
+          "palette": "color",
+          "spot": [
+            0.06,
+            0.08
+          ]
+        },
+        {
+          "id": "IMG_5397",
+          "src": "/archivo/img_5397.jpg",
+          "serie": "chinatown",
+          "date": "2017年2月11日 17:45",
+          "alt": "赤いパビリオンのあるチャイナタウンの広場",
+          "cell": 8,
+          "palette": "rojo",
+          "spot": [
+            0.16,
+            0.62
+          ]
+        },
+        {
+          "id": "IMG_5765",
+          "src": "/archivo/img_5765.jpg",
+          "serie": "reno",
+          "date": "2017年2月19日 19:27",
+          "alt": "嵐の空の下にあるリノのGSRカジノホテル",
+          "cell": 4,
+          "palette": "color",
+          "spot": [
+            0.98,
+            0.56
+          ]
+        }
+      ],
+      "readme": "写真アーカイブ。\n\n写真は動く：ドラッグしてみよう。\nダブルクリックすると、その写真が別ウィンドウで開く。\n2、4、8、16ピクセルのセルサイズ、またはオリジナルサイズ。\n各写真はそれぞれのバージョンが保持されている。",
+      "ui": {
+        "start": "はじめに",
+        "startLabel": "start、アーカイブのインデックス",
+        "band": "archivo 98",
+        "tray": "lima",
+        "tidy": "プリントを整理する",
+        "closeAll": "ウィンドウを閉じる",
+        "backToLab": "ラボに戻る",
+        "readmeName": "readme.txt",
+        "readmeTitle": "readme.txt、メモ帳",
+        "minimize": "最小化",
+        "maximize": "最大化",
+        "restore": "復元",
+        "close": "閉じる",
+        "closeExe": "archivo.exeを閉じて、ラボに戻る",
+        "fill": "画面全体に表示する",
+        "unfill": "ポートフォリオを表示する",
+        "copyLink": "リンクをコピー",
+        "copied": "リンクをコピーした",
+        "objects": "オブジェクト",
+        "photo": "写真",
+        "photos": "写真",
+        "cell": "cell",
+        "palette": "palette",
+        "original": "原文",
+        "openHint": "ダブルクリックで開く",
+        "open": "開く",
+        "paletteNames": {
+          "tinta": "ink",
+          "azul": "blue",
+          "rojo": "red",
+          "acida": "acid",
+          "color": "色"
+        }
+      }
+    },
+    "bitsplashPage": {
+      "title": "bitsplash",
+      "lead": "どこでもクリック：8ビットのアシッド・スプラッシュがグリッドに飛び散る。",
+      "canvasLabel": "灰色のドットグリッド。クリックするたびに、着地した場所に8ビット風のアシッドカラーの飛沫が飛び散り、その周囲にも数滴が散らばる。",
+      "hint": "どこでもクリック",
+      "clean": "シンプル",
+      "download": "ダウンロード",
+      "one": "splash",
+      "many": "スプラッシュ画面"
+    },
+    "boletosPage": {
+      "title": "boletos de lima",
+      "lead": "私が集めているバスのチケット：72枚。中にはユニークなものもあれば、重複しているものもある。このアーカイブに協力したい場合は、ダイレクトメッセージかメールを送ってほしい！チケットをクリックすると詳細が見られる。",
+      "boardLabel": "リマ発のバスチケットが、色付きの押しピンで灰色のドットグリッドに留められている",
+      "sort": {
+        "label": "sort",
+        "loose": "ゆるい",
+        "colour": "by colour",
+        "company": "会社名",
+        "price": "価格別"
+      },
+      "hint": {
+        "loose": "チケットをクリックすると表示される。ドラッグするとグリッドに固定される",
+        "sorted": "並べ替え済み。クリックすると表示され、ドラッグすると解放される"
+      },
+      "colours": {
+        "amarillo": "yellow",
+        "naranja": "orange",
+        "rojo": "red",
+        "rosado": "ピンク",
+        "morado": "purple",
+        "azul": "blue",
+        "celeste": "水色",
+        "verde": "green",
+        "marrón": "brown",
+        "gris": "グレー",
+        "negro": "black",
+        "blanco": "白"
+      },
+      "lightbox": {
+        "label": "チケット",
+        "of": "of",
+        "price": "価格",
+        "fare": "fare",
+        "colour": "色",
+        "noPrice": "価格の記載なし",
+        "notPrinted": "印刷物ではない",
+        "prev": "前のチケット",
+        "next": "次のチケット",
+        "close": "閉じる"
+      },
+      "play": {
+        "title": "pasaje",
+        "text": "チケット1枚ごとに報酬が入る。やってみるか？",
+        "cta": "再生"
+      },
+      "game": {
+        "title": "pasaje",
+        "lead": "チケット1枚ごとに収入になる。消えてしまう前にクリックして、運賃を受け取ろう。",
+        "canvasLabel": "リマ発のバスチケットが灰色のドットグリッド上にポップアップして消えていく。消える前にクリックして運賃を受け取ろう。",
+        "back": "チケット一覧に戻る",
+        "time": "time",
+        "collected": "収集済み",
+        "tickets": "チケット",
+        "start": "start",
+        "restart": "restart",
+        "again": "もう一度再生",
+        "ready": "「スタート」を押してから、表示されるチケットをクリックする",
+        "playing": "チケットの値段が高ければ高いほど、速く売れていく",
+        "result": "{money}（{n}枚のチケットから）",
+        "best": "ベストを尽くす。",
+        "bestWas": "ベストな作品：{money}"
+      }
+    },
+    "camaraPage": {
+      "title": "cámara",
+      "lead": "ウェブカメラ用のお遊びツール：ピンチ操作で自分にエフェクトを重ねてから、写真を撮る。",
+      "gate": {
+        "title": "この作品には君のカメラが必要だ",
+        "text": "ブラウザがカメラの映像を読み取り、あなたの手の位置を特定する。このサイトには何も保存されない。あくまで遊びのため、そしてウェブの能力を示すためのものだ。",
+        "camera": "カメラをオンにする",
+        "cursor": "代わりにカーソルで描く",
+        "touch": "コンピュータ上でこそ、手を使って体験できる。スマホではカメラはウェブのおもちゃのようなものだ。エフェクトを選べば、画像全体が覆われる。"
+      },
+      "loading": "カメラを起動中…",
+      "stop": "カメラをオフにする",
+      "cursor": "カーソルで描く",
+      "camera": "カメラをオンにする",
+      "denied": "カメラの使用は許可されていなかった。カーソルで描くことができる：クリックしてドラッグする。",
+      "noCamera": "ここにはカメラはない。カーソルで描くことができる：クリックしてドラッグする。",
+      "sourceHand": "カメラオン",
+      "sourceToy": "ウェブトイ：画像全体",
+      "sourceCursor": "カーソル：押したままドラッグする",
+      "penUp": "pen up",
+      "penDown": "ペンを置く",
+      "canvasMirror": "カメラで撮影した画像を反転表示し、ピンチ操作で移動させると、選択したエフェクトがその上に描画される。",
+      "canvasToy": "あなたのカメラ画像を左右反転させ、そのすべてに選択したエフェクトを適用する。",
+      "leadToy": "画像全体にエフェクトが適用されている。変更すると、リアルタイムで変化する。",
+      "controls": "カメラの操作方法",
+      "mode": {
+        "label": "モード",
+        "draw": "draw",
+        "toy": "ウェブトイ"
+      },
+      "full": {
+        "on": "全画面表示",
+        "off": "サイドパネル"
+      },
+      "track": {
+        "label": "追跡",
+        "on": "on",
+        "off": "一時停止中",
+        "key": "(スペースキー)",
+        "paused": "トラッキングを一時停止"
+      },
+      "canvasCursor": "灰色のドットグリッド。タップしてドラッグすると、消えないインクのストロークが残る。",
+      "effect": {
+        "label": "effect",
+        "pixels": "ピクセル",
+        "dither": "dither",
+        "halftone": "ハーフトーン",
+        "ascii": "ascii",
+        "stitch": "クロスステッチ",
+        "more": "その他のエフェクト",
+        "back": "以前のエフェクト"
+      },
+      "colour": {
+        "label": "色",
+        "names": {
+          "signal": "blue",
+          "ink": "ink",
+          "naranja": "orange",
+          "rosado": "ピンク",
+          "lima": "lime",
+          "violeta": "violet",
+          "multi": "マルチカラー"
+        }
+      },
+      "brush": {
+        "label": "brush",
+        "small": "small",
+        "medium": "medium",
+        "large": "large"
+      },
+      "pixel": {
+        "label": "pixel",
+        "fine": "OK",
+        "medium": "medium",
+        "coarse": "粗い"
+      },
+      "clear": "clear",
+      "photo": "写真を撮る",
+      "saved": "写真を保存した",
+      "how": [
+        "親指と人差し指でピンチ：指先が触れた場所にエフェクトが現れる。ループを閉じると、その輪が囲む部分が塗りつぶされる。",
+        "新しいストロークが、前のストロークを塗りつぶす。",
+        "「3、2、1」とカウントダウンして、ダウンロードが始まる。"
+      ],
+      "howToy": [
+        "エフェクトを選択：画像全体に適用される。",
+        "エフェクトや色、ピクセルを変更すると、リアルタイムで変化する。",
+        "「3、2、1」とカウントダウンして、ダウンロードが始まる。"
+      ]
+    },
+    "contactPage": {
+      "title": "話そう",
+      "lead": "リマを拠点に、世界中に向けて活動している。プロジェクトやコラボレーションについて、あるいは単に質問がある場合でも、気軽に連絡してほしい :)",
+      "email": {
+        "label": "hola@yuangtong.dev",
+        "href": "mailto:hola@yuangtong.dev"
+      },
+      "emailLabel": "メール",
+      "links": [
+        {
+          "label": "upwork",
+          "href": "https://www.upwork.com/freelancers/~01f641e45cff785eed",
+          "detail": "プロフィール"
+        },
+        {
+          "label": "instagram",
+          "href": "https://www.instagram.com/yuang_tong/",
+          "detail": "@yuang_tong"
+        },
+        {
+          "label": "github",
+          "href": "https://github.com/yuangtong",
+          "detail": "yuangtong"
+        },
+        {
+          "label": "LinkedIn",
+          "href": "https://www.linkedin.com/in/yuangtong",
+          "detail": "yuangtong"
+        }
+      ],
+      "clocks": {
+        "mine": "my time, リマ",
+        "you": "your time、{place}",
+        "youSame": "your time, リマ"
+      },
+      "globe": {
+        "me": "my time, リマ",
+        "you": "your time、{place}",
+        "hint": "ドラッグして回転させる",
+        "label": "ドットでできた回転する地球。青いドットが私のいるリマを示し、ドットの弧がそれを、あなたのいる場所の近くにある{place}へと結んでいる。",
+        "labelSame": "ドットでできた回転する地球。青いドットが、私がいるリマを示している。"
+      },
+      "places": {
+        "America/Lima": "リマ",
+        "America/Bogota": "ボゴタ",
+        "America/Mexico_City": "メキシコシティ",
+        "America/Santiago": "サンティアゴ",
+        "America/Argentina/Buenos_Aires": "ブエノスアイレス",
+        "America/Sao_Paulo": "サンパウロ",
+        "America/Caracas": "カラカス",
+        "America/Guayaquil": "エクアドル",
+        "America/La_Paz": "ラパス",
+        "America/New_York": "ニューヨーク",
+        "America/Chicago": "シカゴ",
+        "America/Denver": "デンバー",
+        "America/Los_Angeles": "ロサンゼルス",
+        "America/Toronto": "トロント",
+        "America/Panama": "パナマ",
+        "Europe/Madrid": "マドリード",
+        "Europe/London": "ロンドン",
+        "Europe/Paris": "パリ",
+        "Europe/Berlin": "ベルリン",
+        "Europe/Rome": "ローマ",
+        "Europe/Amsterdam": "アムステルダム",
+        "Europe/Lisbon": "リスボン",
+        "Asia/Tokyo": "東京",
+        "Asia/Shanghai": "上海",
+        "Asia/Seoul": "ソウル",
+        "Asia/Kolkata": "インド",
+        "Asia/Singapore": "シンガポール",
+        "Asia/Dubai": "ドバイ",
+        "Australia/Sydney": "シドニー"
+      }
+    },
+    "home": {
+      "intro": {
+        "name": "yuang tong",
+        "nameZh": "唐源",
+        "role": [
+          "ウェブデザイナー",
+          "creative coder"
+        ],
+        "hours": {
+          "zone": "America/Lima",
+          "city": "lima",
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "start": 9,
+          "end": 17,
+          "on": "利用可能",
+          "off": "利用不可",
+          "title": "勤務時間",
+          "schedule": "月～金、9:00～17:00、リマ",
+          "mine": "my time",
+          "yours": "お時間をいただきありがとうございます",
+          "working": "現在作業中だ。メッセージを送ってくれれば、今日中に返信する。",
+          "workingLate": "今、仕事中だが、君のいる場所では{time}だろう。遠慮なくメールで連絡してくれ。",
+          "away": "では、これで失礼する。リマ時間の{day}{time}に、{yours}（あなたの現地時間）に戻る予定だ。メールで気軽に連絡してくれ。その時に返信する。",
+          "email": {
+            "label": "hola@yuangtong.dev",
+            "href": "mailto:hola@yuangtong.dev"
+          }
+        },
+        "ctas": [
+          {
+            "label": "ラボを見る",
+            "href": "/lab"
+          },
+          {
+            "label": "fommo.studio",
+            "href": "https://fommo.studio"
+          }
+        ],
+        "canvasLabel": "青いドットでできた馬が駆け抜ける。下にスクロールすると螺旋状のトンネルが現れ、馬は12本の糸を断ち切り、岩を坂の上へ押し上げ、岩が転がり落ちると、馬の疾走は空中で止まる。その後、馬はピクセル化され、やがて文字へと変化していく。",
+        "narrated": false,
+        "narration": {
+          "lines": [
+            "1878年。馬が飛ぶかどうかを確かめるため、0.5秒間に12枚の写真を撮影した。",
+            "一気の駆け上がり、上り坂、永遠に。",
+            "上の方で、岩がまた落ちてくる。ループが最初から始まる。"
+          ],
+          "quote": "シシュフォスが幸せだと想像しなければならない。",
+          "quoteSource": "アルベール・カミュ、『シシュフォスの神話』、1942年",
+          "coda": "創作とは、何かが羽ばたくまで、何度もやり直すことだ。"
+        },
+        "glyphText": "yuangtong web designer creative coder 唐源 ",
+        "scrollHint": "ストーリーを見るには下にスクロールする",
+        "scrollHintTouch": "上にスワイプしてストーリーを見る",
+        "restartHint": "上にスワイプし続けると、ストーリーが最初から始まる",
+        "keepScrolling": "スクロールを続けてください",
+        "restartGo": "物語は再び始まる",
+        "progressLabel": "現在地"
+      },
+      "jugar": {
+        "title": "自己紹介",
+        "line": "yuang tong（唐源）、リマ在住のウェブデザイナー兼creative coder。ブティックスタジオFOMMOを率いており、ここでは純粋な情熱から制作したデジタルアート、写真、音楽などを公開している。",
+        "cta": {
+          "label": "私の詳細",
+          "href": "/about"
+        }
+      },
+      "sheets": {
+        "lab": {
+          "title": "the lab",
+          "line": "ストーリー、ピクセル、そして私のアーカイブ。",
+          "href": "/lab"
+        },
+        "notes": {
+          "title": "備考",
+          "line": "私のメモや文章、そして私的なスペースを少しだけ。",
+          "href": "/notes"
+        },
+        "studio": {
+          "title": "studio",
+          "line": "私はオーダーメイドのスタジオFOMMOを運営している。クライアントワークはそちらに掲載されている。",
+          "sub": "ブランド、製品、開発。オーダーメイドで制作。",
+          "brand": "FOMMO",
+          "href": "/studio"
+        },
+        "contact": {
+          "title": "話そう",
+          "line": "連絡は以下まで",
+          "email": {
+            "label": "hola@yuangtong.dev",
+            "href": "mailto:hola@yuangtong.dev"
+          },
+          "href": "/contact"
+        }
+      }
+    },
+    "labPage": {
+      "title": "the lab",
+      "lead": "ストーリー、ピクセルアート、そして私のアーカイブ。ぜひ自由に見て回って、どの作品でもシェアしてほしい ;)",
+      "doors": [
+        {
+          "id": "sisifo",
+          "group": "story",
+          "preview": "gallop",
+          "title": "sísifo feliz",
+          "text": "Muybridge",
+          "cta": {
+            "label": "sísifo felizを参照",
+            "href": "/lab/sisifo"
+          }
+        },
+        {
+          "id": "lalande",
+          "group": "story",
+          "preview": "drop",
+          "title": "lalande, lágrimas de ángel",
+          "text": "「エンジェルの涙」って知ってる？ 小さな水仙の一種で、ほんのわずかな風でも左右に揺れるんだ。",
+          "cta": {
+            "label": "lalandeを参照",
+            "href": "/lab/lalande"
+          }
+        },
+        {
+          "id": "travesia",
+          "group": "play",
+          "preview": "tunnel",
+          "title": "travesía ácida",
+          "text": "虚無へ踏み込め。",
+          "cta": {
+            "label": "「travesía」へ進む",
+            "href": "/lab/travesia"
+          }
+        },
+        {
+          "id": "archivo",
+          "group": "archive",
+          "preview": "desk",
+          "title": "archivo.exe",
+          "text": "私の写真アーカイブ：すべての写真を移動、開く、ピクセル化。",
+          "cta": {
+            "label": "archivo.exe を開く",
+            "href": "/lab/archivo"
+          }
+        },
+        {
+          "id": "boletos",
+          "held": true,
+          "group": "archive",
+          "preview": "tickets",
+          "title": "boletos de lima",
+          "text": "リマの公共交通機関のチケットのデザインを保存し、鑑賞し、記念するためのスペースだ。",
+          "cta": {
+            "label": "チケットを見る",
+            "href": "/lab/boletos"
+          },
+          "points": [
+            "リマのバスチケットのグラフィックデザインのアーカイブ：その色、書体、運行会社など。",
+            "すべてのチケットをスキャンし、間近で細部まで見られるようにした。",
+            "そして、それらを使って制作した小さなゲームpasaje。"
+          ]
+        },
+        {
+          "id": "metro-cards",
+          "held": true,
+          "group": "archive",
+          "preview": "card",
+          "title": "metro cards",
+          "text": "この種の公共交通機関を運行している主要都市のmetro cardsのデザインをアーカイブするスペースだ。",
+          "cta": {
+            "label": "カードを見る",
+            "href": "/lab/metro-cards"
+          },
+          "points": [
+            "各都市ごとに1枚ずつ、metro cardsのデザインをまとめたアーカイブだ。",
+            "各カードの表と裏、およびそのバリエーション。",
+            "ドットでできた地球上に、各都市がマークされている。"
+          ]
+        },
+        {
+          "id": "bitsplash",
+          "group": "play",
+          "preview": "splash",
+          "title": "bitsplash",
+          "text": "アシッドなスプラッシュ。散らかして、それを画像として残す。",
+          "cta": {
+            "label": "注目を集める",
+            "href": "/lab/bitsplash"
+          }
+        },
+        {
+          "id": "sketchbook",
+          "group": "archive",
+          "preview": "book",
+          "title": "sketchbook",
+          "text": "私が試みたsketchbookだ。",
+          "cta": {
+            "label": "sketchbookをめくる",
+            "href": "/lab/sketchbook"
+          }
+        },
+        {
+          "id": "camara",
+          "group": "play",
+          "preview": "trail",
+          "title": "cámara",
+          "text": "インターネットが今ほど生活に浸透しておらず、もっと楽しかった頃の「ウェブカメラ・トイズ」から着想を得た。",
+          "cta": {
+            "label": "探索",
+            "href": "/lab/camara"
+          }
+        },
+        {
+          "id": "dona",
+          "group": "play",
+          "preview": "still",
+          "soon": true,
+          "title": "dona de teselas",
+          "text": "ドーナツと、その他32のアルゴリズム。",
+          "cta": {
+            "label": "どんな仕上がりになるか見てみよう",
+            "href": "/lab/dona"
+          },
+          "points": [
+            "ドラッグして回転させる。",
+            "タイル：モリネテ、ダメロ、コントルノ、プントス、ティック、マシソ、およびグリフ。",
+            "画像、ソリッド、セル、パレット、スピード。"
+          ]
+        },
+        {
+          "id": "efimero",
+          "group": "play",
+          "preview": "still",
+          "soon": true,
+          "title": "ambiente efímero",
+          "text": "ビープ、ビープ、ビープ。",
+          "cta": {
+            "label": "どんな仕上がりになるか見てみよう",
+            "href": "/lab/efimero"
+          },
+          "points": [
+            "strudelを使ってライブで制作した音楽。",
+            "hydraを使ったライブビジュアル。",
+            "私の作品集も同様かもしれない。"
+          ]
+        }
+      ],
+      "groups": {
+        "story": "ストーリー",
+        "play": "ピクセル",
+        "archive": "アーカイブ"
+      },
+      "previewLabel": "{title}、公開中",
+      "soon": {
+        "label": "近日公開予定",
+        "back": {
+          "label": "ラボに戻る",
+          "href": "/lab"
+        },
+        "cta": "どんな仕上がりになるか見てみよう"
+      },
+      "experiments": [
+        {
+          "id": "medio",
+          "title": "medio tono",
+          "meta": "code, 2026",
+          "alt": "大小さまざまな青いドットによるギャロップ",
+          "visual": "medio",
+          "defaultCell": 8,
+          "href": "/lab"
+        },
+        {
+          "id": "camara",
+          "title": "cámara tramada",
+          "meta": "code, 2026",
+          "alt": "青色でスクリーンプリントされた、紙に描かれた疾走する馬の写真",
+          "visual": "camara",
+          "defaultCell": 4,
+          "href": "/lab"
+        },
+        {
+          "id": "dona",
+          "title": "dona de teselas",
+          "meta": "code, 2026",
+          "alt": "青い背景にタイルで陰影が付けられた、回転するドーナツ",
+          "visual": "dona",
+          "defaultCell": 8,
+          "href": "/lab"
+        },
+        {
+          "id": "fotos",
+          "title": "写真",
+          "meta": "写真、[シリーズ]",
+          "alt": "写真を青いピクセルのモザイクに変えたもの",
+          "visual": "fotos",
+          "defaultCell": 8,
+          "href": "/lab"
+        }
+      ]
+    },
+    "lalandePage": {
+      "title": "lalande, lágrimas de ángel",
+      "canvasLabel": "文字でできたMuybridgeの馬がバラバラになり、lalandeという単語を形成する。その単語は水滴となり、青空を背景にした小さな水仙の上に落ちる。水仙は揺れ、向きを変え、内側から崩壊し、その場所にclarice lispectorの本が文字の雨の中で現れる。",
+      "hint": "下にスクロールして読む",
+      "replay": "もう一度",
+      "quotes": [
+        {
+          "text": "「lalande。まるで天使の涙のようだ。」",
+          "source": "clarice lispector、『野生の心のそばで』"
+        },
+        {
+          "text": "「私がlalandeと言うたびに、海から漂う涼やかで塩気のある振動を感じてほしい……」",
+          "source": "clarice lispector、『野生の心のそばで』"
+        }
+      ],
+      "spec": [
+        "小さな水仙",
+        "angel’s tears"
+      ],
+      "breezeLabel": "breeze",
+      "breezeHint": "カーソルを動かすと：君がそよ風になる",
+      "book": {
+        "label": "perto do coração selvagem、clarice lispector著、rocco edition刊、赤い表紙",
+        "author": "clarice lispector",
+        "title": "perto do coração selvagem",
+        "quote": "「自由だけでは足りない。私が求めているものには、まだ名前がない。」",
+        "quoteSource": "clarice lispector"
+      },
+      "closeText": "clarice lispector、1943年",
+      "word": "lalande",
+      "horseText": "それはまるで天使の涙のようだ。天使の涙が何か知っているか？ ある種の小さな水仙のことだ。ほんのわずかなそよ風でも、左右に揺れ動く。Lalandeはまた、まだ誰もその浜辺を見たことがなく、太陽も昇っていない、夜明けの海でもある。 私がLalandeと言うたびに、あなたは海の冷たく塩気のある振動を感じ、まだ暗い浜辺を、ゆっくりと、裸で歩かなければならない。そうすれば、すぐにLalandeを感じられるだろう。",
+      "closeTitle": "near to the wild heart"
+    },
+    "metroCardsPage": {
+      "title": "metro cards",
+      "lead": "私が集めた交通機関のカード。各都市1枚ずつ。カードをクリックすると裏返る。",
+      "countries": {
+        "pe": "ペルー",
+        "cl": "chile",
+        "ar": "アルゼンチン",
+        "co": "colombia"
+      },
+      "front": "front",
+      "back": "戻る",
+      "turn": "クリックして切り替える",
+      "variants": "バリエーション",
+      "count": "{cities}の都市、{cards}のカード",
+      "cardLabel": "{system}カード、{city}、その{side}が表示されている。タップして裏返そう。",
+      "globeLabel": "中央に{city}、{country}が青でマークされたドットグリッドの地球儀。その他の都市はカード形式で表示：{others}。"
+    },
+    "notFound": {
+      "title": "このページは存在しない",
+      "body": "リンクのスペルが間違っているか、ページが移動した可能性がある。馬はサイトの他のページでも走り続けている。",
+      "back": {
+        "label": "トップへ戻る",
+        "href": "/"
+      },
+      "lab": {
+        "label": "ラボへ",
+        "href": "/lab"
+      },
+      "canvasLabel": "ドットで構成された数字の「404」；疾走する馬がそれに激突し、それは崩れ落ちる。"
+    },
+    "notes": [
+      {
+        "slug": "jinete",
+        "title": "1878年の『ギャロップ』から騎手を切り取った",
+        "lead": "Muybridge",
+        "date": "2026年11月",
+        "about": "about: medio tono",
+        "backLabel": "すべてのメモ",
+        "blocks": [
+          {
+            "type": "figure",
+            "src": "/media/notas/jinete-antes.jpg",
+            "alt": "Muybridgeが撮影した、騎手を乗せて疾走する競走馬の写真15枚",
+            "caption": "前：ライダーが登場する、オリジナルの15コマ。",
+            "width": 1500,
+            "height": 600
+          },
+          {
+            "type": "p",
+            "text": "Eadweard Muybridgeは1878年に疾走する馬を撮影した。これらの写真はパブリックドメインであり、アニメーションに最適だ。動きの表現はすでに解決されているからだ。問題は、馬に騎手が乗っていることだ。"
+          },
+          {
+            "type": "p",
+            "text": "まず、人物を背景から切り出した。各フレームは300×200ピクセルの小さな写真で、明るい空を背景に黒い馬が写っている。シルエットを保つには、明るさの閾値を設定するだけで十分だ。"
+          },
+          {
+            "type": "p",
+            "text": "次に、ライダーを見つける。各列の上から最初の暗いピクセルを探す。その点が最も高い位置にある列がキャップとなる。その周囲に約70ピクセルの範囲を設け、その範囲内で背景より上にあるものをすべて消去する。"
+          },
+          {
+            "type": "p",
+            "text": "ライダーが隠しているため、背面は見えない。そこで、窓のすぐ外側で測定した首の高さと腰の高さの間を、滑らかな曲線で再構築した。曲線より下は塗りつぶし、上は空白にした。"
+          },
+          {
+            "type": "code",
+            "text": "// the cap: the column with the highest dark pixel\nconst cap = tops.indexOf(Math.min(...tops));\n\n// the back: a smooth curve between neck and croup\nfor (let x = x0; x <= x1; x++) {\n  const t = (x - x0) / (x1 - x0);\n  const y = y0 + (y1 - y0) * t * t * (3 - 2 * t);\n  eraseAbove(x, y);\n}"
+          },
+          {
+            "type": "p",
+            "text": "仕上げに、シルエットに膨張と侵食を適用し、メディアンフィルタでエッジを滑らかにする。完璧ではない。サドルがあった部分の背面が、少し平坦なままになっている。1秒あたり12フレームの速度では、ほとんど気にならない。"
+          },
+          {
+            "type": "figure",
+            "src": "/media/notas/jinete-despues.png",
+            "alt": "同じ15の配置が、騎手のない馬の黒いシルエットへと変化した",
+            "caption": "after: 乗馬者のいないシルエット。ドットや文字、タイルを使って描く準備ができている。",
+            "width": 1500,
+            "height": 600,
+            "paper": true
+          }
+        ],
+        "links": [
+          {
+            "label": "ラボで試してみる",
+            "title": "medio tono",
+            "href": "/lab#pieza-medio"
+          },
+          {
+            "label": "次のメモ",
+            "title": "echoes：人物の背後で描かれる時間",
+            "href": "/notes"
+          }
+        ],
+        "credit": "写真：eadweard muybridge、パブリックドメイン"
+      }
+    ],
+    "notesPage": {
+      "title": "備考",
+      "lead": "私のメモや文章、そして私的なスペースを少しだけ。",
+      "soon": "近日公開予定",
+      "items": [
+        {
+          "id": "manifiesto",
+          "soon": true,
+          "title": "マニフェスト",
+          "excerpt": "",
+          "meta": "",
+          "href": "/notes",
+          "alt": "青くスクリーン印刷されたギャロップ",
+          "visual": "foto",
+          "accent": "azul"
+        }
+      ]
+    },
+    "sisyphusPage": {
+      "title": "sísifo feliz",
+      "label": "sísifo feliz、Muybridgeの1878年のギャロップをナレーションで語る",
+      "hint": "下にスクロールしてストーリーを読んでほしい",
+      "replay": "もう一度"
+    },
+    "sketchbookPage": {
+      "title": "sketchbook",
+      "lead": "私のsketchbook。ページごとにスキャンしたものだ。角をドラッグするか、矢印を使ってページをめくってほしい。",
+      "cover": "sketchbook",
+      "coverBy": "yuang tong",
+      "back": "近日中にページを追加予定：現在スキャン中だ。",
+      "prev": "前のページ",
+      "next": "次のページ",
+      "bookLabel": "sketchbook、ページをめくって楽しむ本",
+      "alts": {
+        "menta": "mentaのページ：上部に緑色の彼女の名前、そして青と緑のクレヨンで描かれた風景を背景に、トレーシングペーパーに描かれた鉛筆画の肖像画が配置されている。",
+        "lola": "lolaのページ：黄色い背景に、赤いベレー帽をかぶった彼女の肖像写真と、赤い文字で書かれた彼女の名前が、切り抜かれた画像や手書きのラインと共に配置されている。"
+      }
+    },
+    "studioPage": {
+      "title": "studio",
+      "eyebrow": "studio",
+      "name": "FOMMO Studio",
+      "lead": "私はリマにあるブティックスタジオFOMMOを率いている。ここでは、デザインと複雑なウェブ開発が同じテーブルの上で行われている。",
+      "cta": {
+        "label": "FOMMOのサイトへ",
+        "href": "https://fommo.studio"
+      },
+      "canvasLabel": "FOMMO",
+      "preview": {
+        "src": "/media/fommo-studio.jpg",
+        "alt": "Preview of fommo.studio: at rest it is a screen of glyphs in the studio's colours; on hover or a tap, the carcoma reveals the real page.",
+        "host": "fommo.studio",
+        "caption": "FOMMO, brand & product studio",
+        "live": "live",
+        "screened": "screened",
+        "href": "https://fommo.studio"
+      }
+    },
+    "travesiaPage": {
+      "title": "travesía ácida",
+      "lead": "底のない虚空。どこまで行けるだろうか？",
+      "canvasLabel": "ドットでできた、回転する正方形が延々と続くトンネル。進むにつれて、色は青から紫、赤、黄色へと変化していく。",
+      "hint": "下にスクロールするとトンネルに入り、上にスクロールすると戻る。中央部分はカーソルの動きに追従する。",
+      "hintTouch": "上にスワイプしてトンネルに入る。タップして色を変える。",
+      "ui": {
+        "controls": "操作方法",
+        "cell": "cell",
+        "color": "色",
+        "all": "all the acids",
+        "rampNames": {
+          "azul": "blue",
+          "violeta": "violet",
+          "rojo": "red",
+          "amarillo": "yellow"
+        },
+        "full": "全画面表示",
+        "close": "閉じる",
+        "copyLink": "リンクをコピー",
+        "copied": "リンクをコピーした",
+        "depth": "depth"
+      }
+    }
+  },
+  "settings": {
+    "locale": "ja",
+    "ogLocale": "ja_JP",
+    "languages": {
+      "label": "言語",
+      "spoken": "このサイトは語る",
+      "learning": "これらを学んでいるところだ",
+      "learningNote": "学習",
+      "soon": "近日公開",
+      "promise": "学習中のため、機械翻訳（DeepL）を使用している。進めながら修正していく。",
+      "list": [
+        {
+          "code": "en",
+          "name": "english",
+          "ready": true
+        },
+        {
+          "code": "es",
+          "name": "español",
+          "ready": true
+        },
+        {
+          "code": "pt",
+          "name": "português",
+          "learning": true
+        },
+        {
+          "code": "zh",
+          "name": "中文",
+          "learning": true
+        },
+        {
+          "code": "ja",
+          "name": "日本語",
+          "learning": true
+        }
+      ]
+    },
+    "siteTitle": "yuang tong | creative coder",
+    "description": "yuang tong、リマを拠点とするウェブデザイナー兼creative coderだ。ブティックスタジオFOMMOを率いている。このポートフォリオには、コード、写真、音楽をまとめている。",
+    "nav": [
+      {
+        "label": "ホーム",
+        "href": "/"
+      },
+      {
+        "label": "about",
+        "href": "/about"
+      },
+      {
+        "label": "lab",
+        "href": "/lab"
+      },
+      {
+        "label": "studio",
+        "href": "/studio"
+      },
+      {
+        "label": "備考",
+        "href": "/notes"
+      },
+      {
+        "label": "お問い合わせ",
+        "href": "/contact"
+      }
+    ],
+    "footer": {
+      "left": "yuang tong、リマ",
+      "right": "gallop：eadweard muybridge、1878年、パブリックドメイン"
+    },
+    "cookies": {
+      "label": "クッキーについて",
+      "title": "クッキー",
+      "state": "なし",
+      "body": "このサイトはクッキーを設定せず、誰の追跡も行わない：分析ツールも広告もなく、第三者に情報を送信することも一切ない。",
+      "rows": [
+        {
+          "k": "アナリティクス",
+          "v": "なし"
+        },
+        {
+          "k": "お使いのデバイスで",
+          "v": "この通知を閉じたこと、および言語を選択した場合はその言語"
+        }
+      ],
+      "ok": "了解した"
+    },
+    "ui": {
+      "openLabel": "開く",
+      "copyLinkLabel": "リンクをコピー",
+      "copiedLabel": "リンクをコピーした",
+      "cellGroupLabel": "セルサイズは",
+      "frameStripLabel": "疾走のフレーム",
+      "menuLabel": "メニュー",
+      "closeLabel": "閉じる",
+      "framePrev": "前のフレーム",
+      "frameNext": "次のフレーム",
+      "cameraCounter": "カメラ",
+      "frameCounter": "frame",
+      "readNoteLabel": "注記を読む",
+      "readingTime": "読了時間：min",
+      "enterLabel": "enter",
+      "navLabel": "メイン",
+      "crumbLabel": "セクション"
+    },
+    "share": {
+      "title": "yuang tong（唐源）、ウェブデザイナー兼creative coder",
+      "description": "yuang tong、リマを拠点とするウェブデザイナー兼creative coderだ。ブティックスタジオFOMMOを率いている。このポートフォリオには、コード、写真、音楽をまとめている。",
+      "image": "/social-preview-g75.jpg",
+      "alt": "yuang tong（唐源）、ウェブデザイナー兼creative coder：グレーのドットグリッド上に、青いドットで描かれたMuybridgeの馬と騎手。",
+      "width": 2400,
+      "height": 1260
+    },
+    "crumbs": {
+      "/lab/sisifo": [
+        {
+          "label": "lab",
+          "href": "/lab"
+        },
+        {
+          "label": "sísifo feliz",
+          "href": "/lab/sisifo"
+        }
+      ],
+      "/lab/lalande": [
+        {
+          "label": "lab",
+          "href": "/lab"
+        },
+        {
+          "label": "lalande",
+          "href": "/lab/lalande"
+        }
+      ],
+      "/lab/travesia": [
+        {
+          "label": "lab",
+          "href": "/lab"
+        },
+        {
+          "label": "travesía ácida",
+          "href": "/lab/travesia"
+        }
+      ],
+      "/lab/camara": [
+        {
+          "label": "lab",
+          "href": "/lab"
+        },
+        {
+          "label": "cámara",
+          "href": "/lab/camara"
+        }
+      ],
+      "/lab/dona": [
+        {
+          "label": "lab",
+          "href": "/lab"
+        },
+        {
+          "label": "dona de teselas",
+          "href": "/lab/dona"
+        }
+      ],
+      "/lab/acidos": [
+        {
+          "label": "lab",
+          "href": "/lab"
+        },
+        {
+          "label": "píxeles ácidos",
+          "href": "/lab/acidos"
+        }
+      ],
+      "/lab/efimero": [
+        {
+          "label": "lab",
+          "href": "/lab"
+        },
+        {
+          "label": "ambiente efímero",
+          "href": "/lab/efimero"
+        }
+      ],
+      "/notes/jinete": [
+        {
+          "label": "備考",
+          "href": "/notes"
+        },
+        {
+          "label": "ライダーを外す",
+          "href": "/notes/jinete"
+        }
+      ],
+      "/lab/archivo": [
+        {
+          "label": "lab",
+          "href": "/lab"
+        },
+        {
+          "label": "archivo.exe",
+          "href": "/lab/archivo"
+        }
+      ]
+    }
+  }
+}

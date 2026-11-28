@@ -1,0 +1,1131 @@
+{
+  "home": {
+    "aboutPage": {
+      "title": "sobre mim",
+      "paras": [
+        "Oi. Sou yuang tong (唐源), um web designer em Lima.",
+        "Nasci em 2001 e moro em Lima. Desde bem pequeno, descobri minha paixão pela arte digital.",
+        "Estudei, entre outras coisas, engenharia da tecnologia da informação, e essa formação ainda influencia a maneira como trabalho.",
+        "Eu curto muito tudo que envolve arte digital: tirar fotos, filmar, editar, fazer colagens digitais, entre outras coisas. Ultimamente, tenho me interessado por programação criativa, live coding e DJing. Também adoro ler e escrever.",
+        "Profissionalmente, trabalho com design de produtos digitais, de ponta a ponta. Dirijo o fommo, um estúdio boutique sob medida em Lima."
+      ],
+      "closing": "esse sou eu, mais ou menos. vamos conversar: ",
+      "email": {
+        "label": "hola@yuangtong.dev",
+        "href": "mailto:hola@yuangtong.dev"
+      },
+      "portraitAlt": "Retrato de yuang tong em preto e branco. Um poema de César Vallejo o devora célula por célula, transformando-o em letras, tinta e blocos azuis, e então recomeça."
+    },
+    "archivePage": {
+      "title": "archivo.exe",
+      "windowTitle": "archivo.exe, C:\\fotos",
+      "series": [
+        "highway",
+        "san francisco",
+        "chinatown",
+        "reno"
+      ],
+      "photos": [
+        {
+          "id": "IMG_4999",
+          "src": "/archivo/img_4999.jpg",
+          "serie": "highway",
+          "date": "11 de fevereiro de 2017, 13h30",
+          "alt": "uma rodovia sob viadutos de concreto, céu azul",
+          "cell": 8,
+          "palette": "tinta",
+          "spot": [
+            0.94,
+            0.04
+          ]
+        },
+        {
+          "id": "IMG_5071",
+          "src": "/archivo/img_5071.jpg",
+          "serie": "highway",
+          "date": "11 de fevereiro de 2017, 14h10",
+          "alt": "um trevo de rodovia com a placa indicando a Alum Rock Ave",
+          "cell": 4,
+          "palette": "color",
+          "spot": [
+            0.44,
+            0.5
+          ]
+        },
+        {
+          "id": "IMG_5185",
+          "src": "/archivo/img_5185.jpg",
+          "serie": "san francisco",
+          "date": "11 de fevereiro de 2017, 14h51",
+          "alt": "a Golden Gate atrás de um campo verde",
+          "cell": 4,
+          "palette": "color",
+          "spot": [
+            0.34,
+            0.02
+          ]
+        },
+        {
+          "id": "IMG_5252",
+          "src": "/archivo/img_5252.jpg",
+          "serie": "san francisco",
+          "date": "11 de fevereiro de 2017, 15h28",
+          "alt": "o horizonte de São Francisco com o Transamerica e dois guindastes",
+          "cell": 2,
+          "palette": "azul",
+          "spot": [
+            0.66,
+            0.1
+          ]
+        },
+        {
+          "id": "IMG_5253",
+          "src": "/archivo/img_5253.jpg",
+          "serie": "san francisco",
+          "date": "11 de fevereiro de 2017, 15h29",
+          "alt": "o horizonte de São Francisco, mais de perto",
+          "cell": 16,
+          "palette": "acida",
+          "spot": [
+            0.72,
+            0.74
+          ]
+        },
+        {
+          "id": "IMG_5383",
+          "src": "/archivo/img_5383.jpg",
+          "serie": "chinatown",
+          "date": "11 de fevereiro de 2017, 16h55",
+          "alt": "uma rua de Chinatown com lanternas vermelhas de Ano Novo",
+          "cell": 4,
+          "palette": "color",
+          "spot": [
+            0.06,
+            0.08
+          ]
+        },
+        {
+          "id": "IMG_5397",
+          "src": "/archivo/img_5397.jpg",
+          "serie": "chinatown",
+          "date": "11 de fevereiro de 2017, 17h45",
+          "alt": "uma praça em Chinatown com um pavilhão vermelho",
+          "cell": 8,
+          "palette": "rojo",
+          "spot": [
+            0.16,
+            0.62
+          ]
+        },
+        {
+          "id": "IMG_5765",
+          "src": "/archivo/img_5765.jpg",
+          "serie": "reno",
+          "date": "19 de fevereiro de 2017, 19h27",
+          "alt": "o hotel-cassino GSR em Reno sob um céu tempestuoso",
+          "cell": 4,
+          "palette": "color",
+          "spot": [
+            0.98,
+            0.56
+          ]
+        }
+      ],
+      "readme": "arquivo de fotos.\n\nas imagens se movem: arraste-as.\nclique duas vezes para abrir uma foto em uma janela separada.\ncélulas de 2, 4, 8 ou 16 px, ou o original.\ncada foto mantém sua versão.",
+      "ui": {
+        "start": "Começar",
+        "startLabel": "início, índice do arquivo",
+        "band": "archivo 98",
+        "tray": "lima",
+        "tidy": "organize as imagens",
+        "closeAll": "fechar janelas",
+        "backToLab": "de volta ao laboratório",
+        "readmeName": "readme.txt",
+        "readmeTitle": "readme.txt, bloco de notas",
+        "minimize": "minimizar",
+        "maximize": "maximizar",
+        "restore": "restaurar",
+        "close": "fechar",
+        "closeExe": "Feche o archivo.exe e volte pro laboratório",
+        "fill": "ocupa a tela inteira",
+        "unfill": "mostrar o portfólio",
+        "copyLink": "Copiar link",
+        "copied": "link copiado",
+        "objects": "objetos",
+        "photo": "foto",
+        "photos": "fotos",
+        "cell": "cell",
+        "palette": "palette",
+        "original": "original",
+        "openHint": "clique duas vezes para abrir",
+        "open": "abrir",
+        "paletteNames": {
+          "tinta": "ink",
+          "azul": "azul",
+          "rojo": "vermelho",
+          "acida": "acid",
+          "color": "cor"
+        }
+      }
+    },
+    "bitsplashPage": {
+      "title": "bitsplash",
+      "lead": "Clique em qualquer lugar: um respingo ácido de 8 bits cai na grade.",
+      "canvasLabel": "uma grade de pontos cinza. cada clique cria um respingo de ácido de 8 bits onde cai, em cores ácidas com efeito dither, com algumas gotas ao redor.",
+      "hint": "clique em qualquer lugar",
+      "clean": "limpo",
+      "download": "baixar",
+      "one": "splash",
+      "many": "splashes"
+    },
+    "boletosPage": {
+      "title": "boletos de lima",
+      "lead": "os bilhetes de ônibus que guardo: 72 bilhetes, alguns únicos, outros repetidos. se quiser contribuir com esse arquivo, me manda uma mensagem direta ou um e-mail! clica em qualquer bilhete pra ver os detalhes.",
+      "boardLabel": "passagens de ônibus de Lima presas à grade de pontos cinza com alfinetes coloridos",
+      "sort": {
+        "label": "classificar",
+        "loose": "descontraído",
+        "colour": "por cor",
+        "company": "por empresa",
+        "price": "por preço"
+      },
+      "hint": {
+        "loose": "clica em um ticket para vê-lo; arrasta-o e ele fica preso na grade",
+        "sorted": "organizadas; clica em uma para ver, arrasta uma para soltá-la"
+      },
+      "colours": {
+        "amarillo": "amarelo",
+        "naranja": "laranja",
+        "rojo": "vermelho",
+        "rosado": "rosa",
+        "morado": "roxo",
+        "azul": "azul",
+        "celeste": "azul claro",
+        "verde": "verde",
+        "marrón": "marrom",
+        "gris": "cinza",
+        "negro": "preto",
+        "blanco": "branco"
+      },
+      "lightbox": {
+        "label": "ticket",
+        "of": "de",
+        "price": "preço",
+        "fare": "fare",
+        "colour": "cor",
+        "noPrice": "sem preço indicado",
+        "notPrinted": "não impresso",
+        "prev": "tarefa anterior",
+        "next": "próximo ticket",
+        "close": "fechar"
+      },
+      "play": {
+        "title": "pasaje",
+        "text": "cada ingresso é dinheiro. quer jogar?",
+        "cta": "reproduzir"
+      },
+      "game": {
+        "title": "pasaje",
+        "lead": "cada bilhete vale dinheiro. clica neles antes que sumam e pega a grana.",
+        "canvasLabel": "Passagens de ônibus de Lima aparecem na grade de pontos cinza e desaparecem; clica nelas para pegar o valor da passagem antes que sumam.",
+        "back": "voltar aos tickets",
+        "time": "tempo",
+        "collected": "reunido",
+        "tickets": "tickets",
+        "start": "começar",
+        "restart": "reiniciar",
+        "again": "reproduzir de novo",
+        "ready": "aperta o botão “Iniciar” e, depois, clica nos bilhetes conforme eles aparecerem",
+        "playing": "quanto mais caro o ingresso, mais rápido ele se esgota",
+        "result": "{money} de {n} ingressos",
+        "best": "Dá o teu melhor.",
+        "bestWas": "o seu melhor: {money}"
+      }
+    },
+    "camaraPage": {
+      "title": "cámara",
+      "lead": "Um brinquedo de webcam: aproxime os dedos e aplique um efeito sobre a sua imagem, depois tire a foto.",
+      "gate": {
+        "title": "essa peça precisa da sua câmera",
+        "text": "A câmera do seu navegador é usada pra detectar suas mãos. Nada é salvo neste site: ele serve só pra brincar e pra mostrar o que a web pode fazer.",
+        "camera": "liga a câmera",
+        "cursor": "desenhe com o cursor em vez disso",
+        "touch": "A experiência completa, com as suas mãos, é no computador. No celular, a câmera é um brinquedo da web: escolhe um efeito e ele cobre a imagem inteira."
+      },
+      "loading": "ligando a câmera…",
+      "stop": "desliga a câmera",
+      "cursor": "desenha com o cursor",
+      "camera": "liga a câmera",
+      "denied": "Não era permitido usar a câmera. Você pode desenhar com o cursor: aperte e arraste.",
+      "noCamera": "Não tem câmera aqui. Você pode desenhar com o cursor: aperte e arraste.",
+      "sourceHand": "câmera ligada",
+      "sourceToy": "brinquedo da web: a imagem completa",
+      "sourceCursor": "cursor: aperta e arrasta",
+      "penUp": "pen up",
+      "penDown": "coloca a caneta de lado",
+      "canvasMirror": "A imagem da sua câmera, espelhada; onde você aproxima e afasta os dedos, o efeito escolhido é aplicado sobre ela.",
+      "canvasToy": "a imagem da sua câmera, espelhada, tudo com o efeito escolhido.",
+      "leadToy": "A imagem inteira tem esse efeito. Muda isso e ela muda, em tempo real.",
+      "controls": "controles da câmera",
+      "mode": {
+        "label": "modo",
+        "draw": "desenhar",
+        "toy": "brinquedo da web"
+      },
+      "full": {
+        "on": "tela cheia",
+        "off": "painel lateral"
+      },
+      "track": {
+        "label": "acompanhamento",
+        "on": "em",
+        "off": "em pausa",
+        "key": "(barra de espaço)",
+        "paused": "rastreamento pausado"
+      },
+      "canvasCursor": "uma grade de pontos cinza; toque e arraste para deixar um traço de tinta que fica marcado.",
+      "effect": {
+        "label": "efeito",
+        "pixels": "pixels",
+        "dither": "dither",
+        "halftone": "meio-tom",
+        "ascii": "ascii",
+        "stitch": "ponto cruz",
+        "more": "mais efeitos",
+        "back": "efeitos anteriores"
+      },
+      "colour": {
+        "label": "cor",
+        "names": {
+          "signal": "azul",
+          "ink": "ink",
+          "naranja": "laranja",
+          "rosado": "rosa",
+          "lima": "lime",
+          "violeta": "violeta",
+          "multi": "multicolorido"
+        }
+      },
+      "brush": {
+        "label": "pincel",
+        "small": "pequeno",
+        "medium": "médio",
+        "large": "grande"
+      },
+      "pixel": {
+        "label": "pixel",
+        "fine": "tudo certo",
+        "medium": "médio",
+        "coarse": "grosso"
+      },
+      "clear": "claro",
+      "photo": "tira a foto",
+      "saved": "foto salva",
+      "how": [
+        "Aperta com o polegar e o indicador: onde a ponta do dedo passar, o efeito aparece. Fecha um laço e o que ele circunda se preenche.",
+        "um novo traço pinta por cima do anterior.",
+        "Tira a foto: 3, 2, 1, e ela baixa."
+      ],
+      "howToy": [
+        "escolha um efeito: ele cobre a imagem inteira.",
+        "Muda o efeito, a cor ou o pixel, e a mudança acontece em tempo real.",
+        "Tira a foto: 3, 2, 1, e ela baixa."
+      ]
+    },
+    "contactPage": {
+      "title": "vamos conversar",
+      "lead": "Trabalho de Lima para o mundo todo. Me manda uma mensagem sobre um projeto, uma colaboração ou se você só tiver alguma dúvida :)",
+      "email": {
+        "label": "hola@yuangtong.dev",
+        "href": "mailto:hola@yuangtong.dev"
+      },
+      "emailLabel": "e-mail",
+      "links": [
+        {
+          "label": "upwork",
+          "href": "https://www.upwork.com/freelancers/~01f641e45cff785eed",
+          "detail": "perfil"
+        },
+        {
+          "label": "instagram",
+          "href": "https://www.instagram.com/yuang_tong/",
+          "detail": "@yuang_tong"
+        },
+        {
+          "label": "github",
+          "href": "https://github.com/yuangtong",
+          "detail": "yuangtong"
+        },
+        {
+          "label": "linkedin",
+          "href": "https://www.linkedin.com/in/yuangtong",
+          "detail": "yuangtong"
+        }
+      ],
+      "clocks": {
+        "mine": "meu tempo, Lima",
+        "you": "seu tempo, {place}",
+        "youSame": "Teu tempo, Lima"
+      },
+      "globe": {
+        "me": "meu tempo, Lima",
+        "you": "seu tempo, {place}",
+        "hint": "arraste para girar",
+        "label": "um globo giratório feito de pontos. Um ponto azul marca Lima, onde eu estou, e um arco de pontos liga essa cidade a {place}, perto de onde você está.",
+        "labelSame": "um globo giratório feito de pontos. um ponto azul marca Lima, onde eu estou."
+      },
+      "places": {
+        "America/Lima": "Lima",
+        "America/Bogota": "Bogotá",
+        "America/Mexico_City": "Cidade do México",
+        "America/Santiago": "Santiago",
+        "America/Argentina/Buenos_Aires": "Buenos Aires",
+        "America/Sao_Paulo": "São Paulo",
+        "America/Caracas": "Caracas",
+        "America/Guayaquil": "Equador",
+        "America/La_Paz": "La Paz",
+        "America/New_York": "Nova York",
+        "America/Chicago": "Chicago",
+        "America/Denver": "Denver",
+        "America/Los_Angeles": "Los Angeles",
+        "America/Toronto": "Toronto",
+        "America/Panama": "Panamá",
+        "Europe/Madrid": "Madri",
+        "Europe/London": "Londres",
+        "Europe/Paris": "Paris",
+        "Europe/Berlin": "Berlim",
+        "Europe/Rome": "Roma",
+        "Europe/Amsterdam": "Amsterdã",
+        "Europe/Lisbon": "Lisboa",
+        "Asia/Tokyo": "Tóquio",
+        "Asia/Shanghai": "Xangai",
+        "Asia/Seoul": "Seul",
+        "Asia/Kolkata": "Índia",
+        "Asia/Singapore": "Cingapura",
+        "Asia/Dubai": "Dubai",
+        "Australia/Sydney": "Sydney"
+      }
+    },
+    "home": {
+      "intro": {
+        "name": "yuang tong",
+        "nameZh": "唐源",
+        "role": [
+          "web designer",
+          "creative coder"
+        ],
+        "hours": {
+          "zone": "America/Lima",
+          "city": "lima",
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "start": 9,
+          "end": 17,
+          "on": "disponível",
+          "off": "indisponível",
+          "title": "horário de trabalho",
+          "schedule": "seg–sex, 9h–17h, Lima",
+          "mine": "meu tempo",
+          "yours": "teu tempo",
+          "working": "Estou trabalhando agora: manda uma mensagem que respondo ainda hoje.",
+          "workingLate": "Estou trabalhando agora, embora seja {time} por aí. Fica à vontade pra me mandar um e-mail.",
+          "away": "Vou dar um tempo agora. Volto às {day} {time} em Lima, {yours} no seu horário. Fica à vontade pra me mandar um e-mail que eu respondo quando voltar.",
+          "email": {
+            "label": "hola@yuangtong.dev",
+            "href": "mailto:hola@yuangtong.dev"
+          }
+        },
+        "ctas": [
+          {
+            "label": "veja o laboratório",
+            "href": "/lab"
+          },
+          {
+            "label": "fommo.studio",
+            "href": "https://fommo.studio"
+          }
+        ],
+        "canvasLabel": "Um cavalo feito de pontos azuis galopa. Ao rolar a tela para baixo, abre-se um túnel em espiral; o cavalo rompe doze fios, empurra uma pedra morro acima, a pedra cai e o galope para no ar. Em seguida, o cavalo se transforma em pixels até se tornar letras.",
+        "narrated": false,
+        "narration": {
+          "lines": [
+            "1878. Doze fotos em meio segundo, pra descobrir se um cavalo voa.",
+            "uma corrida, morro acima, para sempre.",
+            "No topo, a pedra cai de novo. O loop recomeça."
+          ],
+          "quote": "é preciso imaginar Sísifo feliz.",
+          "quoteSource": "Albert Camus, O Mito de Sísifo, 1942",
+          "coda": "Criar é recomeçar, até que algo decole."
+        },
+        "glyphText": "yuangtong web designer creative coder 唐源 ",
+        "scrollHint": "role a página para baixo para ver a história",
+        "scrollHintTouch": "desliza para cima para ver a história",
+        "restartHint": "continua deslizando para cima para recomeçar a história",
+        "keepScrolling": "continue rolando a página",
+        "restartGo": "a história recomeça",
+        "progressLabel": "onde você está"
+      },
+      "jugar": {
+        "title": "sobre mim",
+        "line": "yuang tong (唐源), web designer e creative coder em Lima. Eu dirijo o FOMMO, um estúdio boutique, e aqui guardo o que faço por amor: arte digital, fotos e música.",
+        "cta": {
+          "label": "mais sobre mim",
+          "href": "/about"
+        }
+      },
+      "sheets": {
+        "lab": {
+          "title": "o laboratório",
+          "line": "histórias, pixels e meu arquivo.",
+          "href": "/lab"
+        },
+        "notes": {
+          "title": "notas",
+          "line": "minhas anotações, textos e um pedacinho do meu espaço pessoal.",
+          "href": "/notes"
+        },
+        "studio": {
+          "title": "estúdio",
+          "line": "Eu dirijo a FOMMO, um estúdio de serviços personalizados. É lá que ficam os trabalhos dos clientes.",
+          "sub": "marca, produto e desenvolvimento, feitos sob medida.",
+          "brand": "FOMMO",
+          "href": "/studio"
+        },
+        "contact": {
+          "title": "vamos conversar",
+          "line": "me escreve para",
+          "email": {
+            "label": "hola@yuangtong.dev",
+            "href": "mailto:hola@yuangtong.dev"
+          },
+          "href": "/contact"
+        }
+      }
+    },
+    "labPage": {
+      "title": "o laboratório",
+      "lead": "histórias, pixels e meu arquivo. fica à vontade para explorar e compartilhar cada trabalho ;)",
+      "doors": [
+        {
+          "id": "sisifo",
+          "group": "story",
+          "preview": "gallop",
+          "title": "sísifo feliz",
+          "text": "Muybridge",
+          "cta": {
+            "label": "veja o sísifo feliz",
+            "href": "/lab/sisifo"
+          }
+        },
+        {
+          "id": "lalande",
+          "group": "story",
+          "preview": "drop",
+          "title": "lalande, lágrimas de ángel",
+          "text": "Você sabe o que são “lágrimas de anjo”? É um tipo de narciso pequeno; a mais leve brisa balança a flor de um lado para o outro.",
+          "cta": {
+            "label": "veja lalande",
+            "href": "/lab/lalande"
+          }
+        },
+        {
+          "id": "travesia",
+          "group": "play",
+          "preview": "tunnel",
+          "title": "travesía ácida",
+          "text": "entre no vazio.",
+          "cta": {
+            "label": "entre na travesía",
+            "href": "/lab/travesia"
+          }
+        },
+        {
+          "id": "archivo",
+          "group": "archive",
+          "preview": "desk",
+          "title": "archivo.exe",
+          "text": "meu arquivo de fotos: mova, abra e pixelize todas as fotos.",
+          "cta": {
+            "label": "abra o archivo.exe",
+            "href": "/lab/archivo"
+          }
+        },
+        {
+          "id": "boletos",
+          "held": true,
+          "group": "archive",
+          "preview": "tickets",
+          "title": "boletos de lima",
+          "text": "um espaço dedicado a preservar, admirar e celebrar o design das passagens do transporte público de Lima.",
+          "cta": {
+            "label": "veja os tickets",
+            "href": "/lab/boletos"
+          },
+          "points": [
+            "Um arquivo com o design gráfico das passagens de ônibus de Lima: suas cores, seus tipos de letra e suas empresas.",
+            "cada ingresso digitalizado, para ser visto de perto e em detalhes.",
+            "e um joguinho feito com elas, o pasaje."
+          ]
+        },
+        {
+          "id": "metro-cards",
+          "held": true,
+          "group": "archive",
+          "preview": "card",
+          "title": "metro cards",
+          "text": "um espaço que arquiva o design dos cartões dmetro cards das principais cidades que têm esse tipo de transporte público.",
+          "cta": {
+            "label": "veja os cartões",
+            "href": "/lab/metro-cards"
+          },
+          "points": [
+            "Um arquivo com o design de cartões dmetro cards, um por cidade.",
+            "a frente e o verso de cada cartão, com suas variantes.",
+            "cada cidade marcada em um globo feito de pontos."
+          ]
+        },
+        {
+          "id": "bitsplash",
+          "group": "play",
+          "preview": "splash",
+          "title": "bitsplash",
+          "text": "Um respingo de ácido. Faça uma bagunça e guarde isso como uma imagem.",
+          "cta": {
+            "label": "causa impacto",
+            "href": "/lab/bitsplash"
+          }
+        },
+        {
+          "id": "sketchbook",
+          "group": "archive",
+          "preview": "book",
+          "title": "sketchbook",
+          "text": "minha tentativa de fazer um sketchbook.",
+          "cta": {
+            "label": "dá uma olhada no sketchbook",
+            "href": "/lab/sketchbook"
+          }
+        },
+        {
+          "id": "camara",
+          "group": "play",
+          "preview": "trail",
+          "title": "cámara",
+          "text": "Inspirado nos brinquedos de webcam da época em que a internet era menos invasiva e mais divertida.",
+          "cta": {
+            "label": "explorar",
+            "href": "/lab/camara"
+          }
+        },
+        {
+          "id": "dona",
+          "group": "play",
+          "preview": "still",
+          "soon": true,
+          "title": "dona de teselas",
+          "text": "um donut e outros 32 algoritmos.",
+          "cta": {
+            "label": "veja como vai ficar",
+            "href": "/lab/dona"
+          },
+          "points": [
+            "Arraste para girar.",
+            "blocos: molinete, damero, contorno, pontos, tick, macizo e glifos.",
+            "imagem, cor sólida, célula, paleta e velocidade."
+          ]
+        },
+        {
+          "id": "efimero",
+          "group": "play",
+          "preview": "still",
+          "soon": true,
+          "title": "ambiente efímero",
+          "text": "bip bip bip.",
+          "cta": {
+            "label": "veja como vai ficar",
+            "href": "/lab/efimero"
+          },
+          "points": [
+            "música composta ao vivo com o strudel.",
+            "visuais ao vivo com o hydra.",
+            "talvez meus conjuntos também."
+          ]
+        }
+      ],
+      "groups": {
+        "story": "histórias",
+        "play": "pixels",
+        "archive": "arquivo"
+      },
+      "previewLabel": "{title} ao vivo",
+      "soon": {
+        "label": "em breve",
+        "back": {
+          "label": "de volta ao laboratório",
+          "href": "/lab"
+        },
+        "cta": "veja como vai ficar"
+      },
+      "experiments": [
+        {
+          "id": "medio",
+          "title": "medio tono",
+          "meta": "código, 2026",
+          "alt": "O galope em pontos azuis de tamanhos variados",
+          "visual": "medio",
+          "defaultCell": 8,
+          "href": "/lab"
+        },
+        {
+          "id": "camara",
+          "title": "cámara tramada",
+          "meta": "código, 2026",
+          "alt": "Uma foto de um cavalo a galope com efeito azul e papel",
+          "visual": "camara",
+          "defaultCell": 4,
+          "href": "/lab"
+        },
+        {
+          "id": "dona",
+          "title": "dona de teselas",
+          "meta": "código, 2026",
+          "alt": "Um donut girando com sombreado em blocos sobre fundo azul",
+          "visual": "dona",
+          "defaultCell": 8,
+          "href": "/lab"
+        },
+        {
+          "id": "fotos",
+          "title": "fotografias",
+          "meta": "fotografia, [série]",
+          "alt": "Uma foto transformada em um mosaico de pixels azuis",
+          "visual": "fotos",
+          "defaultCell": 8,
+          "href": "/lab"
+        }
+      ]
+    },
+    "lalandePage": {
+      "title": "lalande, lágrimas de ángel",
+      "canvasLabel": "O cavalo de Muybridge, feito de letras, se desfaz e forma a palavra lalande. A palavra vira uma gota que cai sobre um pequeno narciso contra um céu azul. O narciso balança, gira e implode, e em seu lugar o livro de clarice lispector aparece em uma chuva de letras.",
+      "hint": "role a página para baixo para ler",
+      "replay": "de novo",
+      "quotes": [
+        {
+          "text": "“lalande. é como lágrimas de anjo.”",
+          "source": "clarice lispector: perto do coração selvagem"
+        },
+        {
+          "text": "“Sempre que eu disser: lalande, você tem que sentir a vibração fresca e salgada do mar…”",
+          "source": "clarice lispector: perto do coração selvagem"
+        }
+      ],
+      "spec": [
+        "pequeno narciso",
+        "lágrimas de anjo"
+      ],
+      "breezeLabel": "breeze",
+      "breezeHint": "mova o cursor: você é a brisa",
+      "book": {
+        "label": "perto do coração selvagem, de clarice lispector, edição Rocco, com capa vermelha",
+        "author": "clarice lispector",
+        "title": "perto do coração selvagem",
+        "quote": "“A liberdade não é o suficiente. O que eu desejo ainda não tem nome.”",
+        "quoteSource": "clarice lispector"
+      },
+      "closeText": "clarice lispectora, 1943",
+      "word": "lalande",
+      "horseText": "É como lágrimas de anjo. Você sabe o que são lágrimas de anjo? Um tipo de narciso pequeno; a mais leve brisa o balança de um lado para o outro. Lalande também é o mar ao amanhecer, quando nenhum olho ainda viu a praia, quando o sol ainda não nasceu. Sempre que eu disser: Lalande, você precisa sentir a vibração fresca e salgada do mar, precisa caminhar pela praia ainda escura, devagar, nu. Na hora você vai sentir o que é Lalande.",
+      "closeTitle": "perto do coração selvagem"
+    },
+    "metroCardsPage": {
+      "title": "metro cards",
+      "lead": "os cartões de transporte que guardei, um de cada cidade. clica em um cartão para virá-lo.",
+      "countries": {
+        "pe": "peru",
+        "cl": "chile",
+        "ar": "Argentina",
+        "co": "colômbia"
+      },
+      "front": "página inicial",
+      "back": "voltar",
+      "turn": "clica para mudar",
+      "variants": "variantes",
+      "count": "{cities} cidades, {cards} cartões",
+      "cardLabel": "Cartão {system}, {city}, mostrando seu {side}. Toque para virar.",
+      "globeLabel": "Um globo com grade de pontos, com {city} e {country} marcados em azul no meio. As outras cidades em cartões: {others}."
+    },
+    "notFound": {
+      "title": "essa página não existe",
+      "body": "O link pode estar com erro de ortografia ou a página pode ter sido movida. O cavalo continua correndo pelo resto do site.",
+      "back": {
+        "label": "voltar ao início",
+        "href": "/"
+      },
+      "lab": {
+        "label": "vai pro laboratório",
+        "href": "/lab"
+      },
+      "canvasLabel": "o número 404 feito de pontos; um cavalo a galope bate nele e ele se desintegra."
+    },
+    "notes": [
+      {
+        "slug": "jinete",
+        "title": "tirando o cavaleiro de um galope de 1878",
+        "lead": "Muybridge",
+        "date": "novembro de 2026",
+        "about": "sobre: medio tono",
+        "backLabel": "todas as notas",
+        "blocks": [
+          {
+            "type": "figure",
+            "src": "/media/notas/jinete-antes.jpg",
+            "alt": "Quinze fotos de um cavalo de corrida galopando com seu jóquei, tiradas por Muybridge",
+            "caption": "antes: os quinze quadros originais, com o cavaleiro.",
+            "width": 1500,
+            "height": 600
+          },
+          {
+            "type": "p",
+            "text": "Eadweard Muybridge fotografou um cavalo a galope em 1878. As fotos estão em domínio público e são perfeitas para animação: o movimento já está resolvido. O problema é que o cavalo está com um cavaleiro."
+          },
+          {
+            "type": "p",
+            "text": "Primeiro, separei a figura do fundo. Cada quadro é uma foto pequena, de 300 por 200 pixels, com o cavalo escuro contra um céu claro. Basta um limite de brilho para manter a silhueta."
+          },
+          {
+            "type": "p",
+            "text": "Depois, é só achar o “rider”. Em cada coluna, procuro o primeiro pixel escuro a partir do topo; a coluna onde esse ponto fica mais alto é o “cap”. Ao redor dele, abro uma janela de uns setenta pixels e, dentro dela, apago tudo que está acima do fundo."
+          },
+          {
+            "type": "p",
+            "text": "A parte de trás não dá pra ver, porque o cavaleiro a esconde. Eu recriei isso com uma curva suave entre a altura do pescoço e a altura da garupa, medida logo fora da janela. Abaixo da curva, eu preencho; acima dela, nada."
+          },
+          {
+            "type": "code",
+            "text": "// the cap: the column with the highest dark pixel\nconst cap = tops.indexOf(Math.min(...tops));\n\n// the back: a smooth curve between neck and croup\nfor (let x = x0; x <= x1; x++) {\n  const t = (x - x0) / (x1 - x0);\n  const y = y0 + (y1 - y0) * t * t * (3 - 2 * t);\n  eraseAbove(x, y);\n}"
+          },
+          {
+            "type": "p",
+            "text": "Para finalizar, eu finalizo a silhueta com uma dilatação e uma erosão, e um filtro mediano limpa as bordas. Não ficou perfeito: a parte de trás fica um pouco achatada onde ficava a sela. A doze quadros por segundo, você mal percebe."
+          },
+          {
+            "type": "figure",
+            "src": "/media/notas/jinete-despues.png",
+            "alt": "As mesmas quinze posições transformadas em silhuetas pretas de um cavalo sem cavaleiro",
+            "caption": "depois: a silhueta sem o cavaleiro, pronta para ser desenhada com pontos, letras ou blocos.",
+            "width": 1500,
+            "height": 600,
+            "paper": true
+          }
+        ],
+        "links": [
+          {
+            "label": "experimenta no laboratório",
+            "title": "medio tono",
+            "href": "/lab#pieza-medio"
+          },
+          {
+            "label": "próxima nota",
+            "title": "eco: o tempo do desenho por trás de uma figura",
+            "href": "/notes"
+          }
+        ],
+        "credit": "fotografias: eadweard muybridge, domínio público"
+      }
+    ],
+    "notesPage": {
+      "title": "notas",
+      "lead": "minhas anotações, textos e um pedacinho do meu espaço pessoal.",
+      "soon": "em breve",
+      "items": [
+        {
+          "id": "manifiesto",
+          "soon": true,
+          "title": "manifesto",
+          "excerpt": "",
+          "meta": "",
+          "href": "/notes",
+          "alt": "O galope em azul",
+          "visual": "foto",
+          "accent": "azul"
+        }
+      ]
+    },
+    "sisyphusPage": {
+      "title": "sísifo feliz",
+      "label": "sísifo feliz, o galope de Muybridge de 1878 contado com narração",
+      "hint": "role a página para baixo para conhecer a história",
+      "replay": "de novo"
+    },
+    "sketchbookPage": {
+      "title": "sketchbook",
+      "lead": "Meu sketchbook digital, digitalizado página por página. Arraste um canto ou use as setas para virar as páginas.",
+      "cover": "sketchbook",
+      "coverBy": "yuang tong",
+      "back": "Mais páginas em breve: estou digitalizando-as.",
+      "prev": "página anterior",
+      "next": "próxima página",
+      "bookLabel": "o sketchbook, um livro para folhear",
+      "alts": {
+        "menta": "Página da menta: o nome dela em verde na parte de cima e o retrato dela feito a lápis, em papel vegetal, sobre uma paisagem desenhada com giz de cera azul e verde.",
+        "lola": "Página da Lola: o nome dela em vermelho e o retrato dela com uma boina vermelha sobre um fundo amarelo, entre recortes colados e uma frase escrita à mão."
+      }
+    },
+    "studioPage": {
+      "title": "estúdio",
+      "eyebrow": "estúdio",
+      "name": "FOMMO Studio",
+      "lead": "Eu dirijo a FOMMO, um estúdio boutique em Lima onde design e desenvolvimento web complexo rolam na mesma mesa.",
+      "cta": {
+        "label": "acesse o site do FOMMO",
+        "href": "https://fommo.studio"
+      },
+      "canvasLabel": "FOMMO",
+      "preview": {
+        "src": "/media/fommo-studio.jpg",
+        "alt": "Preview of fommo.studio: at rest it is a screen of glyphs in the studio's colours; on hover or a tap, the carcoma reveals the real page.",
+        "host": "fommo.studio",
+        "caption": "FOMMO, brand & product studio",
+        "live": "live",
+        "screened": "screened",
+        "href": "https://fommo.studio"
+      }
+    },
+    "travesiaPage": {
+      "title": "travesía ácida",
+      "lead": "um vazio sem fundo. até onde você consegue ir?",
+      "canvasLabel": "um túnel sem fim de quadrados giratórios feitos de pontos; a cor muda de azul para violeta, vermelho e amarelo conforme você avança.",
+      "hint": "role para baixo para entrar no túnel; role para cima para voltar. o centro acompanha o cursor.",
+      "hintTouch": "deslize para cima para entrar no túnel. toque para mudar a cor.",
+      "ui": {
+        "controls": "controles",
+        "cell": "cell",
+        "color": "cor",
+        "all": "all the acids",
+        "rampNames": {
+          "azul": "azul",
+          "violeta": "violeta",
+          "rojo": "vermelho",
+          "amarillo": "amarelo"
+        },
+        "full": "tela cheia",
+        "close": "fechar",
+        "copyLink": "copiar link",
+        "copied": "link copiado",
+        "depth": "profundidade"
+      }
+    }
+  },
+  "settings": {
+    "locale": "pt",
+    "ogLocale": "pt_BR",
+    "languages": {
+      "label": "idioma",
+      "spoken": "esse site fala",
+      "learning": "Estou aprendendo isso",
+      "learningNote": "aprendizado",
+      "soon": "em breve",
+      "promise": "traduzido por um programa (DeepL) enquanto eu vou aprendendo. Vou corrigindo à medida que vou avançando.",
+      "list": [
+        {
+          "code": "en",
+          "name": "english",
+          "ready": true
+        },
+        {
+          "code": "es",
+          "name": "español",
+          "ready": true
+        },
+        {
+          "code": "pt",
+          "name": "português",
+          "learning": true
+        },
+        {
+          "code": "zh",
+          "name": "中文",
+          "learning": true
+        },
+        {
+          "code": "ja",
+          "name": "日本語",
+          "learning": true
+        }
+      ]
+    },
+    "siteTitle": "yuang tong | creative coder",
+    "description": "yuang tong, web designer e creative coder em lima. Eu dirijo a FOMMO, um estúdio boutique. Meu portfólio reúne programação, fotografia e música.",
+    "nav": [
+      {
+        "label": "página inicial",
+        "href": "/"
+      },
+      {
+        "label": "sobre",
+        "href": "/about"
+      },
+      {
+        "label": "lab",
+        "href": "/lab"
+      },
+      {
+        "label": "estúdio",
+        "href": "/studio"
+      },
+      {
+        "label": "notas",
+        "href": "/notes"
+      },
+      {
+        "label": "contato",
+        "href": "/contact"
+      }
+    ],
+    "footer": {
+      "left": "yuang tong, lima",
+      "right": "galope: eadweard muybridge, 1878, domínio público"
+    },
+    "cookies": {
+      "label": "sobre cookies",
+      "title": "cookies",
+      "state": "nenhum",
+      "body": "Este site não usa cookies e não rastreia ninguém: sem análises, sem anúncios, nada é enviado para terceiros.",
+      "rows": [
+        {
+          "k": "análises",
+          "v": "nenhum"
+        },
+        {
+          "k": "no seu aparelho",
+          "v": "que você fechou este aviso e, se tiver escolhido um, seu idioma"
+        }
+      ],
+      "ok": "Entendi"
+    },
+    "ui": {
+      "openLabel": "abrir",
+      "copyLinkLabel": "copiar link",
+      "copiedLabel": "link copiado",
+      "cellGroupLabel": "Tamanho da célula para",
+      "frameStripLabel": "Quadros do galope",
+      "menuLabel": "menu",
+      "closeLabel": "fechar",
+      "framePrev": "quadro anterior",
+      "frameNext": "próximo quadro",
+      "cameraCounter": "câmera",
+      "frameCounter": "frame",
+      "readNoteLabel": "leia a nota",
+      "readingTime": "tempo de leitura:",
+      "enterLabel": "enter",
+      "navLabel": "Página principal",
+      "crumbLabel": "Seção"
+    },
+    "share": {
+      "title": "yuang tong (唐源), web designer e creative coder",
+      "description": "yuang tong, web designer e creative coder em lima. Eu dirijo a FOMMO, um estúdio boutique. Meu portfólio reúne programação, fotografia e música.",
+      "image": "/social-preview-g75.jpg",
+      "alt": "yuang tong (唐源), web designer e creative coder: o cavalo e o cavaleiro de Muybridge em pontos azuis sobre uma grade de pontos cinza.",
+      "width": 2400,
+      "height": 1260
+    },
+    "crumbs": {
+      "/lab/sisifo": [
+        {
+          "label": "lab",
+          "href": "/lab"
+        },
+        {
+          "label": "sísifo feliz",
+          "href": "/lab/sisifo"
+        }
+      ],
+      "/lab/lalande": [
+        {
+          "label": "lab",
+          "href": "/lab"
+        },
+        {
+          "label": "lalande",
+          "href": "/lab/lalande"
+        }
+      ],
+      "/lab/travesia": [
+        {
+          "label": "lab",
+          "href": "/lab"
+        },
+        {
+          "label": "travesía ácida",
+          "href": "/lab/travesia"
+        }
+      ],
+      "/lab/camara": [
+        {
+          "label": "lab",
+          "href": "/lab"
+        },
+        {
+          "label": "cámara",
+          "href": "/lab/camara"
+        }
+      ],
+      "/lab/dona": [
+        {
+          "label": "lab",
+          "href": "/lab"
+        },
+        {
+          "label": "dona de teselas",
+          "href": "/lab/dona"
+        }
+      ],
+      "/lab/acidos": [
+        {
+          "label": "lab",
+          "href": "/lab"
+        },
+        {
+          "label": "píxeles ácidos",
+          "href": "/lab/acidos"
+        }
+      ],
+      "/lab/efimero": [
+        {
+          "label": "lab",
+          "href": "/lab"
+        },
+        {
+          "label": "ambiente efímero",
+          "href": "/lab/efimero"
+        }
+      ],
+      "/notes/jinete": [
+        {
+          "label": "notas",
+          "href": "/notes"
+        },
+        {
+          "label": "tirando o piloto",
+          "href": "/notes/jinete"
+        }
+      ],
+      "/lab/archivo": [
+        {
+          "label": "lab",
+          "href": "/lab"
+        },
+        {
+          "label": "archivo.exe",
+          "href": "/lab/archivo"
+        }
+      ]
+    }
+  }
+}
