@@ -28,7 +28,7 @@ export const settings: Settings = {
     body: 'este sitio no usa cookies ni sigue a nadie: sin analítica, sin anuncios, nada se envía a terceros.',
     rows: [
       { k: 'analítica', v: 'ninguna' },
-      { k: 'en tu dispositivo', v: 'solo que cerraste este aviso' },
+      { k: 'en tu dispositivo', v: 'que cerraste este aviso y, si lo elegiste, tu idioma' },
     ],
     ok: 'entendido',
   },

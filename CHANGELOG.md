@@ -89,6 +89,23 @@ Owner decisions and housekeeping, to pick up later:
 ### Added
 
 - Contact: the Upwork profile link is live, on the contact page and in the menu, in every language.
+- Machine translation with DeepL for Portuguese, Chinese and Japanese:
+  `scripts/translate.mts` translates the English fixtures into
+  `src/content/fixtures/<locale>/content.json`, only new or changed strings,
+  with placeholders and piece titles protected. The GitHub Action "Translate
+  with DeepL" runs it with the repository secret `DEEPL_API_KEY` and opens a
+  pull request. See `docs/TRANSLATION.md`. The routes for those languages
+  come in a follow-up change.
+- The site picks the language on the first visit (owner, 2026-11-27): an
+  English page reads the browser's preferred languages and moves to the first
+  one the site speaks (`es-PE` goes to `/es`), English when none matches. A
+  language chosen in the selector is kept on the device (local storage key
+  `lang`, not a cookie) and wins from then on. It reads the browser language,
+  not the country. Runs in the page head before the first paint; crawlers and
+  automated browsers are skipped and the server still answers every address
+  as it is, so each language keeps its own URL. The cookie notice's device row
+  says so in both languages (`src/lib/lang-detect.ts`).
+
 - Sanity connected (CMS). The editing panel is served at `/admin` (Sanity
   Studio, embedded with `next-sanity`), outside the locale routing and not
   indexed. Two content types to start: "Lab: order", which sets the order of

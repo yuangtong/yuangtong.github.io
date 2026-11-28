@@ -1,9 +1,10 @@
 import type { Metadata, Viewport } from 'next';
 import { color } from '@/lib/tokens';
-import { getSettings, locales, localePath } from '@/content';
+import { defaultLocale, getSettings, locales, localePath } from '@/content';
 import { CarcomaProvider } from '@/components/Carcoma';
 import { AsciiCursor } from '@/components/AsciiCursor';
 import { CookieNotice } from '@/components/CookieNotice';
+import { langDetectScript } from '@/lib/lang-detect';
 import { geistMono, host, notoTc, script } from '../fonts';
 import { routeLocale, type LangParams } from '@/app/[lang]/locale';
 import '../tokens.css';
@@ -35,6 +36,8 @@ export default async function RootLayout({ children, params }: { children: React
   const s = await getSettings(locale);
   return (
     <html lang={locale} className={[host.variable, geistMono.variable, notoTc.variable, script.variable].join(' ')}>
+      {/* first visit: the browser's language, or the one chosen before (English pages only) */}
+      {locale === defaultLocale && <head><script dangerouslySetInnerHTML={{ __html: langDetectScript() }} /></head>}
       <body><CarcomaProvider>{children}<CookieNotice text={s.cookies} /><AsciiCursor /></CarcomaProvider></body>
     </html>
   );

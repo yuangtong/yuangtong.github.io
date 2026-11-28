@@ -28,7 +28,7 @@ export const settings: Settings = {
     body: 'this site sets no cookies and follows no one: no analytics, no ads, nothing sent to third parties.',
     rows: [
       { k: 'analytics', v: 'none' },
-      { k: 'on your device', v: 'only that you closed this notice' },
+      { k: 'on your device', v: 'that you closed this notice and, if you chose one, your language' },
     ],
     ok: 'understood',
   },
