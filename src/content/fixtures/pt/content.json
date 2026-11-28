@@ -996,11 +996,11 @@
       "label": "sobre cookies",
       "title": "cookies",
       "state": "nenhum",
-      "body": "Este site não usa cookies e não rastreia ninguém: sem análises, sem anúncios, nada é enviado para terceiros.",
+      "body": "esse site não usa cookies e não rastreia ninguém: ele conta as visitas de forma anônima com o Vercel Analytics, sem anúncios e sem nada que identifique você.",
       "rows": [
         {
           "k": "análises",
-          "v": "nenhum"
+          "v": "visitas anônimas, sem cookies (Vercel)"
         },
         {
           "k": "no seu aparelho",
