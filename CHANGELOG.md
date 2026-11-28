@@ -88,6 +88,7 @@ Owner decisions and housekeeping, to pick up later:
 
 ### Added
 
+- Visit counts with Vercel Web Analytics (owner, 2026-11-28): `@vercel/analytics` and its `<Analytics />` in the root layout, on every language route; the locale proxy skips `/_vercel/` so its requests are never rewritten. It sets no cookies and keeps nothing that identifies a visitor. The cookie notice now says so instead of "no analytics" (English and Spanish; Portuguese, Chinese and Japanese follow with the DeepL run).
 - Contact: the Upwork profile link is live, on the contact page and in the menu, in every language.
 - Portuguese, Chinese and Japanese turn on by themselves when their DeepL
   translation is merged: the translate script also writes
