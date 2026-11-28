@@ -1,0 +1,1131 @@
+{
+  "home": {
+    "aboutPage": {
+      "title": "关于我",
+      "paras": [
+        "hola。我是yuang tong（唐源），一位在利马工作的网页设计师。",
+        "我出生于2001年，现居利马。从小我就对数字艺术产生了浓厚的兴趣。",
+        "我曾学习过许多学科，其中包括信息技术工程，这一背景至今仍影响着我的工作方式。",
+        "我从数字艺术的方方面面中都能获得真正的乐趣：拍照、拍摄、后期制作、制作数字拼贴画等等。最近，我开始涉足创意编程、现场编程和DJ打碟。我也热爱阅读和写作。",
+        "职业方面，我从事数字产品设计，涵盖从概念到上线的全流程。我在利马经营着一家名为fommo的定制化精品工作室。"
+      ],
+      "closing": "这就是我，大致如此。让我们聊聊： ",
+      "email": {
+        "label": "hola@yuangtong.dev",
+        "href": "mailto:hola@yuangtong.dev"
+      },
+      "portraitAlt": "yuang tong 的黑白肖像。塞萨尔·瓦莱霍的一首诗将其一格一格地吞噬，将其转化为字母、墨水和蓝色方块，然后周而复始。"
+    },
+    "archivePage": {
+      "title": "archivo.exe",
+      "windowTitle": "archivo.exe，C:\\photos",
+      "series": [
+        "highway",
+        "san francisco",
+        "chinatown",
+        "reno"
+      ],
+      "photos": [
+        {
+          "id": "IMG_4999",
+          "src": "/archivo/img_4999.jpg",
+          "serie": "highway",
+          "date": "2017年2月11日 13:30",
+          "alt": "混凝土高架桥下的高速公路，蓝天",
+          "cell": 8,
+          "palette": "tinta",
+          "spot": [
+            0.94,
+            0.04
+          ]
+        },
+        {
+          "id": "IMG_5071",
+          "src": "/archivo/img_5071.jpg",
+          "serie": "highway",
+          "date": "2017年2月11日 14:10",
+          "alt": "一条高速公路立交桥，路牌指向Alum Rock大道",
+          "cell": 4,
+          "palette": "color",
+          "spot": [
+            0.44,
+            0.5
+          ]
+        },
+        {
+          "id": "IMG_5185",
+          "src": "/archivo/img_5185.jpg",
+          "serie": "san francisco",
+          "date": "2017年2月11日 14:51",
+          "alt": "绿野背后的金门大桥",
+          "cell": 4,
+          "palette": "color",
+          "spot": [
+            0.34,
+            0.02
+          ]
+        },
+        {
+          "id": "IMG_5252",
+          "src": "/archivo/img_5252.jpg",
+          "serie": "san francisco",
+          "date": "2017年2月11日 15:28",
+          "alt": "旧金山天际线，可见泛美大厦和两台起重机",
+          "cell": 2,
+          "palette": "azul",
+          "spot": [
+            0.66,
+            0.1
+          ]
+        },
+        {
+          "id": "IMG_5253",
+          "src": "/archivo/img_5253.jpg",
+          "serie": "san francisco",
+          "date": "2017年2月11日 15:29",
+          "alt": "旧金山天际线，特写",
+          "cell": 16,
+          "palette": "acida",
+          "spot": [
+            0.72,
+            0.74
+          ]
+        },
+        {
+          "id": "IMG_5383",
+          "src": "/archivo/img_5383.jpg",
+          "serie": "chinatown",
+          "date": "2017年2月11日 16:55",
+          "alt": "一条挂满红色新年灯笼的唐人街街道",
+          "cell": 4,
+          "palette": "color",
+          "spot": [
+            0.06,
+            0.08
+          ]
+        },
+        {
+          "id": "IMG_5397",
+          "src": "/archivo/img_5397.jpg",
+          "serie": "chinatown",
+          "date": "2017年2月11日 17:45",
+          "alt": "一个设有红色凉亭的唐人街广场",
+          "cell": 8,
+          "palette": "rojo",
+          "spot": [
+            0.16,
+            0.62
+          ]
+        },
+        {
+          "id": "IMG_5765",
+          "src": "/archivo/img_5765.jpg",
+          "serie": "reno",
+          "date": "2017年2月19日 19:27",
+          "alt": "雷诺市GSR赌场酒店，背景是风雨交加的天空",
+          "cell": 4,
+          "palette": "color",
+          "spot": [
+            0.98,
+            0.56
+          ]
+        }
+      ],
+      "readme": "照片档案。\n\n图片会动：拖动它们。\n双击可在新窗口中打开照片。\n2、4、8 或 16 像素的像素格，或原始尺寸。\n每张照片都保留其原始版本。",
+      "ui": {
+        "start": "开始",
+        "startLabel": "开始，档案索引",
+        "band": "archivo 98",
+        "tray": "利马",
+        "tidy": "整理印刷品",
+        "closeAll": "关闭窗口",
+        "backToLab": "返回实验室",
+        "readmeName": "readme.txt",
+        "readmeTitle": "readme.txt，记事本",
+        "minimize": "最小化",
+        "maximize": "最大化",
+        "restore": "恢复",
+        "close": "关闭",
+        "closeExe": "关闭archivo.exe并返回实验室",
+        "fill": "填满整个屏幕",
+        "unfill": "查看作品集",
+        "copyLink": "复制链接",
+        "copied": "链接已复制",
+        "objects": "对象",
+        "photo": "照片",
+        "photos": "照片",
+        "cell": "cell",
+        "palette": "palette",
+        "original": "原文",
+        "openHint": "双击打开",
+        "open": "打开",
+        "paletteNames": {
+          "tinta": "ink",
+          "azul": "蓝色",
+          "rojo": "red",
+          "acida": "acid",
+          "color": "颜色"
+        }
+      }
+    },
+    "bitsplashPage": {
+      "title": "bitsplash",
+      "lead": "点击任意位置：一个8位酸色飞溅效果落在网格上。",
+      "canvasLabel": "一个灰色的点阵网格。每次点击都会在落点处溅起一团8位酸色飞溅，呈现出抖动效果的酸色，周围还会散落几滴。",
+      "hint": "点击任意位置",
+      "clean": "简洁",
+      "download": "下载",
+      "one": "splash",
+      "many": "启动画面"
+    },
+    "boletosPage": {
+      "title": "boletos de lima",
+      "lead": "我收藏的公交车票：72张票根，有些是独一无二的，有些则有重复。如果你想为这个档案库贡献一份力量，请给我发私信或邮件！点击任意一张车票即可查看详情。",
+      "boardLabel": "用彩色图钉将利马的公交车票固定在灰色圆点网格上",
+      "sort": {
+        "label": "排序",
+        "loose": "随性",
+        "colour": "by colour",
+        "company": "作者：公司",
+        "price": "按价格排序"
+      },
+      "hint": {
+        "loose": "点击票据即可查看；拖动票据即可将其固定在网格上",
+        "sorted": "已分类；点击一个查看，拖动一个使其脱离"
+      },
+      "colours": {
+        "amarillo": "黄色",
+        "naranja": "orange",
+        "rojo": "red",
+        "rosado": "粉色",
+        "morado": "紫色",
+        "azul": "蓝色",
+        "celeste": "浅蓝色",
+        "verde": "绿色",
+        "marrón": "brown",
+        "gris": "灰色",
+        "negro": "黑色",
+        "blanco": "白色"
+      },
+      "lightbox": {
+        "label": "票据",
+        "of": "of",
+        "price": "价格",
+        "fare": "fare",
+        "colour": "颜色",
+        "noPrice": "未标注价格",
+        "notPrinted": "未印刷",
+        "prev": "上一张票",
+        "next": "下一张票",
+        "close": "关闭"
+      },
+      "play": {
+        "title": "pasaje",
+        "text": "每张票都是钱。想玩玩吗？",
+        "cta": "播放"
+      },
+      "game": {
+        "title": "pasaje",
+        "lead": "每张车票都代表一笔钱。在它们消失前点击它们，收取车费。",
+        "canvasLabel": "来自利马的公交车票会出现在灰色圆点网格上，随后消失；点击它们，在消失前收取车费。",
+        "back": "返回工单列表",
+        "time": "时间",
+        "collected": "收藏",
+        "tickets": "票务",
+        "start": "开始",
+        "restart": "重新开始",
+        "again": "再次播放",
+        "ready": "按下“开始”按钮，然后点击出现的票券",
+        "playing": "票价越高，速度越快",
+        "result": "{money}，来自 {n} 张票",
+        "best": "你的最佳作品。",
+        "bestWas": "你的最佳作品：{money}"
+      }
+    },
+    "camaraPage": {
+      "title": "cámara",
+      "lead": "一款网络摄像头小工具：用双指捏合在自己身上绘制特效，然后拍摄照片。",
+      "gate": {
+        "title": "这件作品需要你的相机",
+        "text": "本网站会读取您浏览器中的摄像头以检测您的双手。本网站不会保存任何数据：它仅供娱乐，旨在展示网络的潜力。",
+        "camera": "打开摄像头",
+        "cursor": "改用光标绘图",
+        "touch": "完整的体验，需要亲手在电脑上操作。在手机上，相机只是个网页小玩具：选择一个特效，它就会覆盖整张图片。"
+      },
+      "loading": "启动摄像头……",
+      "stop": "关闭摄像头",
+      "cursor": "用光标绘画",
+      "camera": "打开摄像头",
+      "denied": "不允许使用相机。你可以用光标绘画：按住并拖动。",
+      "noCamera": "这里没有摄像头。你可以用光标绘画：按住并拖动。",
+      "sourceHand": "相机开启",
+      "sourceToy": "网页小玩意：整张图片",
+      "sourceCursor": "光标：按住并拖动",
+      "penUp": "pen up",
+      "penDown": "pen down",
+      "canvasMirror": "将您的摄像头拍摄的图像进行镜像处理；当您进行捏合和移动操作时，选定的特效会覆盖在图像上。",
+      "canvasToy": "您的相机照片，经过镜像处理，并应用所选特效。",
+      "leadToy": "整张图片都带有特效。稍作更改，效果便会实时变化。",
+      "controls": "相机控制",
+      "mode": {
+        "label": "模式",
+        "draw": "draw",
+        "toy": "网页小玩意"
+      },
+      "full": {
+        "on": "全屏",
+        "off": "侧边栏"
+      },
+      "track": {
+        "label": "跟踪",
+        "on": "on",
+        "off": "暂停",
+        "key": "(空格键)",
+        "paused": "跟踪已暂停"
+      },
+      "canvasCursor": "一个灰色的点阵网格；点击并拖动可留下持久的墨迹轨迹。",
+      "effect": {
+        "label": "效果",
+        "pixels": "像素",
+        "dither": "dither",
+        "halftone": "halftone",
+        "ascii": "ascii",
+        "stitch": "十字绣",
+        "more": "更多特效",
+        "back": "之前的特效"
+      },
+      "colour": {
+        "label": "颜色",
+        "names": {
+          "signal": "蓝色",
+          "ink": "ink",
+          "naranja": "orange",
+          "rosado": "粉色",
+          "lima": "lime",
+          "violeta": "violet",
+          "multi": "多色"
+        }
+      },
+      "brush": {
+        "label": "brush",
+        "small": "small",
+        "medium": "medium",
+        "large": "大"
+      },
+      "pixel": {
+        "label": "像素",
+        "fine": "没问题",
+        "medium": "medium",
+        "coarse": "粗略"
+      },
+      "clear": "clear",
+      "photo": "拍摄照片",
+      "saved": "照片已保存",
+      "how": [
+        "拇指与食指捏合：指尖所及之处，特效随之显现。闭合环形，环内区域即被填满。",
+        "新的一笔覆盖了上一笔。",
+        "“3、2、1”，拍照后即可下载。"
+      ],
+      "howToy": [
+        "选择一种特效：它会覆盖整张图片。",
+        "更改特效、颜色或像素，效果会实时更新。",
+        "“3、2、1”，拍照后即可下载。"
+      ]
+    },
+    "contactPage": {
+      "title": "让我们聊聊",
+      "lead": "我以利马为基地，服务全球。欢迎就项目、合作事宜，或者只是有任何疑问，随时联系我 :)",
+      "email": {
+        "label": "hola@yuangtong.dev",
+        "href": "mailto:hola@yuangtong.dev"
+      },
+      "emailLabel": "电子邮件",
+      "links": [
+        {
+          "label": "upwork",
+          "href": "https://www.upwork.com/freelancers/~01f641e45cff785eed",
+          "detail": "个人简介"
+        },
+        {
+          "label": "instagram",
+          "href": "https://www.instagram.com/yuang_tong/",
+          "detail": "@yuang_tong"
+        },
+        {
+          "label": "github",
+          "href": "https://github.com/yuangtong",
+          "detail": "yuangtong"
+        },
+        {
+          "label": "linkedin",
+          "href": "https://www.linkedin.com/in/yuangtong",
+          "detail": "yuangtong"
+        }
+      ],
+      "clocks": {
+        "mine": "my time, 利马",
+        "you": "你的时间，{place}",
+        "youSame": "你的时间，利马"
+      },
+      "globe": {
+        "me": "my time, 利马",
+        "you": "你的时间，{place}",
+        "hint": "拖动以旋转",
+        "label": "一个由点组成的旋转地球。一个蓝色小点标记着利马——我所在的地方，一条由点组成的弧线将它与{place}连接起来，那里就在你所在位置附近。",
+        "labelSame": "一个由点组成的旋转地球。一个蓝色小点标记着利马——我所在的地方。"
+      },
+      "places": {
+        "America/Lima": "利马",
+        "America/Bogota": "波哥大",
+        "America/Mexico_City": "墨西哥城",
+        "America/Santiago": "圣地亚哥",
+        "America/Argentina/Buenos_Aires": "布宜诺斯艾利斯",
+        "America/Sao_Paulo": "圣保罗",
+        "America/Caracas": "加拉加斯",
+        "America/Guayaquil": "厄瓜多尔",
+        "America/La_Paz": "拉巴斯",
+        "America/New_York": "纽约",
+        "America/Chicago": "芝加哥",
+        "America/Denver": "丹佛",
+        "America/Los_Angeles": "洛杉矶",
+        "America/Toronto": "多伦多",
+        "America/Panama": "巴拿马",
+        "Europe/Madrid": "马德里",
+        "Europe/London": "伦敦",
+        "Europe/Paris": "巴黎",
+        "Europe/Berlin": "柏林",
+        "Europe/Rome": "罗马",
+        "Europe/Amsterdam": "阿姆斯特丹",
+        "Europe/Lisbon": "里斯本",
+        "Asia/Tokyo": "东京",
+        "Asia/Shanghai": "上海",
+        "Asia/Seoul": "首尔",
+        "Asia/Kolkata": "印度",
+        "Asia/Singapore": "新加坡",
+        "Asia/Dubai": "迪拜",
+        "Australia/Sydney": "悉尼"
+      }
+    },
+    "home": {
+      "intro": {
+        "name": "yuang tong",
+        "nameZh": "唐源",
+        "role": [
+          "网页设计师",
+          "creative coder"
+        ],
+        "hours": {
+          "zone": "America/Lima",
+          "city": "利马",
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "start": 9,
+          "end": 17,
+          "on": "可用",
+          "off": "不可用",
+          "title": "工作时间",
+          "schedule": "周一至周五，9:00–17:00，利马",
+          "mine": "我的时间",
+          "yours": "你的时间",
+          "working": "我目前正在工作：发消息给我，我今天会回复。",
+          "workingLate": "我目前正在工作，不过在您所在的地方现在是{time}。欢迎随时通过电子邮件联系我。",
+          "away": "我先下线了。{day}{time}（利马时间）{yours}（您所在时区）见。欢迎随时发邮件给我，届时我会回复。",
+          "email": {
+            "label": "hola@yuangtong.dev",
+            "href": "mailto:hola@yuangtong.dev"
+          }
+        },
+        "ctas": [
+          {
+            "label": "查看作品集",
+            "href": "/lab"
+          },
+          {
+            "label": "fommo.studio",
+            "href": "https://fommo.studio"
+          }
+        ],
+        "canvasLabel": "一匹由蓝色圆点组成的马正在疾驰。向下滚动会打开一条螺旋隧道；马儿扯断十二根丝线，将一块石头推上山坡，石头坠落，马儿在半空中停下了奔跑的步伐。随后，马儿逐渐像素化，最终化作一串字母。",
+        "narrated": false,
+        "narration": {
+          "lines": [
+            "1878。半秒内拍摄十二张照片，只为验证马是否会飞。",
+            "一次疾驰，向上，永无止境。",
+            "顶部，岩石再次坠落。循环重新开始。"
+          ],
+          "quote": "人们必须想象西西弗斯是快乐的。",
+          "quoteSource": "阿尔贝·加缪，《西西弗斯的神话》，1942年",
+          "coda": "创作就是不断重来，直到某样东西飞起来。"
+        },
+        "glyphText": "yuangtong web designer creative coder 唐源 ",
+        "scrollHint": "向下滚动查看故事",
+        "scrollHintTouch": "向上滑动查看故事",
+        "restartHint": "继续向上滑动，重新开始故事",
+        "keepScrolling": "继续向下滚动",
+        "restartGo": "故事重新开始",
+        "progressLabel": "您所在的位置"
+      },
+      "jugar": {
+        "title": "关于我",
+        "line": "yuang tong（唐源），利马的网页设计师兼creative coder。我负责运营一家精品工作室FOMMO，并在此分享我出于热爱而创作的作品：数字艺术、摄影和音乐。",
+        "cta": {
+          "label": "更多关于我",
+          "href": "/about"
+        }
+      },
+      "sheets": {
+        "lab": {
+          "title": "the lab",
+          "line": "故事、像素与我的作品集。",
+          "href": "/lab"
+        },
+        "notes": {
+          "title": "注释",
+          "line": "我的笔记、随笔以及一点个人空间。",
+          "href": "/notes"
+        },
+        "studio": {
+          "title": "工作室",
+          "line": "我负责运营FOMMO——一家提供定制化服务的创意工作室。客户作品均展示于该平台。",
+          "sub": "品牌、产品与开发，量身定制。",
+          "brand": "FOMMO",
+          "href": "/studio"
+        },
+        "contact": {
+          "title": "让我们聊聊",
+          "line": "请发邮件至",
+          "email": {
+            "label": "hola@yuangtong.dev",
+            "href": "mailto:hola@yuangtong.dev"
+          },
+          "href": "/contact"
+        }
+      }
+    },
+    "labPage": {
+      "title": "the lab",
+      "lead": "故事、像素与我的作品集。欢迎随意浏览并分享每一件作品 ;)",
+      "doors": [
+        {
+          "id": "sisifo",
+          "group": "story",
+          "preview": "gallop",
+          "title": "sísifo feliz",
+          "text": "Muybridge",
+          "cta": {
+            "label": "参见sísifo feliz",
+            "href": "/lab/sisifo"
+          }
+        },
+        {
+          "id": "lalande",
+          "group": "story",
+          "preview": "drop",
+          "title": "lalande, lágrimas de ángel",
+          "text": "你知道什么是“天使之泪”吗？这是一种小型水仙花；哪怕是最轻微的微风，也能让它左右摇曳。",
+          "cta": {
+            "label": "参见 lalande",
+            "href": "/lab/lalande"
+          }
+        },
+        {
+          "id": "travesia",
+          "group": "play",
+          "preview": "tunnel",
+          "title": "travesía ácida",
+          "text": "进入虚空。",
+          "cta": {
+            "label": "进入“travesía”",
+            "href": "/lab/travesia"
+          }
+        },
+        {
+          "id": "archivo",
+          "group": "archive",
+          "preview": "desk",
+          "title": "archivo.exe",
+          "text": "我的照片档案：移动、打开并使每张照片像素化。",
+          "cta": {
+            "label": "打开archivo.exe",
+            "href": "/lab/archivo"
+          }
+        },
+        {
+          "id": "boletos",
+          "held": true,
+          "group": "archive",
+          "preview": "tickets",
+          "title": "boletos de lima",
+          "text": "一个专门用于保存、欣赏和纪念利马公共交通车票设计的空间。",
+          "cta": {
+            "label": "查看工单",
+            "href": "/lab/boletos"
+          },
+          "points": [
+            "利马公交车票平面设计的档案：其配色、字体及运营公司。",
+            "每张票都经过扫描，供您近距离细细观赏。",
+            "以及用这些作品制作的一款小游戏——pasaje。"
+          ]
+        },
+        {
+          "id": "metro-cards",
+          "held": true,
+          "group": "archive",
+          "preview": "card",
+          "title": "metro cards",
+          "text": "一个专门收录主要城市地铁卡（metro cards）设计作品的档案库，这些城市均运营此类公共交通。",
+          "cta": {
+            "label": "查看卡片",
+            "href": "/lab/metro-cards"
+          },
+          "points": [
+            "一个metro cards设计档案，每个城市一张。",
+            "每张卡片的正反面及其变体。",
+            "每个城市都在由点组成的地球仪上被标记出来。"
+          ]
+        },
+        {
+          "id": "bitsplash",
+          "group": "play",
+          "preview": "splash",
+          "title": "bitsplash",
+          "text": "一抹酸性飞溅。制造一团混乱，并将其保存为图像。",
+          "cta": {
+            "label": "大放异彩",
+            "href": "/lab/bitsplash"
+          }
+        },
+        {
+          "id": "sketchbook",
+          "group": "archive",
+          "preview": "book",
+          "title": "sketchbook",
+          "text": "我尝试制作的sketchbook。",
+          "cta": {
+            "label": "翻阅sketchbook",
+            "href": "/lab/sketchbook"
+          }
+        },
+        {
+          "id": "camara",
+          "group": "play",
+          "preview": "trail",
+          "title": "cámara",
+          "text": "灵感源自互联网尚未如此侵入性、充满更多乐趣时的网络摄像头小游戏。",
+          "cta": {
+            "label": "探索",
+            "href": "/lab/camara"
+          }
+        },
+        {
+          "id": "dona",
+          "group": "play",
+          "preview": "still",
+          "soon": true,
+          "title": "dona de teselas",
+          "text": "一个甜甜圈和另外32种算法。",
+          "cta": {
+            "label": "看看它会变成什么样",
+            "href": "/lab/dona"
+          },
+          "points": [
+            "拖动以旋转。",
+            "图块：molinete、damero、contorno、puntos、tick、macizo 和 glyphs。",
+            "图像、纯色、单元格、配色方案和速度。"
+          ]
+        },
+        {
+          "id": "efimero",
+          "group": "play",
+          "preview": "still",
+          "soon": true,
+          "title": "ambiente efímero",
+          "text": "哔哔哔。",
+          "cta": {
+            "label": "看看它会变成什么样",
+            "href": "/lab/efimero"
+          },
+          "points": [
+            "使用strudel实时创作的音乐。",
+            "使用hydra制作的实时视觉效果。",
+            "也许我的作品集也是如此。"
+          ]
+        }
+      ],
+      "groups": {
+        "story": "故事",
+        "play": "像素",
+        "archive": "作品集"
+      },
+      "previewLabel": "{title}，已上线",
+      "soon": {
+        "label": "即将推出",
+        "back": {
+          "label": "返回实验室",
+          "href": "/lab"
+        },
+        "cta": "看看它会变成什么样"
+      },
+      "experiments": [
+        {
+          "id": "medio",
+          "title": "medio tono",
+          "meta": "code, 2026",
+          "alt": "由大小不一的蓝色圆点组成的奔腾效果",
+          "visual": "medio",
+          "defaultCell": 8,
+          "href": "/lab"
+        },
+        {
+          "id": "camara",
+          "title": "cámara tramada",
+          "meta": "code, 2026",
+          "alt": "一张以蓝色和纸张为背景的骏马疾驰照片",
+          "visual": "camara",
+          "defaultCell": 4,
+          "href": "/lab"
+        },
+        {
+          "id": "dona",
+          "title": "dona de teselas",
+          "meta": "code, 2026",
+          "alt": "一个在蓝色背景上用瓷砖进行阴影处理的旋转甜甜圈",
+          "visual": "dona",
+          "defaultCell": 8,
+          "href": "/lab"
+        },
+        {
+          "id": "fotos",
+          "title": "摄影作品",
+          "meta": "摄影，[系列]",
+          "alt": "一张照片被转化为由蓝色像素组成的马赛克",
+          "visual": "fotos",
+          "defaultCell": 8,
+          "href": "/lab"
+        }
+      ]
+    },
+    "lalandePage": {
+      "title": "lalande, lágrimas de ángel",
+      "canvasLabel": "由字母组成的Muybridge的马逐渐解体，形成lalande一词。这个词化作一滴水，落在一朵蓝天映衬下的水仙花上。水仙花摇曳、旋转并向内坍缩，取而代之的是克拉丽丝·利斯佩克托（clarice lispector）的书，在字母雨中显现。",
+      "hint": "向下滚动阅读",
+      "replay": "再次",
+      "quotes": [
+        {
+          "text": "“lalande。它就像天使的泪水。”",
+          "source": "clarice lispector，《靠近狂野的心》"
+        },
+        {
+          "text": "“每当我说：lalande，你一定能感受到大海那凉爽而略带咸味的震动……”",
+          "source": "clarice lispector，《靠近狂野的心》"
+        }
+      ],
+      "spec": [
+        "小水仙",
+        "天使之泪"
+      ],
+      "breezeLabel": "breeze",
+      "breezeHint": "移动光标：你就是那阵微风",
+      "book": {
+        "label": "perto do coração selvagem，克拉丽丝·利斯佩克托（clarice lispector）著，罗科出版社（rocco edition）出版，红色封面",
+        "author": "clarice lispector",
+        "title": "perto do coração selvagem",
+        "quote": "“自由还不够。我渴望的，尚无名。”",
+        "quoteSource": "clarice lispector"
+      },
+      "closeText": "clarice lispector，1943",
+      "word": "lalande",
+      "horseText": "这就像天使的眼泪。你知道什么是天使的眼泪吗？是一种小水仙；轻轻一缕微风便能将它吹得左右摇曳。Lalande也是黎明时分的海洋，那时还没有人见过海滩，太阳尚未升起。 每当我说出Lalande这个名字，你便会感受到大海那清凉而略带咸味的震颤，你会赤身裸体地沿着仍处于黑暗中的海滩缓缓漫步。霎时间，你便会感受到Lalande。",
+      "closeTitle": "靠近那颗狂野的心"
+    },
+    "metroCardsPage": {
+      "title": "metro cards",
+      "lead": "我收藏的交通卡，每张代表一座城市。点击卡片即可翻面。",
+      "countries": {
+        "pe": "秘鲁",
+        "cl": "chile",
+        "ar": "阿根廷",
+        "co": "哥伦比亚"
+      },
+      "front": "首页",
+      "back": "返回",
+      "turn": "点击切换",
+      "variants": "变体",
+      "count": "{cities} 城市，{cards} 卡片",
+      "cardLabel": "{system}名片，{city}，展示其{side}。点击翻面。",
+      "globeLabel": "一个点阵地球仪，中间用蓝色标注了{city}和{country}。其他城市以卡片形式呈现：{others}。"
+    },
+    "notFound": {
+      "title": "该页面不存在",
+      "body": "链接可能拼写有误，或者页面已移动。那匹马一直在网站的其他页面中奔跑。",
+      "back": {
+        "label": "返回首页",
+        "href": "/"
+      },
+      "lab": {
+        "label": "前往实验室",
+        "href": "/lab"
+      },
+      "canvasLabel": "由点组成的数字“404”；一匹疾驰的马撞上它，数字随即崩塌。"
+    },
+    "notes": [
+      {
+        "slug": "jinete",
+        "title": "让骑手从1878年的骏马上下来",
+        "lead": "Muybridge",
+        "date": "2026年11月",
+        "about": "关于：medio tono",
+        "backLabel": "所有备注",
+        "blocks": [
+          {
+            "type": "figure",
+            "src": "/media/notas/jinete-antes.jpg",
+            "alt": "由Muybridge拍摄的15张赛马载着骑手疾驰的照片",
+            "caption": "之前：包含骑手的十五帧原始画面。",
+            "width": 1500,
+            "height": 600
+          },
+          {
+            "type": "p",
+            "text": "1878年，埃德韦尔德·迈布里奇（Eadweard Muybridge）拍摄了一匹疾驰的马。这些照片属于公有领域，非常适合制作动画：动作轨迹已经明确。问题在于，马背上还载着一名骑手。"
+          },
+          {
+            "type": "p",
+            "text": "首先，我将人物与背景分离。每帧都是一张300×200像素的小照片，画面中一匹深色骏马映衬在浅色天空之下。只需设置一个亮度阈值，即可保留剪影效果。"
+          },
+          {
+            "type": "p",
+            "text": "接着，寻找“骑手”。在每一列中，我寻找自顶部起第一个深色像素；该点所在位置最高的列即为“帽檐”。在其周围，我打开一个约七十像素的窗口，并在其中删除背景线以上的一切内容。"
+          },
+          {
+            "type": "p",
+            "text": "背面无法看到，因为骑手将其遮挡住了。我根据从窗外测量的颈部高度与臀部高度之间的平滑曲线重新构建了背面。曲线下方进行填充；上方则留白。"
+          },
+          {
+            "type": "code",
+            "text": "// the cap: the column with the highest dark pixel\nconst cap = tops.indexOf(Math.min(...tops));\n\n// the back: a smooth curve between neck and croup\nfor (let x = x0; x <= x1; x++) {\n  const t = (x - x0) / (x1 - x0);\n  const y = y0 + (y1 - y0) * t * t * (3 - 2 * t);\n  eraseAbove(x, y);\n}"
+          },
+          {
+            "type": "p",
+            "text": "最后，我通过膨胀和侵蚀处理来完善剪影，并使用中值滤波器清理边缘。效果并非完美：鞍部所在的位置，背景仍略显平坦。但在每秒十二帧的播放速度下，这一点几乎难以察觉。"
+          },
+          {
+            "type": "figure",
+            "src": "/media/notas/jinete-despues.png",
+            "alt": "这十五个相同的位置化作了一匹无人骑乘的马的黑色剪影",
+            "caption": "后文：没有骑手的剪影，可以随时用点、字母或图块来绘制。",
+            "width": 1500,
+            "height": 600,
+            "paper": true
+          }
+        ],
+        "links": [
+          {
+            "label": "在实验室中试用",
+            "title": "medio tono",
+            "href": "/lab#pieza-medio"
+          },
+          {
+            "label": "下一条备注",
+            "title": "回响：人物背后的绘画时光",
+            "href": "/notes"
+          }
+        ],
+        "credit": "照片来源：eadweard muybridge，公有领域"
+      }
+    ],
+    "notesPage": {
+      "title": "注释",
+      "lead": "我的笔记、随笔以及一点个人空间。",
+      "soon": "即将推出",
+      "items": [
+        {
+          "id": "manifiesto",
+          "soon": true,
+          "title": "宣言",
+          "excerpt": "",
+          "meta": "",
+          "href": "/notes",
+          "alt": "蓝色背景下的骏马奔腾",
+          "visual": "foto",
+          "accent": "azul"
+        }
+      ]
+    },
+    "sisyphusPage": {
+      "title": "sísifo feliz",
+      "label": "sísifo feliz，通过旁白讲述Muybridge 1878年的“疾驰”",
+      "hint": "向下滚动，了解故事详情",
+      "replay": "再次"
+    },
+    "sketchbookPage": {
+      "title": "sketchbook",
+      "lead": "我的sketchbook，逐页扫描而成。拖动角落或使用箭头翻页。",
+      "cover": "sketchbook",
+      "coverBy": "yuang tong",
+      "back": "更多页面即将上线：我正在扫描这些作品。",
+      "prev": "上一页",
+      "next": "下一页",
+      "bookLabel": "sketchbook，一本适合随手翻阅的书",
+      "alts": {
+        "menta": "menta的页面：顶部以绿色字体显示她的名字，背景是一幅蓝绿色蜡笔画的风景，上面叠加着她用铅笔在描图纸上绘制的肖像。",
+        "lola": "lola 的页面：黄色背景上，她的名字以红色呈现，头戴红色贝雷帽的肖像置于其间，周围点缀着剪贴画和手写线条。"
+      }
+    },
+    "studioPage": {
+      "title": "工作室",
+      "eyebrow": "工作室",
+      "name": "FOMMO Studio",
+      "lead": "我负责运营FOMMO——一家位于利马的精品工作室，在这里，设计与复杂的网页开发工作在同一张桌子上同步进行。",
+      "cta": {
+        "label": "访问 FOMMO 的网站",
+        "href": "https://fommo.studio"
+      },
+      "canvasLabel": "FOMMO",
+      "preview": {
+        "src": "/media/fommo-studio.jpg",
+        "alt": "Preview of fommo.studio: at rest it is a screen of glyphs in the studio's colours; on hover or a tap, the carcoma reveals the real page.",
+        "host": "fommo.studio",
+        "caption": "FOMMO, brand & product studio",
+        "live": "live",
+        "screened": "screened",
+        "href": "https://fommo.studio"
+      }
+    },
+    "travesiaPage": {
+      "title": "travesía ácida",
+      "lead": "一个没有底的虚空。你能走多远？",
+      "canvasLabel": "一条由点构成的、不断旋转的方形隧道；随着前进，颜色从蓝色渐变为紫色、红色和黄色。",
+      "hint": "向下滚动进入隧道；向上滚动返回。中心位置会跟随光标移动。",
+      "hintTouch": "向上滑动进入隧道。点击以更改颜色。",
+      "ui": {
+        "controls": "操作说明",
+        "cell": "cell",
+        "color": "颜色",
+        "all": "all the acids",
+        "rampNames": {
+          "azul": "蓝色",
+          "violeta": "violet",
+          "rojo": "red",
+          "amarillo": "黄色"
+        },
+        "full": "全屏",
+        "close": "关闭",
+        "copyLink": "复制链接",
+        "copied": "链接已复制",
+        "depth": "深度"
+      }
+    }
+  },
+  "settings": {
+    "locale": "zh",
+    "ogLocale": "zh_CN",
+    "languages": {
+      "label": "语言",
+      "spoken": "本网站讲述的故事",
+      "learning": "我正在学习这些",
+      "learningNote": "学习",
+      "soon": "即将发布",
+      "promise": "这些内容由机器翻译（DeepL）生成，我正在学习这些工具，会边学边进行修正。",
+      "list": [
+        {
+          "code": "en",
+          "name": "english",
+          "ready": true
+        },
+        {
+          "code": "es",
+          "name": "español",
+          "ready": true
+        },
+        {
+          "code": "pt",
+          "name": "português",
+          "learning": true
+        },
+        {
+          "code": "zh",
+          "name": "中文",
+          "learning": true
+        },
+        {
+          "code": "ja",
+          "name": "日本語",
+          "learning": true
+        }
+      ]
+    },
+    "siteTitle": "yuang tong | creative coder",
+    "description": "yuang tong，利马的网页设计师兼创意程序员（creative coder）。我负责运营精品工作室FOMMO。我的作品集汇集了代码、摄影和音乐作品。",
+    "nav": [
+      {
+        "label": "首页",
+        "href": "/"
+      },
+      {
+        "label": "关于",
+        "href": "/about"
+      },
+      {
+        "label": "lab",
+        "href": "/lab"
+      },
+      {
+        "label": "工作室",
+        "href": "/studio"
+      },
+      {
+        "label": "注释",
+        "href": "/notes"
+      },
+      {
+        "label": "联系",
+        "href": "/contact"
+      }
+    ],
+    "footer": {
+      "left": "yuang tong，利马",
+      "right": "《疾驰》：eadweard muybridge，1878年，公有领域"
+    },
+    "cookies": {
+      "label": "关于Cookie",
+      "title": "cookies",
+      "state": "无",
+      "body": "本网站不设置任何Cookie，也不追踪任何人：不使用分析工具，不展示广告，不会向第三方发送任何信息。",
+      "rows": [
+        {
+          "k": "分析",
+          "v": "无"
+        },
+        {
+          "k": "在您的设备上",
+          "v": "您已关闭此提示，以及（若您选择了语言）您的语言"
+        }
+      ],
+      "ok": "已知悉"
+    },
+    "ui": {
+      "openLabel": "打开",
+      "copyLinkLabel": "复制链接",
+      "copiedLabel": "链接已复制",
+      "cellGroupLabel": "单元格大小为",
+      "frameStripLabel": "疾驰的画面",
+      "menuLabel": "菜单",
+      "closeLabel": "关闭",
+      "framePrev": "上一帧",
+      "frameNext": "下一帧",
+      "cameraCounter": "相机",
+      "frameCounter": "frame",
+      "readNoteLabel": "阅读说明",
+      "readingTime": "预计阅读时间",
+      "enterLabel": "enter",
+      "navLabel": "主页",
+      "crumbLabel": "章节"
+    },
+    "share": {
+      "title": "yuang tong（唐源），网页设计师兼creative coder",
+      "description": "yuang tong，利马的网页设计师兼创意程序员（creative coder）。我负责运营精品工作室FOMMO。我的作品集汇集了代码、摄影和音乐作品。",
+      "image": "/social-preview-g75.jpg",
+      "alt": "yuang tong（唐源），网页设计师兼creative coder：Muybridge的马与骑手，以蓝色圆点呈现于灰色圆点网格之上。",
+      "width": 2400,
+      "height": 1260
+    },
+    "crumbs": {
+      "/lab/sisifo": [
+        {
+          "label": "lab",
+          "href": "/lab"
+        },
+        {
+          "label": "sísifo feliz",
+          "href": "/lab/sisifo"
+        }
+      ],
+      "/lab/lalande": [
+        {
+          "label": "lab",
+          "href": "/lab"
+        },
+        {
+          "label": "lalande",
+          "href": "/lab/lalande"
+        }
+      ],
+      "/lab/travesia": [
+        {
+          "label": "lab",
+          "href": "/lab"
+        },
+        {
+          "label": "travesía ácida",
+          "href": "/lab/travesia"
+        }
+      ],
+      "/lab/camara": [
+        {
+          "label": "lab",
+          "href": "/lab"
+        },
+        {
+          "label": "cámara",
+          "href": "/lab/camara"
+        }
+      ],
+      "/lab/dona": [
+        {
+          "label": "lab",
+          "href": "/lab"
+        },
+        {
+          "label": "dona de teselas",
+          "href": "/lab/dona"
+        }
+      ],
+      "/lab/acidos": [
+        {
+          "label": "lab",
+          "href": "/lab"
+        },
+        {
+          "label": "píxeles ácidos",
+          "href": "/lab/acidos"
+        }
+      ],
+      "/lab/efimero": [
+        {
+          "label": "lab",
+          "href": "/lab"
+        },
+        {
+          "label": "ambiente efímero",
+          "href": "/lab/efimero"
+        }
+      ],
+      "/notes/jinete": [
+        {
+          "label": "注释",
+          "href": "/notes"
+        },
+        {
+          "label": "卸下骑手",
+          "href": "/notes/jinete"
+        }
+      ],
+      "/lab/archivo": [
+        {
+          "label": "lab",
+          "href": "/lab"
+        },
+        {
+          "label": "archivo.exe",
+          "href": "/lab/archivo"
+        }
+      ]
+    }
+  }
+}
