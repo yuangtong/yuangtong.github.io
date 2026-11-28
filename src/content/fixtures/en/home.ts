@@ -28,13 +28,13 @@ export const home: HomePage = {
     narrated: false,
     narration: {
       lines: [
-        '1878. a horse breaks twelve threads and each thread fires a camera.',
-        'fifteen frames, uphill, forever.',
+        '1878. twelve photographs in half a second, to find out whether a horse flies.',
+        'one gallop, uphill, forever.',
         'at the top, the rock falls again. the loop starts over.',
       ],
       quote: 'one must imagine sisyphus happy.',
       quoteSource: 'albert camus, the myth of sisyphus, 1942',
-      coda: 'to code is to run the loop again until you find the frame where you fly.',
+      coda: 'to create is to start over, until something flies.',
     },
     glyphText: 'yuangtong web designer creative coder lima ',
     scrollHint: 'scroll down for the story',
@@ -68,7 +68,7 @@ export const notes: NotePage[] = [
     backLabel: 'all notes',
     blocks: [
       { type: 'figure', src: '/media/notas/jinete-antes.jpg', alt: 'Fifteen photographs of a racehorse galloping with its rider, taken by Muybridge', caption: 'before: the fifteen original frames, with the rider.', width: 1500, height: 600 },
-      { type: 'p', text: 'Eadweard Muybridge photographed a galloping horse in fifteen frames. They are in the public domain and perfect for animation: the motion is already solved. The trouble is that the horse carries a rider.' },
+      { type: 'p', text: 'Eadweard Muybridge photographed a galloping horse in 1878. The photographs are in the public domain and perfect for animation: the motion is already solved. The trouble is that the horse carries a rider.' },
       { type: 'p', text: 'First I separated the figure from the background. Each frame is a small photo, 300 by 200 pixels, with the dark horse against a light sky. A brightness threshold is enough to keep the silhouette.' },
       { type: 'p', text: 'Then, finding the rider. In each column I look for the first dark pixel from the top; the column where that point sits highest is the cap. Around it I open a window of about seventy pixels and, inside it, erase everything above the back.' },
       { type: 'p', text: 'The back cannot be seen, because the rider hides it. I rebuild it with a smooth curve between the height of the neck and the height of the croup, measured just outside the window. Below the curve I fill; above it, nothing.' },
@@ -96,7 +96,7 @@ export const labPage: LabPage = {
   title: 'the lab',
   lead: 'stories, toys made of pixels and my photo archive. every piece can be re-screened and shared.',
   doors: [
-    { id: 'sisifo', group: 'story', preview: 'gallop', title: 'sísifo feliz', text: "Muybridge's 1878 gallop told as sisyphus: twelve threads, the hill and the rock that rolls back.", cta: { label: 'see sísifo feliz', href: '/lab/sisifo' } },
+    { id: 'sisifo', group: 'story', preview: 'gallop', title: 'sísifo feliz', text: "Muybridge's 1878 gallop told as sisyphus: twelve photographs, the hill and the rock that rolls back.", cta: { label: 'see sísifo feliz', href: '/lab/sisifo' } },
     { id: 'lalande', group: 'story', preview: 'drop', title: 'lalande, lágrimas de ángel', text: "a word by clarice lispector falls like a drop onto a small narcissus. you are the breeze.", cta: { label: 'see lalande', href: '/lab/lalande' } },
     { id: 'travesia', group: 'play', preview: 'tunnel', title: 'travesía ácida', text: 'the void from the opening, with no bottom. scrolling takes you in and every twelve layers the acid changes.', cta: { label: 'enter the travesía', href: '/lab/travesia' } },
     { id: 'archivo', group: 'archive', preview: 'desk', title: 'archivo.exe', text: 'my photos of california and nevada, february 2017. move them, open them, pixelate them.', cta: { label: 'open archivo.exe', href: '/lab/archivo' } },

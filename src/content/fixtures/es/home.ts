@@ -28,13 +28,13 @@ export const home: HomePage = {
     narrated: false,
     narration: {
       lines: [
-        '1878. un caballo rompe doce hilos y cada hilo dispara una cámara.',
-        'quince cuadros, cuesta arriba, para siempre.',
+        '1878. doce fotografías en medio segundo, para saber si un caballo vuela.',
+        'un galope, cuesta arriba, para siempre.',
         'arriba, la roca vuelve a caer. el loop empieza otra vez.',
       ],
       quote: 'hay que imaginarse a sísifo feliz.',
       quoteSource: 'albert camus, el mito de sísifo, 1942',
-      coda: 'programar es repetir el loop hasta encontrar el cuadro en el que vuelas.',
+      coda: 'crear es volver a empezar, hasta que algo vuele.',
     },
     glyphText: 'yuangtong creative coder diseñador web lima ',
     scrollHint: 'baja para ver la historia',
@@ -68,7 +68,7 @@ export const notes: NotePage[] = [
     backLabel: 'todas las notas',
     blocks: [
       { type: 'figure', src: '/media/notas/jinete-antes.jpg', alt: 'Quince fotografías de un caballo de carreras al galope con su jinete, tomadas por Muybridge', caption: 'antes: los quince cuadros originales, con jinete.', width: 1500, height: 600 },
-      { type: 'p', text: 'Eadweard Muybridge fotografió a un caballo al galope en quince cuadros. Son de dominio público y sirven perfecto para animar: el movimiento ya está resuelto. El problema es que el caballo lleva jinete.' },
+      { type: 'p', text: 'Eadweard Muybridge fotografió a un caballo al galope en 1878. Sus fotos son de dominio público y sirven perfecto para animar: el movimiento ya está resuelto. El problema es que el caballo lleva jinete.' },
       { type: 'p', text: 'Primero separé la figura del fondo. Cada cuadro es una foto pequeña, de 300 por 200 píxeles, con el caballo oscuro sobre un cielo claro. Con un umbral de luz basta para quedarse con la silueta.' },
       { type: 'p', text: 'Después, encontrar al jinete. En cada columna busco el primer píxel oscuro desde arriba; la columna donde ese punto queda más alto es la gorra. Alrededor de ella abro una ventana de unos setenta píxeles y, dentro, borro todo lo que esté por encima del lomo.' },
       { type: 'p', text: 'El lomo no se ve, porque el jinete lo tapa. Lo reconstruyo con una curva suave entre la altura del cuello y la de la grupa, medidas justo fuera de la ventana. Debajo de la curva relleno; encima, nada.' },
@@ -96,7 +96,7 @@ export const labPage: LabPage = {
   title: 'el lab',
   lead: 'historias, juguetes hechos de píxeles y mi archivo de fotos. cada pieza se puede retramar y compartir.',
   doors: [
-    { id: 'sisifo', group: 'story', preview: 'gallop', title: 'sísifo feliz', text: 'el galope de Muybridge de 1878 contado como sísifo: doce hilos, la colina y la roca que vuelve a rodar.', cta: { label: 'ver sísifo feliz', href: '/lab/sisifo' } },
+    { id: 'sisifo', group: 'story', preview: 'gallop', title: 'sísifo feliz', text: 'el galope de Muybridge de 1878 contado como sísifo: doce fotografías, la colina y la roca que vuelve a rodar.', cta: { label: 'ver sísifo feliz', href: '/lab/sisifo' } },
     { id: 'lalande', group: 'story', preview: 'drop', title: 'lalande, lágrimas de ángel', text: 'una palabra de clarice lispector cae como gota sobre un narciso pequeño. tú eres la brisa.', cta: { label: 'ver lalande', href: '/lab/lalande' } },
     { id: 'travesia', group: 'play', preview: 'tunnel', title: 'travesía ácida', text: 'el void del inicio sin fondo. el scroll te mete en él y cada doce capas cambia el ácido.', cta: { label: 'entrar en la travesía', href: '/lab/travesia' } },
     { id: 'archivo', group: 'archive', preview: 'desk', title: 'archivo.exe', text: 'mis fotos de california y nevada, febrero de 2017. muévelas, ábrelas, pixélalas.', cta: { label: 'abrir archivo.exe', href: '/lab/archivo' } },

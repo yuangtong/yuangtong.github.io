@@ -72,9 +72,13 @@ Decided with the owner. Do not drift from these without asking.
   it carries no visitor controls. Controls (density, palette, parameters) belong
   to the pieces in the lab, where the visitor is invited to play.
 - The horse stays as the recurring figure. Its narrative is the owner's: the
-  opening tells Muybridge's 1878 gallop as Sisyphus (twelve threads, the hill,
-  the rock that rolls back, Camus' "hay que imaginarse a Sísifo feliz").
-  Approved with home G7.3, 2026-11-22. Do not add story beats without asking.
+  opening tells Muybridge's 1878 gallop as Sisyphus (twelve photographs in half
+  a second, the hill, the rock that rolls back, Camus' "hay que imaginarse a
+  Sísifo feliz", and the close "crear es volver a empezar, hasta que algo
+  vuele"). Approved with home G7.3, 2026-11-22; facts corrected against Spanish
+  Wikipedia's "El caballo en movimiento" and the close rewritten without the
+  word "code" (owner, 2026-11-27). The twelve threads stay in the animation as
+  the trigger. Do not add story beats without asking.
 - The hero carries the owner's name, his Chinese name (唐源) and a role label:
   two words joined by a fixed ampersand in every language, "(word) & (word)":
   "web designer & creative coder", "diseñador web & creative coder". Content
