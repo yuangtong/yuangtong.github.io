@@ -50,4 +50,4 @@ jobs:
             Review the copy before merging; manual fixes in content.json are kept
             until the English source of that string changes.
           labels: translations
-          add-paths: src/content/fixtures/pt,src/content/fixtures/zh,src/content/fixtures/ja
+          add-paths: src/content/fixtures/pt,src/content/fixtures/zh,src/content/fixtures/ja,src/content/fixtures/translated.ts,src/content/fixtures/learning.ts

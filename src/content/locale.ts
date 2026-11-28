@@ -1,13 +1,27 @@
 /**
- * The site's languages. English is primary and lives at the root; Spanish
- * lives under /es. Content keeps canonical paths ("/lab"); the loaders add
+ * The site's languages. English is primary and lives at the root; the others
+ * live under their code (/es, /pt). Content keeps canonical paths ("/lab"); the loaders add
  * the prefix for the locale they serve.
  */
-export const locales = ['en', 'es'] as const;
-export type Locale = (typeof locales)[number];
+import { translated } from './fixtures/translated';
+
+/** Languages written by hand, the ones edited in Sanity. */
+export const writtenLocales = ['en', 'es'] as const;
+/**
+ * Languages the owner is learning: machine translated from English with DeepL
+ * (scripts/translate.mts, docs/TRANSLATION.md). Each is served, linked and
+ * offered by browser detection only once its translation exists.
+ */
+export const learningLocales = ['pt', 'zh', 'ja'] as const;
+export type WrittenLocale = (typeof writtenLocales)[number];
+export type LearningLocale = (typeof learningLocales)[number];
+export type Locale = WrittenLocale | LearningLocale;
+/** Every language the site serves now. */
+export const locales: readonly Locale[] = [...writtenLocales, ...learningLocales.filter((l) => (translated as readonly string[]).includes(l))];
 export const defaultLocale: Locale = 'en';
 
 export const isLocale = (v: string): v is Locale => (locales as readonly string[]).includes(v);
+export const isLearning = (l: Locale): l is LearningLocale => (learningLocales as readonly string[]).includes(l);
 
 /** "/lab" in a locale: "/lab" in English, "/es/lab" in Spanish. External links and anchors pass through. */
 export function localePath(locale: Locale, path: string): string {
