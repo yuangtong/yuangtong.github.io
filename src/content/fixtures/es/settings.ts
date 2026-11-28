@@ -25,9 +25,9 @@ export const settings: Settings = {
     label: 'sobre las cookies',
     title: 'cookies',
     state: 'ninguna',
-    body: 'este sitio no usa cookies ni sigue a nadie: sin analítica, sin anuncios, nada se envía a terceros.',
+    body: 'este sitio no usa cookies ni sigue a nadie: cuenta visitas de forma anónima con vercel analytics, sin anuncios y sin datos que te identifiquen.',
     rows: [
-      { k: 'analítica', v: 'ninguna' },
+      { k: 'analítica', v: 'visitas anónimas, sin cookies (vercel)' },
       { k: 'en tu dispositivo', v: 'que cerraste este aviso y, si lo elegiste, tu idioma' },
     ],
     ok: 'entendido',

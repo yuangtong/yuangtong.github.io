@@ -23,6 +23,6 @@ export function proxy(req: NextRequest) {
 }
 
 export const config = {
-  // pages only: not Next's own files, not files with an extension (media, images, icons)
-  matcher: ['/((?!_next/|api/|.*\\.[a-zA-Z0-9]+$).*)'],
+  // pages only: not Next's own files, not Vercel's (/_vercel: analytics), not files with an extension (media, images, icons)
+  matcher: ['/((?!_next/|_vercel/|api/|.*\\.[a-zA-Z0-9]+$).*)'],
 };

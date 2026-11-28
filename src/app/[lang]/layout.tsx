@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next';
+import { Analytics } from '@vercel/analytics/next';
 import { color } from '@/lib/tokens';
 import { defaultLocale, getSettings, locales, localePath } from '@/content';
 import { CarcomaProvider } from '@/components/Carcoma';
@@ -38,7 +39,7 @@ export default async function RootLayout({ children, params }: { children: React
     <html lang={locale} className={[host.variable, geistMono.variable, notoTc.variable, script.variable].join(' ')}>
       {/* first visit: the browser's language, or the one chosen before (English pages only) */}
       {locale === defaultLocale && <head><script dangerouslySetInnerHTML={{ __html: langDetectScript() }} /></head>}
-      <body><CarcomaProvider>{children}<CookieNotice text={s.cookies} /><AsciiCursor /></CarcomaProvider></body>
+      <body><CarcomaProvider>{children}<CookieNotice text={s.cookies} /><AsciiCursor /></CarcomaProvider><Analytics /></body>
     </html>
   );
 }
