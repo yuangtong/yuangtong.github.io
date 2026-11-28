@@ -11,7 +11,7 @@ export const settings: Settings = {
     ],
   },
   siteTitle: 'yuang tong | creative coder',
-  description: 'yuang tong, web designer and creative coder in lima. he directs FOMMO. the lab gathers code, photography and music.',
+  description: 'yuang tong, web designer and creative coder in lima. I direct FOMMO, a boutique studio. my portfolio gathers code, photography and music.',
   nav: [
     { label: 'home', href: '/' },
     { label: 'about', href: '/about' },
@@ -52,7 +52,7 @@ export const settings: Settings = {
   },
   share: {
     title: 'yuang tong (唐源), web designer & creative coder',
-    description: 'yuang tong, web designer and creative coder in lima. he directs FOMMO. the lab gathers code, photography and music.',
+    description: 'yuang tong, web designer and creative coder in lima. I direct FOMMO, a boutique studio. my portfolio gathers code, photography and music.',
     image: '/social-preview-g75.jpg',
     alt: "yuang tong (唐源), web designer & creative coder: Muybridge's horse and rider in blue dots on a grey dot grid.",
     width: 2400,

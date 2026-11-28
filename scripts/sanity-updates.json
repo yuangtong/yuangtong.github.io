@@ -1,34 +1,98 @@
 [
   {
-    "id": "labPiece-boletos",
-    "why": "what it will be, owner 2026-11-27",
+    "id": "labPiece-sisifo",
+    "why": "story facts per Spanish Wikipedia, owner 2026-11-27",
     "set": {
-      "points.en": [
-        "an archive of the graphic design of lima's bus tickets: their colours, their type, their companies.",
-        "every ticket scanned, to be seen up close and in detail.",
-        "and a small game made with them, pasaje."
-      ],
-      "points.es": [
-        "un archivo del diseño gráfico de los boletos de bus de lima: sus colores, su tipografía, sus empresas.",
-        "cada boleto escaneado, para verlo de cerca y en detalle.",
-        "y un pequeño juego hecho con ellos, pasaje."
-      ]
+      "text.es": "el galope de Muybridge de 1878 contado como sísifo: doce fotografías, la colina y la roca que vuelve a rodar.",
+      "text.en": "Muybridge's 1878 gallop told as sisyphus: twelve photographs, the hill and the rock that rolls back."
     }
   },
   {
-    "id": "labPiece-metro-cards",
-    "why": "what it will be, owner 2026-11-27",
+    "id": "note-jinete-es",
+    "why": "story facts per Spanish Wikipedia, owner 2026-11-27",
     "set": {
-      "points.en": [
-        "an archive of the design of metro cards, one per city.",
-        "the front and the back of each card, with its variants.",
-        "each city marked on a globe of dots."
-      ],
-      "points.es": [
-        "un archivo del diseño de las tarjetas de metro, una por ciudad.",
-        "el frente y el reverso de cada tarjeta, con sus variantes.",
-        "cada ciudad marcada en un globo de puntos."
-      ]
+      "blocks[_key==\"b1\"].text": "Eadweard Muybridge fotografió a un caballo al galope en 1878. Sus fotos son de dominio público y sirven perfecto para animar: el movimiento ya está resuelto. El problema es que el caballo lleva jinete."
+    }
+  },
+  {
+    "id": "note-jinete-en",
+    "why": "story facts per Spanish Wikipedia, owner 2026-11-27",
+    "set": {
+      "blocks[_key==\"b1\"].text": "Eadweard Muybridge photographed a galloping horse in 1878. The photographs are in the public domain and perfect for animation: the motion is already solved. The trouble is that the horse carries a rider."
+    }
+  },
+  {
+    "id": "labPiece-lalande",
+    "why": "owner rewrite of the lab doors, 2026-11-27",
+    "set": {
+      "text.es": "¿sabes lo que son las lágrimas de ángel? una especie de narciso pequeño, la brisa más ligera lo mueve a un lado y a otro.",
+      "text.en": "do you know what angel's tears are? a kind of small narcissus; the lightest breeze moves it to one side and the other."
+    }
+  },
+  {
+    "id": "labPiece-travesia",
+    "why": "owner rewrite of the lab doors, 2026-11-27",
+    "set": {
+      "text.es": "enter the void.",
+      "text.en": "enter the void."
+    }
+  },
+  {
+    "id": "labPiece-archivo",
+    "why": "owner rewrite of the lab doors, 2026-11-27",
+    "set": {
+      "text.es": "mi archivo fotográfico: mueve, abre y pixela cada foto.",
+      "text.en": "my photo archive: move, open and pixelate every photo."
+    }
+  },
+  {
+    "id": "labPiece-boletos",
+    "why": "owner rewrite of the lab doors, 2026-11-27",
+    "set": {
+      "text.es": "espacio dedicado a conservar, admirar y conmemorar el diseño de los boletos del transporte público de lima.",
+      "text.en": "a space dedicated to preserving, admiring and commemorating the design of the tickets of lima's public transport."
+    }
+  },
+  {
+    "id": "labPiece-bitsplash",
+    "why": "owner rewrite of the lab doors, 2026-11-27",
+    "set": {
+      "text.es": "salpicadura ácida. haz un desastre y guárdalo como imagen.",
+      "text.en": "an acid splash. make a mess and keep it as an image."
+    }
+  },
+  {
+    "id": "labPiece-sketchbook",
+    "why": "owner rewrite of the lab doors, 2026-11-27",
+    "set": {
+      "text.es": "mi intento de sketchbook.",
+      "text.en": "my attempt at a sketchbook."
+    }
+  },
+  {
+    "id": "labPiece-camara",
+    "why": "owner rewrite of the lab doors, 2026-11-27",
+    "set": {
+      "text.es": "inspirado en los webcam toys de cuando internet era menos invasivo y más divertido.",
+      "text.en": "inspired by the webcam toys of when the internet was less invasive and more fun.",
+      "cta.es": "explorar",
+      "cta.en": "explore"
+    }
+  },
+  {
+    "id": "labPiece-dona",
+    "why": "owner rewrite of the lab doors, 2026-11-27",
+    "set": {
+      "text.es": "una dona y otros 32 algoritmos.",
+      "text.en": "a donut and 32 other algorithms."
+    }
+  },
+  {
+    "id": "labPiece-efimero",
+    "why": "owner rewrite of the lab doors, 2026-11-27",
+    "set": {
+      "text.es": "beep beep beep.",
+      "text.en": "beep beep beep."
     }
   }
 ]

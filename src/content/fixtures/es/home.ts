@@ -28,15 +28,15 @@ export const home: HomePage = {
     narrated: false,
     narration: {
       lines: [
-        '1878. un caballo rompe doce hilos y cada hilo dispara una cámara.',
-        'quince cuadros, cuesta arriba, para siempre.',
+        '1878. doce fotografías en medio segundo, para saber si un caballo vuela.',
+        'un galope, cuesta arriba, para siempre.',
         'arriba, la roca vuelve a caer. el loop empieza otra vez.',
       ],
       quote: 'hay que imaginarse a sísifo feliz.',
       quoteSource: 'albert camus, el mito de sísifo, 1942',
-      coda: 'programar es repetir el loop hasta encontrar el cuadro en el que vuelas.',
+      coda: 'crear es volver a empezar, hasta que algo vuele.',
     },
-    glyphText: 'yuangtong creative coder diseñador web lima ',
+    glyphText: 'yuangtong creative coder diseñador web 唐源 ',
     scrollHint: 'baja para ver la historia',
     scrollHintTouch: 'desliza para ver la historia',
     restartHint: 'sigue deslizando para empezar la historia de nuevo',
@@ -46,13 +46,13 @@ export const home: HomePage = {
   },
   jugar: {
     title: 'sobre mí',
-    line: 'soy yuang tong (唐源), diseñador web y creative coder en lima. dirijo FOMMO, un estudio a medida, y aquí guardo lo que hago por gusto: arte digital, fotos y música.',
+    line: 'yuang tong (唐源), diseñador web y creative coder en lima. dirijo FOMMO, un estudio boutique, y aquí guardo lo que hago por gusto: arte digital, fotos y música.',
     // the about page is still to come; the button already points to it (owner, 2026-11-27)
     cta: { label: 'más sobre mí', href: '/about' },
   },
   sheets: {
-    lab: { title: 'el lab', line: 'historias, juguetes hechos de píxeles y mi archivo de fotos.', href: '/lab' },
-    notes: { title: 'notas', line: 'cómo está hecha cada pieza, escrito mientras la construyo.', href: '/notes' },
+    lab: { title: 'el lab', line: 'historias, píxeles y mi archivo.', href: '/lab' },
+    notes: { title: 'notas', line: 'mis notas, escritos y un poco de mi espacio personal.', href: '/notes' },
     studio: { title: 'studio', line: 'dirijo FOMMO, un bespoke studio. el trabajo para clientes vive ahí.', sub: 'marca, producto y desarrollo, hechos a medida.', brand: 'FOMMO', href: '/studio' },
     contact: { title: 'hablemos', line: 'escríbeme a', email: { label: 'hola@yuangtong.dev', href: 'mailto:hola@yuangtong.dev' }, href: '/contact' },
   },
@@ -68,7 +68,7 @@ export const notes: NotePage[] = [
     backLabel: 'todas las notas',
     blocks: [
       { type: 'figure', src: '/media/notas/jinete-antes.jpg', alt: 'Quince fotografías de un caballo de carreras al galope con su jinete, tomadas por Muybridge', caption: 'antes: los quince cuadros originales, con jinete.', width: 1500, height: 600 },
-      { type: 'p', text: 'Eadweard Muybridge fotografió a un caballo al galope en quince cuadros. Son de dominio público y sirven perfecto para animar: el movimiento ya está resuelto. El problema es que el caballo lleva jinete.' },
+      { type: 'p', text: 'Eadweard Muybridge fotografió a un caballo al galope en 1878. Sus fotos son de dominio público y sirven perfecto para animar: el movimiento ya está resuelto. El problema es que el caballo lleva jinete.' },
       { type: 'p', text: 'Primero separé la figura del fondo. Cada cuadro es una foto pequeña, de 300 por 200 píxeles, con el caballo oscuro sobre un cielo claro. Con un umbral de luz basta para quedarse con la silueta.' },
       { type: 'p', text: 'Después, encontrar al jinete. En cada columna busco el primer píxel oscuro desde arriba; la columna donde ese punto queda más alto es la gorra. Alrededor de ella abro una ventana de unos setenta píxeles y, dentro, borro todo lo que esté por encima del lomo.' },
       { type: 'p', text: 'El lomo no se ve, porque el jinete lo tapa. Lo reconstruyo con una curva suave entre la altura del cuello y la de la grupa, medidas justo fuera de la ventana. Debajo de la curva relleno; encima, nada.' },
@@ -94,25 +94,25 @@ export const notFound: NotFoundPage = {
 
 export const labPage: LabPage = {
   title: 'el lab',
-  lead: 'historias, juguetes hechos de píxeles y mi archivo de fotos. cada pieza se puede retramar y compartir.',
+  lead: 'historias, píxeles y mi archivo. siéntete libre de explorar y compartir cada pieza ;)',
   doors: [
-    { id: 'sisifo', group: 'story', preview: 'gallop', title: 'sísifo feliz', text: 'el galope de Muybridge de 1878 contado como sísifo: doce hilos, la colina y la roca que vuelve a rodar.', cta: { label: 'ver sísifo feliz', href: '/lab/sisifo' } },
-    { id: 'lalande', group: 'story', preview: 'drop', title: 'lalande, lágrimas de ángel', text: 'una palabra de clarice lispector cae como gota sobre un narciso pequeño. tú eres la brisa.', cta: { label: 'ver lalande', href: '/lab/lalande' } },
-    { id: 'travesia', group: 'play', preview: 'tunnel', title: 'travesía ácida', text: 'el void del inicio sin fondo. el scroll te mete en él y cada doce capas cambia el ácido.', cta: { label: 'entrar en la travesía', href: '/lab/travesia' } },
-    { id: 'archivo', group: 'archive', preview: 'desk', title: 'archivo.exe', text: 'mis fotos de california y nevada, febrero de 2017. muévelas, ábrelas, pixélalas.', cta: { label: 'abrir archivo.exe', href: '/lab/archivo' } },
-    { id: 'boletos', held: true, group: 'archive', preview: 'tickets', title: 'boletos de lima', text: 'espacio dedicado a conservar el diseño de los boletos del transporte público de lima.', cta: { label: 'ver los boletos', href: '/lab/boletos' },
+    { id: 'sisifo', group: 'story', preview: 'gallop', title: 'sísifo feliz', text: 'el galope de Muybridge de 1878 contado como sísifo: doce fotografías, la colina y la roca que vuelve a rodar.', cta: { label: 'ver sísifo feliz', href: '/lab/sisifo' } },
+    { id: 'lalande', group: 'story', preview: 'drop', title: 'lalande, lágrimas de ángel', text: '¿sabes lo que son las lágrimas de ángel? una especie de narciso pequeño, la brisa más ligera lo mueve a un lado y a otro.', cta: { label: 'ver lalande', href: '/lab/lalande' } },
+    { id: 'travesia', group: 'play', preview: 'tunnel', title: 'travesía ácida', text: 'enter the void.', cta: { label: 'entrar en la travesía', href: '/lab/travesia' } },
+    { id: 'archivo', group: 'archive', preview: 'desk', title: 'archivo.exe', text: 'mi archivo fotográfico: mueve, abre y pixela cada foto.', cta: { label: 'abrir archivo.exe', href: '/lab/archivo' } },
+    { id: 'boletos', held: true, group: 'archive', preview: 'tickets', title: 'boletos de lima', text: 'espacio dedicado a conservar, admirar y conmemorar el diseño de los boletos del transporte público de lima.', cta: { label: 'ver los boletos', href: '/lab/boletos' },
       points: ['un archivo del diseño gráfico de los boletos de bus de lima: sus colores, su tipografía, sus empresas.', 'cada boleto escaneado, para verlo de cerca y en detalle.', 'y un pequeño juego hecho con ellos, pasaje.'] },
     { id: 'metro-cards', held: true, group: 'archive', preview: 'card', title: 'metro cards', text: 'espacio que archiva el diseño de las tarjetas de metro de las principales ciudades que tienen este tipo de transporte público.', cta: { label: 'ver las tarjetas', href: '/lab/metro-cards' },
       points: ['un archivo del diseño de las tarjetas de metro, una por ciudad.', 'el frente y el reverso de cada tarjeta, con sus variantes.', 'cada ciudad marcada en un globo de puntos.'] },
-    { id: 'bitsplash', group: 'play', preview: 'splash', title: 'bitsplash', text: 'haz clic y cae una salpicadura ácida de 8 bits sobre la malla gris. haz un desastre y guárdalo como imagen.', cta: { label: 'salpicar', href: '/lab/bitsplash' } },
-    { id: 'sketchbook', group: 'archive', preview: 'book', title: 'sketchbook', text: 'mi sketchbook, escaneado página por página. pasa las hojas como en un libro.', cta: { label: 'hojear el sketchbook', href: '/lab/sketchbook' } },
-    { id: 'camara', group: 'play', preview: 'trail', title: 'cámara', text: 'tu cámara y tu mano: junta pulgar e índice y pinta píxeles, medio tono, ascii o bordado sobre ti.', cta: { label: 'dibujar con la mano', href: '/lab/camara' } },
-    { id: 'dona', group: 'play', preview: 'still', soon: true, title: 'dona de teselas', text: 'una dona y otros sólidos en 3d hechos de teselas y glifos. los giras y cambias la imagen de la que están hechos.', cta: { label: 'ver qué será', href: '/lab/dona' },
+    { id: 'bitsplash', group: 'play', preview: 'splash', title: 'bitsplash', text: 'salpicadura ácida. haz un desastre y guárdalo como imagen.', cta: { label: 'salpicar', href: '/lab/bitsplash' } },
+    { id: 'sketchbook', group: 'archive', preview: 'book', title: 'sketchbook', text: 'mi intento de sketchbook.', cta: { label: 'hojear el sketchbook', href: '/lab/sketchbook' } },
+    { id: 'camara', group: 'play', preview: 'trail', title: 'cámara', text: 'inspirado en los webcam toys de cuando internet era menos invasivo y más divertido.', cta: { label: 'explorar', href: '/lab/camara' } },
+    { id: 'dona', group: 'play', preview: 'still', soon: true, title: 'dona de teselas', text: 'una dona y otros 32 algoritmos.', cta: { label: 'ver qué será', href: '/lab/dona' },
       points: ['arrastra para girarla.', 'teselas: molinete, damero, contorno, puntos, tick, macizo y glifos.', 'imagen, sólido, celda, paleta y velocidad.'] },
-    { id: 'efimero', group: 'play', preview: 'still', soon: true, title: 'ambiente efímero', text: 'código en vivo: música con strudel y visuales con hydra, que existen mientras suenan.', cta: { label: 'ver qué será', href: '/lab/efimero' },
+    { id: 'efimero', group: 'play', preview: 'still', soon: true, title: 'ambiente efímero', text: 'beep beep beep.', cta: { label: 'ver qué será', href: '/lab/efimero' },
       points: ['música escrita en vivo con strudel.', 'visuales en vivo con hydra.', 'quizá también mis sets.'] },
   ],
-  groups: { story: 'historia', play: 'para jugar', archive: 'archivo' },
+  groups: { story: 'historias', play: 'píxeles', archive: 'archivo' },
   previewLabel: '{title}, en vivo',
   soon: { label: 'próximamente', back: { label: 'volver al lab', href: '/lab' }, cta: 'ver qué será' },
   experiments: [
@@ -125,7 +125,7 @@ export const labPage: LabPage = {
 
 export const notesPage: NotesPage = {
   title: 'notas',
-  lead: 'cómo está hecha cada pieza, escrito mientras la construyo. cada nota lleva su imagen tramada.',
+  lead: 'mis notas, escritos y un poco de mi espacio personal.',
   soon: 'próximamente',
   // one note for now, not published yet (owner, 2026-11-27)
   items: [
@@ -137,7 +137,7 @@ export const studioPage: StudioPage = {
   title: 'studio',
   eyebrow: 'studio',
   name: 'FOMMO Studio',
-  lead: 'dirijo FOMMO, un estudio en Lima donde el diseño y el desarrollo web de alta complejidad se hacen en la misma mesa.',
+  lead: 'dirijo FOMMO, un estudio boutique en Lima donde el diseño y el desarrollo web de alta complejidad se hacen en la misma mesa.',
   cta: { label: 'ir a la página de FOMMO', href: 'https://fommo.studio' },
   canvasLabel: 'Formas de colores de FOMMO que se comen el papel, dejan caer letras y vuelven a empezar.',
   preview: {
@@ -153,12 +153,11 @@ export const studioPage: StudioPage = {
 
 export const contactPage: ContactPage = {
   title: 'hablemos',
-  lead: 'trabajo desde Lima para cualquier huso horario. escríbeme por un proyecto, una colaboración o solo para jugar con píxeles.',
+  lead: 'trabajo desde lima para todo el mundo. escríbeme por un proyecto, una colaboración o si solo tienes alguna duda :)',
   email: { label: 'hola@yuangtong.dev', href: 'mailto:hola@yuangtong.dev' },
   emailLabel: 'correo',
-  // upwork waits for its real link; '#' keeps it off the contact page
   links: [
-    { label: 'upwork', href: '#', detail: '' },
+    { label: 'upwork', href: 'https://www.upwork.com/freelancers/~01f641e45cff785eed', detail: 'perfil' },
     { label: 'instagram', href: 'https://www.instagram.com/yuang_tong/', detail: '@yuang_tong' },
     { label: 'github', href: 'https://github.com/yuangtong', detail: 'yuangtong' },
     { label: 'linkedin', href: 'https://www.linkedin.com/in/yuangtong', detail: 'yuangtong' },
@@ -195,7 +194,7 @@ export const lalandePage: LalandePage = {
   replay: 'de nuevo',
   quotes: [
     { text: '«lalande. es como lágrimas de ángel.»', source: 'clarice lispector, cerca del corazón salvaje' },
-    { text: '«…la brisa más ligera lo mueve a un lado y a otro.»', source: 'clarice lispector, cerca del corazón salvaje' },
+    { text: '«siempre que diga: lalande, debes sentir la vibración fresca y salada del mar…»', source: 'clarice lispector, cerca del corazón salvaje' },
   ],
   spec: ['narciso pequeño', 'lágrimas de ángel'],
   breezeLabel: 'brisa',
@@ -213,7 +212,7 @@ export const lalandePage: LalandePage = {
 
 export const travesiaPage: TravesiaPage = {
   title: 'travesía ácida',
-  lead: 'un void sin fondo, hecho con la misma rejilla de puntos del inicio. el scroll te mete en él y cada doce capas cambia el ácido.',
+  lead: 'un void sin fondo. ¿hasta dónde puedes llegar?',
   canvasLabel: 'un túnel de cuadrados que giran, hecho de puntos, que no termina nunca; el color cambia de azul a violeta, rojo y amarillo mientras se avanza.',
   hint: 'baja con el scroll para entrar en el túnel; súbelo para volver. el centro sigue al cursor.',
   hintTouch: 'desliza hacia arriba para entrar en el túnel. toca para cambiar el color.',
@@ -238,7 +237,7 @@ export const archivePage: ArchivePage = {
     { id: 'IMG_5397', src: '/archivo/img_5397.jpg', serie: 'chinatown', date: '11 feb 2017, 17:45', alt: 'plaza de Chinatown con un pabellón rojo', cell: 8, palette: 'rojo', spot: [0.16, 0.62] },
     { id: 'IMG_5765', src: '/archivo/img_5765.jpg', serie: 'reno', date: '19 feb 2017, 19:27', alt: 'hotel casino GSR en Reno bajo un cielo de tormenta', cell: 4, palette: 'color', spot: [0.98, 0.56] },
   ],
-  readme: 'archivo fotográfico de yuang tong.\ncalifornia y nevada, febrero de 2017.\ncanon eos rebel t6.\n\nlas copias se mueven: arrástralas.\ndoble clic abre la foto en su ventana.\nceldas de 2, 4, 8 o 16 px, u original.\ncada foto guarda su versión.',
+  readme: 'archivo fotográfico.\n\nlas copias se mueven: arrástralas.\ndoble clic abre la foto en su ventana.\nceldas de 2, 4, 8 o 16 px, u original.\ncada foto guarda su versión.',
   ui: {
     start: 'Inicio', startLabel: 'inicio, índice del archivo', band: 'archivo 98', tray: 'lima', tidy: 'ordenar las copias', closeAll: 'cerrar ventanas', backToLab: 'volver al lab',
     readmeName: 'léeme.txt', readmeTitle: 'léeme.txt, bloc de notas', minimize: 'minimizar', maximize: 'maximizar', restore: 'restaurar', close: 'cerrar',
@@ -250,7 +249,7 @@ export const archivePage: ArchivePage = {
 
 export const boletosPage: BoletosPage = {
   title: 'boletos de lima',
-  lead: 'los boletos de bus que guardé en lima: 72 de papel y un recibo electrónico. el transporte de lima es informal y se sufre, y aun así estos boletos son nuestros. arrástralos, ordénalos, ábrelos.',
+  lead: 'los boletos de bus que guardo: 72 papeles, entre únicos y repetidos. si quieres colaborar con este archivo, ¡mándame un mensaje directo o un correo electrónico! haz clic en cada boleto para verlo en detalle.',
   boardLabel: 'boletos de bus de lima clavados con chinchetas de colores en la malla de puntos gris',
   sort: { label: 'ordenar', loose: 'sueltos', colour: 'por color', company: 'por empresa', price: 'por precio' },
   hint: { loose: 'haz clic en un boleto para verlo; arrástralo y se clava en la malla', sorted: 'ordenados; haz clic en uno para verlo, arrastra uno para soltarlo' },
@@ -279,10 +278,10 @@ export const aboutPage: AboutPage = {
   title: 'sobre mí',
   paras: [
     'hola. soy yuang tong (唐源), diseñador web en lima.',
-    'nací en 2001 y crecí en lima. desde muy chico encontré pasión por el arte digital.',
-    'mientras crecía estudié ingeniería informática, y esa base sigue presente en cómo trabajo.',
-    'disfruto mucho todo lo que rodea al arte digital: tomar fotos, grabar y editar videos, hacer collage digital. últimamente me estoy metiendo en la programación creativa, el live coding de música con strudel y la práctica de dj. también me gusta mucho leer y escribir.',
-    'profesionalmente me dedico al diseño de producto digital, de principio a fin. dirijo fommo, un estudio a medida en lima. el trabajo con clientes vive ahí.',
+    'nací en 2001 y vivo en lima. desde muy chico encontré pasión por el arte digital.',
+    'estudié, entre muchas cosas, ingeniería informática, y esa base sigue presente en cómo trabajo.',
+    'disfruto mucho todo lo que rodea al arte digital: fotografiar, grabar, editar, crear collage digital, entre otros. últimamente me estoy metiendo en la programación creativa, el live coding y el dj. también me gusta mucho leer y escribir.',
+    'profesionalmente me dedico al diseño de producto digital, de principio a fin. dirijo fommo, un estudio boutique a medida en lima.',
   ],
   closing: 'eso soy yo, más o menos. hablemos: ',
   email: { label: 'hola@yuangtong.dev', href: 'mailto:hola@yuangtong.dev' },

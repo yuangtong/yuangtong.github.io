@@ -28,15 +28,15 @@ export const home: HomePage = {
     narrated: false,
     narration: {
       lines: [
-        '1878. a horse breaks twelve threads and each thread fires a camera.',
-        'fifteen frames, uphill, forever.',
+        '1878. twelve photographs in half a second, to find out whether a horse flies.',
+        'one gallop, uphill, forever.',
         'at the top, the rock falls again. the loop starts over.',
       ],
       quote: 'one must imagine sisyphus happy.',
       quoteSource: 'albert camus, the myth of sisyphus, 1942',
-      coda: 'to code is to run the loop again until you find the frame where you fly.',
+      coda: 'to create is to start over, until something flies.',
     },
-    glyphText: 'yuangtong web designer creative coder lima ',
+    glyphText: 'yuangtong web designer creative coder 唐源 ',
     scrollHint: 'scroll down for the story',
     scrollHintTouch: 'swipe up for the story',
     restartHint: 'keep swiping up to start the story again',
@@ -46,13 +46,13 @@ export const home: HomePage = {
   },
   jugar: {
     title: 'about me',
-    line: "i'm yuang tong (唐源), a web designer and creative coder in lima. i direct FOMMO, a bespoke studio, and here i keep what i make for the love of it: digital art, photos and music.",
+    line: "yuang tong (唐源), web designer and creative coder in lima. i direct FOMMO, a boutique studio, and here i keep what i make for the love of it: digital art, photos and music.",
     // the about page is still to come; the button already points to it (owner, 2026-11-27)
     cta: { label: 'more about me', href: '/about' },
   },
   sheets: {
-    lab: { title: 'the lab', line: 'stories, toys made of pixels and my photo archive.', href: '/lab' },
-    notes: { title: 'notes', line: 'how each piece is made, written while I build it.', href: '/notes' },
+    lab: { title: 'the lab', line: 'stories, pixels and my archive.', href: '/lab' },
+    notes: { title: 'notes', line: 'my notes, writings and a little of my personal space.', href: '/notes' },
     studio: { title: 'studio', line: 'I direct FOMMO, a bespoke studio. client work lives there.', sub: 'brand, product and development, made to measure.', brand: 'FOMMO', href: '/studio' },
     contact: { title: "let's talk", line: 'write to me at', email: { label: 'hola@yuangtong.dev', href: 'mailto:hola@yuangtong.dev' }, href: '/contact' },
   },
@@ -68,7 +68,7 @@ export const notes: NotePage[] = [
     backLabel: 'all notes',
     blocks: [
       { type: 'figure', src: '/media/notas/jinete-antes.jpg', alt: 'Fifteen photographs of a racehorse galloping with its rider, taken by Muybridge', caption: 'before: the fifteen original frames, with the rider.', width: 1500, height: 600 },
-      { type: 'p', text: 'Eadweard Muybridge photographed a galloping horse in fifteen frames. They are in the public domain and perfect for animation: the motion is already solved. The trouble is that the horse carries a rider.' },
+      { type: 'p', text: 'Eadweard Muybridge photographed a galloping horse in 1878. The photographs are in the public domain and perfect for animation: the motion is already solved. The trouble is that the horse carries a rider.' },
       { type: 'p', text: 'First I separated the figure from the background. Each frame is a small photo, 300 by 200 pixels, with the dark horse against a light sky. A brightness threshold is enough to keep the silhouette.' },
       { type: 'p', text: 'Then, finding the rider. In each column I look for the first dark pixel from the top; the column where that point sits highest is the cap. Around it I open a window of about seventy pixels and, inside it, erase everything above the back.' },
       { type: 'p', text: 'The back cannot be seen, because the rider hides it. I rebuild it with a smooth curve between the height of the neck and the height of the croup, measured just outside the window. Below the curve I fill; above it, nothing.' },
@@ -94,25 +94,25 @@ export const notFound: NotFoundPage = {
 
 export const labPage: LabPage = {
   title: 'the lab',
-  lead: 'stories, toys made of pixels and my photo archive. every piece can be re-screened and shared.',
+  lead: 'stories, pixels and my archive. feel free to explore and share every piece ;)',
   doors: [
-    { id: 'sisifo', group: 'story', preview: 'gallop', title: 'sísifo feliz', text: "Muybridge's 1878 gallop told as sisyphus: twelve threads, the hill and the rock that rolls back.", cta: { label: 'see sísifo feliz', href: '/lab/sisifo' } },
-    { id: 'lalande', group: 'story', preview: 'drop', title: 'lalande, lágrimas de ángel', text: "a word by clarice lispector falls like a drop onto a small narcissus. you are the breeze.", cta: { label: 'see lalande', href: '/lab/lalande' } },
-    { id: 'travesia', group: 'play', preview: 'tunnel', title: 'travesía ácida', text: 'the void from the opening, with no bottom. scrolling takes you in and every twelve layers the acid changes.', cta: { label: 'enter the travesía', href: '/lab/travesia' } },
-    { id: 'archivo', group: 'archive', preview: 'desk', title: 'archivo.exe', text: 'my photos of california and nevada, february 2017. move them, open them, pixelate them.', cta: { label: 'open archivo.exe', href: '/lab/archivo' } },
-    { id: 'boletos', held: true, group: 'archive', preview: 'tickets', title: 'boletos de lima', text: "a space dedicated to preserving the design of the tickets of lima's public transport.", cta: { label: 'see the tickets', href: '/lab/boletos' },
+    { id: 'sisifo', group: 'story', preview: 'gallop', title: 'sísifo feliz', text: "Muybridge's 1878 gallop told as sisyphus: twelve photographs, the hill and the rock that rolls back.", cta: { label: 'see sísifo feliz', href: '/lab/sisifo' } },
+    { id: 'lalande', group: 'story', preview: 'drop', title: 'lalande, lágrimas de ángel', text: "do you know what angel's tears are? a kind of small narcissus; the lightest breeze moves it to one side and the other.", cta: { label: 'see lalande', href: '/lab/lalande' } },
+    { id: 'travesia', group: 'play', preview: 'tunnel', title: 'travesía ácida', text: 'enter the void.', cta: { label: 'enter the travesía', href: '/lab/travesia' } },
+    { id: 'archivo', group: 'archive', preview: 'desk', title: 'archivo.exe', text: 'my photo archive: move, open and pixelate every photo.', cta: { label: 'open archivo.exe', href: '/lab/archivo' } },
+    { id: 'boletos', held: true, group: 'archive', preview: 'tickets', title: 'boletos de lima', text: "a space dedicated to preserving, admiring and commemorating the design of the tickets of lima's public transport.", cta: { label: 'see the tickets', href: '/lab/boletos' },
       points: ["an archive of the graphic design of lima's bus tickets: their colours, their type, their companies.", 'every ticket scanned, to be seen up close and in detail.', 'and a small game made with them, pasaje.'] },
     { id: 'metro-cards', held: true, group: 'archive', preview: 'card', title: 'metro cards', text: 'a space that archives the design of the metro cards of the main cities that run this kind of public transport.', cta: { label: 'see the cards', href: '/lab/metro-cards' },
       points: ['an archive of the design of metro cards, one per city.', 'the front and the back of each card, with its variants.', 'each city marked on a globe of dots.'] },
-    { id: 'bitsplash', group: 'play', preview: 'splash', title: 'bitsplash', text: 'click and an 8-bit acid splash lands on the grey grid. make a mess and keep it as an image.', cta: { label: 'make a splash', href: '/lab/bitsplash' } },
-    { id: 'sketchbook', group: 'archive', preview: 'book', title: 'sketchbook', text: 'my sketchbook, scanned page by page. turn the pages as in a book.', cta: { label: 'leaf through the sketchbook', href: '/lab/sketchbook' } },
-    { id: 'camara', group: 'play', preview: 'trail', title: 'cámara', text: 'your camera and your hand: pinch thumb and index and paint pixels, halftone, ascii or cross-stitch over yourself.', cta: { label: 'draw with your hand', href: '/lab/camara' } },
-    { id: 'dona', group: 'play', preview: 'still', soon: true, title: 'dona de teselas', text: 'a donut and other 3d solids made of tiles and glyphs. you turn them and change the image they are made of.', cta: { label: 'see what it will be', href: '/lab/dona' },
+    { id: 'bitsplash', group: 'play', preview: 'splash', title: 'bitsplash', text: 'an acid splash. make a mess and keep it as an image.', cta: { label: 'make a splash', href: '/lab/bitsplash' } },
+    { id: 'sketchbook', group: 'archive', preview: 'book', title: 'sketchbook', text: 'my attempt at a sketchbook.', cta: { label: 'leaf through the sketchbook', href: '/lab/sketchbook' } },
+    { id: 'camara', group: 'play', preview: 'trail', title: 'cámara', text: 'inspired by the webcam toys of when the internet was less invasive and more fun.', cta: { label: 'explore', href: '/lab/camara' } },
+    { id: 'dona', group: 'play', preview: 'still', soon: true, title: 'dona de teselas', text: 'a donut and 32 other algorithms.', cta: { label: 'see what it will be', href: '/lab/dona' },
       points: ['drag to turn it.', 'tiles: molinete, damero, contorno, puntos, tick, macizo and glyphs.', 'image, solid, cell, palette and speed.'] },
-    { id: 'efimero', group: 'play', preview: 'still', soon: true, title: 'ambiente efímero', text: 'live code: music with strudel and visuals with hydra, which exist while they play.', cta: { label: 'see what it will be', href: '/lab/efimero' },
+    { id: 'efimero', group: 'play', preview: 'still', soon: true, title: 'ambiente efímero', text: 'beep beep beep.', cta: { label: 'see what it will be', href: '/lab/efimero' },
       points: ['music written live with strudel.', 'live visuals with hydra.', 'maybe my sets too.'] },
   ],
-  groups: { story: 'story', play: 'to play', archive: 'archive' },
+  groups: { story: 'stories', play: 'pixels', archive: 'archive' },
   previewLabel: '{title}, live',
   soon: { label: 'coming soon', back: { label: 'back to the lab', href: '/lab' }, cta: 'see what it will be' },
   experiments: [
@@ -125,7 +125,7 @@ export const labPage: LabPage = {
 
 export const notesPage: NotesPage = {
   title: 'notes',
-  lead: 'how each piece is made, written while I build it. every note carries its screened image.',
+  lead: 'my notes, writings and a little of my personal space.',
   soon: 'coming soon',
   // one note for now, not published yet (owner, 2026-11-27)
   items: [
@@ -137,7 +137,7 @@ export const studioPage: StudioPage = {
   title: 'studio',
   eyebrow: 'studio',
   name: 'FOMMO Studio',
-  lead: 'I direct FOMMO, a studio in Lima where design and complex web development happen at the same table.',
+  lead: 'I direct FOMMO, a boutique studio in Lima where design and complex web development happen at the same table.',
   cta: { label: "go to FOMMO's site", href: 'https://fommo.studio' },
   canvasLabel: "FOMMO's coloured shapes eat the paper, drop letters and start again.",
   preview: {
@@ -153,12 +153,11 @@ export const studioPage: StudioPage = {
 
 export const contactPage: ContactPage = {
   title: "let's talk",
-  lead: 'I work from Lima for any time zone. write to me about a project, a collaboration or just to play with pixels.',
+  lead: 'I work from lima for the whole world. write to me about a project, a collaboration or if you just have a question :)',
   email: { label: 'hola@yuangtong.dev', href: 'mailto:hola@yuangtong.dev' },
   emailLabel: 'email',
-  // upwork waits for its real link; '#' keeps it off the contact page
   links: [
-    { label: 'upwork', href: '#', detail: '' },
+    { label: 'upwork', href: 'https://www.upwork.com/freelancers/~01f641e45cff785eed', detail: 'profile' },
     { label: 'instagram', href: 'https://www.instagram.com/yuang_tong/', detail: '@yuang_tong' },
     { label: 'github', href: 'https://github.com/yuangtong', detail: 'yuangtong' },
     { label: 'linkedin', href: 'https://www.linkedin.com/in/yuangtong', detail: 'yuangtong' },
@@ -195,7 +194,7 @@ export const lalandePage: LalandePage = {
   replay: 'again',
   quotes: [
     { text: '“lalande. it is like angel’s tears.”', source: 'clarice lispector, near to the wild heart' },
-    { text: '“…the lightest breeze sways it from side to side.”', source: 'clarice lispector, near to the wild heart' },
+    { text: '“whenever I say: lalande, you must feel the cool, salty vibration of the sea…”', source: 'clarice lispector, near to the wild heart' },
   ],
   spec: ['small narcissus', 'angel’s tears'],
   breezeLabel: 'breeze',
@@ -213,7 +212,7 @@ export const lalandePage: LalandePage = {
 
 export const travesiaPage: TravesiaPage = {
   title: 'travesía ácida',
-  lead: 'a void with no bottom, made of the same dot grid as the opening. scrolling takes you in and every twelve layers the acid changes.',
+  lead: 'a void with no bottom. how far can you go?',
   canvasLabel: 'a never-ending tunnel of turning squares made of dots; the colour shifts from blue to violet, red and yellow as you go.',
   hint: 'scroll down to enter the tunnel; scroll up to come back. the centre follows the cursor.',
   hintTouch: 'swipe up to enter the tunnel. tap to change the colour.',
@@ -238,7 +237,7 @@ export const archivePage: ArchivePage = {
     { id: 'IMG_5397', src: '/archivo/img_5397.jpg', serie: 'chinatown', date: '11 feb 2017, 17:45', alt: 'a Chinatown square with a red pavilion', cell: 8, palette: 'rojo', spot: [0.16, 0.62] },
     { id: 'IMG_5765', src: '/archivo/img_5765.jpg', serie: 'reno', date: '19 feb 2017, 19:27', alt: 'the GSR casino hotel in Reno under a stormy sky', cell: 4, palette: 'color', spot: [0.98, 0.56] },
   ],
-  readme: 'photo archive of yuang tong.\ncalifornia and nevada, february 2017.\ncanon eos rebel t6.\n\nthe prints move: drag them.\ndouble click opens a photo in its window.\ncells of 2, 4, 8 or 16 px, or the original.\neach photo keeps its version.',
+  readme: 'photo archive.\n\nthe prints move: drag them.\ndouble click opens a photo in its window.\ncells of 2, 4, 8 or 16 px, or the original.\neach photo keeps its version.',
   ui: {
     start: 'Start', startLabel: 'start, index of the archive', band: 'archivo 98', tray: 'lima', tidy: 'tidy the prints', closeAll: 'close windows', backToLab: 'back to the lab',
     readmeName: 'readme.txt', readmeTitle: 'readme.txt, notepad', minimize: 'minimize', maximize: 'maximize', restore: 'restore', close: 'close',
@@ -250,7 +249,7 @@ export const archivePage: ArchivePage = {
 
 export const boletosPage: BoletosPage = {
   title: 'boletos de lima',
-  lead: "the bus tickets i kept in lima: 72 on paper and one electronic receipt. lima's transport is informal and hard, and still these tickets are ours. drag them, sort them, open them.",
+  lead: 'the bus tickets i keep: 72 slips, some unique, some repeated. if you want to contribute to this archive, send me a direct message or an email! click any ticket to see it in detail.',
   boardLabel: 'bus tickets from lima pinned to the grey dot grid with coloured push pins',
   sort: { label: 'sort', loose: 'loose', colour: 'by colour', company: 'by company', price: 'by price' },
   hint: { loose: 'click a ticket to see it; drag it and it pins to the grid', sorted: 'sorted; click one to see it, drag one to set it loose' },
@@ -279,10 +278,10 @@ export const aboutPage: AboutPage = {
   title: 'about me',
   paras: [
     "hola. i'm yuang tong (唐源), a web designer in lima.",
-    'born in 2001, raised in lima. from a very young age i found a passion for digital art.',
-    'as i grew up, i studied information technology engineering, and that background still shapes how i work.',
-    "i find real joy in everything around digital art: taking photos, shooting and editing video, making digital collage. lately i've been getting into creative coding, live coding music with strudel and practicing djing. i also love reading and writing.",
-    'professionally, i work in digital product design, end to end. i run fommo, a bespoke studio in lima. client work lives there.',
+    'born in 2001, i live in lima. from a very young age i found a passion for digital art.',
+    'i studied, among many things, information technology engineering, and that background still shapes how i work.',
+    "i find real joy in everything around digital art: taking photos, shooting, editing, making digital collage, among others. lately i've been getting into creative coding, live coding and djing. i also love reading and writing.",
+    'professionally, i work in digital product design, end to end. i run fommo, a made-to-measure boutique studio in lima.',
   ],
   closing: "that's me, more or less. let's talk: ",
   email: { label: 'hola@yuangtong.dev', href: 'mailto:hola@yuangtong.dev' },
