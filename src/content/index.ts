@@ -1,9 +1,10 @@
 import type { AboutPage, ArchivePage, BitsplashPage, SketchbookPage, BoletosPage, CamaraPage, ContactPage, MetroCardsPage, HomePage, LabPage, NotesPage, NotFoundPage, LalandePage, NotePage, Settings, StoryPage, StudioPage, TravesiaPage } from './types';
-import { defaultLocale, localize, type Locale } from './locale';
+import { defaultLocale, isLearning, localize, type Locale } from './locale';
 import * as en from './fixtures/en/home';
 import * as es from './fixtures/es/home';
 import { settings as enSettings } from './fixtures/en/settings';
 import { settings as esSettings } from './fixtures/es/settings';
+import { learning } from './fixtures/learning';
 import { fetchArchivePhotos, fetchLab, fetchNotes } from '@/sanity/queries';
 
 export { locales, defaultLocale, isLocale, localePath, splitPath, type Locale } from './locale';
@@ -16,12 +17,15 @@ export { locales, defaultLocale, isLocale, localePath, splitPath, type Locale } 
  * has nothing yet, the local content is used as it is. `localize` puts
  * internal links in the locale's paths.
  */
-const pages = { en, es } as const;
-const settingsBy = { en: enSettings, es: esSettings } as const;
-const get = <T>(locale: Locale, pick: (p: typeof en) => T): T => localize(pick(pages[locale]), locale);
+const pages: Partial<Record<Locale, typeof en>> = { en, es, ...Object.fromEntries(Object.entries(learning).map(([l, c]) => [l, c!.home])) };
+const settingsBy: Partial<Record<Locale, Settings>> = { en: enSettings, es: esSettings, ...Object.fromEntries(Object.entries(learning).map(([l, c]) => [l, c!.settings])) };
+const page = (locale: Locale) => pages[locale] ?? en;
+/** Sanity holds the hand-written languages; a learning language reads its English. */
+const cmsLocale = (locale: Locale): Locale => (isLearning(locale) ? defaultLocale : locale);
+const get = <T>(locale: Locale, pick: (p: typeof en) => T): T => localize(pick(page(locale)), locale);
 
 export async function getSettings(locale: Locale): Promise<Settings> {
-  return localize(settingsBy[locale], locale);
+  return localize(settingsBy[locale] ?? enSettings, locale);
 }
 
 export async function getHomePage(locale: Locale): Promise<HomePage> {
@@ -34,7 +38,8 @@ export async function getNotFoundPage(locale: Locale): Promise<NotFoundPage> {
 
 export async function getLabPage(locale: Locale): Promise<LabPage> {
   const page = get(locale, (p) => p.labPage);
-  const cms = await fetchLab(locale);
+  const cms = await fetchLab(cmsLocale(locale));
+  const own = !isLearning(locale); // a learning language keeps its translated copy, Sanity sets order and status
   if (!cms) return page;
   const doors = page.doors.flatMap((d) => {
     const o = cms.pieces.get(d.id);
@@ -48,8 +53,8 @@ export async function getLabPage(locale: Locale): Promise<LabPage> {
     const soon = planned || o.soon === true;
     return [{
       ...d,
-      group: o.group ?? d.group, title: o.title ?? d.title, text: o.text ?? d.text, points: o.points ?? d.points,
-      cta: { ...d.cta, label: o.ctaLabel ?? d.cta.label },
+      group: o.group ?? d.group,
+      ...(own ? { title: o.title ?? d.title, text: o.text ?? d.text, points: o.points ?? d.points, cta: { ...d.cta, label: o.ctaLabel ?? d.cta.label } } : {}),
       soon: soon || undefined, held: held || undefined,
     }];
   });
@@ -61,8 +66,8 @@ export async function getLabPage(locale: Locale): Promise<LabPage> {
 
 /** The notes from the CMS in a language, or null to use the local ones. */
 const cmsNotes = async (locale: Locale) => {
-  const back = pages[locale].notes[0]?.backLabel ?? pages[defaultLocale].notes[0]?.backLabel ?? '';
-  return fetchNotes(locale, back);
+  const back = page(locale).notes[0]?.backLabel ?? en.notes[0]?.backLabel ?? '';
+  return fetchNotes(cmsLocale(locale), back);
 };
 
 export async function getNotesPage(locale: Locale): Promise<NotesPage> {
@@ -81,7 +86,7 @@ export async function getContactPage(locale: Locale): Promise<ContactPage> {
 
 export async function getArchivePage(locale: Locale): Promise<ArchivePage> {
   const page = get(locale, (p) => p.archivePage);
-  const cms = await fetchArchivePhotos(locale);
+  const cms = await fetchArchivePhotos(cmsLocale(locale));
   return cms ? { ...page, ...cms } : page;
 }
 
@@ -105,7 +110,7 @@ export async function getNote(locale: Locale, slug: string): Promise<NotePage | 
 
 export async function getNoteSlugs(locale: Locale): Promise<string[]> {
   const cms = await cmsNotes(locale);
-  return cms ? cms.pages.map((n) => n.slug) : pages[locale].notes.map((n) => n.slug);
+  return cms ? cms.pages.map((n) => n.slug) : page(locale).notes.map((n) => n.slug);
 }
 
 export async function getBoletosPage(locale: Locale): Promise<BoletosPage> {

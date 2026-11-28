@@ -4,7 +4,7 @@ import { defineConfig } from 'sanity';
 import { structureTool } from 'sanity/structure';
 import { SortIcon } from '@sanity/icons/Sort';
 import { DocumentTextIcon } from '@sanity/icons/DocumentText';
-import { locales } from '@/content/locale';
+import { writtenLocales as locales } from '@/content/locale';
 import { apiVersion, dataset, projectId } from './env';
 import { schemaTypes, singletons } from './schemas';
 

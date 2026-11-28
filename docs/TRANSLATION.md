@@ -43,10 +43,20 @@ node --experimental-strip-types scripts/translate.mts --dry    # list, no API ca
 node --experimental-strip-types scripts/translate.mts --fake   # check the pipeline without DeepL
 ```
 
-## Not covered yet
+## How a language turns on
 
-- The routes `/pt`, `/zh` and `/ja` are not served yet: the loaders and the
-  locale list pick up the generated files in a follow-up change, once the
-  first translation is reviewed.
-- Content that lives in Sanity (lab pieces, notes) is translated separately,
-  in the CMS.
+The script also writes `src/content/fixtures/translated.ts` (the list of
+learning languages that have a `content.json`) and
+`src/content/fixtures/learning.ts` (their content). `locales` in
+`src/content/locale.ts` is the hand-written languages plus that list, so a
+language gets its routes (`/pt/lab`), its link in the language selector and
+browser detection in the same merge that brings its translation. Until then
+the selector shows it as "soon". `writtenLocales` (en, es) are the languages
+edited in Sanity.
+
+## Content from Sanity
+
+Sanity holds only the hand-written languages. On a learning language the lab
+keeps its translated texts and takes only the order and status of each piece
+from Sanity; notes and archivo.exe photos from Sanity show in English until
+they get their own translation path.

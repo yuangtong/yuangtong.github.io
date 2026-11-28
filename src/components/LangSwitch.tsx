@@ -12,8 +12,8 @@ type Props = { languages: Settings['languages']; className?: string; /** Inline 
  * The language selector (canvas "nav: idiomas"). The button shows the current
  * code; the panel lists the languages the site speaks, which link to this same
  * page in that language, and the ones the owner is learning, machine
- * translated and marked as such. Those wait for DeepL and say "soon" until
- * their content is ready.
+ * translated and marked as such. Those say "soon" until their DeepL
+ * translation is served (see `locales`).
  */
 /** The visitor's choice wins over the browser's language from now on (see lang-detect). */
 const remember = (code: string) => { try { localStorage.setItem(LANG_KEY, code); } catch { /* private mode */ } };
@@ -56,13 +56,21 @@ export function LangSwitch({ languages, className, inline }: Props) {
       </ul>
       <p className="lang__head lang__head--learn">{languages.learning}</p>
       <ul className="lang__list">
-        {learning.map((l) => (
-          <li key={l.code}>
-            <span className="lang__opt lang__opt--learn" lang={l.code} aria-disabled="true">
-              <span className="lang__name">{l.name}</span><span className="lang__code">{l.code}, {languages.learningNote}{l.ready ? '' : `, ${languages.soon}`}</span>
-            </span>
-          </li>
-        ))}
+        {learning.map((l) => {
+          // a learning language links once its translation is served; until then it says "soon"
+          const code = l.code;
+          const ready = isLocale(code);
+          const label = <><span className="lang__name">{l.name}</span><span className="lang__code">{l.code}, {languages.learningNote}{ready ? '' : `, ${languages.soon}`}</span></>;
+          return (
+            <li key={l.code}>
+              {ready ? (
+                <a className="lang__opt lang__opt--learn" href={localePath(code, path) + hash} hrefLang={l.code} lang={l.code} aria-current={l.code === locale ? 'true' : undefined} onClick={() => remember(l.code)}>{label}</a>
+              ) : (
+                <span className="lang__opt lang__opt--learn" lang={l.code} aria-disabled="true">{label}</span>
+              )}
+            </li>
+          );
+        })}
       </ul>
       <p className="lang__promise">{languages.promise}</p>
     </div>

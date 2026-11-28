@@ -578,6 +578,10 @@ img, canvas { display: block; }
 .lang__code { font-family: var(--font-mono); font-size: var(--t-label); }
 .lang__opt--learn { min-height: 48px; border-top: 1px dashed var(--quiet); color: var(--quiet); cursor: default; }
 .lang__opt--learn:hover { background: transparent; }
+/* a learning language whose translation is served: a link, still dashed and quiet */
+a.lang__opt--learn { color: var(--ink); cursor: pointer; }
+a.lang__opt--learn:hover { background: var(--paper-2); }
+a.lang__opt--learn[aria-current='true'] { background: var(--signal); color: var(--on-signal); }
 .lang__opt--learn .lang__name { font-size: 22px; letter-spacing: -0.02em; }
 .lang__promise { margin: 0; padding: var(--s-3) var(--s-4) 14px; border-top: 1px solid var(--ink); font-size: 14px; line-height: 1.4; color: var(--body); }
 .menu__lang { margin-top: var(--s-6); }

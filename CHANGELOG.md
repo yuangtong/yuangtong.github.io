@@ -89,6 +89,15 @@ Owner decisions and housekeeping, to pick up later:
 ### Added
 
 - Contact: the Upwork profile link is live, on the contact page and in the menu, in every language.
+- Portuguese, Chinese and Japanese turn on by themselves when their DeepL
+  translation is merged: the translate script also writes
+  `src/content/fixtures/translated.ts` and `learning.ts`, and `locales` adds
+  every translated language to the routes, the language selector (as a link
+  instead of "soon") and browser detection. Sanity keeps only the written
+  languages (`writtenLocales`); on a learning language the lab keeps its
+  translated texts and notes from Sanity show in English. See
+  `docs/TRANSLATION.md`.
+
 - Machine translation with DeepL for Portuguese, Chinese and Japanese:
   `scripts/translate.mts` translates the English fixtures into
   `src/content/fixtures/<locale>/content.json`, only new or changed strings,
